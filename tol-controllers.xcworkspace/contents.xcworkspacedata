@@ -8,9 +8,6 @@
       location = "group:ScreenshotController/ScreenshotController.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:dist">
-   </FileRef>
-   <FileRef
       location = "group:EnvironmentModifierController/EnvironmentModifierController.xcodeproj">
    </FileRef>
    <FileRef

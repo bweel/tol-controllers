@@ -4,18 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>ToLSupervisor.xcscheme</key>
+		<key>all.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
-	</dict>
-	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>61AD162A1897F88A003D24DE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
+			<integer>9</integer>
 		</dict>
 	</dict>
 </dict>

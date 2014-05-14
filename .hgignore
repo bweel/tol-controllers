@@ -2,3 +2,4 @@ syntax: glob
 DerivedData
 
 .DS_Store
+dist

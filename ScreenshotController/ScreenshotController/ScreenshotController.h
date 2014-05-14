@@ -22,6 +22,10 @@ private:
     static const int SCREENSHOT_INTERVAL = 25; // in seconds
 
     double lastScreenshot = -1;
+    std::string simulationDateAndTime;
+    
+    Receiver * receiver;
+    
 public:
     
     ScreenshotController();

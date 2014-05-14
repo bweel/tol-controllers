@@ -130,10 +130,7 @@ void Organism::writeControllerArgsFile(std::string simulationDateAndTime)
     child.put("Type", "2");
     child.put("Parameters", "");
     child.put("Save", "");
-    child.put("Recovery_Steps", "50");
-    child.put("Evaluation_Steps", "300");
-// TODO: Change the ones above to the one below.
-//    child.put("Infancy_Duration",INFANCY_DURATION);
+    child.put("Infancy_Duration",INFANCY_DURATION);
     child.put("Evaluations", "50");
     child.put("Angular_Velocity", "2.6");
     pt.put_child("Algorithm", child);

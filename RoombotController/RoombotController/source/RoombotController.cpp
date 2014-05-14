@@ -40,8 +40,6 @@ organismSize(_parameters->get<std::size_t>("Robot.Modules_#")),
 _m_index(_parameters->get<std::size_t>("Robot." + getName() + ".Index")/* - _r_index*/),
 _m_type(_parameters->get<int>("Robot." + getName() + ".Type")),
 _ev_type(_parameters->get<int>("Algorithm.Type")),
-_ev_steps_recovery(_parameters->get<std::size_t>("Algorithm.Recovery_Steps")),
-_ev_steps_total_infancy(_parameters->get<std::size_t>("Algorithm.Evaluation_Steps") + _ev_steps_recovery),
 totalEvaluations(_parameters->get<unsigned int>("Algorithm.Evaluations")),
 _ev_angular_velocity(_parameters->get<double>("Algorithm.Angular_Velocity")),
 genome(_parameters->get<std::string>("Genome")),
@@ -134,7 +132,6 @@ _motors(_m_type ? _init_motors(_time_step) : 0)
         utils::Random rng;
         std::string parametersPath = _parameters->get<std::string>("Algorithm.Parameters");
         std::string save_path = _parameters->get<std::string>("Algorithm.Save");
-        
         
         /*boost::posix_time::time_facet *facet = new boost::posix_time::time_facet("%d-%b-%Y %H:%M:%S");
         cout.imbue(locale(cout.getloc(), facet));
@@ -255,13 +252,6 @@ _motors(_m_type ? _init_motors(_time_step) : 0)
         std::cout << "Algorithm: " << &_algorithm << std::endl;
                 
     }
-    
-    // Avoid wasting memory (all attributes have already been set with the values of the tree
-    if (_parameters)
-    {
-        delete(_parameters);
-    }
-    
 }
 
 
@@ -269,6 +259,10 @@ RoombotController::~RoombotController()
 {
     if (_algorithm) {
         delete(_algorithm);
+    }
+    if (_parameters)
+    {
+        delete(_parameters);
     }
 }
 
@@ -724,6 +718,13 @@ void RoombotController::infancy()
             _set_motor_position(i,0.0);
         }
         
+        evaluationDuration = _parameters->get<double>("Algorithm.Infancy_Duration");
+        double singleEvaluationTime = evaluationDuration / totalEvaluations;
+        double timeStep = getBasicTimeStep() / 1000.0;
+        int totalEvaluationSteps = singleEvaluationTime / timeStep;
+        _ev_steps_recovery = totalEvaluationSteps / 10;
+        _ev_steps_total_infancy = totalEvaluationSteps - _ev_steps_recovery;
+        
         // two first steps (one more than non-root modules)
         if (step(_time_step) == -1)
             return;
@@ -784,7 +785,7 @@ void RoombotController::infancy()
             // if it is time for evaluation
             else
             {
-                std::cout << "evaluation " << _algorithm->getGeneration() << "\n";
+                std::cout << "Organism " << organismId << " evaluation " << _algorithm->getGeneration() << ":  ";
                 
                 _time_end = getTime();      // get final time
                 _position_end = _get_gps(); // get final position

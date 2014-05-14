@@ -83,17 +83,17 @@
 #define NORTH_WEST_CONNECTOR 8
 #define NORTH_TOP_CONNECTOR 9
 #define NR_OF_CONNECTORS 10
-static const std::vector<std::string> CONNECTOR_NAMES = {
-    "CB1Y",
-    "CB1Z",
-    "CB1X",
-    "CW1X",
-    "CW1Z",
-    "CB2Z",
-    "CB2X",
-    "CW2Y",
-    "CW2X",
-    "CW2Z"};
+static const std::vector<std::string> CONNECTOR_NAMES =
+{"CB1Y",
+"CB1Z",
+"CB1X",
+"CW1X",
+"CW1Z",
+"CB2Z",
+"CB2X",
+"CW2Y",
+"CW2X",
+"CW2Z"};
 
 /************************/
 /* Supervisor  settings */
@@ -185,6 +185,7 @@ static const int EVOLVER_CHANNEL = 1000;
 static const int CLINIC_CHANNEL = 1001;
 static const int MODIFIER_CHANNEL = 1002;
 static const int DEATH_CHANNEL = 1003;
+static const int SCREENSHOT_CHANNEL = 1004;
 
 
 
@@ -212,7 +213,7 @@ const double CLINIC_RAIUS = 3;
 /// These are now in seconds!
 const unsigned int MATING_TIME = 500;
 const unsigned int DYING_TIME = 1000;
-const unsigned int INFANCY_DURATION = 20;
+const unsigned int INFANCY_DURATION = 500;
 const unsigned int SEND_FITNESS_TO_EVOLVER_INTERVAL = 50;
 
 

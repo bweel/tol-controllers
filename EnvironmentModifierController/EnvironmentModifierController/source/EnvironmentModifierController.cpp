@@ -101,6 +101,8 @@ void EnvironmentModifierController::sendInitializedEnvironmentMessage()
     emitter->send(message.c_str(), (int)message.length()+1);
     emitter->setChannel(CLINIC_CHANNEL);
     emitter->send(message.c_str(), (int)message.length()+1);
+    emitter->setChannel(SCREENSHOT_CHANNEL);
+    emitter->send(message.c_str(), (int)message.length()+1);
 }
 
 

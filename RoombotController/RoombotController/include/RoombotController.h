@@ -95,6 +95,7 @@ private:
     std::size_t _ev_step;                       // current evaluation step
     std::size_t _ev_steps_recovery;             // time steps without fitness
     std::size_t _ev_steps_total_infancy;        // time steps to wait before evaluation during infancy
+    double evaluationDuration;
     unsigned int totalEvaluations;              // total number of evaluations
     unsigned int generation;                    // current generation
     double _ev_angular_velocity;                // speed of the motors

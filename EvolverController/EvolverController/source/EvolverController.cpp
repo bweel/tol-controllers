@@ -6,15 +6,15 @@ void EvolverController::generateInitialGenomes()
     for(id_t i = 0; i < INITIAL_POPULATION; i++)
     {
         CppnGenome newGenome = genomeManager->createGenome(std::vector<CppnGenome>());
-        sendGenomeToBirthClinic(newGenome);
+        sendGenomeToBirthClinic(newGenome, 0, 0);
     }
 }
 
 
-void EvolverController::sendGenomeToBirthClinic(CppnGenome genome)
+void EvolverController::sendGenomeToBirthClinic(CppnGenome genome, id_t parent1, id_t parent2)
 {
     emitter->setChannel(CLINIC_CHANNEL);
-    std::string message = genomeManager->genomeToString(genome);
+    std::string message = "GENOME" + genomeManager->genomeToString(genome) + "PARENTS" + std::to_string(parent1) + "-" + std::to_string(parent2);
     emitter->send(message.c_str(), (int)message.length()+1);
 }
 
@@ -189,9 +189,10 @@ void EvolverController::run()
         if(receiver->getQueueLength() > 0)
         {
             std::string message = (char*)receiver->getData();
-            if (message.compare("ENVIRONMENT_OK") == 0)
+            if (message.substr(0,14).compare("ENVIRONMENT_OK") == 0)
             {
                 environmentOk = true;
+                simulationDateAndTime = message.substr(14,message.length());
             }
             receiver->nextPacket();
         }
@@ -241,7 +242,7 @@ void EvolverController::run()
                 
                 std::cout << "NEW GENOME CREATED FROM organism_" << forMating[0] << "and organism_" << forMating[1] << std::endl;
                 
-                sendGenomeToBirthClinic(newGenome);
+                sendGenomeToBirthClinic(newGenome, forMating[0], forMating[1]);
             }
         }
         

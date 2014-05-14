@@ -17,6 +17,8 @@ class BirthClinicController : public Supervisor
 
     private:
     
+    std::string simulationDateAndTime;
+    
     Receiver * receiver;
     Emitter * emitter;
     
@@ -33,7 +35,7 @@ class BirthClinicController : public Supervisor
     
     void connectModulesToObjects();
     
-    bool buildOrganism(CppnGenome genome);
+    int buildOrganism(CppnGenome genome);
     
     id_t getNextOrganismId();
     
@@ -49,7 +51,11 @@ class BirthClinicController : public Supervisor
     
     std::string readUpdateAvailableMessage(std::string message);
     
+    void readGenomeMessage(std::string message, std::string * genomeStr, id_t * parent1, id_t * parent2);
+    
     void addModuleToReserve(std::string moduleDef);
+    
+    void storePhilogenyOnFile(id_t parent1, id_t parent2, id_t newBorn);
     
     
 

@@ -96,8 +96,10 @@ void EnvironmentModifierController::putModuleToReserve(std::string moduleName)
 
 void EnvironmentModifierController::sendInitializedEnvironmentMessage()
 {
+    std::string message = "ENVIRONMENT_OK" + simulationDateAndTime;
     emitter->setChannel(EVOLVER_CHANNEL);
-    std::string message = "ENVIRONMENT_OK";
+    emitter->send(message.c_str(), (int)message.length()+1);
+    emitter->setChannel(CLINIC_CHANNEL);
     emitter->send(message.c_str(), (int)message.length()+1);
 }
 
@@ -124,6 +126,14 @@ std::string EnvironmentModifierController::readToReserveMessage(std::string mess
 
 EnvironmentModifierController::EnvironmentModifierController()
 {
+    std::time_t rawtime;
+    std::tm* timeinfo;
+    char buffer [80];
+    std::time(&rawtime);
+    timeinfo = std::localtime(&rawtime);
+    std::strftime(buffer,80,"%Y-%m-%d-%H.%M.%S",timeinfo);
+    simulationDateAndTime = buffer;
+    
     emitter = getEmitter(EMITTER_NAME);
     emitter->setChannel(EVOLVER_CHANNEL);
     receiver = getReceiver(RECEIVER_NAME);

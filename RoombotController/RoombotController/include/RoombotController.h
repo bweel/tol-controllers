@@ -65,6 +65,8 @@ private:
     
     // ATTRIBUTES
     
+    std::string simulationDateAndTime;
+    
     boost::property_tree::ptree * _parameters;  // parameters tree
     
     std::string _name;                          // whole robot's name

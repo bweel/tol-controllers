@@ -111,6 +111,30 @@ void BirthClinicController::addModuleToReserve(std::string moduleDef)
 }
 
 
+void BirthClinicController::readGenomeMessage(std::string message, std::string * genomeStr, id_t * parent1, id_t * parent2)
+{
+    *genomeStr = message.substr(message.find("GENOME")+6, message.find("PARENTS")-6);
+    std::string parentsSubStr = message.substr(message.find("PARENTS")+7, message.length());
+    *parent1 = std::atoi(parentsSubStr.substr(0, parentsSubStr.find("-")).c_str());
+    *parent2 = std::atoi(parentsSubStr.substr(parentsSubStr.find("-")+1, parentsSubStr.length()).c_str());
+}
+
+
+std::string BirthClinicController::readUpdateAvailableMessage(std::string message)
+{
+    return message.substr(16, message.length());
+}
+
+
+void BirthClinicController::storePhilogenyOnFile(id_t parent1, id_t parent2, id_t newBorn)
+{
+    ofstream philogenyFile;
+    philogenyFile.open(RESULTS_PATH + simulationDateAndTime + "/philogenetic_tree.txt", ios::app);
+    philogenyFile << std::to_string(parent1) + " " + std::to_string(parent2) + " " + std::to_string(newBorn) + "\n";
+    philogenyFile.close();
+}
+
+
 ////////////////////////////////////////////
 ////////////// INITIALIZATION //////////////
 ////////////////////////////////////////////
@@ -141,7 +165,7 @@ void BirthClinicController::connectModulesToObjects()
 ////////////////////////////////////////////
 
 
-bool BirthClinicController::buildOrganism(CppnGenome genome)
+int BirthClinicController::buildOrganism(CppnGenome genome)
 {
     std::auto_ptr<BuildPlan> buildPlan = builder->translateGenome(genome);
     
@@ -175,33 +199,27 @@ bool BirthClinicController::buildOrganism(CppnGenome genome)
                 }
                 // build organism, write relative ControllerArgs file and activate it (set controller and arguments fields on Webots)
                 organism->build();
-                organism->writeControllerArgsFile();
+                organism->writeControllerArgsFile(simulationDateAndTime);
                 organism->activate();
-                return false;
+                return 1;
             }
             else
             {
                 std::cout << "ORGANISM NOT CREATED: waiting for clinic to be free" << std::endl;
-                return true;
+                return 2;
             }
         }
         else
         {
             std::cout << "ORGANISM NOT CREATED: not enough nodules available" << std::endl;
-            return false;
+            return 3;
         }
     }
     else
     {
         std::cout << "ORGANISM NOT CREATED: the build plan was empty or made of only one module" << std::endl;
-        return false;
+        return 3;
     }
-}
-
-
-std::string BirthClinicController::readUpdateAvailableMessage(std::string message)
-{
-    return message.substr(16, message.length());
 }
 
 
@@ -233,7 +251,7 @@ BirthClinicController::BirthClinicController() : Supervisor()
     }
     
     // update id for next organism
-    nextOrganismId = INITIAL_POPULATION + 1;
+    nextOrganismId = 1;
 }
 
 
@@ -253,6 +271,22 @@ void BirthClinicController::run()
         receiver->nextPacket();
     }
     
+    // wait unitil EnvironmentModifierController sais the environment is ok
+    bool environmentOk = false;
+    while (step(timeStep) != -1 && !environmentOk)
+    {
+        if(receiver->getQueueLength() > 0)
+        {
+            std::string message = (char*)receiver->getData();
+            if (message.substr(0,14).compare("ENVIRONMENT_OK") == 0)
+            {
+                environmentOk = true;
+                simulationDateAndTime = message.substr(14,message.length());
+            }
+            receiver->nextPacket();
+        }
+    }
+    
     connectModulesToObjects();
     
     while (step(timeStep) != -1)
@@ -269,12 +303,27 @@ void BirthClinicController::run()
             }
             else
             {
+                std::string genomeStr;
+                id_t parent1;
+                id_t parent2;
+                readGenomeMessage(message, & genomeStr, & parent1, & parent2);
+                
                 std::istringstream stream(message);
                 CppnGenome genome = builder->getGenomeFromStream(stream);
-                bool waiting = buildOrganism(genome);
-                if (!waiting)
+                int buildResponse = buildOrganism(genome);
+                
+                if (buildResponse == 1)
+                {
+                    storePhilogenyOnFile(parent1, parent2, nextOrganismId-1);
+                    receiver->nextPacket();
+                }
+                if (buildResponse == 3)
                 {
                     receiver->nextPacket();
+                }
+                if (buildResponse == 2)
+                {
+                    
                 }
             }
         }

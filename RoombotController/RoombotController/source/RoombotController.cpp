@@ -11,6 +11,8 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/posix_time/posix_time_io.hpp>
 
 #include <stdexcept>
 #include <ctime>
@@ -59,6 +61,8 @@ _algorithm(0),
 _gps(isRoot() ? _init_gps(_time_step) : 0),
 _motors(_m_type ? _init_motors(_time_step) : 0)
 {
+    simulationDateAndTime = _parameters->get<std::string>("Simulation");
+    
     istringstream(_name.substr(_name.find("_") + 1, _name.length() - 1)) >> organismId;
     
     std::cout << "[" << getTime() << "] " << getName() << ": " << "Starting Controller, timestep: " << _time_step  << std::endl;
@@ -130,6 +134,16 @@ _motors(_m_type ? _init_motors(_time_step) : 0)
         utils::Random rng;
         std::string parametersPath = _parameters->get<std::string>("Algorithm.Parameters");
         std::string save_path = _parameters->get<std::string>("Algorithm.Save");
+        
+        
+        /*boost::posix_time::time_facet *facet = new boost::posix_time::time_facet("%d-%b-%Y %H:%M:%S");
+        cout.imbue(locale(cout.getloc(), facet));
+        std::stringstream dateStream;
+        dateStream << boost::posix_time::second_clock::local_time();
+        logDirectory = RESULTS_PATH + dateStream.str() + "/";
+        std::cout << "LOG PATH: " << logDirectory << std::endl;*/
+        
+        
         logDirectory = _parameters->get<std::string>("Algorithm.LogDir","");
         
         // set attributes for specific algorithm
@@ -266,19 +280,6 @@ RoombotController::~RoombotController()
 boost::property_tree::ptree * RoombotController::_init_parameters(const std::string & path)
 {
     boost::property_tree::ptree * result = new boost::property_tree::ptree();
-    
-    cout << "PATH for " << getName() << ": " << path << endl;
-    
-    /*std::ifstream file(path);
-    std::string jsonStr = "";
-    std::string line;
-    while(std::getline(file, line)) {
-        jsonStr = jsonStr + line;
-    }
-    file.close();
-    std::istringstream stream(jsonStr);
-    boost::property_tree::read_json(stream, * result);*/
-    
     boost::property_tree::read_json(path, (* result));
     return result;
 }
@@ -608,22 +609,23 @@ std::string RoombotController::_init_directory(const std::string & directory, co
     boost::filesystem::path path(directory);
     
     path /= RoombotController::RESULTS_DIR;
+    
+    /*std::time_t rawtime;
+    std::tm* timeinfo;
+    char buffer [80];
+    std::time(&rawtime);
+    timeinfo = std::localtime(&rawtime);
+    std::strftime(buffer,80,"%Y-%m-%d-%H.%M.%S",timeinfo);*/
+    
+    path /= simulationDateAndTime;
+    
     path /= name;
+    
     path /= algorithm;
+    
     if(logdir.length() > 0){
         path /= logdir;
     }
-    
-    std::time_t rawtime;
-    std::tm* timeinfo;
-    char buffer [80];
-    
-    std::time(&rawtime);
-    timeinfo = std::localtime(&rawtime);
-    
-    std::strftime(buffer,80,"%Y-%m-%d-%H.%M.%S",timeinfo);
-    
-    path /= buffer;
     
     //    path /= boost::lexical_cast<std::string>(instance);
     

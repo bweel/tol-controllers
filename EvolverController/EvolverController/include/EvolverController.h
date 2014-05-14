@@ -14,6 +14,8 @@ class EvolverController : public Supervisor
     
 private:
     
+    std::string simulationDateAndTime;
+    
     Receiver * receiver;
     Emitter * emitter;
     
@@ -32,7 +34,7 @@ private:
     
     std::vector<id_t> selectForDying();
     
-    void sendGenomeToBirthClinic(CppnGenome genome);
+    void sendGenomeToBirthClinic(CppnGenome genome, id_t parent1, id_t parent2);
     
     void sendDeathMessage(id_t organimsId);
     

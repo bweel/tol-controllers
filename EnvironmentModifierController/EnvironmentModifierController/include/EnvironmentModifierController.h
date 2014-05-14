@@ -19,6 +19,7 @@ private:
     Receiver * receiver;
     Emitter * emitter;
     
+    std::string simulationDateAndTime;
     
     
     void putAllModulesToReserve();

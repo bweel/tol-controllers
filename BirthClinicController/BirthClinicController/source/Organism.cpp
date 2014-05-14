@@ -109,7 +109,7 @@ void Organism::build()
 }
 
 
-void Organism::writeControllerArgsFile()
+void Organism::writeControllerArgsFile(std::string simulationDateAndTime)
 {
     std::cout << "writing ControllerArgs file for " << getName() << std::endl;
     
@@ -124,6 +124,7 @@ void Organism::writeControllerArgsFile()
     // build tree
     ptree pt;
     pt.put("ID", "organism_" + organismId);
+    pt.put("Simulation", simulationDateAndTime);
     // Algorithm
     ptree child;
     child.put("Type", "2");
@@ -210,10 +211,6 @@ void Organism::activate()
             // update controller in Webots
             robots[i]->setController(ROOMBOT_CONTROLLER_NAME);
             std::cout << robots[i]->getDef() << " -> " << ROOMBOT_CONTROLLER_NAME << " has been set" << std::endl;
-            
-            /*std::cout << "waiting a bit ..." << std::endl;
-            sleep(1);
-            std::cout << "stop waiting!" << std::endl;*/
         }
     }
 }

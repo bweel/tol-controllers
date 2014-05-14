@@ -10,7 +10,6 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <fstream>
-#include <time.h>
 
 using boost::property_tree::ptree;
 using boost::property_tree::write_json;
@@ -104,7 +103,7 @@ class Organism
     
     void activate();
     
-    void writeControllerArgsFile();
+    void writeControllerArgsFile(std::string simulationDateAndTime);
     
 	/**
 	 * Returns a string with the positions of every module in the organism.

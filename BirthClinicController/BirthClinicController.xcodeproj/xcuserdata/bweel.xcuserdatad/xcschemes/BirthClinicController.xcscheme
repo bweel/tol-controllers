@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "61278C0B189667FF007D50F4"
-               BuildableName = "libUtilities.a"
-               BlueprintName = "Utilities"
-               ReferencedContainer = "container:RoombotController.xcodeproj">
+               BlueprintIdentifier = "61AD162A1897F88A003D24DE"
+               BuildableName = "BirthClinicController"
+               BlueprintName = "BirthClinicController"
+               ReferencedContainer = "container:BirthClinicController.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,15 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "61AD162A1897F88A003D24DE"
+            BuildableName = "BirthClinicController"
+            BlueprintName = "BirthClinicController"
+            ReferencedContainer = "container:BirthClinicController.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -39,6 +48,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "61AD162A1897F88A003D24DE"
+            BuildableName = "BirthClinicController"
+            BlueprintName = "BirthClinicController"
+            ReferencedContainer = "container:BirthClinicController.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -48,6 +66,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "61AD162A1897F88A003D24DE"
+            BuildableName = "BirthClinicController"
+            BlueprintName = "BirthClinicController"
+            ReferencedContainer = "container:BirthClinicController.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

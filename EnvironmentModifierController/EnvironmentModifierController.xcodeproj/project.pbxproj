@@ -7,14 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61746C0E1923987F002D8509 /* EnvironmentModifierController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61AD162B1897F88A003D24DE /* EnvironmentModifierController */; };
 		61AD16401897F90A003D24DE /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163E1897F90A003D24DE /* libController.dylib */; };
 		61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163F1897F90A003D24DE /* libCppController.dylib */; };
-		61AD164418980187003D24DE /* EnvironmentModifierController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61AD162B1897F88A003D24DE /* EnvironmentModifierController */; };
+		61EBFBDE19224754000E6D71 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBDD19224754000E6D71 /* libshared.a */; };
 		A80421D9191CD32700894790 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80421D7191CD32700894790 /* main.cpp */; };
 		A80421E0191CD39900894790 /* EnvironmentModifierController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80421DE191CD39900894790 /* EnvironmentModifierController.cpp */; };
-		A80421E4191CD9FC00894790 /* Position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80421E3191CD9FC00894790 /* Position.cpp */; };
-		A86042381906C80100972DED /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042371906C80100972DED /* libNEATLib.a */; };
-		A86042561906C85400972DED /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042551906C85400972DED /* libtinyxmlpluslib.a */; };
 		A86042651906CD1500972DED /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042641906CD1500972DED /* libz.dylib */; };
 		A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */; };
 /* End PBXBuildFile section */
@@ -23,10 +21,10 @@
 		61AD16291897F88A003D24DE /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
-			dstPath = "/Users/emanuele/Desktop/tol-project/controllers/EnvironmentModifierController";
+			dstPath = "~/Documents/projects/tol-project/controllers/EnvironmentModifierController";
 			dstSubfolderSpec = 0;
 			files = (
-				61AD164418980187003D24DE /* EnvironmentModifierController in CopyFiles */,
+				61746C0E1923987F002D8509 /* EnvironmentModifierController in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,54 +34,15 @@
 		61AD162B1897F88A003D24DE /* EnvironmentModifierController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EnvironmentModifierController; sourceTree = BUILT_PRODUCTS_DIR; };
 		61AD163E1897F90A003D24DE /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = ../../../../../../../../Applications/Webots/lib/libController.dylib; sourceTree = "<group>"; };
 		61AD163F1897F90A003D24DE /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
+		61EBFBD919224453000E6D71 /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = ../lib/libNEATLib.a; sourceTree = "<group>"; };
+		61EBFBDA19224453000E6D71 /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = ../lib/libtinyxmlpluslib.a; sourceTree = "<group>"; };
+		61EBFBDD19224754000E6D71 /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = ../dist/Debug/libshared.a; sourceTree = "<group>"; };
 		A80421D7191CD32700894790 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = EnvironmentModifierController/source/main.cpp; sourceTree = SOURCE_ROOT; };
 		A80421DA191CD37A00894790 /* EnvironmentModifierController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EnvironmentModifierController.h; path = EnvironmentModifierController/include/EnvironmentModifierController.h; sourceTree = SOURCE_ROOT; };
 		A80421DE191CD39900894790 /* EnvironmentModifierController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EnvironmentModifierController.cpp; path = EnvironmentModifierController/source/EnvironmentModifierController.cpp; sourceTree = SOURCE_ROOT; };
-		A80421E1191CD9CE00894790 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Position.h; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/shared/include/Position.h"; sourceTree = "<absolute>"; };
-		A80421E3191CD9FC00894790 /* Position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Position.cpp; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/shared/source/Position.cpp"; sourceTree = "<absolute>"; };
-		A86042371906C80100972DED /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/libNEATLib.a"; sourceTree = "<absolute>"; };
-		A860423A1906C80D00972DED /* NEAT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT.h; sourceTree = "<group>"; };
-		A860423B1906C80D00972DED /* NEAT_CoEvoExperiment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_CoEvoExperiment.h; sourceTree = "<group>"; };
-		A860423C1906C80D00972DED /* NEAT_CoEvoGeneticGeneration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_CoEvoGeneticGeneration.h; sourceTree = "<group>"; };
-		A860423D1906C80D00972DED /* NEAT_Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_Defines.h; sourceTree = "<group>"; };
-		A860423E1906C80D00972DED /* NEAT_FastBiasNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_FastBiasNetwork.h; sourceTree = "<group>"; };
-		A860423F1906C80D00972DED /* NEAT_FastLayeredNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_FastLayeredNetwork.h; sourceTree = "<group>"; };
-		A86042401906C80D00972DED /* NEAT_FastNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_FastNetwork.h; sourceTree = "<group>"; };
-		A86042411906C80D00972DED /* NEAT_FractalNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_FractalNetwork.h; sourceTree = "<group>"; };
-		A86042421906C80D00972DED /* NEAT_GeneticGene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticGene.h; sourceTree = "<group>"; };
-		A86042431906C80D00972DED /* NEAT_GeneticGeneration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticGeneration.h; sourceTree = "<group>"; };
-		A86042441906C80D00972DED /* NEAT_GeneticIndividual.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticIndividual.h; sourceTree = "<group>"; };
-		A86042451906C80D00972DED /* NEAT_GeneticLinkGene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticLinkGene.h; sourceTree = "<group>"; };
-		A86042461906C80D00972DED /* NEAT_GeneticNodeGene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticNodeGene.h; sourceTree = "<group>"; };
-		A86042471906C80D00972DED /* NEAT_GeneticPopulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticPopulation.h; sourceTree = "<group>"; };
-		A86042481906C80D00972DED /* NEAT_GeneticSpecies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticSpecies.h; sourceTree = "<group>"; };
-		A86042491906C80D00972DED /* NEAT_Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_Globals.h; sourceTree = "<group>"; };
-		A860424A1906C80D00972DED /* NEAT_GPUANN.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GPUANN.h; sourceTree = "<group>"; };
-		A860424B1906C80D00972DED /* NEAT_LayeredSubstrate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_LayeredSubstrate.h; sourceTree = "<group>"; };
-		A860424C1906C80D00972DED /* NEAT_ModularNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_ModularNetwork.h; sourceTree = "<group>"; };
-		A860424D1906C80D00972DED /* NEAT_Network.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_Network.h; sourceTree = "<group>"; };
-		A860424E1906C80D00972DED /* NEAT_NetworkIndexedLink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_NetworkIndexedLink.h; sourceTree = "<group>"; };
-		A860424F1906C80D00972DED /* NEAT_NetworkLink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_NetworkLink.h; sourceTree = "<group>"; };
-		A86042501906C80D00972DED /* NEAT_NetworkNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_NetworkNode.h; sourceTree = "<group>"; };
-		A86042511906C80D00972DED /* NEAT_Random.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_Random.h; sourceTree = "<group>"; };
-		A86042521906C80D00972DED /* NEAT_STL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_STL.h; sourceTree = "<group>"; };
-		A86042531906C80D00972DED /* NEAT_VectorNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_VectorNetwork.h; sourceTree = "<group>"; };
-		A86042541906C80D00972DED /* StringConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringConverter.h; sourceTree = "<group>"; };
-		A86042551906C85400972DED /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/libtinyxmlpluslib.a"; sourceTree = "<absolute>"; };
-		A86042581906C86300972DED /* tinystr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
-		A86042591906C86300972DED /* tinyxmlplus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinyxmlplus.h; sourceTree = "<group>"; };
-		A860425B1906C89800972DED /* JGTL_Index3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_Index3.h; sourceTree = "<group>"; };
-		A860425C1906C89800972DED /* JGTL_LocatedException.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_LocatedException.h; sourceTree = "<group>"; };
-		A860425D1906C89800972DED /* JGTL_MapInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_MapInterface.h; sourceTree = "<group>"; };
-		A860425E1906C89800972DED /* JGTL_StackMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_StackMap.h; sourceTree = "<group>"; };
-		A860425F1906C89800972DED /* JGTL_StringConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_StringConverter.h; sourceTree = "<group>"; };
-		A86042601906C89800972DED /* JGTL_Vector2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_Vector2.h; sourceTree = "<group>"; };
-		A86042611906C89800972DED /* JGTL_Vector3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_Vector3.h; sourceTree = "<group>"; };
-		A86042621906C89800972DED /* JGTL_Vector4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_Vector4.h; sourceTree = "<group>"; };
 		A86042641906CD1500972DED /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "/opt/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<absolute>"; };
 		A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "/opt/local/lib/libboost_system-mt.dylib"; sourceTree = "<absolute>"; };
-		A8C42D8E191A5793006DAF05 /* Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Defines.h; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/shared/include/Defines.h"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,10 +50,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61EBFBDE19224754000E6D71 /* libshared.a in Frameworks */,
 				A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */,
 				A86042651906CD1500972DED /* libz.dylib in Frameworks */,
-				A86042561906C85400972DED /* libtinyxmlpluslib.a in Frameworks */,
-				A86042381906C80100972DED /* libNEATLib.a in Frameworks */,
 				61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */,
 				61AD16401897F90A003D24DE /* libController.dylib in Frameworks */,
 			);
@@ -106,6 +64,7 @@
 		61AD16221897F88A003D24DE = {
 			isa = PBXGroup;
 			children = (
+				61EBFBDD19224754000E6D71 /* libshared.a */,
 				61AD162D1897F88A003D24DE /* EvolverControllerController */,
 				61AD163D1897F8C7003D24DE /* Libraries */,
 				61AD162C1897F88A003D24DE /* Products */,
@@ -138,28 +97,16 @@
 				A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */,
 				A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */,
 				A86042641906CD1500972DED /* libz.dylib */,
-				A860425A1906C89800972DED /* JGTL */,
-				A86042571906C86300972DED /* TinyXMLPlus */,
-				A86042391906C80D00972DED /* NEAT */,
-				A86042551906C85400972DED /* libtinyxmlpluslib.a */,
-				A86042371906C80100972DED /* libNEATLib.a */,
+				61EBFBD919224453000E6D71 /* libNEATLib.a */,
+				61EBFBDA19224453000E6D71 /* libtinyxmlpluslib.a */,
 			);
 			name = Libraries;
-			sourceTree = "<group>";
-		};
-		A80421E2191CD9EB00894790 /* shared */ = {
-			isa = PBXGroup;
-			children = (
-				A80421E3191CD9FC00894790 /* Position.cpp */,
-			);
-			name = shared;
 			sourceTree = "<group>";
 		};
 		A84E611818FE734C007E227E /* include */ = {
 			isa = PBXGroup;
 			children = (
 				A80421DA191CD37A00894790 /* EnvironmentModifierController.h */,
-				A8B3C157191B718B00F5E499 /* shared */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -169,79 +116,8 @@
 			children = (
 				A80421D7191CD32700894790 /* main.cpp */,
 				A80421DE191CD39900894790 /* EnvironmentModifierController.cpp */,
-				A80421E2191CD9EB00894790 /* shared */,
 			);
 			name = source;
-			sourceTree = "<group>";
-		};
-		A86042391906C80D00972DED /* NEAT */ = {
-			isa = PBXGroup;
-			children = (
-				A860423A1906C80D00972DED /* NEAT.h */,
-				A860423B1906C80D00972DED /* NEAT_CoEvoExperiment.h */,
-				A860423C1906C80D00972DED /* NEAT_CoEvoGeneticGeneration.h */,
-				A860423D1906C80D00972DED /* NEAT_Defines.h */,
-				A860423E1906C80D00972DED /* NEAT_FastBiasNetwork.h */,
-				A860423F1906C80D00972DED /* NEAT_FastLayeredNetwork.h */,
-				A86042401906C80D00972DED /* NEAT_FastNetwork.h */,
-				A86042411906C80D00972DED /* NEAT_FractalNetwork.h */,
-				A86042421906C80D00972DED /* NEAT_GeneticGene.h */,
-				A86042431906C80D00972DED /* NEAT_GeneticGeneration.h */,
-				A86042441906C80D00972DED /* NEAT_GeneticIndividual.h */,
-				A86042451906C80D00972DED /* NEAT_GeneticLinkGene.h */,
-				A86042461906C80D00972DED /* NEAT_GeneticNodeGene.h */,
-				A86042471906C80D00972DED /* NEAT_GeneticPopulation.h */,
-				A86042481906C80D00972DED /* NEAT_GeneticSpecies.h */,
-				A86042491906C80D00972DED /* NEAT_Globals.h */,
-				A860424A1906C80D00972DED /* NEAT_GPUANN.h */,
-				A860424B1906C80D00972DED /* NEAT_LayeredSubstrate.h */,
-				A860424C1906C80D00972DED /* NEAT_ModularNetwork.h */,
-				A860424D1906C80D00972DED /* NEAT_Network.h */,
-				A860424E1906C80D00972DED /* NEAT_NetworkIndexedLink.h */,
-				A860424F1906C80D00972DED /* NEAT_NetworkLink.h */,
-				A86042501906C80D00972DED /* NEAT_NetworkNode.h */,
-				A86042511906C80D00972DED /* NEAT_Random.h */,
-				A86042521906C80D00972DED /* NEAT_STL.h */,
-				A86042531906C80D00972DED /* NEAT_VectorNetwork.h */,
-				A86042541906C80D00972DED /* StringConverter.h */,
-			);
-			name = NEAT;
-			path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/NEAT";
-			sourceTree = "<absolute>";
-		};
-		A86042571906C86300972DED /* TinyXMLPlus */ = {
-			isa = PBXGroup;
-			children = (
-				A86042581906C86300972DED /* tinystr.h */,
-				A86042591906C86300972DED /* tinyxmlplus.h */,
-			);
-			name = TinyXMLPlus;
-			path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/TinyXMLPlus";
-			sourceTree = "<absolute>";
-		};
-		A860425A1906C89800972DED /* JGTL */ = {
-			isa = PBXGroup;
-			children = (
-				A860425B1906C89800972DED /* JGTL_Index3.h */,
-				A860425C1906C89800972DED /* JGTL_LocatedException.h */,
-				A860425D1906C89800972DED /* JGTL_MapInterface.h */,
-				A860425E1906C89800972DED /* JGTL_StackMap.h */,
-				A860425F1906C89800972DED /* JGTL_StringConverter.h */,
-				A86042601906C89800972DED /* JGTL_Vector2.h */,
-				A86042611906C89800972DED /* JGTL_Vector3.h */,
-				A86042621906C89800972DED /* JGTL_Vector4.h */,
-			);
-			name = JGTL;
-			path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/JGTL";
-			sourceTree = "<absolute>";
-		};
-		A8B3C157191B718B00F5E499 /* shared */ = {
-			isa = PBXGroup;
-			children = (
-				A80421E1191CD9CE00894790 /* Position.h */,
-				A8C42D8E191A5793006DAF05 /* Defines.h */,
-			);
-			name = shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,7 +173,6 @@
 			files = (
 				A80421E0191CD39900894790 /* EnvironmentModifierController.cpp in Sources */,
 				A80421D9191CD32700894790 /* main.cpp in Sources */,
-				A80421E4191CD9FC00894790 /* Position.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +215,13 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/Applications/Webots/include/controller/cpp/,
 					/opt/local/include/,
+					"../lib/**",
+					../shared/include/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SYSTEM_APPS_DIR)/Webots/lib",
+					/opt/local/lib,
+					../lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
@@ -378,6 +260,13 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/Applications/Webots/include/controller/cpp/,
 					/opt/local/include/,
+					"../lib/**",
+					../shared/include/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SYSTEM_APPS_DIR)/Webots/lib",
+					/opt/local/lib,
+					../lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
@@ -387,12 +276,7 @@
 		61AD16351897F88A003D24DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SYSTEM_APPS_DIR)/Webots/lib",
-					"/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib",
-					/opt/local/lib,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = EnvironmentModifierController;
 			};
 			name = Debug;
@@ -400,12 +284,7 @@
 		61AD16361897F88A003D24DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SYSTEM_APPS_DIR)/Webots/lib",
-					"/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib",
-					/opt/local/lib,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = EnvironmentModifierController;
 			};
 			name = Release;

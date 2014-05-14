@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "61892BEC1888175900E9EDCD"
-               BuildableName = "ToLController"
-               BlueprintName = "ToLController"
-               ReferencedContainer = "container:ToLController.xcodeproj">
+               BlueprintIdentifier = "61854A5219235CD900D24E32"
+               BuildableName = "ScreenshotController"
+               BlueprintName = "ScreenshotController"
+               ReferencedContainer = "container:ScreenshotController.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "61892BEC1888175900E9EDCD"
-            BuildableName = "ToLController"
-            BlueprintName = "ToLController"
-            ReferencedContainer = "container:ToLController.xcodeproj">
+            BlueprintIdentifier = "61854A5219235CD900D24E32"
+            BuildableName = "ScreenshotController"
+            BlueprintName = "ScreenshotController"
+            ReferencedContainer = "container:ScreenshotController.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -51,10 +51,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "61892BEC1888175900E9EDCD"
-            BuildableName = "ToLController"
-            BlueprintName = "ToLController"
-            ReferencedContainer = "container:ToLController.xcodeproj">
+            BlueprintIdentifier = "61854A5219235CD900D24E32"
+            BuildableName = "ScreenshotController"
+            BlueprintName = "ScreenshotController"
+            ReferencedContainer = "container:ScreenshotController.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -69,10 +69,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "61892BEC1888175900E9EDCD"
-            BuildableName = "ToLController"
-            BlueprintName = "ToLController"
-            ReferencedContainer = "container:ToLController.xcodeproj">
+            BlueprintIdentifier = "61854A5219235CD900D24E32"
+            BuildableName = "ScreenshotController"
+            BlueprintName = "ScreenshotController"
+            ReferencedContainer = "container:ScreenshotController.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61746C0C1923980C002D8509 /* EvolverController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61AD162B1897F88A003D24DE /* EvolverController */; };
+		61854A6D19236EA600D24E32 /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61854A6B19236EA600D24E32 /* libNEATLib.a */; };
+		61854A6E19236EA600D24E32 /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61854A6C19236EA600D24E32 /* libtinyxmlpluslib.a */; };
 		61AD16401897F90A003D24DE /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163E1897F90A003D24DE /* libController.dylib */; };
 		61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163F1897F90A003D24DE /* libCppController.dylib */; };
-		61AD164418980187003D24DE /* EvolverController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61AD162B1897F88A003D24DE /* EvolverController */; };
-		A86042381906C80100972DED /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042371906C80100972DED /* libNEATLib.a */; };
-		A86042561906C85400972DED /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042551906C85400972DED /* libtinyxmlpluslib.a */; };
 		A86042651906CD1500972DED /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042641906CD1500972DED /* libz.dylib */; };
 		A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */; };
 		A8C2754A19138273004A85A3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8C2754819138273004A85A3 /* main.cpp */; };
@@ -24,20 +24,21 @@
 		61AD16291897F88A003D24DE /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
-			dstPath = "/Users/emanuele/Desktop/tol-project/controllers/EvolverController";
+			dstPath = "~/Documents/projects/tol-project/controllers/EvolverController";
 			dstSubfolderSpec = 0;
 			files = (
-				61AD164418980187003D24DE /* EvolverController in CopyFiles */,
+				61746C0C1923980C002D8509 /* EvolverController in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		61854A6B19236EA600D24E32 /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = ../lib/libNEATLib.a; sourceTree = "<group>"; };
+		61854A6C19236EA600D24E32 /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = ../lib/libtinyxmlpluslib.a; sourceTree = "<group>"; };
 		61AD162B1897F88A003D24DE /* EvolverController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EvolverController; sourceTree = BUILT_PRODUCTS_DIR; };
 		61AD163E1897F90A003D24DE /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = ../../../../../../../../Applications/Webots/lib/libController.dylib; sourceTree = "<group>"; };
 		61AD163F1897F90A003D24DE /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
-		A86042371906C80100972DED /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/libNEATLib.a"; sourceTree = "<absolute>"; };
 		A860423A1906C80D00972DED /* NEAT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT.h; sourceTree = "<group>"; };
 		A860423B1906C80D00972DED /* NEAT_CoEvoExperiment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_CoEvoExperiment.h; sourceTree = "<group>"; };
 		A860423C1906C80D00972DED /* NEAT_CoEvoGeneticGeneration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_CoEvoGeneticGeneration.h; sourceTree = "<group>"; };
@@ -65,7 +66,6 @@
 		A86042521906C80D00972DED /* NEAT_STL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_STL.h; sourceTree = "<group>"; };
 		A86042531906C80D00972DED /* NEAT_VectorNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_VectorNetwork.h; sourceTree = "<group>"; };
 		A86042541906C80D00972DED /* StringConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringConverter.h; sourceTree = "<group>"; };
-		A86042551906C85400972DED /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/libtinyxmlpluslib.a"; sourceTree = "<absolute>"; };
 		A86042581906C86300972DED /* tinystr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
 		A86042591906C86300972DED /* tinyxmlplus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinyxmlplus.h; sourceTree = "<group>"; };
 		A860425B1906C89800972DED /* JGTL_Index3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_Index3.h; sourceTree = "<group>"; };
@@ -95,12 +95,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61854A6D19236EA600D24E32 /* libNEATLib.a in Frameworks */,
 				A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */,
 				A86042651906CD1500972DED /* libz.dylib in Frameworks */,
-				A86042561906C85400972DED /* libtinyxmlpluslib.a in Frameworks */,
-				A86042381906C80100972DED /* libNEATLib.a in Frameworks */,
 				61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */,
 				61AD16401897F90A003D24DE /* libController.dylib in Frameworks */,
+				61854A6E19236EA600D24E32 /* libtinyxmlpluslib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,11 +142,11 @@
 				A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */,
 				A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */,
 				A86042641906CD1500972DED /* libz.dylib */,
+				61854A6B19236EA600D24E32 /* libNEATLib.a */,
+				61854A6C19236EA600D24E32 /* libtinyxmlpluslib.a */,
 				A860425A1906C89800972DED /* JGTL */,
 				A86042571906C86300972DED /* TinyXMLPlus */,
 				A86042391906C80D00972DED /* NEAT */,
-				A86042551906C85400972DED /* libtinyxmlpluslib.a */,
-				A86042371906C80100972DED /* libNEATLib.a */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -347,7 +347,9 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/Applications/Webots/include/controller/cpp/,
+					"../lib/**",
 					/opt/local/include/,
+					../shared/include/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
@@ -385,7 +387,9 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/Applications/Webots/include/controller/cpp/,
+					"../lib/**",
 					/opt/local/include/,
+					../shared/include/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
@@ -395,11 +399,13 @@
 		61AD16351897F88A003D24DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_APPS_DIR)/Webots/lib",
 					"/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib",
 					/opt/local/lib,
+					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/lib",
 				);
 				PRODUCT_NAME = EvolverController;
 			};
@@ -408,11 +414,13 @@
 		61AD16361897F88A003D24DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_APPS_DIR)/Webots/lib",
 					"/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib",
 					/opt/local/lib,
+					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/lib",
 				);
 				PRODUCT_NAME = EvolverController;
 			};

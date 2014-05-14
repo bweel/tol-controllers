@@ -854,6 +854,7 @@ void RoombotController::infancy()
 void RoombotController::matureLife()
 {
     // ROOT MODULES BEHAVIOR
+    lastFitnessSent = 0;
     
     if (isRoot())
     {
@@ -911,7 +912,8 @@ void RoombotController::matureLife()
                 tPlusOne = getTime();
             }
             
-            if (_ev_step < SEND_FITNESS_TO_EVOLVER_INTERVAL)
+            double now = getTime();
+            if (now - lastFitnessSent < SEND_FITNESS_TO_EVOLVER_INTERVAL)
             {
                 _ev_step++;
             }
@@ -926,6 +928,7 @@ void RoombotController::matureLife()
                 _emitter->send(message.c_str(), (int)message.length()+1);
                 _emitter->setChannel(backup_channel);
                 
+                lastFitnessSent = getTime();
                 _ev_step = 0;
             }
         }

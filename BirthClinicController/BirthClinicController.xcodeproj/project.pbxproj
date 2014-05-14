@@ -7,21 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61746C14192398B3002D8509 /* BirthClinicController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61AD162B1897F88A003D24DE /* BirthClinicController */; };
 		61AD16401897F90A003D24DE /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163E1897F90A003D24DE /* libController.dylib */; };
 		61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163F1897F90A003D24DE /* libCppController.dylib */; };
-		61AD164418980187003D24DE /* BirthClinicController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61AD162B1897F88A003D24DE /* BirthClinicController */; };
+		61EBFBE619224833000E6D71 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBE519224833000E6D71 /* libshared.a */; };
+		61EBFBF919224C50000E6D71 /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBF719224C50000E6D71 /* libNEATLib.a */; };
+		61EBFBFA19224C50000E6D71 /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBF819224C50000E6D71 /* libtinyxmlpluslib.a */; };
 		A84E613D18FE883B007E227E /* BirthClinicController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84E613B18FE883B007E227E /* BirthClinicController.cpp */; };
 		A84F2AEA190A96EB0033F39C /* Organism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84F2AE8190A96EB0033F39C /* Organism.cpp */; };
 		A84F2AED190A970E0033F39C /* RoombotModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84F2AEB190A970E0033F39C /* RoombotModule.cpp */; };
 		A84F2AF0190A9DB00033F39C /* Module.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84F2AEE190A9DB00033F39C /* Module.cpp */; };
-		A86042381906C80100972DED /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042371906C80100972DED /* libNEATLib.a */; };
-		A86042561906C85400972DED /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042551906C85400972DED /* libtinyxmlpluslib.a */; };
 		A86042651906CD1500972DED /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042641906CD1500972DED /* libz.dylib */; };
 		A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */; };
-		A89E5B8E1907A987008C9CDD /* CppnGenome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A89E5B8C1907A987008C9CDD /* CppnGenome.cpp */; };
 		A8C42D95191A5FFF006DAF05 /* Builder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8C42D93191A5FFF006DAF05 /* Builder.cpp */; };
 		A8C42D99191A6352006DAF05 /* RoombotBuildPlan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8C42D98191A6352006DAF05 /* RoombotBuildPlan.cpp */; };
-		A8C42D9C191A63A8006DAF05 /* Position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8C42D9B191A63A8006DAF05 /* Position.cpp */; };
 		A8C42DC7191A640C006DAF05 /* ActivationValueMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8C42DC4191A640C006DAF05 /* ActivationValueMatrix.cpp */; };
 		A8C42DC8191A640C006DAF05 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8C42DC5191A640C006DAF05 /* Bitmap.cpp */; };
 		A8C42DC9191A640C006DAF05 /* RelativePosition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8C42DC6191A640C006DAF05 /* RelativePosition.cpp */; };
@@ -29,13 +28,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		61AD16291897F88A003D24DE /* CopyFiles */ = {
+		61746C13192398A7002D8509 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = "/Users/emanuele/Desktop/tol-project/controllers/BirthClinicController";
+			buildActionMask = 2147483647;
+			dstPath = "~/Documents/projects/tol-project/controllers/BirthClinicController";
 			dstSubfolderSpec = 0;
 			files = (
-				61AD164418980187003D24DE /* BirthClinicController in CopyFiles */,
+				61746C14192398B3002D8509 /* BirthClinicController in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,65 +44,24 @@
 		61AD162B1897F88A003D24DE /* BirthClinicController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BirthClinicController; sourceTree = BUILT_PRODUCTS_DIR; };
 		61AD163E1897F90A003D24DE /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = ../../../../../../../../Applications/Webots/lib/libController.dylib; sourceTree = "<group>"; };
 		61AD163F1897F90A003D24DE /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
+		61EBFBE519224833000E6D71 /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = ../dist/Debug/libshared.a; sourceTree = "<group>"; };
+		61EBFBF719224C50000E6D71 /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = ../lib/libNEATLib.a; sourceTree = "<group>"; };
+		61EBFBF819224C50000E6D71 /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = ../lib/libtinyxmlpluslib.a; sourceTree = "<group>"; };
 		A84E613A18FE881C007E227E /* BirthClinicController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BirthClinicController.h; path = BirthClinicController/include/BirthClinicController.h; sourceTree = SOURCE_ROOT; };
 		A84E613B18FE883B007E227E /* BirthClinicController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BirthClinicController.cpp; path = BirthClinicController/source/BirthClinicController.cpp; sourceTree = SOURCE_ROOT; };
 		A84F2AE8190A96EB0033F39C /* Organism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Organism.cpp; path = BirthClinicController/source/Organism.cpp; sourceTree = SOURCE_ROOT; };
 		A84F2AEB190A970E0033F39C /* RoombotModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RoombotModule.cpp; path = BirthClinicController/source/RoombotModule.cpp; sourceTree = SOURCE_ROOT; };
 		A84F2AEE190A9DB00033F39C /* Module.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Module.cpp; path = BirthClinicController/source/Module.cpp; sourceTree = SOURCE_ROOT; };
-		A86042321906C4C100972DED /* CppnGenome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CppnGenome.h; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/shared/include/CppnGenome.h"; sourceTree = "<absolute>"; };
-		A86042371906C80100972DED /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/libNEATLib.a"; sourceTree = "<absolute>"; };
-		A860423A1906C80D00972DED /* NEAT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT.h; sourceTree = "<group>"; };
-		A860423B1906C80D00972DED /* NEAT_CoEvoExperiment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_CoEvoExperiment.h; sourceTree = "<group>"; };
-		A860423C1906C80D00972DED /* NEAT_CoEvoGeneticGeneration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_CoEvoGeneticGeneration.h; sourceTree = "<group>"; };
-		A860423D1906C80D00972DED /* NEAT_Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_Defines.h; sourceTree = "<group>"; };
-		A860423E1906C80D00972DED /* NEAT_FastBiasNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_FastBiasNetwork.h; sourceTree = "<group>"; };
-		A860423F1906C80D00972DED /* NEAT_FastLayeredNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_FastLayeredNetwork.h; sourceTree = "<group>"; };
-		A86042401906C80D00972DED /* NEAT_FastNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_FastNetwork.h; sourceTree = "<group>"; };
-		A86042411906C80D00972DED /* NEAT_FractalNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_FractalNetwork.h; sourceTree = "<group>"; };
-		A86042421906C80D00972DED /* NEAT_GeneticGene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticGene.h; sourceTree = "<group>"; };
-		A86042431906C80D00972DED /* NEAT_GeneticGeneration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticGeneration.h; sourceTree = "<group>"; };
-		A86042441906C80D00972DED /* NEAT_GeneticIndividual.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticIndividual.h; sourceTree = "<group>"; };
-		A86042451906C80D00972DED /* NEAT_GeneticLinkGene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticLinkGene.h; sourceTree = "<group>"; };
-		A86042461906C80D00972DED /* NEAT_GeneticNodeGene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticNodeGene.h; sourceTree = "<group>"; };
-		A86042471906C80D00972DED /* NEAT_GeneticPopulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticPopulation.h; sourceTree = "<group>"; };
-		A86042481906C80D00972DED /* NEAT_GeneticSpecies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticSpecies.h; sourceTree = "<group>"; };
-		A86042491906C80D00972DED /* NEAT_Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_Globals.h; sourceTree = "<group>"; };
-		A860424A1906C80D00972DED /* NEAT_GPUANN.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GPUANN.h; sourceTree = "<group>"; };
-		A860424B1906C80D00972DED /* NEAT_LayeredSubstrate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_LayeredSubstrate.h; sourceTree = "<group>"; };
-		A860424C1906C80D00972DED /* NEAT_ModularNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_ModularNetwork.h; sourceTree = "<group>"; };
-		A860424D1906C80D00972DED /* NEAT_Network.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_Network.h; sourceTree = "<group>"; };
-		A860424E1906C80D00972DED /* NEAT_NetworkIndexedLink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_NetworkIndexedLink.h; sourceTree = "<group>"; };
-		A860424F1906C80D00972DED /* NEAT_NetworkLink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_NetworkLink.h; sourceTree = "<group>"; };
-		A86042501906C80D00972DED /* NEAT_NetworkNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_NetworkNode.h; sourceTree = "<group>"; };
-		A86042511906C80D00972DED /* NEAT_Random.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_Random.h; sourceTree = "<group>"; };
-		A86042521906C80D00972DED /* NEAT_STL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_STL.h; sourceTree = "<group>"; };
-		A86042531906C80D00972DED /* NEAT_VectorNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_VectorNetwork.h; sourceTree = "<group>"; };
-		A86042541906C80D00972DED /* StringConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringConverter.h; sourceTree = "<group>"; };
-		A86042551906C85400972DED /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/libtinyxmlpluslib.a"; sourceTree = "<absolute>"; };
-		A86042581906C86300972DED /* tinystr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
-		A86042591906C86300972DED /* tinyxmlplus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinyxmlplus.h; sourceTree = "<group>"; };
-		A860425B1906C89800972DED /* JGTL_Index3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_Index3.h; sourceTree = "<group>"; };
-		A860425C1906C89800972DED /* JGTL_LocatedException.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_LocatedException.h; sourceTree = "<group>"; };
-		A860425D1906C89800972DED /* JGTL_MapInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_MapInterface.h; sourceTree = "<group>"; };
-		A860425E1906C89800972DED /* JGTL_StackMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_StackMap.h; sourceTree = "<group>"; };
-		A860425F1906C89800972DED /* JGTL_StringConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_StringConverter.h; sourceTree = "<group>"; };
-		A86042601906C89800972DED /* JGTL_Vector2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_Vector2.h; sourceTree = "<group>"; };
-		A86042611906C89800972DED /* JGTL_Vector3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_Vector3.h; sourceTree = "<group>"; };
-		A86042621906C89800972DED /* JGTL_Vector4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_Vector4.h; sourceTree = "<group>"; };
-		A86042631906CA6C00972DED /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Defines.h; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/shared/include/Defines.h"; sourceTree = "<absolute>"; };
 		A86042641906CD1500972DED /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A89B150E190941420075DDE2 /* Organism.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Organism.h; path = BirthClinicController/include/Organism.h; sourceTree = SOURCE_ROOT; };
 		A89B150F190946270075DDE2 /* Module.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Module.h; path = BirthClinicController/include/Module.h; sourceTree = SOURCE_ROOT; };
 		A89B1510190946640075DDE2 /* RoombotModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RoombotModule.h; path = BirthClinicController/include/RoombotModule.h; sourceTree = SOURCE_ROOT; };
 		A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "/opt/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<absolute>"; };
 		A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "/opt/local/lib/libboost_system-mt.dylib"; sourceTree = "<absolute>"; };
-		A89E5B8C1907A987008C9CDD /* CppnGenome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CppnGenome.cpp; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/shared/source/CppnGenome.cpp"; sourceTree = "<absolute>"; };
 		A8C42D93191A5FFF006DAF05 /* Builder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Builder.cpp; path = BirthClinicController/source/Builder.cpp; sourceTree = SOURCE_ROOT; };
 		A8C42D96191A6346006DAF05 /* BuildPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuildPlan.h; path = BirthClinicController/include/BuildPlan.h; sourceTree = SOURCE_ROOT; };
 		A8C42D97191A6346006DAF05 /* RoombotBuildPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoombotBuildPlan.h; path = BirthClinicController/include/RoombotBuildPlan.h; sourceTree = SOURCE_ROOT; };
 		A8C42D98191A6352006DAF05 /* RoombotBuildPlan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RoombotBuildPlan.cpp; path = BirthClinicController/source/RoombotBuildPlan.cpp; sourceTree = SOURCE_ROOT; };
-		A8C42D9A191A637F006DAF05 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Position.h; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/shared/include/Position.h"; sourceTree = "<absolute>"; };
-		A8C42D9B191A63A8006DAF05 /* Position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Position.cpp; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/shared/source/Position.cpp"; sourceTree = "<absolute>"; };
 		A8C42DC1191A63EA006DAF05 /* ActivationValueMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivationValueMatrix.h; path = BirthClinicController/include/ActivationValueMatrix.h; sourceTree = SOURCE_ROOT; };
 		A8C42DC2191A63EA006DAF05 /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bitmap.h; path = BirthClinicController/include/Bitmap.h; sourceTree = SOURCE_ROOT; };
 		A8C42DC3191A63EA006DAF05 /* RelativePosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RelativePosition.h; path = BirthClinicController/include/RelativePosition.h; sourceTree = SOURCE_ROOT; };
@@ -119,10 +77,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61EBFBE619224833000E6D71 /* libshared.a in Frameworks */,
 				A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */,
 				A86042651906CD1500972DED /* libz.dylib in Frameworks */,
-				A86042561906C85400972DED /* libtinyxmlpluslib.a in Frameworks */,
-				A86042381906C80100972DED /* libNEATLib.a in Frameworks */,
+				61EBFBF919224C50000E6D71 /* libNEATLib.a in Frameworks */,
+				61EBFBFA19224C50000E6D71 /* libtinyxmlpluslib.a in Frameworks */,
 				61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */,
 				61AD16401897F90A003D24DE /* libController.dylib in Frameworks */,
 			);
@@ -161,16 +120,14 @@
 		61AD163D1897F8C7003D24DE /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				61EBFBE519224833000E6D71 /* libshared.a */,
 				61AD163E1897F90A003D24DE /* libController.dylib */,
 				61AD163F1897F90A003D24DE /* libCppController.dylib */,
 				A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */,
 				A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */,
 				A86042641906CD1500972DED /* libz.dylib */,
-				A860425A1906C89800972DED /* JGTL */,
-				A86042571906C86300972DED /* TinyXMLPlus */,
-				A86042391906C80D00972DED /* NEAT */,
-				A86042551906C85400972DED /* libtinyxmlpluslib.a */,
-				A86042371906C80100972DED /* libNEATLib.a */,
+				61EBFBF719224C50000E6D71 /* libNEATLib.a */,
+				61EBFBF819224C50000E6D71 /* libtinyxmlpluslib.a */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -188,7 +145,6 @@
 				A8C42DC1191A63EA006DAF05 /* ActivationValueMatrix.h */,
 				A8C42DC3191A63EA006DAF05 /* RelativePosition.h */,
 				A8C42DC2191A63EA006DAF05 /* Bitmap.h */,
-				A8C42DCB191A7301006DAF05 /* shared */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -206,89 +162,8 @@
 				A8C42DC4191A640C006DAF05 /* ActivationValueMatrix.cpp */,
 				A8C42DC6191A640C006DAF05 /* RelativePosition.cpp */,
 				A8C42DC5191A640C006DAF05 /* Bitmap.cpp */,
-				A8C42DCC191A733F006DAF05 /* shared */,
 			);
 			name = source;
-			sourceTree = "<group>";
-		};
-		A86042391906C80D00972DED /* NEAT */ = {
-			isa = PBXGroup;
-			children = (
-				A860423A1906C80D00972DED /* NEAT.h */,
-				A860423B1906C80D00972DED /* NEAT_CoEvoExperiment.h */,
-				A860423C1906C80D00972DED /* NEAT_CoEvoGeneticGeneration.h */,
-				A860423D1906C80D00972DED /* NEAT_Defines.h */,
-				A860423E1906C80D00972DED /* NEAT_FastBiasNetwork.h */,
-				A860423F1906C80D00972DED /* NEAT_FastLayeredNetwork.h */,
-				A86042401906C80D00972DED /* NEAT_FastNetwork.h */,
-				A86042411906C80D00972DED /* NEAT_FractalNetwork.h */,
-				A86042421906C80D00972DED /* NEAT_GeneticGene.h */,
-				A86042431906C80D00972DED /* NEAT_GeneticGeneration.h */,
-				A86042441906C80D00972DED /* NEAT_GeneticIndividual.h */,
-				A86042451906C80D00972DED /* NEAT_GeneticLinkGene.h */,
-				A86042461906C80D00972DED /* NEAT_GeneticNodeGene.h */,
-				A86042471906C80D00972DED /* NEAT_GeneticPopulation.h */,
-				A86042481906C80D00972DED /* NEAT_GeneticSpecies.h */,
-				A86042491906C80D00972DED /* NEAT_Globals.h */,
-				A860424A1906C80D00972DED /* NEAT_GPUANN.h */,
-				A860424B1906C80D00972DED /* NEAT_LayeredSubstrate.h */,
-				A860424C1906C80D00972DED /* NEAT_ModularNetwork.h */,
-				A860424D1906C80D00972DED /* NEAT_Network.h */,
-				A860424E1906C80D00972DED /* NEAT_NetworkIndexedLink.h */,
-				A860424F1906C80D00972DED /* NEAT_NetworkLink.h */,
-				A86042501906C80D00972DED /* NEAT_NetworkNode.h */,
-				A86042511906C80D00972DED /* NEAT_Random.h */,
-				A86042521906C80D00972DED /* NEAT_STL.h */,
-				A86042531906C80D00972DED /* NEAT_VectorNetwork.h */,
-				A86042541906C80D00972DED /* StringConverter.h */,
-			);
-			name = NEAT;
-			path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/NEAT";
-			sourceTree = "<absolute>";
-		};
-		A86042571906C86300972DED /* TinyXMLPlus */ = {
-			isa = PBXGroup;
-			children = (
-				A86042581906C86300972DED /* tinystr.h */,
-				A86042591906C86300972DED /* tinyxmlplus.h */,
-			);
-			name = TinyXMLPlus;
-			path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/TinyXMLPlus";
-			sourceTree = "<absolute>";
-		};
-		A860425A1906C89800972DED /* JGTL */ = {
-			isa = PBXGroup;
-			children = (
-				A860425B1906C89800972DED /* JGTL_Index3.h */,
-				A860425C1906C89800972DED /* JGTL_LocatedException.h */,
-				A860425D1906C89800972DED /* JGTL_MapInterface.h */,
-				A860425E1906C89800972DED /* JGTL_StackMap.h */,
-				A860425F1906C89800972DED /* JGTL_StringConverter.h */,
-				A86042601906C89800972DED /* JGTL_Vector2.h */,
-				A86042611906C89800972DED /* JGTL_Vector3.h */,
-				A86042621906C89800972DED /* JGTL_Vector4.h */,
-			);
-			name = JGTL;
-			path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/JGTL";
-			sourceTree = "<absolute>";
-		};
-		A8C42DCB191A7301006DAF05 /* shared */ = {
-			isa = PBXGroup;
-			children = (
-				A86042631906CA6C00972DED /* Defines.h */,
-				A86042321906C4C100972DED /* CppnGenome.h */,
-				A8C42D9A191A637F006DAF05 /* Position.h */,
-			);
-			name = shared;
-			sourceTree = "<group>";
-		};
-		A8C42DCC191A733F006DAF05 /* shared */ = {
-			isa = PBXGroup;
-			children = (
-				A89E5B8C1907A987008C9CDD /* CppnGenome.cpp */,
-				A8C42D9B191A63A8006DAF05 /* Position.cpp */,
-			);
-			name = shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,7 +175,7 @@
 			buildPhases = (
 				61AD16271897F88A003D24DE /* Sources */,
 				61AD16281897F88A003D24DE /* Frameworks */,
-				61AD16291897F88A003D24DE /* CopyFiles */,
+				61746C13192398A7002D8509 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -343,7 +218,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8C42D95191A5FFF006DAF05 /* Builder.cpp in Sources */,
-				A89E5B8E1907A987008C9CDD /* CppnGenome.cpp in Sources */,
 				A8C42DC9191A640C006DAF05 /* RelativePosition.cpp in Sources */,
 				A8C42D99191A6352006DAF05 /* RoombotBuildPlan.cpp in Sources */,
 				A84F2AF0190A9DB00033F39C /* Module.cpp in Sources */,
@@ -353,7 +227,6 @@
 				A84F2AEA190A96EB0033F39C /* Organism.cpp in Sources */,
 				A8E6B63819000AA9000D6E40 /* main.cpp in Sources */,
 				A84E613D18FE883B007E227E /* BirthClinicController.cpp in Sources */,
-				A8C42D9C191A63A8006DAF05 /* Position.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,6 +269,13 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/Applications/Webots/include/controller/cpp/,
 					/opt/local/include/,
+					"../lib/**",
+					../shared/incude/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SYSTEM_APPS_DIR)/Webots/lib",
+					/opt/local/lib,
+					../lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
@@ -434,6 +314,13 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/Applications/Webots/include/controller/cpp/,
 					/opt/local/include/,
+					"../lib/**",
+					../shared/incude/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SYSTEM_APPS_DIR)/Webots/lib",
+					/opt/local/lib,
+					../lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
@@ -450,12 +337,7 @@
 					/opt/local/include/,
 					../shared/include,
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SYSTEM_APPS_DIR)/Webots/lib",
-					"/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib",
-					/opt/local/lib,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = BirthClinicController;
 			};
 			name = Debug;
@@ -470,12 +352,7 @@
 					/opt/local/include/,
 					../shared/include,
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SYSTEM_APPS_DIR)/Webots/lib",
-					"/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib",
-					/opt/local/lib,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = BirthClinicController;
 			};
 			name = Release;

@@ -1,7 +1,7 @@
 #ifndef VALUES_H
 #define	VALUES_H
 
-#include "tinyxmlplus.h"
+#include <tinyxmlplus.h>
 
 #include <cstddef>
 #include <iostream>

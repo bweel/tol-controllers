@@ -203,10 +203,14 @@ void EvolverController::run()
     
     
     // MAIN CYCLE
-    unsigned int currentTime = 1;
+    double currentTime = 0;
+    lastMating = 0;
+    lastDeath = 0;
     
     while (step(timeStep) != -1)
     {
+        currentTime = getTime();
+        
         if(receiver->getQueueLength() > 0)
         {
             std::string message = (char*)receiver->getData();
@@ -225,7 +229,7 @@ void EvolverController::run()
             receiver->nextPacket();
         }
         
-        if(currentTime % MATING_TIME == 0)
+        if(currentTime - lastMating > MATING_TIME)
         {
             std::cout << "time to mate" << std::endl;
             
@@ -244,9 +248,11 @@ void EvolverController::run()
                 
                 sendGenomeToBirthClinic(newGenome, forMating[0], forMating[1]);
             }
+            
+            lastMating = getTime();
         }
         
-        if(currentTime % DYING_TIME == 0)
+        if(currentTime - lastDeath > DYING_TIME)
         {
             std::vector<id_t> forDying = selectForDying();
             for (int i = 0; i < forDying.size(); i++)
@@ -257,7 +263,5 @@ void EvolverController::run()
                 std::cout << "organism_" << forDying[i] << " SELECTED FOR DEATH" << std::endl;
             }
         }
-        
-        currentTime++;
     }
 }

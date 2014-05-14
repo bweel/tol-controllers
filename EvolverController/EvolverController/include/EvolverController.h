@@ -16,8 +16,11 @@ private:
     
     std::string simulationDateAndTime;
     
-    Receiver * receiver;
+    Receiver * receiver; 
     Emitter * emitter;
+    
+    double lastMating;
+    double lastDeath;
     
     GenomeManager * genomeManager;
     

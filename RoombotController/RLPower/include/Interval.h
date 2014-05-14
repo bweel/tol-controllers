@@ -1,7 +1,7 @@
 #ifndef INTERVAL_H
 #define	INTERVAL_H
 
-#include "tinyxmlplus.h"
+#include <tinyxmlplus.h>
 
 #include <cstddef>
 #include <valarray>

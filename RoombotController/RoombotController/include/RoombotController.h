@@ -66,6 +66,7 @@ private:
     // ATTRIBUTES
     
     std::string simulationDateAndTime;
+    double lastFitnessSent;
     
     boost::property_tree::ptree * _parameters;  // parameters tree
     

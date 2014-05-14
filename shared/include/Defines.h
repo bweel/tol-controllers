@@ -175,7 +175,7 @@ enum Shape_Encoding_Type
 #define ORGANISM_BASE_NAME "organism_"
 #define ROOMBOT_CONTROLLER_NAME "RoombotController"
 #define CONTROLLER_ARGS_PATH "../../Arguments/"
-
+#define RESULTS_PATH "../../Results"
 
 
 
@@ -209,10 +209,10 @@ const double CLINIC_RAIUS = 3;
 
 
 
-
-const unsigned int MATING_TIME = 100;
-const unsigned int DYING_TIME = 200;
-const unsigned int INFANCY_DURATION = 0;
+/// These are now in seconds!
+const unsigned int MATING_TIME = 500;
+const unsigned int DYING_TIME = 1000;
+const unsigned int INFANCY_DURATION = 20;
 const unsigned int SEND_FITNESS_TO_EVOLVER_INTERVAL = 50;
 
 

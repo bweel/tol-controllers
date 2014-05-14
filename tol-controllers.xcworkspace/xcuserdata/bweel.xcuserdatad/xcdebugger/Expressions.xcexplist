@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ScreenshotController::run():ScreenshotController.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "getTime() - lastScreenshot">
+            </PersistentString>
+            <PersistentString
+               value = "getTime()">
+            </PersistentString>
+            <PersistentString
+               value = "now - lastScreenshot">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "EvolverController::run():EvolverController.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentTime - lastMating">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

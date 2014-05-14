@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -17,7 +17,7 @@
                BlueprintIdentifier = "61278C2018966A5A007D50F4"
                BuildableName = "libEVAlgorithms.a"
                BlueprintName = "EVAlgorithms"
-               ReferencedContainer = "container:ToLController.xcodeproj">
+               ReferencedContainer = "container:RoombotController.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

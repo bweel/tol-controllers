@@ -4,18 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>EvolverController.xcscheme</key>
+		<key>All.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
-		</dict>
-	</dict>
-	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>61AD162A1897F88A003D24DE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
+			<integer>8</integer>
 		</dict>
 	</dict>
 </dict>

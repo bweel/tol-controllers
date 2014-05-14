@@ -13,7 +13,7 @@ namespace POWER
 	const double Trial::VARIANCE_DECAY = 0.98;
 
 	const std::size_t Trial::V_SIZE_MIN = 2;
-	const std::size_t Trial::V_SIZE_MAX = 100;
+	const std::size_t Trial::V_SIZE_MAX = 20;
 	const std::size_t Trial::RANKING_SIZE = 10;
 	const std::size_t Trial::EVALUATION_SIZE = 1000;
 
@@ -42,11 +42,11 @@ namespace POWER
 				bool adaptive)
 	:
 	_random(new utils::Random(seed)),
-	_v_size_min((Trial::V_SIZE_MIN <= min_size) ? min_size : throw std::invalid_argument("1")),
-	_v_size_max((min_size <= max_size) ? max_size : throw std::invalid_argument("2")),
+	_v_size_min((Trial::V_SIZE_MIN <= min_size) ? min_size : throw std::invalid_argument("Interval minimum length should be larger than "+Trial::V_SIZE_MIN)),
+	_v_size_max((min_size <= max_size) ? max_size : throw std::invalid_argument("Interval maximum length should be larger than the minimum length")),
 	_interval(Trial::INTERVAL_START, Trial::INTERVAL_END, min_size),
-	_rank_size((0 < rank_size) ? rank_size : throw std::invalid_argument("3")),
-	_ev_size((ev_size > (_v_size_max - _v_size_min)) ? ev_size : throw std::invalid_argument("4")),
+	_rank_size((0 < rank_size) ? rank_size : throw std::invalid_argument("Rank size should be positive")),
+	_ev_size((ev_size > (_v_size_max - _v_size_min)) ? ev_size : throw std::invalid_argument("Evaluation size should be larger than the interval maximum length")),
 	_ev_delta((_v_size_max - _v_size_min) ? static_cast<std::size_t> (round(_ev_size / (_v_size_max - _v_size_min))) : 1),
 	//_ev_delta((_v_size_max - _v_size_min) ? static_cast<std::size_t> (round(_ev_size / ((_v_size_max - _v_size_min) / 2.0))) : 1),
 	_ev_index(0),

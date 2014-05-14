@@ -43,18 +43,18 @@
 		61278C87189694EC007D50F4 /* libUtilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C0C189667FF007D50F4 /* libUtilities.a */; };
 		61278C88189694FC007D50F4 /* libEVAlgorithms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C2118966A5A007D50F4 /* libEVAlgorithms.a */; };
 		61278C89189694FC007D50F4 /* libRLPower.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C521896755A007D50F4 /* libRLPower.a */; };
+		61746C0F19239893002D8509 /* RoombotController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61892BED1888175900E9EDCD /* RoombotController */; };
 		61892C8A18881AD800E9EDCD /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61892C8818881AD800E9EDCD /* libController.dylib */; };
 		61892C8B18881AD800E9EDCD /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61892C8918881AD800E9EDCD /* libCppController.dylib */; };
 		61AD161C1896AE13003D24DE /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD161B1896AE13003D24DE /* libboost_system-mt.dylib */; };
 		61AD161E1896AE29003D24DE /* libgsl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD161D1896AE29003D24DE /* libgsl.dylib */; };
 		61AD16201896AE3A003D24DE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD161F1896AE3A003D24DE /* libz.dylib */; };
-		61AD16211896BCBA003D24DE /* RoombotController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61892BED1888175900E9EDCD /* RoombotController */; };
 		61B4068C18A8E78900154961 /* SplineNeat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61B4068B18A8E78900154961 /* SplineNeat.cpp */; };
+		61EBFBFD19224C66000E6D71 /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBFB19224C66000E6D71 /* libNEATLib.a */; };
+		61EBFBFE19224C66000E6D71 /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBFC19224C66000E6D71 /* libtinyxmlpluslib.a */; };
+		61EBFC0019224CD1000E6D71 /* libboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBFF19224CD1000E6D71 /* libboard.a */; };
 		A84E613618FE8734007E227E /* RoombotController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84E613418FE8734007E227E /* RoombotController.cpp */; };
 		A84E613918FE8754007E227E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84E613718FE8754007E227E /* main.cpp */; };
-		A86042071906C18800972DED /* libboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042041906C18800972DED /* libboard.a */; };
-		A86042081906C18800972DED /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042051906C18800972DED /* libNEATLib.a */; };
-		A86042091906C18800972DED /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042061906C18800972DED /* libtinyxmlpluslib.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,10 +92,10 @@
 		61892BEB1888175900E9EDCD /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
-			dstPath = "/Users/emanuele/Desktop/tol-project/controllers/RoombotController";
+			dstPath = "~/Documents/projects/tol-project/controllers/RoombotController";
 			dstSubfolderSpec = 0;
 			files = (
-				61AD16211896BCBA003D24DE /* RoombotController in CopyFiles */,
+				61746C0F19239893002D8509 /* RoombotController in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,50 +146,12 @@
 		61AD161F1896AE3A003D24DE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = ../../../../../../../../opt/local/lib/libz.dylib; sourceTree = "<group>"; };
 		61B4068A18A8E65700154961 /* SplineNeat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplineNeat.h; sourceTree = "<group>"; };
 		61B4068B18A8E78900154961 /* SplineNeat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SplineNeat.cpp; sourceTree = "<group>"; };
+		61EBFBFB19224C66000E6D71 /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = ../lib/libNEATLib.a; sourceTree = "<group>"; };
+		61EBFBFC19224C66000E6D71 /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = ../lib/libtinyxmlpluslib.a; sourceTree = "<group>"; };
+		61EBFBFF19224CD1000E6D71 /* libboard.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboard.a; path = ../lib/libboard.a; sourceTree = "<group>"; };
 		A84E613318FE8702007E227E /* RoombotController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RoombotController.h; path = RoombotController/include/RoombotController.h; sourceTree = SOURCE_ROOT; };
 		A84E613418FE8734007E227E /* RoombotController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RoombotController.cpp; path = RoombotController/source/RoombotController.cpp; sourceTree = SOURCE_ROOT; };
 		A84E613718FE8754007E227E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = RoombotController/source/main.cpp; sourceTree = SOURCE_ROOT; };
-		A86042041906C18800972DED /* libboard.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboard.a; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/libboard.a"; sourceTree = "<absolute>"; };
-		A86042051906C18800972DED /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/libNEATLib.a"; sourceTree = "<absolute>"; };
-		A86042061906C18800972DED /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/libtinyxmlpluslib.a"; sourceTree = "<absolute>"; };
-		A860420B1906C1B200972DED /* JGTL_Index3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_Index3.h; sourceTree = "<group>"; };
-		A860420C1906C1B200972DED /* JGTL_LocatedException.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JGTL_LocatedException.h; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/RoombotController/../lib/JGTL/JGTL_LocatedException.h"; sourceTree = "<absolute>"; };
-		A860420D1906C1B200972DED /* JGTL_MapInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_MapInterface.h; sourceTree = "<group>"; };
-		A860420E1906C1B200972DED /* JGTL_StackMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_StackMap.h; sourceTree = "<group>"; };
-		A860420F1906C1B200972DED /* JGTL_StringConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_StringConverter.h; sourceTree = "<group>"; };
-		A86042101906C1B200972DED /* JGTL_Vector2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_Vector2.h; sourceTree = "<group>"; };
-		A86042111906C1B200972DED /* JGTL_Vector3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_Vector3.h; sourceTree = "<group>"; };
-		A86042121906C1B200972DED /* JGTL_Vector4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JGTL_Vector4.h; sourceTree = "<group>"; };
-		A86042141906C1B200972DED /* NEAT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT.h; sourceTree = "<group>"; };
-		A86042151906C1B200972DED /* NEAT_CoEvoExperiment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_CoEvoExperiment.h; sourceTree = "<group>"; };
-		A86042161906C1B200972DED /* NEAT_CoEvoGeneticGeneration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_CoEvoGeneticGeneration.h; sourceTree = "<group>"; };
-		A86042171906C1B200972DED /* NEAT_Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_Defines.h; sourceTree = "<group>"; };
-		A86042181906C1B200972DED /* NEAT_FastBiasNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_FastBiasNetwork.h; sourceTree = "<group>"; };
-		A86042191906C1B200972DED /* NEAT_FastLayeredNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_FastLayeredNetwork.h; sourceTree = "<group>"; };
-		A860421A1906C1B200972DED /* NEAT_FastNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_FastNetwork.h; sourceTree = "<group>"; };
-		A860421B1906C1B200972DED /* NEAT_FractalNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_FractalNetwork.h; sourceTree = "<group>"; };
-		A860421C1906C1B200972DED /* NEAT_GeneticGene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticGene.h; sourceTree = "<group>"; };
-		A860421D1906C1B200972DED /* NEAT_GeneticGeneration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticGeneration.h; sourceTree = "<group>"; };
-		A860421E1906C1B200972DED /* NEAT_GeneticIndividual.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticIndividual.h; sourceTree = "<group>"; };
-		A860421F1906C1B200972DED /* NEAT_GeneticLinkGene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticLinkGene.h; sourceTree = "<group>"; };
-		A86042201906C1B200972DED /* NEAT_GeneticNodeGene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticNodeGene.h; sourceTree = "<group>"; };
-		A86042211906C1B200972DED /* NEAT_GeneticPopulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticPopulation.h; sourceTree = "<group>"; };
-		A86042221906C1B200972DED /* NEAT_GeneticSpecies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GeneticSpecies.h; sourceTree = "<group>"; };
-		A86042231906C1B200972DED /* NEAT_Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_Globals.h; sourceTree = "<group>"; };
-		A86042241906C1B200972DED /* NEAT_GPUANN.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_GPUANN.h; sourceTree = "<group>"; };
-		A86042251906C1B200972DED /* NEAT_LayeredSubstrate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_LayeredSubstrate.h; sourceTree = "<group>"; };
-		A86042261906C1B200972DED /* NEAT_ModularNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_ModularNetwork.h; sourceTree = "<group>"; };
-		A86042271906C1B200972DED /* NEAT_Network.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_Network.h; sourceTree = "<group>"; };
-		A86042281906C1B200972DED /* NEAT_NetworkIndexedLink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_NetworkIndexedLink.h; sourceTree = "<group>"; };
-		A86042291906C1B200972DED /* NEAT_NetworkLink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_NetworkLink.h; sourceTree = "<group>"; };
-		A860422A1906C1B200972DED /* NEAT_NetworkNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_NetworkNode.h; sourceTree = "<group>"; };
-		A860422B1906C1B200972DED /* NEAT_Random.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_Random.h; sourceTree = "<group>"; };
-		A860422C1906C1B200972DED /* NEAT_STL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_STL.h; sourceTree = "<group>"; };
-		A860422D1906C1B200972DED /* NEAT_VectorNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEAT_VectorNetwork.h; sourceTree = "<group>"; };
-		A860422E1906C1B200972DED /* StringConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringConverter.h; sourceTree = "<group>"; };
-		A86042301906C1B200972DED /* tinystr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
-		A86042311906C1B200972DED /* tinyxmlplus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinyxmlplus.h; sourceTree = "<group>"; };
-		A8C42DCD191A7AC6006DAF05 /* Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Defines.h; path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/shared/include/Defines.h"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,14 +180,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A86042071906C18800972DED /* libboard.a in Frameworks */,
-				A86042081906C18800972DED /* libNEATLib.a in Frameworks */,
-				A86042091906C18800972DED /* libtinyxmlpluslib.a in Frameworks */,
 				61278C88189694FC007D50F4 /* libEVAlgorithms.a in Frameworks */,
 				61278C89189694FC007D50F4 /* libRLPower.a in Frameworks */,
 				61278C87189694EC007D50F4 /* libUtilities.a in Frameworks */,
+				61EBFC0019224CD1000E6D71 /* libboard.a in Frameworks */,
 				61AD16201896AE3A003D24DE /* libz.dylib in Frameworks */,
 				61278C7C189693D5007D50F4 /* libboost_filesystem-mt.dylib in Frameworks */,
+				61EBFBFE19224C66000E6D71 /* libtinyxmlpluslib.a in Frameworks */,
+				61EBFBFD19224C66000E6D71 /* libNEATLib.a in Frameworks */,
 				61AD161C1896AE13003D24DE /* libboost_system-mt.dylib in Frameworks */,
 				61278C7D189693D5007D50F4 /* libboost_random-mt.dylib in Frameworks */,
 				61892C8B18881AD800E9EDCD /* libCppController.dylib in Frameworks */,
@@ -375,19 +337,16 @@
 		61892C8718881AB400E9EDCD /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				61EBFBFB19224C66000E6D71 /* libNEATLib.a */,
+				61EBFBFC19224C66000E6D71 /* libtinyxmlpluslib.a */,
 				61AD161F1896AE3A003D24DE /* libz.dylib */,
 				61AD161D1896AE29003D24DE /* libgsl.dylib */,
 				61278C7A189693D5007D50F4 /* libboost_filesystem-mt.dylib */,
 				61278C7B189693D5007D50F4 /* libboost_random-mt.dylib */,
 				61AD161B1896AE13003D24DE /* libboost_system-mt.dylib */,
 				61892C8818881AD800E9EDCD /* libController.dylib */,
+				61EBFBFF19224CD1000E6D71 /* libboard.a */,
 				61892C8918881AD800E9EDCD /* libCppController.dylib */,
-				A860420A1906C1B200972DED /* JGTL */,
-				A86042131906C1B200972DED /* NEAT */,
-				A860422F1906C1B200972DED /* TinyXMLPlus */,
-				A86042041906C18800972DED /* libboard.a */,
-				A86042051906C18800972DED /* libNEATLib.a */,
-				A86042061906C18800972DED /* libtinyxmlpluslib.a */,
 			);
 			name = Libraries;
 			path = EvoController;
@@ -397,7 +356,6 @@
 			isa = PBXGroup;
 			children = (
 				A84E613318FE8702007E227E /* RoombotController.h */,
-				A8B3C159191BB90200F5E499 /* shared */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -409,75 +367,6 @@
 				A84E613418FE8734007E227E /* RoombotController.cpp */,
 			);
 			name = source;
-			sourceTree = "<group>";
-		};
-		A860420A1906C1B200972DED /* JGTL */ = {
-			isa = PBXGroup;
-			children = (
-				A860420B1906C1B200972DED /* JGTL_Index3.h */,
-				A860420C1906C1B200972DED /* JGTL_LocatedException.h */,
-				A860420D1906C1B200972DED /* JGTL_MapInterface.h */,
-				A860420E1906C1B200972DED /* JGTL_StackMap.h */,
-				A860420F1906C1B200972DED /* JGTL_StringConverter.h */,
-				A86042101906C1B200972DED /* JGTL_Vector2.h */,
-				A86042111906C1B200972DED /* JGTL_Vector3.h */,
-				A86042121906C1B200972DED /* JGTL_Vector4.h */,
-			);
-			name = JGTL;
-			path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/JGTL";
-			sourceTree = "<absolute>";
-		};
-		A86042131906C1B200972DED /* NEAT */ = {
-			isa = PBXGroup;
-			children = (
-				A86042141906C1B200972DED /* NEAT.h */,
-				A86042151906C1B200972DED /* NEAT_CoEvoExperiment.h */,
-				A86042161906C1B200972DED /* NEAT_CoEvoGeneticGeneration.h */,
-				A86042171906C1B200972DED /* NEAT_Defines.h */,
-				A86042181906C1B200972DED /* NEAT_FastBiasNetwork.h */,
-				A86042191906C1B200972DED /* NEAT_FastLayeredNetwork.h */,
-				A860421A1906C1B200972DED /* NEAT_FastNetwork.h */,
-				A860421B1906C1B200972DED /* NEAT_FractalNetwork.h */,
-				A860421C1906C1B200972DED /* NEAT_GeneticGene.h */,
-				A860421D1906C1B200972DED /* NEAT_GeneticGeneration.h */,
-				A860421E1906C1B200972DED /* NEAT_GeneticIndividual.h */,
-				A860421F1906C1B200972DED /* NEAT_GeneticLinkGene.h */,
-				A86042201906C1B200972DED /* NEAT_GeneticNodeGene.h */,
-				A86042211906C1B200972DED /* NEAT_GeneticPopulation.h */,
-				A86042221906C1B200972DED /* NEAT_GeneticSpecies.h */,
-				A86042231906C1B200972DED /* NEAT_Globals.h */,
-				A86042241906C1B200972DED /* NEAT_GPUANN.h */,
-				A86042251906C1B200972DED /* NEAT_LayeredSubstrate.h */,
-				A86042261906C1B200972DED /* NEAT_ModularNetwork.h */,
-				A86042271906C1B200972DED /* NEAT_Network.h */,
-				A86042281906C1B200972DED /* NEAT_NetworkIndexedLink.h */,
-				A86042291906C1B200972DED /* NEAT_NetworkLink.h */,
-				A860422A1906C1B200972DED /* NEAT_NetworkNode.h */,
-				A860422B1906C1B200972DED /* NEAT_Random.h */,
-				A860422C1906C1B200972DED /* NEAT_STL.h */,
-				A860422D1906C1B200972DED /* NEAT_VectorNetwork.h */,
-				A860422E1906C1B200972DED /* StringConverter.h */,
-			);
-			name = NEAT;
-			path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/NEAT";
-			sourceTree = "<absolute>";
-		};
-		A860422F1906C1B200972DED /* TinyXMLPlus */ = {
-			isa = PBXGroup;
-			children = (
-				A86042301906C1B200972DED /* tinystr.h */,
-				A86042311906C1B200972DED /* tinyxmlplus.h */,
-			);
-			name = TinyXMLPlus;
-			path = "/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib/TinyXMLPlus";
-			sourceTree = "<absolute>";
-		};
-		A8B3C159191BB90200F5E499 /* shared */ = {
-			isa = PBXGroup;
-			children = (
-				A8C42DCD191A7AC6006DAF05 /* Defines.h */,
-			);
-			name = shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -798,14 +687,15 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/Applications/Webots/include/controller/cpp/,
+					"../lib/**",
 					/opt/local/include/,
-					"lib/**",
+					../shared/include/,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_APPS_DIR)/Webots/lib",
+					../lib,
 					/opt/local/lib/,
-					lib/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
@@ -844,14 +734,15 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/Applications/Webots/include/controller/cpp/,
+					"../lib/**",
 					/opt/local/include/,
-					"lib/**",
+					../shared/include/,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_APPS_DIR)/Webots/lib",
+					../lib,
 					/opt/local/lib/,
-					lib/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
@@ -864,9 +755,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/emanuele/Documents/xcode-workspace/triangle-of-life-controller/lib",
-					/opt/local/lib,
-					"/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib",
+					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_NAME = RoombotController;
 			};
@@ -878,9 +767,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/emanuele/Documents/xcode-workspace/triangle-of-life-controller/lib",
-					/opt/local/lib,
-					"/Users/emanuele/Desktop/crosatoemanuele-triangle-of-life/lib",
+					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_NAME = RoombotController;
 			};

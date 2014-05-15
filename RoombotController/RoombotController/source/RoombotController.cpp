@@ -991,10 +991,13 @@ void RoombotController::death()
 
 void RoombotController::run()
 {
-    
-    // make a first step
-    if (step(_time_step) == -1) {
-        return;
+    double startingTime = getTime();
+    while (getTime() - startingTime < ROOMBOT_WAITING_TIME)
+    {
+        if (step(_time_step) == -1)
+        {
+            return;
+        }
     }
     
     infancy();

@@ -131,6 +131,7 @@ void Organism::writeControllerArgsFile(std::string simulationDateAndTime)
     child.put("Parameters", "");
     child.put("Save", "");
     child.put("Infancy_Duration",INFANCY_DURATION);
+    child.put("Waiting_Time", ROOMBOT_WAITING_TIME);
     child.put("Evaluations", "50");
     child.put("Angular_Velocity", "2.6");
     pt.put_child("Algorithm", child);

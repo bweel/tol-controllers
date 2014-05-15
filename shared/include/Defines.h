@@ -214,6 +214,7 @@ const unsigned int MATING_TIME = 500;
 const unsigned int DYING_TIME = 1000;
 const unsigned int INFANCY_DURATION = 500;
 const unsigned int SEND_FITNESS_TO_EVOLVER_INTERVAL = 50;
+const unsigned int ROOMBOT_WAITING_TIME = 10;
 
 
 #endif

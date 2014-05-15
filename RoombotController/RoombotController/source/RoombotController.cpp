@@ -1,21 +1,6 @@
 #include "RoombotController.h"
 
-#include "MyMath.h"
 
-#include "HyperNEAT.h"
-#include "RL_PoWER.h"
-#include "SplineNeat.h"
-
-#include <boost/filesystem.hpp>
-#include <boost/property_tree/exceptions.hpp>
-#include <boost/property_tree/json_parser.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/foreach.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
-#include <boost/date_time/posix_time/posix_time_io.hpp>
-
-#include <stdexcept>
-#include <ctime>
 
 const std::string RoombotController::GPS_NAME = "GPS";
 

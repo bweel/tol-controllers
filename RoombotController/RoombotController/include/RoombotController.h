@@ -4,14 +4,30 @@
 //#define DEBUG_CONTROLLER
 //#define DEBUG_TIMING
 
-
 #include "Defines.h"
-#include "EVAlgorithm.h"
 
+#include "EVAlgorithm.h"
+#include "HyperNEAT.h"
+#include "RL_PoWER.h"
+#include "SplineNeat.h"
+
+#include "MyMath.h"
 #include "Vector_3.h"
+
 #include <webots/Robot.hpp>
 #include <vector>
 #include <fstream>
+#include <boost/filesystem.hpp>
+#include <boost/property_tree/exceptions.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/foreach.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/posix_time/posix_time_io.hpp>
+
+#include <stdexcept>
+#include <ctime>
+
 
 using namespace webots;
 
@@ -99,8 +115,6 @@ private:
     unsigned int totalEvaluations;              // total number of evaluations
     unsigned int generation;                    // current generation
     double _ev_angular_velocity;                // speed of the motors
-    
-    unsigned int infancy_generations;           // number of generetion for infancy
     
     transforms::Vector_3 _position_start;       // list of transformations
     transforms::Vector_3 _position_end;         // from start to end

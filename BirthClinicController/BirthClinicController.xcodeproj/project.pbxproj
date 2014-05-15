@@ -10,9 +10,9 @@
 		61746C14192398B3002D8509 /* BirthClinicController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61AD162B1897F88A003D24DE /* BirthClinicController */; };
 		61AD16401897F90A003D24DE /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163E1897F90A003D24DE /* libController.dylib */; };
 		61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163F1897F90A003D24DE /* libCppController.dylib */; };
-		61EBFBE619224833000E6D71 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBE519224833000E6D71 /* libshared.a */; };
 		61EBFBF919224C50000E6D71 /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBF719224C50000E6D71 /* libNEATLib.a */; };
 		61EBFBFA19224C50000E6D71 /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBF819224C50000E6D71 /* libtinyxmlpluslib.a */; };
+		A814555E1924A94000278923 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A814555D1924A94000278923 /* libshared.a */; };
 		A84E613D18FE883B007E227E /* BirthClinicController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84E613B18FE883B007E227E /* BirthClinicController.cpp */; };
 		A84F2AEA190A96EB0033F39C /* Organism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84F2AE8190A96EB0033F39C /* Organism.cpp */; };
 		A84F2AED190A970E0033F39C /* RoombotModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84F2AEB190A970E0033F39C /* RoombotModule.cpp */; };
@@ -44,9 +44,9 @@
 		61AD162B1897F88A003D24DE /* BirthClinicController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BirthClinicController; sourceTree = BUILT_PRODUCTS_DIR; };
 		61AD163E1897F90A003D24DE /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = ../../../../../../../../Applications/Webots/lib/libController.dylib; sourceTree = "<group>"; };
 		61AD163F1897F90A003D24DE /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
-		61EBFBE519224833000E6D71 /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = ../dist/Debug/libshared.a; sourceTree = "<group>"; };
 		61EBFBF719224C50000E6D71 /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = ../lib/libNEATLib.a; sourceTree = "<group>"; };
 		61EBFBF819224C50000E6D71 /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = ../lib/libtinyxmlpluslib.a; sourceTree = "<group>"; };
+		A814555D1924A94000278923 /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = "../../../../Library/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug/libshared.a"; sourceTree = "<group>"; };
 		A84E613A18FE881C007E227E /* BirthClinicController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BirthClinicController.h; path = BirthClinicController/include/BirthClinicController.h; sourceTree = SOURCE_ROOT; };
 		A84E613B18FE883B007E227E /* BirthClinicController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BirthClinicController.cpp; path = BirthClinicController/source/BirthClinicController.cpp; sourceTree = SOURCE_ROOT; };
 		A84F2AE8190A96EB0033F39C /* Organism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Organism.cpp; path = BirthClinicController/source/Organism.cpp; sourceTree = SOURCE_ROOT; };
@@ -77,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61EBFBE619224833000E6D71 /* libshared.a in Frameworks */,
+				A814555E1924A94000278923 /* libshared.a in Frameworks */,
 				A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */,
 				A86042651906CD1500972DED /* libz.dylib in Frameworks */,
 				61EBFBF919224C50000E6D71 /* libNEATLib.a in Frameworks */,
@@ -120,7 +120,6 @@
 		61AD163D1897F8C7003D24DE /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				61EBFBE519224833000E6D71 /* libshared.a */,
 				61AD163E1897F90A003D24DE /* libController.dylib */,
 				61AD163F1897F90A003D24DE /* libCppController.dylib */,
 				A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */,
@@ -128,6 +127,7 @@
 				A86042641906CD1500972DED /* libz.dylib */,
 				61EBFBF719224C50000E6D71 /* libNEATLib.a */,
 				61EBFBF819224C50000E6D71 /* libtinyxmlpluslib.a */,
+				A814555D1924A94000278923 /* libshared.a */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -337,7 +337,10 @@
 					/opt/local/include/,
 					../shared/include,
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
+				);
 				PRODUCT_NAME = BirthClinicController;
 			};
 			name = Debug;
@@ -352,7 +355,10 @@
 					/opt/local/include/,
 					../shared/include,
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
+				);
 				PRODUCT_NAME = BirthClinicController;
 			};
 			name = Release;

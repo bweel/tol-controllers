@@ -204,7 +204,6 @@ const id_t NUMBER_OF_MODULES = 30;
 const int INITIAL_POPULATION = 5;
 const Shape_Encoding_Type SHAPE_ENCODING = CPPN;
 const double CLINIC_RAIUS = 3;
-//const double CLINIC_POSITION[3] = {-((ARENA_SIZE/2)-1), 2, -((ARENA_SIZE/2)-1)};
 
 
 

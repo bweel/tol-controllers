@@ -7,25 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		61746C0E1923987F002D8509 /* EnvironmentModifierController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61AD162B1897F88A003D24DE /* EnvironmentModifierController */; };
+		61746C0E1923987F002D8509 /* EnvironmentModifierController in Copy Files */ = {isa = PBXBuildFile; fileRef = 61AD162B1897F88A003D24DE /* EnvironmentModifierController */; };
 		61AD16401897F90A003D24DE /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163E1897F90A003D24DE /* libController.dylib */; };
 		61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163F1897F90A003D24DE /* libCppController.dylib */; };
-		61EBFBDE19224754000E6D71 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBDD19224754000E6D71 /* libshared.a */; };
 		A80421D9191CD32700894790 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80421D7191CD32700894790 /* main.cpp */; };
 		A80421E0191CD39900894790 /* EnvironmentModifierController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80421DE191CD39900894790 /* EnvironmentModifierController.cpp */; };
+		A814555C1924A8F900278923 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A814555B1924A8F900278923 /* libshared.a */; };
 		A86042651906CD1500972DED /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042641906CD1500972DED /* libz.dylib */; };
 		A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		61AD16291897F88A003D24DE /* CopyFiles */ = {
+		61AD16291897F88A003D24DE /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = "~/Documents/projects/tol-project/controllers/EnvironmentModifierController";
 			dstSubfolderSpec = 0;
 			files = (
-				61746C0E1923987F002D8509 /* EnvironmentModifierController in CopyFiles */,
+				61746C0E1923987F002D8509 /* EnvironmentModifierController in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -36,10 +37,10 @@
 		61AD163F1897F90A003D24DE /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
 		61EBFBD919224453000E6D71 /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = ../lib/libNEATLib.a; sourceTree = "<group>"; };
 		61EBFBDA19224453000E6D71 /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = ../lib/libtinyxmlpluslib.a; sourceTree = "<group>"; };
-		61EBFBDD19224754000E6D71 /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = ../dist/Debug/libshared.a; sourceTree = "<group>"; };
 		A80421D7191CD32700894790 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = EnvironmentModifierController/source/main.cpp; sourceTree = SOURCE_ROOT; };
 		A80421DA191CD37A00894790 /* EnvironmentModifierController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EnvironmentModifierController.h; path = EnvironmentModifierController/include/EnvironmentModifierController.h; sourceTree = SOURCE_ROOT; };
 		A80421DE191CD39900894790 /* EnvironmentModifierController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EnvironmentModifierController.cpp; path = EnvironmentModifierController/source/EnvironmentModifierController.cpp; sourceTree = SOURCE_ROOT; };
+		A814555B1924A8F900278923 /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = "../../../../Library/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug/libshared.a"; sourceTree = "<group>"; };
 		A86042641906CD1500972DED /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "/opt/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<absolute>"; };
 		A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "/opt/local/lib/libboost_system-mt.dylib"; sourceTree = "<absolute>"; };
@@ -50,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61EBFBDE19224754000E6D71 /* libshared.a in Frameworks */,
+				A814555C1924A8F900278923 /* libshared.a in Frameworks */,
 				A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */,
 				A86042651906CD1500972DED /* libz.dylib in Frameworks */,
 				61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */,
@@ -64,7 +65,6 @@
 		61AD16221897F88A003D24DE = {
 			isa = PBXGroup;
 			children = (
-				61EBFBDD19224754000E6D71 /* libshared.a */,
 				61AD162D1897F88A003D24DE /* EvolverControllerController */,
 				61AD163D1897F8C7003D24DE /* Libraries */,
 				61AD162C1897F88A003D24DE /* Products */,
@@ -99,6 +99,7 @@
 				A86042641906CD1500972DED /* libz.dylib */,
 				61EBFBD919224453000E6D71 /* libNEATLib.a */,
 				61EBFBDA19224453000E6D71 /* libtinyxmlpluslib.a */,
+				A814555B1924A8F900278923 /* libshared.a */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -129,7 +130,7 @@
 			buildPhases = (
 				61AD16271897F88A003D24DE /* Sources */,
 				61AD16281897F88A003D24DE /* Frameworks */,
-				61AD16291897F88A003D24DE /* CopyFiles */,
+				61AD16291897F88A003D24DE /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -276,7 +277,10 @@
 		61AD16351897F88A003D24DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
+				);
 				PRODUCT_NAME = EnvironmentModifierController;
 			};
 			name = Debug;
@@ -284,7 +288,10 @@
 		61AD16361897F88A003D24DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
+				);
 				PRODUCT_NAME = EnvironmentModifierController;
 			};
 			name = Release;

@@ -72,7 +72,6 @@
 		61AD16221897F88A003D24DE = {
 			isa = PBXGroup;
 			children = (
-				A8AF10231923BD3800D639E1 /* libshared.a */,
 				61AD162D1897F88A003D24DE /* EvolverControllerController */,
 				61AD163D1897F8C7003D24DE /* Libraries */,
 				61AD162C1897F88A003D24DE /* Products */,
@@ -107,6 +106,7 @@
 				A86042641906CD1500972DED /* libz.dylib */,
 				A8AF101F1923BD0D00D639E1 /* libNEATLib.a */,
 				A8AF10201923BD0D00D639E1 /* libtinyxmlpluslib.a */,
+				A8AF10231923BD3800D639E1 /* libshared.a */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";

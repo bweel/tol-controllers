@@ -339,13 +339,13 @@
 			children = (
 				61EBFBFB19224C66000E6D71 /* libNEATLib.a */,
 				61EBFBFC19224C66000E6D71 /* libtinyxmlpluslib.a */,
+				61EBFBFF19224CD1000E6D71 /* libboard.a */,
 				61AD161F1896AE3A003D24DE /* libz.dylib */,
 				61AD161D1896AE29003D24DE /* libgsl.dylib */,
 				61278C7A189693D5007D50F4 /* libboost_filesystem-mt.dylib */,
 				61278C7B189693D5007D50F4 /* libboost_random-mt.dylib */,
 				61AD161B1896AE13003D24DE /* libboost_system-mt.dylib */,
 				61892C8818881AD800E9EDCD /* libController.dylib */,
-				61EBFBFF19224CD1000E6D71 /* libboard.a */,
 				61892C8918881AD800E9EDCD /* libCppController.dylib */,
 			);
 			name = Libraries;

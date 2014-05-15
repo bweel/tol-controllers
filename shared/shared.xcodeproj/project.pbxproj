@@ -54,8 +54,8 @@
 		61EBFBCE192243B4000E6D71 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				61EBFBCB192243B4000E6D71 /* CppnGenome.h */,
 				61EBFBCC192243B4000E6D71 /* Defines.h */,
+				61EBFBCB192243B4000E6D71 /* CppnGenome.h */,
 				61EBFBCD192243B4000E6D71 /* Position.h */,
 			);
 			path = include;

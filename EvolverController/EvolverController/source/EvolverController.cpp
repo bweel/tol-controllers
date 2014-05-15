@@ -255,6 +255,7 @@ void EvolverController::run()
         if(currentTime - lastDeath > DYING_TIME)
         {
             std::vector<id_t> forDying = selectForDying();
+            
             for (int i = 0; i < forDying.size(); i++)
             {
                 sendDeathMessage(forDying[i]);
@@ -262,6 +263,8 @@ void EvolverController::run()
                 
                 std::cout << "organism_" << forDying[i] << " SELECTED FOR DEATH" << std::endl;
             }
+            
+            lastDeath = getTime();
         }
     }
 }

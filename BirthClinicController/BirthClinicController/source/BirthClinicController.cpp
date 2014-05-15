@@ -12,23 +12,6 @@ id_t BirthClinicController::getNextOrganismId()
 }
 
 
-int BirthClinicController::getFreeSlide()
-{
-    int bestSlide = -1;
-    int bestScore = 1000;
-    for (int i = 0; i < NUMBER_OF_SLIDES; i++)
-    {
-        int score = countInRadius(slidesPosition[i], CLINIC_RAIUS);
-        if (score < bestScore)
-        {
-            bestSlide = i;
-            bestScore = score;
-        }
-    }
-    return bestSlide;
-}
-
-
 int BirthClinicController::countInRadius(Position position, double radius)
 {
     std::map<id_t, Module*>::iterator it;
@@ -134,6 +117,14 @@ void BirthClinicController::storePhilogenyOnFile(id_t parent1, id_t parent2, id_
     philogenyFile.close();
 }
 
+void BirthClinicController::rotate()
+{
+    Field * rotation = platform->getField("rotation");
+    double angle = (rand() % (2*31459)) / 10000;
+    double r[4] = {0, 1, 0, angle};
+    rotation->setSFRotation(r);
+}
+
 
 ////////////////////////////////////////////
 ////////////// INITIALIZATION //////////////
@@ -175,12 +166,12 @@ int BirthClinicController::buildOrganism(CppnGenome genome)
         if (availableModules.size() >= buildPlan->size())
         {
             // create an organism object and add the modules
-            
-            int freeslide = getFreeSlide();
-            if (freeslide != -1)
+            if (countInRadius(position, CLINIC_SAFE_DISTANCE) == 0)
             {
+                rotate();
+                
                 size_t buildPlanSize = buildPlan->size();   // after creating the new organism the pointer to the build plan disappears
-                Organism * organism = new Organism(genome.toString(), getNextOrganismId(), buildPlan, slidesPosition[freeslide]);
+                Organism * organism = new Organism(genome.toString(), getNextOrganismId(), buildPlan, position);
                 std::cout << "NEW ORGANISM CREATED: " << organism->getName() << std::endl;
                 
                 for(size_t i = 0; i < buildPlanSize; i++)
@@ -205,7 +196,7 @@ int BirthClinicController::buildOrganism(CppnGenome genome)
             }
             else
             {
-                std::cout << "ORGANISM NOT CREATED: waiting for clinic to be free" << std::endl;
+                //std::cout << "ORGANISM NOT CREATED: waiting for clinic to be free" << std::endl;
                 return 2;
             }
         }
@@ -230,15 +221,13 @@ int BirthClinicController::buildOrganism(CppnGenome genome)
 
 BirthClinicController::BirthClinicController() : Supervisor()
 {
+    srand(static_cast<unsigned int>(time(NULL)));
+    
+    platform = getFromDef("CLINIC_PLATFORM");
+    
     receiver = getReceiver(RECEIVER_NAME);
     receiver->setChannel(CLINIC_CHANNEL);
     emitter = getEmitter(EMITTER_NAME);
-    
-    // slides positions
-    slidesPosition[0] = Position((ARENA_SIZE/2)-1, 1, (ARENA_SIZE/2)-1);
-    slidesPosition[1] = Position((ARENA_SIZE/2)-1, 1, -((ARENA_SIZE/2)-1));
-    slidesPosition[2] = Position(-((ARENA_SIZE/2)-1), 1, (ARENA_SIZE/2)-1);
-    slidesPosition[3] = Position(-((ARENA_SIZE/2)-1), 1, -((ARENA_SIZE/2)-1));
     
     // setup shape encoding
     switch (SHAPE_ENCODING) {

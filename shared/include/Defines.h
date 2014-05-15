@@ -199,11 +199,11 @@ static const int SCREENSHOT_CHANNEL = 1004;
 
 
 
-const int ARENA_SIZE = 20;
+const int ARENA_SIZE = 30;
 const id_t NUMBER_OF_MODULES = 30;
 const int INITIAL_POPULATION = 5;
 const Shape_Encoding_Type SHAPE_ENCODING = CPPN;
-const double CLINIC_RAIUS = 3;
+const double CLINIC_SAFE_DISTANCE = 5;
 
 
 
@@ -214,11 +214,6 @@ const unsigned int MATING_TIME = 500;
 const unsigned int DYING_TIME = 1000;
 const unsigned int INFANCY_DURATION = 500;
 const unsigned int SEND_FITNESS_TO_EVOLVER_INTERVAL = 50;
-
-
-
-const int NUMBER_OF_SLIDES = 4;
-
 
 
 #endif

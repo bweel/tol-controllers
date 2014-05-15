@@ -19,10 +19,12 @@ class BirthClinicController : public Supervisor
     
     std::string simulationDateAndTime;
     
+    Node * platform;
+    
     Receiver * receiver;
     Emitter * emitter;
     
-    Position slidesPosition[4];
+    Position position = Position(0,5,0,true);
     
     Builder * builder;
     
@@ -38,8 +40,6 @@ class BirthClinicController : public Supervisor
     int buildOrganism(CppnGenome genome);
     
     id_t getNextOrganismId();
-    
-    int getFreeSlide();
     
     int countInRadius(Position position, double radius);
     
@@ -57,6 +57,7 @@ class BirthClinicController : public Supervisor
     
     void storePhilogenyOnFile(id_t parent1, id_t parent2, id_t newBorn);
     
+    void rotate();
     
 
 

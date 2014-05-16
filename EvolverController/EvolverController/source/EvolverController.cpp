@@ -237,16 +237,18 @@ void EvolverController::run()
             
             if (forMating.size() == 2)
             {
-                std::cout << "parents found" << std::endl;
-                
                 std::vector<CppnGenome> parentsGenomes = std::vector<CppnGenome>();
                 parentsGenomes.push_back(std::get<2>(organismsList[searchForOrganism(forMating[0])]));
                 parentsGenomes.push_back(std::get<2>(organismsList[searchForOrganism(forMating[1])]));
                 CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
                 
-                std::cout << "NEW GENOME CREATED FROM organism_" << forMating[0] << "and organism_" << forMating[1] << std::endl;
+                std::cout << "NEW GENOME CREATED FROM organism_" << forMating[0] << " and organism_" << forMating[1] << std::endl;
                 
                 sendGenomeToBirthClinic(newGenome, forMating[0], forMating[1]);
+            }
+            else
+            {
+                std::cout << "couple of parents not found" << std::endl;
             }
             
             lastMating = getTime();

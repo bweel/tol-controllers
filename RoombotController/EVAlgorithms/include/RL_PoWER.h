@@ -5,6 +5,7 @@
 
 #include "Globals.h"
 #include "Trial.h"
+#include "Spline.h"
 #include "Values.h"
 
 #include <string>
@@ -34,6 +35,11 @@ virtual public EVAlgorithm
 
     unsigned int getGeneration();
     unsigned int getEvaluation();
+    
+    
+    std::vector<POWER::Spline *> getSplines();
+    
+    
   private:
 
 	bool _flag;

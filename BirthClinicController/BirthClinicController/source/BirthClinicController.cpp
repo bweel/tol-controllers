@@ -117,6 +117,16 @@ void BirthClinicController::storePhilogenyOnFile(id_t parent1, id_t parent2, id_
     philogenyFile.close();
 }
 
+
+void BirthClinicController::storeGenomeOnFile(id_t organismId, std::string genomeStr)
+{
+    ofstream genomesFile;
+    genomesFile.open(RESULTS_PATH + simulationDateAndTime + "/genomes.txt", ios::app);
+    genomesFile << "organism_" + std::to_string(organismId) + ": " + genomeStr + "\n";
+    genomesFile.close();
+}
+
+
 void BirthClinicController::rotate()
 {
     Field * rotation = platform->getField("rotation");
@@ -304,6 +314,7 @@ void BirthClinicController::run()
                 if (buildResponse == 1)
                 {
                     storePhilogenyOnFile(parent1, parent2, nextOrganismId-1);
+                    storeGenomeOnFile(nextOrganismId-1, genomeStr);
                     receiver->nextPacket();
                 }
                 if (buildResponse == 3)

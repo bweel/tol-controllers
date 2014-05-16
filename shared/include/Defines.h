@@ -175,7 +175,7 @@ enum Shape_Encoding_Type
 #define ORGANISM_BASE_NAME "organism_"
 #define ROOMBOT_CONTROLLER_NAME "RoombotController"
 #define CONTROLLER_ARGS_PATH "../../Arguments/"
-#define RESULTS_PATH "../../Results"
+#define RESULTS_PATH "../../Results/"
 
 
 

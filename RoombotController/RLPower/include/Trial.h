@@ -110,6 +110,8 @@ namespace POWER
 		TiXmlElement save_xml() const;
         
         unsigned int getEvaluationIndex();
+        
+        Policy * getStartingPolicy();
 
 	  private:
 		static const double FITNESS_EXP;

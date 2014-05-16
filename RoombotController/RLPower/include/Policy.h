@@ -146,6 +146,9 @@ namespace POWER
 		 * @return XML Element representing class
 		 */
 		TiXmlElement save_xml() const;
+        
+        
+        std::vector<Spline *> getSplines();
 
 	  private:
 

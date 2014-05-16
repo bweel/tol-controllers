@@ -26,6 +26,7 @@ _m_index(_parameters->get<std::size_t>("Robot." + getName() + ".Index")/* - _r_i
 _m_type(_parameters->get<int>("Robot." + getName() + ".Type")),
 _ev_type(_parameters->get<int>("Algorithm.Type")),
 totalEvaluations(_parameters->get<unsigned int>("Algorithm.Evaluations")),
+evaluationDuration (_parameters->get<double>("Algorithm.Infancy_Duration")),
 _ev_angular_velocity(_parameters->get<double>("Algorithm.Angular_Velocity")),
 genome(_parameters->get<std::string>("Genome")),
 
@@ -670,9 +671,6 @@ bool RoombotController::isRoot() {
 // initial learning phase of the organism's life
 void RoombotController::infancy()
 {
-    
-    unsigned int generations = 0;   // infancy lasts for a fixed number of generations
-    
     // ROOT MODULES' BEHAVIOR
     
     if (isRoot()) {
@@ -699,11 +697,11 @@ void RoombotController::infancy()
         dvector anglesTPlusOne = dvector(numMotors,0.0);    // angles for root at time t+1
         
         // initialize motors position
-        for(size_t i=0;i<numMotors;i++){
+        for(size_t i=0;i<numMotors;i++)
+        {
             _set_motor_position(i,0.0);
         }
         
-        evaluationDuration = _parameters->get<double>("Algorithm.Infancy_Duration");
         double singleEvaluationTime = evaluationDuration / totalEvaluations;
         double timeStep = getBasicTimeStep() / 1000.0;
         int totalEvaluationSteps = singleEvaluationTime / timeStep;
@@ -722,7 +720,10 @@ void RoombotController::infancy()
         _time_offset = getTime();   // remember offset for time calculations
         double tMinusOne,tPlusOne;  // times T-1 and T+1
         
-        while (step(_time_step) != -1 &&  generations < INFANCY_DURATION)
+        
+        double startingTime = getTime();
+        
+        while (step(_time_step) != -1 && (getTime() - startingTime < evaluationDuration))
         {
             anglesIn = receiveAngles();     // read current angles
             
@@ -730,7 +731,8 @@ void RoombotController::infancy()
             std::cout << "[" << getTime() << "] " << getName() << " using root angles of timestep: " << tMinusOne << std::endl;
 #endif
             // modify root angles with the ones at time T-1
-            for(size_t i=0;i<numMotors;i++){
+            for(size_t i=0;i<numMotors;i++)
+            {
                 anglesIn[_m_index][i] = anglesTMinusOne[i];     // notice that _m_index is for sure the root here
                 anglesTMinusOne[i] = _get_motor_position(i);    // update anglesTMinusOne for the next iteration
                 tMinusOne = getTime();                          // update tMinusOne for the next iteration
@@ -744,7 +746,8 @@ void RoombotController::infancy()
             std::cout << "[" << getTime() << "] " << getName() << " setting root angles of time: " << tPlusOne << std::endl;
 #endif
             // update real motors position
-            for(size_t i=0;i<numMotors;i++){
+            for(size_t i=0;i<numMotors;i++)
+            {
                 _set_motor_position(i,anglesTPlusOne[i]);   // root is one timestep further
                 anglesTPlusOne[i] = anglesOut[_m_index][i]; // update anglesTPlusOne for the next iteration
                 tPlusOne = getTime();                       // update tPlusOne for the next iteration
@@ -786,7 +789,6 @@ void RoombotController::infancy()
                     _algorithm->save();
                 }
                 
-                generations++;
                 _ev_step = 0;
             }
         }
@@ -811,7 +813,9 @@ void RoombotController::infancy()
         
         // main cycle for non-root
         
-        while (step(_time_step) != -1 && generations < INFANCY_DURATION)
+        double startingTime = getTime();
+        
+        while (step(_time_step) != -1 && (getTime() - startingTime < evaluationDuration))
         {
             // read angles for each motor
             for(size_t i=0;i<numMotors;i++){
@@ -914,6 +918,11 @@ void RoombotController::matureLife()
                 _emitter->send(message.c_str(), (int)message.length()+1);
                 _emitter->setChannel(backup_channel);
                 
+                
+                //std::vector<POWER::Spline *> splines = dynamic_cast<RL_PoWER *>(_algorithm)->getSplines();
+                
+                
+                
                 lastFitnessSent = getTime();
                 _ev_step = 0;
             }
@@ -1000,9 +1009,15 @@ void RoombotController::run()
         }
     }
     
+    std::cout << getName() << " STARTS INFANCY" << std::endl;
+    
     infancy();
     
+    std::cout << getName() << " STARTS MATURE LIFE" << std::endl;
+    
     matureLife();
+    
+    std::cout << getName() << " STARTS DEATH" << std::endl;
     
     death();
 }

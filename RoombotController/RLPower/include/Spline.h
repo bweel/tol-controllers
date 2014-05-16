@@ -40,7 +40,7 @@ namespace POWER
 		/*Spline(const Interval &, const std::valarray<double> &);*/
 
 		Spline(const TiXmlElement &);
-
+        
 		// </editor-fold>
 
 		// <editor-fold defaultstate="collapsed" desc="Destructor">

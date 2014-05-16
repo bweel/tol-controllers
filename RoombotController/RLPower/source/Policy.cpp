@@ -209,4 +209,11 @@ namespace POWER
 
 		return result;
 	}
+    
+    
+    std::vector<Spline *> Policy::getSplines()
+    {
+       return _splines;
+    }
+    
 }

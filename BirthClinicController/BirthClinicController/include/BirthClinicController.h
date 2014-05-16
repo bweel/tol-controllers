@@ -57,6 +57,8 @@ class BirthClinicController : public Supervisor
     
     void storePhilogenyOnFile(id_t parent1, id_t parent2, id_t newBorn);
     
+    void storeGenomeOnFile(id_t organismId, std::string genomeStr);
+    
     void rotate();
     
 

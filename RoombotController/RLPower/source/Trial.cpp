@@ -408,4 +408,12 @@ namespace POWER
 
 		return result;
 	}
+    
+    
+    
+    
+    Policy * Trial::getStartingPolicy()
+    {
+        return _evaluations[0];
+    }
 }

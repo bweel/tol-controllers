@@ -171,6 +171,8 @@ void EnvironmentModifierController::run()
             
             std::string moduleName = readToReserveMessage(message);
             
+            std::cout << "trying to put into reserve " << moduleName << std::endl;
+            
             putModuleToReserve(moduleName);
             
             receiver->nextPacket();

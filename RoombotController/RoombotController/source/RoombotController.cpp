@@ -919,9 +919,6 @@ void RoombotController::matureLife()
                 _emitter->setChannel(backup_channel);
                 
                 
-                //std::vector<POWER::Spline *> splines = dynamic_cast<RL_PoWER *>(_algorithm)->getSplines();
-                
-                
                 
                 lastFitnessSent = getTime();
                 _ev_step = 0;
@@ -1000,7 +997,12 @@ void RoombotController::death()
 
 void RoombotController::run()
 {
+    if (step(_time_step) == -1)
+    {
+        return;
+    }
     double startingTime = getTime();
+    std::cout << getName() << " starts at " << startingTime << endl;
     while (getTime() - startingTime < ROOMBOT_WAITING_TIME)
     {
         if (step(_time_step) == -1)

@@ -280,7 +280,14 @@ void BirthClinicController::run()
             if (message.substr(0,14).compare("ENVIRONMENT_OK") == 0)
             {
                 environmentOk = true;
+                
                 simulationDateAndTime = message.substr(14,message.length());
+                
+                boost::filesystem::path path(RESULTS_PATH + simulationDateAndTime);
+                if (boost::filesystem::exists(path) && boost::filesystem::is_directory(path)) {
+                    throw std::runtime_error("Directory Already Existing");
+                }
+                boost::filesystem::create_directories(path);
             }
             receiver->nextPacket();
         }

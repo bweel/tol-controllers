@@ -277,10 +277,3 @@ void RL_PoWER::save()
 		throw std::runtime_error("XML Error: Saving File " + (path / (_name + ".xml")).string());
 	}
 }
-
-
-
-std::vector<POWER::Spline *> RL_PoWER::getSplines()
-{
-    return _trial->getStartingPolicy()->getSplines();
-}

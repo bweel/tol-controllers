@@ -13,6 +13,7 @@
 		61EBFBF919224C50000E6D71 /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBF719224C50000E6D71 /* libNEATLib.a */; };
 		61EBFBFA19224C50000E6D71 /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBF819224C50000E6D71 /* libtinyxmlpluslib.a */; };
 		A814555E1924A94000278923 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A814555D1924A94000278923 /* libshared.a */; };
+		A814555F192627D600278923 /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */; };
 		A84E613D18FE883B007E227E /* BirthClinicController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84E613B18FE883B007E227E /* BirthClinicController.cpp */; };
 		A84F2AEA190A96EB0033F39C /* Organism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84F2AE8190A96EB0033F39C /* Organism.cpp */; };
 		A84F2AED190A970E0033F39C /* RoombotModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84F2AEB190A970E0033F39C /* RoombotModule.cpp */; };
@@ -77,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A814555F192627D600278923 /* libboost_filesystem-mt.dylib in Frameworks */,
 				A814555E1924A94000278923 /* libshared.a in Frameworks */,
 				A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */,
 				A86042651906CD1500972DED /* libz.dylib in Frameworks */,
@@ -340,6 +342,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
+					/opt/local/lib,
 				);
 				PRODUCT_NAME = BirthClinicController;
 			};
@@ -358,6 +361,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
+					/opt/local/lib,
 				);
 				PRODUCT_NAME = BirthClinicController;
 			};

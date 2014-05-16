@@ -37,9 +37,6 @@ virtual public EVAlgorithm
     unsigned int getEvaluation();
     
     
-    std::vector<POWER::Spline *> getSplines();
-    
-    
   private:
 
 	bool _flag;

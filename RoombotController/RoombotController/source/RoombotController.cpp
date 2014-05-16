@@ -773,7 +773,7 @@ void RoombotController::infancy()
             // if it is time for evaluation
             else
             {
-                std::cout << "Organism " << organismId << " evaluation " << _algorithm->getGeneration() << ":  ";
+//                std::cout << "Organism " << organismId << " evaluation " << _algorithm->getGeneration() << ":  ";
                 
                 _time_end = getTime();      // get final time
                 _position_end = _get_gps(); // get final position

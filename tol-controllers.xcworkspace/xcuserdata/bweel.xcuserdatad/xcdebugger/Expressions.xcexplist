@@ -6,13 +6,13 @@
          contextName = "ScreenshotController::run():ScreenshotController.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "getTime() - lastScreenshot">
+               value = "now - lastScreenshot">
             </PersistentString>
             <PersistentString
                value = "getTime()">
             </PersistentString>
             <PersistentString
-               value = "now - lastScreenshot">
+               value = "getTime() - lastScreenshot">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -21,6 +21,9 @@
          <PersistentStrings>
             <PersistentString
                value = "currentTime - lastMating">
+            </PersistentString>
+            <PersistentString
+               value = "currentTime - lastDeath">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

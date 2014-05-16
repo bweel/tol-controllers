@@ -34,6 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		617B36F11926330B001D459C /* MatrixGenomeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MatrixGenomeManager.h; path = EvolverController/include/MatrixGenomeManager.h; sourceTree = SOURCE_ROOT; };
 		61AD162B1897F88A003D24DE /* EvolverController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EvolverController; sourceTree = BUILT_PRODUCTS_DIR; };
 		61AD163E1897F90A003D24DE /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = ../../../../../../../../Applications/Webots/lib/libController.dylib; sourceTree = "<group>"; };
 		61AD163F1897F90A003D24DE /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
@@ -117,6 +118,7 @@
 				A8C2754B191382E6004A85A3 /* EvolverController.h */,
 				A8C42D8B191A574D006DAF05 /* GenomeManager.h */,
 				A8C42D8A191A574D006DAF05 /* CppnGenomeManager.h */,
+				617B36F11926330B001D459C /* MatrixGenomeManager.h */,
 			);
 			name = include;
 			sourceTree = "<group>";

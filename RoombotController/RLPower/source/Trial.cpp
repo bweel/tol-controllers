@@ -31,7 +31,7 @@ namespace POWER
 	const double Trial::FITNESS_EXP = 6.0;
 	const double Trial::EPSILON = 1e-10;
 
-	Trial::Trial(unsigned int seed,
+	Trial::Trial(utils::Random *random,
 				std::size_t numSplines,
 				std::size_t min_size,
 				std::size_t max_size,
@@ -39,9 +39,10 @@ namespace POWER
 				std::size_t ev_size,
 				double variance,
 				double variance_decay,
+                std::vector<std::vector<double> > parameters,
 				bool adaptive)
 	:
-	_random(new utils::Random(seed)),
+	_random(random),
 	_v_size_min((Trial::V_SIZE_MIN <= min_size) ? min_size : throw std::invalid_argument("Interval minimum length should be larger than "+Trial::V_SIZE_MIN)),
 	_v_size_max((min_size <= max_size) ? max_size : throw std::invalid_argument("Interval maximum length should be larger than the minimum length")),
 	_interval(Trial::INTERVAL_START, Trial::INTERVAL_END, min_size),
@@ -50,7 +51,7 @@ namespace POWER
 	_ev_delta((_v_size_max - _v_size_min) ? static_cast<std::size_t> (round(_ev_size / (_v_size_max - _v_size_min))) : 1),
 	//_ev_delta((_v_size_max - _v_size_min) ? static_cast<std::size_t> (round(_ev_size / ((_v_size_max - _v_size_min) / 2.0))) : 1),
 	_ev_index(0),
-	_variance_decay((0.0 < variance_decay) ? variance_decay : throw std::invalid_argument("6"))
+	_variance_decay((0.0 < variance_decay) ? variance_decay : throw std::invalid_argument("Variance Decay should be positive"))
 	{
 		if (0.0 >= variance) {
 			throw std::invalid_argument("Variance must be higher than 0");
@@ -62,16 +63,19 @@ namespace POWER
 
 		_ranking.reserve(_rank_size);
 		_evaluations.reserve(_ev_size);
+        
+        Values values(parameters.size(),parameters[0].size());
+        
+        for(int i=0;i<parameters.size();i++){
+            for(int j=0;j<parameters[0].size();j++){
+                values.row(i)[j] = parameters[i][j];
+            }
+        }
 
-		Values parameters(numSplines, min_size, 0.5);
-
-		parameters += (std::sqrt(variance) * random_normal_distribution(parameters.rows(), parameters.columns()));
-
-		_evaluations.push_back(new Policy(_ev_index, variance, _interval, parameters));
+		_evaluations.push_back(new Policy(_ev_index, variance, _interval, values));
 
 		std::cout
 				<< "RL_PoWER: Starting Trial" << std::endl
-				<< "Seed: " << seed << std::endl
 				<< "Variance: " << variance << " Decay Factor: " << _variance_decay << std::endl
 				<< "Interval: [" << _interval.min() << "," << _interval.max() << "]" << std::endl
 				<< "Parameters # Start: " << _v_size_min << std::endl
@@ -187,7 +191,7 @@ namespace POWER
 		}
 	}
     
-    unsigned int Trial::getEvaluationIndex() {
+    std::size_t Trial::getEvaluationIndex() {
         return _ev_index;
         
     }

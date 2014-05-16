@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		61278C1918966833007D50F4 /* MyMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C1418966833007D50F4 /* MyMath.h */; };
-		61278C1A18966833007D50F4 /* Random.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C1518966833007D50F4 /* Random.h */; };
 		61278C1B18966833007D50F4 /* MyMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61278C1718966833007D50F4 /* MyMath.cpp */; };
-		61278C1C18966833007D50F4 /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61278C1818966833007D50F4 /* Random.cpp */; };
 		61278C2F18966A78007D50F4 /* CPG.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C2718966A78007D50F4 /* CPG.h */; };
 		61278C3018966A78007D50F4 /* EVAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C2818966A78007D50F4 /* EVAlgorithm.h */; };
 		61278C3118966A78007D50F4 /* HyperNEAT.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C2918966A78007D50F4 /* HyperNEAT.h */; };
@@ -44,6 +42,7 @@
 		61278C88189694FC007D50F4 /* libEVAlgorithms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C2118966A5A007D50F4 /* libEVAlgorithms.a */; };
 		61278C89189694FC007D50F4 /* libRLPower.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C521896755A007D50F4 /* libRLPower.a */; };
 		61746C0F19239893002D8509 /* RoombotController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61892BED1888175900E9EDCD /* RoombotController */; };
+		617B37111926469D001D459C /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 617B37101926469D001D459C /* libshared.a */; };
 		61892C8A18881AD800E9EDCD /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61892C8818881AD800E9EDCD /* libController.dylib */; };
 		61892C8B18881AD800E9EDCD /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61892C8918881AD800E9EDCD /* libCppController.dylib */; };
 		61AD161C1896AE13003D24DE /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD161B1896AE13003D24DE /* libboost_system-mt.dylib */; };
@@ -104,9 +103,7 @@
 /* Begin PBXFileReference section */
 		61278C0C189667FF007D50F4 /* libUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61278C1418966833007D50F4 /* MyMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMath.h; sourceTree = "<group>"; };
-		61278C1518966833007D50F4 /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Random.h; sourceTree = "<group>"; };
 		61278C1718966833007D50F4 /* MyMath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyMath.cpp; sourceTree = "<group>"; };
-		61278C1818966833007D50F4 /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
 		61278C2118966A5A007D50F4 /* libEVAlgorithms.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEVAlgorithms.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61278C2718966A78007D50F4 /* CPG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPG.h; sourceTree = "<group>"; };
 		61278C2818966A78007D50F4 /* EVAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EVAlgorithm.h; sourceTree = "<group>"; };
@@ -138,6 +135,7 @@
 		61278C6418967563007D50F4 /* Values.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Values.cpp; sourceTree = "<group>"; };
 		61278C7A189693D5007D50F4 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "/opt/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<absolute>"; };
 		61278C7B189693D5007D50F4 /* libboost_random-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_random-mt.dylib"; path = "/opt/local/lib/libboost_random-mt.dylib"; sourceTree = "<absolute>"; };
+		617B37101926469D001D459C /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = ../dist/Debug/libshared.a; sourceTree = "<group>"; };
 		61892BED1888175900E9EDCD /* RoombotController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RoombotController; sourceTree = BUILT_PRODUCTS_DIR; };
 		61892C8818881AD800E9EDCD /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = ../../../../../../../../Applications/Webots/lib/libController.dylib; sourceTree = "<group>"; };
 		61892C8918881AD800E9EDCD /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
@@ -180,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				617B37111926469D001D459C /* libshared.a in Frameworks */,
 				61278C88189694FC007D50F4 /* libEVAlgorithms.a in Frameworks */,
 				61278C89189694FC007D50F4 /* libRLPower.a in Frameworks */,
 				61278C87189694EC007D50F4 /* libUtilities.a in Frameworks */,
@@ -227,7 +226,6 @@
 				61278C3918966ADD007D50F4 /* Vector_3.h */,
 				61278C3A18966ADD007D50F4 /* Vector_4.h */,
 				61278C1418966833007D50F4 /* MyMath.h */,
-				61278C1518966833007D50F4 /* Random.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -239,7 +237,6 @@
 				61278C3F18966AE9007D50F4 /* Vector_3.cpp */,
 				61278C4018966AE9007D50F4 /* Vector_4.cpp */,
 				61278C1718966833007D50F4 /* MyMath.cpp */,
-				61278C1818966833007D50F4 /* Random.cpp */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -314,6 +311,7 @@
 		61892BE41888175900E9EDCD = {
 			isa = PBXGroup;
 			children = (
+				617B37101926469D001D459C /* libshared.a */,
 				61278C1218966833007D50F4 /* Utilities */,
 				61278BFD18966728007D50F4 /* RoombotController */,
 				61278C2518966A78007D50F4 /* EVAlgorithms */,
@@ -381,7 +379,6 @@
 				61278C3C18966ADD007D50F4 /* Vector_3.h in Headers */,
 				61278C4718966B02007D50F4 /* ILinkable.h in Headers */,
 				61278C3D18966ADD007D50F4 /* Vector_4.h in Headers */,
-				61278C1A18966833007D50F4 /* Random.h in Headers */,
 				61278C3B18966ADD007D50F4 /* Quaternion.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -519,7 +516,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61278C1C18966833007D50F4 /* Random.cpp in Sources */,
 				61278C1B18966833007D50F4 /* MyMath.cpp in Sources */,
 				61278C4218966AE9007D50F4 /* Vector_3.cpp in Sources */,
 				61278C4318966AE9007D50F4 /* Vector_4.cpp in Sources */,
@@ -756,6 +752,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/dist/Debug",
 				);
 				PRODUCT_NAME = RoombotController;
 			};
@@ -768,6 +765,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/dist/Debug",
 				);
 				PRODUCT_NAME = RoombotController;
 			};

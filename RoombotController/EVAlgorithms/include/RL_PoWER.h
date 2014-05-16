@@ -32,6 +32,10 @@ virtual public EVAlgorithm
 	inline void setEvaluationFitnessAlt(const std::string &);
 
 	void save();
+    
+    std::vector<std::vector<double> > getInitialParameters();
+    void setInitialParameters(std::vector<std::vector<double> > parameters);
+    std::vector<std::vector<double> > getRandomInitialParameters();
 
     unsigned int getGeneration();
     unsigned int getEvaluation();
@@ -46,6 +50,12 @@ virtual public EVAlgorithm
 	std::size_t _ev_step;
 	std::size_t _ev_steps;
 
+    std::size_t numSplines;
+    unsigned int evaluations;
+    
+    std::vector<std::vector<double> > initialParameters;
+    
+    utils::Random *_random;
 	POWER::Globals * _globals;
 	POWER::Trial * _trial;
 	POWER::Values _evaluation;

@@ -57,7 +57,7 @@ void ScreenshotController::run() {
             boost::filesystem::path filepath = dirpath;
             filepath /= boost::lexical_cast<std::string>(now) + ".jpg";
             
-            std::cout << "Screenshot taken." << std::endl;
+//            std::cout << "Screenshot taken." << std::endl;
             exportImage(filepath.string(), 100);
             lastScreenshot = now;
         }

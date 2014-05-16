@@ -196,6 +196,9 @@ static const int SCREENSHOT_CHANNEL = 1004;
 #define CPPN_GRID_STARTING_SIZE 5		//Grid size for new cppnGenomes.
 
 
+#define MATRIX_MUTATION_RATE 0.5
+#define MATRIX_MUTATION_STRENGTH 1
+
 
 
 
@@ -212,7 +215,7 @@ const double CLINIC_SAFE_DISTANCE = 5;
 /// These are now in seconds!
 const unsigned int MATING_TIME = 500;
 const unsigned int DYING_TIME = 1000;
-const unsigned int INFANCY_DURATION = 500;
+const unsigned int INFANCY_DURATION = 1000;
 const unsigned int SEND_FITNESS_TO_EVOLVER_INTERVAL = 50;
 const unsigned int ROOMBOT_WAITING_TIME = 10;
 

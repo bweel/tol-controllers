@@ -5,6 +5,9 @@
 
 #include "NEAT.h"
 
+#include <iostream>
+#include <random>
+
 
 class CppnGenome {
 	

@@ -118,8 +118,14 @@ int CppnGenome::getSize() const
 }
 
 
-void CppnGenome::mutateSize(){
-    if (RANDOM.getRandomDouble() < SIZE_MUTATION_RATE) {
+void CppnGenome::mutateSize()
+{
+    if (RANDOM.getRandomDouble() < SIZE_MUTATION_RATE)
+    {
+        std::default_random_engine generator;
+        std::normal_distribution<double> distribution(0,SIZE_MUTATION_STRENGTH);
+        double randomMutation = distribution(generator);
+        size = size + randomMutation;
     	//size = size + RANDOM.getNormalDouble()*SIZE_MUTATION_STRENGTH + 0.5; *****TODO****
     }
 }

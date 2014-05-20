@@ -162,7 +162,14 @@ enum Shape_Encoding_Type
     OTHER = 0x02
 };
 
-
+enum Algorithm_Types    // type of learning algorithm
+{
+    A_UNDEFINED = 0,    // not defined
+    A_NEAT = 1,         // HyperNEAT
+    A_POWER = 2,        // RL PoWER
+    A_CPG = 3,          // ???
+    A_SPLINENEAT = 4    // SplineNEAT
+};
 
 
 
@@ -198,6 +205,7 @@ static const int SCREENSHOT_CHANNEL = 1004;
 
 #define MATRIX_MUTATION_RATE 0.5
 #define MATRIX_MUTATION_STRENGTH 1
+#define MATRIX_INITIAL_Y_SIZE 1
 
 
 
@@ -206,6 +214,7 @@ const int ARENA_SIZE = 30;
 const id_t NUMBER_OF_MODULES = 30;
 const int INITIAL_POPULATION = 5;
 const Shape_Encoding_Type SHAPE_ENCODING = CPPN;
+const Algorithm_Types MIND_ENCODING = A_POWER;
 const double CLINIC_SAFE_DISTANCE = 5;
 
 
@@ -213,11 +222,33 @@ const double CLINIC_SAFE_DISTANCE = 5;
 
 
 /// These are now in seconds!
-const unsigned int MATING_TIME = 500;
+const unsigned int MATING_TIME = 10;
 const unsigned int DYING_TIME = 1000;
-const unsigned int INFANCY_DURATION = 1000;
-const unsigned int SEND_FITNESS_TO_EVOLVER_INTERVAL = 50;
-const unsigned int ROOMBOT_WAITING_TIME = 10;
+const unsigned int INFANCY_DURATION = 0;
+const unsigned int SEND_FITNESS_TO_EVOLVER_INTERVAL = 5;
+const unsigned int ROOMBOT_WAITING_TIME = 4;
 
+
+/***************************/
+/***** Terminal Colors *****/
+/***************************/
+//the following are UBUNTU/LINUX ONLY terminal color codes.
+#define RESET   "\033[0m"
+#define BLACK   "\033[30m"      /* Black */
+#define RED     "\033[31m"      /* Red */
+#define GREEN   "\033[32m"      /* Green */
+#define YELLOW  "\033[33m"      /* Yellow */
+#define BLUE    "\033[34m"      /* Blue */
+#define MAGENTA "\033[35m"      /* Magenta */
+#define CYAN    "\033[36m"      /* Cyan */
+#define WHITE   "\033[37m"      /* White */
+#define BOLDBLACK   "\033[1m\033[30m"      /* Bold Black */
+#define BOLDRED     "\033[1m\033[31m"      /* Bold Red */
+#define BOLDGREEN   "\033[1m\033[32m"      /* Bold Green */
+#define BOLDYELLOW  "\033[1m\033[33m"      /* Bold Yellow */
+#define BOLDBLUE    "\033[1m\033[34m"      /* Bold Blue */
+#define BOLDMAGENTA "\033[1m\033[35m"      /* Bold Magenta */
+#define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
+#define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 
 #endif

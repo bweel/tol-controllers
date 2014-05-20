@@ -157,6 +157,16 @@ unsigned int HyperNEAT::getEvaluation() {
     return _i_index_last;
 }
 
+void HyperNEAT::setInitialMinds(boost::ptr_vector<MindGenome> genomes) {
+    
+}
+
+boost::ptr_vector<MindGenome> HyperNEAT::getRandomInitialMinds() {
+    boost::ptr_vector<MindGenome> minds;
+    
+    return minds;
+}
+
 bool HyperNEAT::nextEvaluation()
 {
 	int d_index, d_modulo, next_index;

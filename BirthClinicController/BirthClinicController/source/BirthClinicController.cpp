@@ -94,9 +94,10 @@ void BirthClinicController::addModuleToReserve(std::string moduleDef)
 }
 
 
-void BirthClinicController::readGenomeMessage(std::string message, std::string * genomeStr, id_t * parent1, id_t * parent2)
+void BirthClinicController::readGenomeMessage(std::string message, std::string * genomeStr, std::string * mindStr, id_t * parent1, id_t * parent2)
 {
-    *genomeStr = message.substr(message.find("GENOME")+6, message.find("PARENTS")-6);
+    *genomeStr = message.substr(message.find("GENOME")+6, message.find("MIND")-6);
+    *mindStr = message.substr(message.find("MIND")+4, message.find("PARENTS")-(genomeStr->length()+10));
     std::string parentsSubStr = message.substr(message.find("PARENTS")+7, message.length());
     *parent1 = std::atoi(parentsSubStr.substr(0, parentsSubStr.find("-")).c_str());
     *parent2 = std::atoi(parentsSubStr.substr(parentsSubStr.find("-")+1, parentsSubStr.length()).c_str());
@@ -166,7 +167,7 @@ void BirthClinicController::connectModulesToObjects()
 ////////////////////////////////////////////
 
 
-int BirthClinicController::buildOrganism(CppnGenome genome)
+int BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGenome)
 {
     std::auto_ptr<BuildPlan> buildPlan = builder->translateGenome(genome);
     
@@ -181,7 +182,7 @@ int BirthClinicController::buildOrganism(CppnGenome genome)
                 rotate();
                 
                 size_t buildPlanSize = buildPlan->size();   // after creating the new organism the pointer to the build plan disappears
-                Organism * organism = new Organism(genome.toString(), getNextOrganismId(), buildPlan, position);
+                BuildableOrganism * organism = new BuildableOrganism(genome.toString(), mindGenome, getNextOrganismId(), buildPlan, position);
                 std::cout << "NEW ORGANISM CREATED: " << organism->getName() << std::endl;
                 
                 for(size_t i = 0; i < buildPlanSize; i++)
@@ -310,13 +311,15 @@ void BirthClinicController::run()
             else
             {
                 std::string genomeStr;
+                std::string mindStr;
                 id_t parent1;
                 id_t parent2;
-                readGenomeMessage(message, & genomeStr, & parent1, & parent2);
+//                std::cout << "Decoding genome message: " << message << std::endl;
+                readGenomeMessage(message, & genomeStr, & mindStr, & parent1, & parent2);
                 
                 std::istringstream stream(message);
                 CppnGenome genome = builder->getGenomeFromStream(stream);
-                int buildResponse = buildOrganism(genome);
+                int buildResponse = buildOrganism(genome, mindStr);
                 
                 if (buildResponse == 1)
                 {

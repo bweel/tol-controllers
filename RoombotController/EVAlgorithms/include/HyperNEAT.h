@@ -47,6 +47,9 @@ virtual public EVAlgorithm
     
     unsigned int getGeneration();
     unsigned int getEvaluation();
+    
+    virtual void setInitialMinds(boost::ptr_vector<MindGenome> genomes);
+    virtual boost::ptr_vector<MindGenome> getRandomInitialMinds();
 
   private:
 

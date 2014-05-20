@@ -1,5 +1,5 @@
 #include "RoombotController.h"
-
+#include "MatrixGenomeManager.h"
 
 
 const std::string RoombotController::GPS_NAME = "GPS";
@@ -12,39 +12,42 @@ const int RoombotController::GPS_LOG_PERIOD = 50;
 
 /********************************************* CONSTRUCTORS *********************************************/
 
-RoombotController::RoombotController():
+RoombotController::RoombotController() {
+}
+
+void RoombotController::initialise(){
 
 // read parameters tree
-_parameters(_init_parameters(getControllerArguments())),
+    _parameters = _init_parameters(getControllerArguments());
 
 // set attributes with the parameters' values
-_name(_parameters->get<std::string>("Robot.Name")),
-_r_index(_parameters->get<std::size_t>("Robot.Index")),
-_r_index_root(_parameters->get<std::size_t>("Robot.Index_Root")),
-organismSize(_parameters->get<std::size_t>("Robot.Modules_#")),
-_m_index(_parameters->get<std::size_t>("Robot." + getName() + ".Index")/* - _r_index*/),
-_m_type(_parameters->get<int>("Robot." + getName() + ".Type")),
-_ev_type(_parameters->get<int>("Algorithm.Type")),
-totalEvaluations(_parameters->get<unsigned int>("Algorithm.Evaluations")),
-evaluationDuration (_parameters->get<double>("Algorithm.Infancy_Duration")),
-_ev_angular_velocity(_parameters->get<double>("Algorithm.Angular_Velocity")),
-genome(_parameters->get<std::string>("Genome")),
+    _name = _parameters->get<std::string>("Robot.Name");
+    _r_index = _parameters->get<std::size_t>("Robot.Index");
+    _r_index_root = _parameters->get<std::size_t>("Robot.Index_Root");
+    organismSize = _parameters->get<std::size_t>("Robot.Modules_#");
+    _m_index = _parameters->get<std::size_t>("Robot." + getName() + ".Index") ; /* - _r_index*/
+    _m_type = _parameters->get<int>("Robot." + getName() + ".Type");
+    _ev_type = _parameters->get<int>("Algorithm.Type");
+    totalEvaluations = _parameters->get<unsigned int>("Algorithm.Evaluations");
+    evaluationDuration = _parameters->get<double>("Algorithm.Infancy_Duration");
+    _ev_angular_velocity = _parameters->get<double>("Algorithm.Angular_Velocity");
+    genome = _parameters->get<std::string>("Genome");
+    mindGenome = _parameters->get<std::string>("MindGenome");
 
 // set other attributes to initial values
-_seed(0),
-_time_step(getBasicTimeStep()),
-_time_start(0.0),
-_time_offset(0.0),
-_time_end(0.0),
-_ev_step(0),
-_position_start(transforms::Vector_3::ZERO),
-_position_end(transforms::Vector_3::ZERO),
-numMotors(0),
-motorRange(0),
-_algorithm(0),
-_gps(isRoot() ? _init_gps(_time_step) : 0),
-_motors(_m_type ? _init_motors(_time_step) : 0)
-{
+    _seed = 0;
+    _time_step = getBasicTimeStep();
+    _time_start = 0.0;
+    _time_offset = 0.0;
+    _time_end = 0.0;
+    _ev_step = 0;
+    _position_start = transforms::Vector_3::ZERO;
+    _position_end = transforms::Vector_3::ZERO;
+    numMotors = 0;
+    motorRange = 0;
+    _algorithm = 0;
+    _gps = isRoot() ? _init_gps(_time_step) : 0;
+    _motors = _m_type ? _init_motors(_time_step) : 0;
     simulationDateAndTime = _parameters->get<std::string>("Simulation");
     
     istringstream(_name.substr(_name.find("_") + 1, _name.length() - 1)) >> organismId;
@@ -136,7 +139,7 @@ _motors(_m_type ? _init_motors(_time_step) : 0)
         switch (_ev_type)
         {
                 
-            case RoombotController::A_NEAT:
+            case A_NEAT:
                 
                 while (flag) {
                     flag = false;
@@ -165,7 +168,7 @@ _motors(_m_type ? _init_motors(_time_step) : 0)
                 
                 break;
                 
-            case RoombotController::A_POWER:
+            case A_POWER:
                 
                 while (flag) {
                     flag = false;
@@ -199,12 +202,12 @@ _motors(_m_type ? _init_motors(_time_step) : 0)
                 
                 break;
                 
-            case RoombotController::A_CPG:
+            case A_CPG:
                 
                 throw std::runtime_error("Algorithm Unsupported");
                 break;
                 
-            case RoombotController::A_SPLINENEAT:
+            case A_SPLINENEAT:
                 
                 while (flag) {
                     flag = false;
@@ -390,16 +393,16 @@ std::pair<double, std::string> RoombotController::_compute_fitness(double d_t, c
     std::pair<double, std::string> result;
     
     switch (_ev_type) {
-        case RoombotController::A_NEAT:
-        case RoombotController::A_SPLINENEAT:
+        case A_NEAT:
+        case A_SPLINENEAT:
             result.first = std::pow(2, d_xyz.lenght_square());
             break;
             
-        case RoombotController::A_CPG:
+        case A_CPG:
             result.first = d_xyz.lenght();
             break;
             
-        case RoombotController::A_POWER:
+        case A_POWER:
             result.first = d_xyz.lenght() / d_t;
             break;
             
@@ -424,13 +427,13 @@ double RoombotController::getRealFitness(double fitness)
 {
     double result;
     switch (_ev_type) {
-        case RoombotController::A_NEAT:
-        case RoombotController::A_SPLINENEAT:
-        case RoombotController::A_CPG:
+        case A_NEAT:
+        case A_SPLINENEAT:
+        case A_CPG:
             result = fitness;
             break;
             
-        case RoombotController::A_POWER:
+        case A_POWER:
             result = std::pow(100 * fitness,6);
             break;
             
@@ -708,6 +711,18 @@ void RoombotController::infancy()
         _ev_steps_recovery = totalEvaluationSteps / 10;
         _ev_steps_total_infancy = totalEvaluationSteps - _ev_steps_recovery;
         
+        
+        boost::ptr_vector<MindGenome> genomes;
+        MatrixGenomeManager manager;
+        if(mindGenome.length() == 0){
+            genomes = _algorithm->getRandomInitialMinds();
+            mindGenome = manager.genomeArrayToString(genomes);
+        }else{
+            genomes = manager.readStringToArray(mindGenome);
+        }
+        
+        _algorithm->setInitialMinds(genomes);
+        
         // two first steps (one more than non-root modules)
         if (step(_time_step) == -1)
             return;
@@ -914,7 +929,7 @@ void RoombotController::matureLife()
                 
                 int backup_channel = _emitter->getChannel();
                 _emitter->setChannel(EVOLVER_CHANNEL);
-                string message = "NAME" + _name + "FITNESS" + std::to_string(fitness.first) + "GENOME" + genome;
+                string message = "NAME" + _name + "FITNESS" + std::to_string(fitness.first) + "MIND" + mindGenome  + "GENOME" + genome;
                 _emitter->send(message.c_str(), (int)message.length()+1);
                 _emitter->setChannel(backup_channel);
                 
@@ -1001,6 +1016,7 @@ void RoombotController::run()
     {
         return;
     }
+    initialise();
     double startingTime = getTime();
     std::cout << getName() << " starts at " << startingTime << endl;
     while (getTime() - startingTime < ROOMBOT_WAITING_TIME)

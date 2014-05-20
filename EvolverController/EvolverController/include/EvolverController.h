@@ -3,6 +3,8 @@
 
 #include "GenomeManager.h"
 #include "CppnGenomeManager.h"
+#include "MatrixGenomeManager.h"
+#include "Organism.h"
 
 #include <webots/Supervisor.hpp>
 
@@ -23,27 +25,26 @@ private:
     double lastDeath;
     
     GenomeManager * genomeManager;
+    MindGenomeManager * mindGenomeManager;
     
-    std::vector<std::tuple<id_t, double, CppnGenome>> organismsList = std::vector<std::tuple<id_t, double, CppnGenome>>();
+    std::vector<Organism> organismsList;
 
-    
-    
     
     void generateInitialGenomes();
     
-    void readFitenessMessage(id_t * id, double * fitness, std::string * genome, std::string message);
+    void readFitnessMessage(id_t * id, double * fitness, std::string * genome, std::string * mind, std::string message);
     
     std::vector<id_t> selectForMating();
     
     std::vector<id_t> selectForDying();
     
-    void sendGenomeToBirthClinic(CppnGenome genome, id_t parent1, id_t parent2);
+    void sendGenomeToBirthClinic(std::string genome, std::string newMind, id_t parent1, id_t parent2);
     
     void sendDeathMessage(id_t organimsId);
     
     void removeFromOrganismsList(id_t organimsID);
     
-    void addToOrganismsList(id_t organismID, double fitness, CppnGenome genome);
+    void addToOrganismsList(id_t organimsID, double fitness, std::string genome, std::string mindGenome);
     
     int searchForOrganism(id_t organismId);
     

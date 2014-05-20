@@ -1,8 +1,8 @@
 #ifndef VECTOR_3_H
 #define	VECTOR_3_H
 
-#include "Vector_4.h"
-#include "Quaternion.h"
+//#include "Vector_4.h"
+//#include "Quaternion.h"
 
 #include "IExportable.h"
 
@@ -66,7 +66,7 @@ namespace transforms
 			Vector_3 & operator -=(const Vector_3 &);
 			Vector_3 & operator *=(const Vector_3 &);
 			Vector_3 & operator /=(const Vector_3 &);
-			Vector_3 & operator *=(const Quaternion &);
+//			Vector_3 & operator *=(const Quaternion &);
 
 			// </editor-fold>
 
@@ -81,7 +81,7 @@ namespace transforms
 
 			double dot_product(const Vector_3 &) const;
 			Vector_3 cross_product(const Vector_3 &) const;
-			Quaternion calculate_rotation(const Vector_3 &) const;
+//			Quaternion calculate_rotation(const Vector_3 &) const;
 
 			const double * c_array() const;
 
@@ -106,8 +106,6 @@ namespace transforms
 
 	/* Non Member Operator Overloads */
 
-	// <editor-fold defaultstate="collapsed" desc="Arithmetic Operators">
-
 	Vector_3 operator +(const double &, const Vector_3 &);
 	Vector_3 operator -(const double &, const Vector_3 &);
 	Vector_3 operator *(const double &, const Vector_3 &);
@@ -123,12 +121,8 @@ namespace transforms
 	Vector_3 operator *(const Vector_3 &, const Vector_3 &);
 	Vector_3 operator /(const Vector_3 &, const Vector_3 &);
 
-	Vector_3 operator *(const Quaternion &, const Vector_3 &);
-	Vector_3 operator *(const Vector_3 &, const Quaternion &);
-
-	// </editor-fold>
-
-	// <editor-fold defaultstate="collapsed" desc="Logical Operators">
+//	Vector_3 operator *(const Quaternion &, const Vector_3 &);
+//	Vector_3 operator *(const Vector_3 &, const Quaternion &);
 
 	bool operator ==(const Vector_3 &, const Vector_3 &);
 	bool operator !=(const Vector_3 &, const Vector_3 &);
@@ -137,8 +131,6 @@ namespace transforms
 	bool operator >(const Vector_3 &, const Vector_3 &);
 	//bool operator <=(const Vector_3 &, const Vector_3 &);
 	//bool operator >=(const Vector_3 &, const Vector_3 &);
-
-	// </editor-fold>
 
 }
 #endif	/* VECTOR_3_H */

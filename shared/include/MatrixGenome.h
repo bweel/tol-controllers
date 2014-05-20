@@ -15,9 +15,10 @@
 #include <random>
 
 #include "Random.h"
+#include "MindGenome.h"
 
 
-class MatrixGenome {
+class MatrixGenome : public MindGenome {
     
 private:
     std::vector<std::vector<double> > genes;
@@ -26,7 +27,14 @@ private:
     utils::Random *random;
     
 public:
+    
 	
+    /**
+     * Default constructor, the genome will be completely empty.
+     *
+     */
+    MatrixGenome();
+    
     /**
      * Constructs a random, minimal genome with a matrix of size_x by size_y.
      * The minimal genome will contain one output node, two input nodes
@@ -62,6 +70,26 @@ public:
     virtual ~MatrixGenome();
     
     /**
+     * Clone implementation for the use of ptr_vector
+     *
+     */
+    MatrixGenome *clone () const;
+    
+    /**
+     * Sets the parameters of the genome.
+     * This overwrites any values that have been set before.
+     *
+     * @param The values
+     */
+    void setValues(std::vector<std::vector<double> > values);
+    
+    /**
+     * Initialize this genome by reading a string
+     *
+     */
+    virtual void readString(std::string genome);
+       
+    /**
      * Returns a string of this genome that contains enough information to create
      * an exact copy of this genome.
      * Used in combination with the stream based constructor to write the genome to file,
@@ -70,7 +98,7 @@ public:
      *
      * @return Returns a string containing all information to reconstruct the genome.
      */
-    std::string toString() const;
+    virtual std::string toString() const;
     
     /**
      * Mutates this genome.
@@ -90,7 +118,7 @@ public:
      *
      * @param genome The genome to use in the crossover.
      */
-    void crossoverAndMutate(const MatrixGenome& genome);
+    void crossoverAndMutate(boost::shared_ptr<MindGenome> genome);
     
     /**
      * Returns a copy of the matrix

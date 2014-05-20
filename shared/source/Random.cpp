@@ -1,7 +1,9 @@
 #include "Random.h"
+#include "Defines.h"
 
 namespace utils
 {
+    Random* Random::instance = NULL;
 
 	Random::Random()
 	:
@@ -30,6 +32,20 @@ namespace utils
 	_normal_gen(_engine, _normal_dist),
 	_cauchy_dist(),
 	_cauchy_gen(_engine, _cauchy_dist) { }
+    
+    Random *Random::getInstance() {
+        if(Random::instance == NULL){
+            Random::instance = new Random();
+            std::cout << BOLDMAGENTA << "Initialized new random instance with seed: " << Random::instance->seed() << RESET << std::endl;
+        }
+        return Random::instance;
+    }
+    
+    Random::~Random() {
+        if(Random::instance){
+            delete Random::instance;
+        }
+    }
 
 	unsigned int Random::seed() const
 	{

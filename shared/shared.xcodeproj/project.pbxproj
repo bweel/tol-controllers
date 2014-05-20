@@ -9,12 +9,23 @@
 /* Begin PBXBuildFile section */
 		617B36F519263624001D459C /* MatrixGenome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B36F319263624001D459C /* MatrixGenome.cpp */; };
 		617B36FF19263CA7001D459C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B36FE19263CA7001D459C /* main.cpp */; };
-		617B370119263CA7001D459C /* UnitTests.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 617B370019263CA7001D459C /* UnitTests.1 */; };
 		617B370619263D3A001D459C /* gtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 617B370519263D3A001D459C /* gtest.framework */; };
-		617B370919263ECF001D459C /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBC419224330000E6D71 /* libshared.a */; };
 		617B3713192646CC001D459C /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B3712192646CC001D459C /* Random.cpp */; };
 		617B3715192646D3001D459C /* Random.h in Headers */ = {isa = PBXBuildFile; fileRef = 617B3714192646D3001D459C /* Random.h */; };
 		617B3718192647CC001D459C /* libboost_random-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 617B3717192647CC001D459C /* libboost_random-mt.dylib */; };
+		617B37201929FFF1001D459C /* MatrixGenomeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 617B371F1929FFF1001D459C /* MatrixGenomeManager.h */; };
+		617B37221929FFF8001D459C /* MatrixGenomeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B37211929FFF8001D459C /* MatrixGenomeManager.cpp */; };
+		617B3725192A3298001D459C /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBC419224330000E6D71 /* libshared.a */; };
+		617B3727192A32CC001D459C /* MindGenome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B3726192A32CC001D459C /* MindGenome.cpp */; };
+		61C68B83192A4A4F00AD6D19 /* Organism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C68B82192A4A4F00AD6D19 /* Organism.cpp */; };
+		61C68B85192A4ABF00AD6D19 /* Module.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C68B84192A4ABF00AD6D19 /* Module.h */; };
+		61C68B87192A4AC600AD6D19 /* Module.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C68B86192A4AC600AD6D19 /* Module.cpp */; };
+		61C68B88192A4ADC00AD6D19 /* Organism.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C68B81192A4A4700AD6D19 /* Organism.h */; };
+		61C68B89192A4ADC00AD6D19 /* MatrixGenome.h in Headers */ = {isa = PBXBuildFile; fileRef = 617B36F2192633CC001D459C /* MatrixGenome.h */; };
+		61C68B8A192A4ADC00AD6D19 /* MindGenome.h in Headers */ = {isa = PBXBuildFile; fileRef = 617B371D1929F5DB001D459C /* MindGenome.h */; };
+		61C68B8B192A4ADC00AD6D19 /* MindGenomeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 617B371E1929FD25001D459C /* MindGenomeManager.h */; };
+		61C68B8D192A4B1400AD6D19 /* BuildPlan.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C68B8C192A4B1400AD6D19 /* BuildPlan.h */; };
+		61C68B8F192A4B2500AD6D19 /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C68B8E192A4B2500AD6D19 /* Bitmap.h */; };
 		61EBFBD2192243B4000E6D71 /* CppnGenome.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EBFBCB192243B4000E6D71 /* CppnGenome.h */; };
 		61EBFBD3192243B4000E6D71 /* Defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EBFBCC192243B4000E6D71 /* Defines.h */; };
 		61EBFBD4192243B4000E6D71 /* Position.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EBFBCD192243B4000E6D71 /* Position.h */; };
@@ -22,26 +33,15 @@
 		61EBFBD6192243B4000E6D71 /* Position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61EBFBD0192243B4000E6D71 /* Position.cpp */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		617B370A19263ED3001D459C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 61EBFBBC19224330000E6D71 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 61EBFBC319224330000E6D71;
-			remoteInfo = shared;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		617B36FA19263CA7001D459C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				617B370119263CA7001D459C /* UnitTests.1 in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -55,6 +55,17 @@
 		617B3712192646CC001D459C /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
 		617B3714192646D3001D459C /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Random.h; sourceTree = "<group>"; };
 		617B3717192647CC001D459C /* libboost_random-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_random-mt.dylib"; path = "../../../../../../../../opt/local/lib/libboost_random-mt.dylib"; sourceTree = "<group>"; };
+		617B371D1929F5DB001D459C /* MindGenome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MindGenome.h; sourceTree = "<group>"; };
+		617B371E1929FD25001D459C /* MindGenomeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MindGenomeManager.h; sourceTree = "<group>"; };
+		617B371F1929FFF1001D459C /* MatrixGenomeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatrixGenomeManager.h; sourceTree = "<group>"; };
+		617B37211929FFF8001D459C /* MatrixGenomeManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MatrixGenomeManager.cpp; sourceTree = "<group>"; };
+		617B3726192A32CC001D459C /* MindGenome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MindGenome.cpp; sourceTree = "<group>"; };
+		61C68B81192A4A4700AD6D19 /* Organism.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Organism.h; sourceTree = "<group>"; };
+		61C68B82192A4A4F00AD6D19 /* Organism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Organism.cpp; sourceTree = "<group>"; };
+		61C68B84192A4ABF00AD6D19 /* Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Module.h; sourceTree = "<group>"; };
+		61C68B86192A4AC600AD6D19 /* Module.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Module.cpp; sourceTree = "<group>"; };
+		61C68B8C192A4B1400AD6D19 /* BuildPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildPlan.h; sourceTree = "<group>"; };
+		61C68B8E192A4B2500AD6D19 /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bitmap.h; sourceTree = "<group>"; };
 		61EBFBC419224330000E6D71 /* libshared.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libshared.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61EBFBCB192243B4000E6D71 /* CppnGenome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CppnGenome.h; sourceTree = "<group>"; };
 		61EBFBCC192243B4000E6D71 /* Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
@@ -68,8 +79,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				617B3725192A3298001D459C /* libshared.a in Frameworks */,
 				617B3718192647CC001D459C /* libboost_random-mt.dylib in Frameworks */,
-				617B370919263ECF001D459C /* libshared.a in Frameworks */,
 				617B370619263D3A001D459C /* gtest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,11 +144,18 @@
 		61EBFBCE192243B4000E6D71 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				61C68B8E192A4B2500AD6D19 /* Bitmap.h */,
+				61C68B8C192A4B1400AD6D19 /* BuildPlan.h */,
+				61C68B84192A4ABF00AD6D19 /* Module.h */,
+				61C68B81192A4A4700AD6D19 /* Organism.h */,
+				617B371F1929FFF1001D459C /* MatrixGenomeManager.h */,
 				617B3714192646D3001D459C /* Random.h */,
 				61EBFBCC192243B4000E6D71 /* Defines.h */,
 				61EBFBCB192243B4000E6D71 /* CppnGenome.h */,
 				61EBFBCD192243B4000E6D71 /* Position.h */,
 				617B36F2192633CC001D459C /* MatrixGenome.h */,
+				617B371D1929F5DB001D459C /* MindGenome.h */,
+				617B371E1929FD25001D459C /* MindGenomeManager.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -145,10 +163,14 @@
 		61EBFBD1192243B4000E6D71 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				61C68B86192A4AC600AD6D19 /* Module.cpp */,
+				61C68B82192A4A4F00AD6D19 /* Organism.cpp */,
+				617B37211929FFF8001D459C /* MatrixGenomeManager.cpp */,
 				617B3712192646CC001D459C /* Random.cpp */,
 				61EBFBCF192243B4000E6D71 /* CppnGenome.cpp */,
 				61EBFBD0192243B4000E6D71 /* Position.cpp */,
 				617B36F319263624001D459C /* MatrixGenome.cpp */,
+				617B3726192A32CC001D459C /* MindGenome.cpp */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -160,10 +182,18 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61C68B88192A4ADC00AD6D19 /* Organism.h in Headers */,
+				61C68B89192A4ADC00AD6D19 /* MatrixGenome.h in Headers */,
+				61C68B8A192A4ADC00AD6D19 /* MindGenome.h in Headers */,
+				61C68B8B192A4ADC00AD6D19 /* MindGenomeManager.h in Headers */,
 				61EBFBD2192243B4000E6D71 /* CppnGenome.h in Headers */,
+				61C68B8D192A4B1400AD6D19 /* BuildPlan.h in Headers */,
 				61EBFBD3192243B4000E6D71 /* Defines.h in Headers */,
+				61C68B8F192A4B2500AD6D19 /* Bitmap.h in Headers */,
+				61C68B85192A4ABF00AD6D19 /* Module.h in Headers */,
 				61EBFBD4192243B4000E6D71 /* Position.h in Headers */,
 				617B3715192646D3001D459C /* Random.h in Headers */,
+				617B37201929FFF1001D459C /* MatrixGenomeManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,7 +211,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				617B370B19263ED3001D459C /* PBXTargetDependency */,
 			);
 			name = UnitTests;
 			productName = UnitTests;
@@ -246,21 +275,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				617B3713192646CC001D459C /* Random.cpp in Sources */,
+				61C68B87192A4AC600AD6D19 /* Module.cpp in Sources */,
 				617B36F519263624001D459C /* MatrixGenome.cpp in Sources */,
+				61C68B83192A4A4F00AD6D19 /* Organism.cpp in Sources */,
+				617B37221929FFF8001D459C /* MatrixGenomeManager.cpp in Sources */,
 				61EBFBD6192243B4000E6D71 /* Position.cpp in Sources */,
+				617B3727192A32CC001D459C /* MindGenome.cpp in Sources */,
 				61EBFBD5192243B4000E6D71 /* CppnGenome.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		617B370B19263ED3001D459C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 61EBFBC319224330000E6D71 /* shared */;
-			targetProxy = 617B370A19263ED3001D459C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		617B370319263CA7001D459C /* Debug */ = {
@@ -325,7 +350,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -366,7 +391,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -411,6 +436,7 @@
 				617B370419263CA7001D459C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		61EBFBBF19224330000E6D71 /* Build configuration list for PBXProject "shared" */ = {
 			isa = XCConfigurationList;

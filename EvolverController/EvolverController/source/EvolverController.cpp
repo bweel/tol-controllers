@@ -1,3 +1,5 @@
+#include <utility>
+
 #include "EvolverController.h"
 
 
@@ -8,6 +10,7 @@ void EvolverController::generateInitialGenomes()
     for(id_t i = 0; i < INITIAL_POPULATION; i++)
     {
         CppnGenome newGenome = genomeManager->createGenome(std::vector<CppnGenome>());
+        sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), "", 0, 0);
         sendGenomeToBirthClinic(newGenome, 0, 0);
         
         double startingTime = getTime();
@@ -39,6 +42,7 @@ bool EvolverController::checkEvolutionEnd()
 
 
 void EvolverController::sendGenomeToBirthClinic(CppnGenome genome, id_t parent1, id_t parent2)
+void EvolverController::sendGenomeToBirthClinic(std::string genome, std::string newMind, id_t parent1, id_t parent2)
 {
     emitter->setChannel(CLINIC_CHANNEL);
     
@@ -53,6 +57,7 @@ void EvolverController::sendGenomeToBirthClinic(CppnGenome genome, id_t parent1,
         fitness2 = "/";
     
     std::string message = "GENOME" + genomeManager->genomeToString(genome) + "PARENTS" + std::to_string(parent1) + "-" + std::to_string(parent2) + "PARENTS_FITNESS" + fitness1 + "-" + fitness2;
+    std::string message = "GENOME" + genome + "MIND" + newMind + "PARENTS" + std::to_string(parent1) + "-" + std::to_string(parent2);
     emitter->send(message.c_str(), (int)message.length()+1);
 }
 
@@ -65,10 +70,11 @@ void EvolverController::sendDeathMessage(id_t organimsId)
 }
 
 
-void EvolverController::readFitenessMessage(id_t * id, double * fitness, std::string * genome, std::string message)
+void EvolverController::readFitnessMessage(id_t * id, double * fitness, std::string * genome, std::string * mind, std::string message)
 {
     std::string organismStr = message.substr(message.find("NAME")+4, message.find("FITNESS")-4);
-    std::string fitnessStr = message.substr(message.find("FITNESS")+7, message.find("GENOME")-(organismStr.length()+11));
+    std::string fitnessStr = message.substr(message.find("FITNESS")+7, message.find("MIND")-(organismStr.length()+11));
+    *mind = message.substr(message.find("MIND")+4, message.find("GENOME")-(organismStr.length()+fitnessStr.length()+11));
     *genome = message.substr(message.find("GENOME")+6, message.length());
     
     if (fitnessStr.compare("nan") == 0)
@@ -90,9 +96,9 @@ std::vector<id_t> EvolverController::selectForMating()
     double bestFitness = -1;
     for(int i = 0; i < organismsList.size(); i++)
     {
-        if (std::get<1>(organismsList[i]) > bestFitness)
+        if (organismsList[i].getFitness() > bestFitness)
         {
-            bestFitness = std::get<1>(organismsList[i]);
+            bestFitness = organismsList[i].getFitness();
             bestPos = i;
         }
     }
@@ -100,18 +106,18 @@ std::vector<id_t> EvolverController::selectForMating()
     {
         return forMating;
     }
-    forMating.push_back(std::get<0>(organismsList[bestPos]));
+    forMating.push_back(organismsList[bestPos].getId());
     
     // second
-    std::tuple<id_t, double, CppnGenome> backupBestPair = organismsList[bestPos];
+    Organism backupBestPair = organismsList[bestPos];
     organismsList.erase(organismsList.begin()+bestPos);
     bestPos = -1;
     bestFitness = -1;
     for(int i = 0; i < organismsList.size(); i++)
     {
-        if (std::get<1>(organismsList[i]) > bestFitness)
+        if (organismsList[i].getFitness() > bestFitness)
         {
-            bestFitness = std::get<1>(organismsList[i]);
+            bestFitness = organismsList[i].getFitness();
             bestPos = i;
         }
     }
@@ -120,7 +126,7 @@ std::vector<id_t> EvolverController::selectForMating()
     {
         return forMating;
     }
-    forMating.push_back(std::get<0>(organismsList[bestPos]));
+    forMating.push_back(organismsList[bestPos].getId());
     return forMating;
 }
 
@@ -131,7 +137,7 @@ std::vector<id_t> EvolverController::selectForDying()
     
     if (!organismsList.empty())
     {
-        forDying.push_back(std::get<0>(organismsList[rand() % organismsList.size()]));
+        forDying.push_back(organismsList[rand() % organismsList.size()].getId());
     }
     return forDying;
 }
@@ -141,7 +147,7 @@ void EvolverController::removeFromOrganismsList(id_t organimsID)
 {
     for(int i = 0; i < organismsList.size(); i++)
     {
-        if (std::get<0>(organismsList[i]) == organimsID)
+        if (organismsList[i].getId() == organimsID)
         {
             organismsList.erase(organismsList.begin() + i);
             return;
@@ -150,18 +156,20 @@ void EvolverController::removeFromOrganismsList(id_t organimsID)
 }
 
 
-void EvolverController::addToOrganismsList(id_t organimsID, double fitness, CppnGenome genome)
+void EvolverController::addToOrganismsList(id_t organismID, double fitness, std::string genome, std::string mindGenome)
 {
     for(int i = 0; i < organismsList.size(); i++)
     {
-        if (std::get<0>(organismsList[i]) == organimsID)
+        if (organismsList[i].getId() == organismID)
         {
-            std::get<1>(organismsList[i]) = fitness;
-            std::get<2>(organismsList[i]) = genome;
+            organismsList[i].setFitness(fitness);
+            organismsList[i].setGenome(genome);
+            organismsList[i].setMind(mindGenome);
             return;
         }
     }
-    organismsList.push_back(std::tuple<id_t, double, CppnGenome>(organimsID, fitness, genome));
+    Organism organism(genome, mindGenome, organismID, fitness);
+    organismsList.push_back(organism);
 }
 
 
@@ -169,7 +177,7 @@ int EvolverController::searchForOrganism(id_t organismId)
 {
     for(int i = 0; i < organismsList.size(); i++)
     {
-        if (std::get<0>(organismsList[i]) == organismId)
+        if (organismsList[i].getId() == organismId)
         {
             return i;
         }
@@ -205,6 +213,15 @@ EvolverController::EvolverController() : Supervisor()
     else
     {
         // set genomeManager for other kind of genome
+    }
+    
+    switch (MIND_ENCODING) {
+        case A_POWER:
+            mindGenomeManager = new MatrixGenomeManager();
+            break;
+            
+        default:
+            break;
     }
     
     emitter = getEmitter(EMITTER_NAME);
@@ -289,13 +306,18 @@ void EvolverController::run()
                 id_t organismId;
                 double fitness;
                 std::string genomeStr;
-                readFitenessMessage(& organismId, & fitness, &genomeStr, message);
-                std::istringstream stream(genomeStr);
-                CppnGenome genome = genomeManager->getGenomeFromStream(stream);
+            std::string mindStr;
+            readFitnessMessage(& organismId, & fitness, &genomeStr, &mindStr, message);
                 
+//            std::istringstream stream(genomeStr);
+//            CppnGenome genome = genomeManager->getGenomeFromStream(stream);
+            
+//            std::istringstream mindStream(mindStr);
+//            boost::shared_ptr<Mind::MindGenome> mind = mindGenomeManager->getGenomeFromStream(mindStream);
+            
                 std::cout << "new message received from organism_" << organismId << std::endl;
                 
-                addToOrganismsList(organismId, fitness, genome);
+            addToOrganismsList(organismId, fitness, genomeStr, mindStr);
                 
                 std::string log = std::to_string(getTime()) + " MESSAGE_FROM " + std::to_string(organismId) + std::to_string(std::get<1>(organismsList[searchForOrganism(organismId)])) + std::to_string(organismsList.size());
                 storeEventOnFile(log);
@@ -313,9 +335,25 @@ void EvolverController::run()
             if (forMating.size() == 2)
             {
                 std::vector<CppnGenome> parentsGenomes = std::vector<CppnGenome>();
-                parentsGenomes.push_back(std::get<2>(organismsList[searchForOrganism(forMating[0])]));
-                parentsGenomes.push_back(std::get<2>(organismsList[searchForOrganism(forMating[1])]));
+                std::stringstream stream1(organismsList[searchForOrganism(forMating[0])].getGenome());
+                std::stringstream stream2(organismsList[searchForOrganism(forMating[1])].getGenome());
+                
+                parentsGenomes.push_back(CppnGenome(stream1));
+                parentsGenomes.push_back(CppnGenome(stream2));
+                
                 CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
+                
+                std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
+                std::stringstream mind1(organismsList[searchForOrganism(forMating[0])].getMind());
+                std::stringstream mind2(organismsList[searchForOrganism(forMating[0])].getMind());
+                
+                boost::shared_ptr<MindGenome> mindGenome1 = mindGenomeManager->getGenomeFromStream(mind1);
+                boost::shared_ptr<MindGenome> mindGenome2 = mindGenomeManager->getGenomeFromStream(mind2);
+                
+                parentMindGenomes.push_back(mindGenome1);
+                parentMindGenomes.push_back(mindGenome2);
+                boost::shared_ptr<MindGenome> newMind = mindGenomeManager->createGenome(parentMindGenomes);
+                
                 
                 std::cout << "NEW GENOME CREATED FROM organism_" << forMating[0] << " and organism_" << forMating[1] << std::endl;
                 
@@ -323,6 +361,7 @@ void EvolverController::run()
                 storeEventOnFile(log);
                 
                 sendGenomeToBirthClinic(newGenome, forMating[0], forMating[1]);
+                sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), forMating[0], forMating[1]);
             }
             if (forMating.size() == 1)
             {

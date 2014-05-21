@@ -15,9 +15,7 @@
 		A814555E1924A94000278923 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A814555D1924A94000278923 /* libshared.a */; };
 		A814555F192627D600278923 /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */; };
 		A84E613D18FE883B007E227E /* BirthClinicController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84E613B18FE883B007E227E /* BirthClinicController.cpp */; };
-		A84F2AEA190A96EB0033F39C /* Organism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84F2AE8190A96EB0033F39C /* Organism.cpp */; };
 		A84F2AED190A970E0033F39C /* RoombotModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84F2AEB190A970E0033F39C /* RoombotModule.cpp */; };
-		A84F2AF0190A9DB00033F39C /* Module.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84F2AEE190A9DB00033F39C /* Module.cpp */; };
 		A86042651906CD1500972DED /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042641906CD1500972DED /* libz.dylib */; };
 		A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */; };
 		A8C42D95191A5FFF006DAF05 /* Builder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8C42D93191A5FFF006DAF05 /* Builder.cpp */; };
@@ -50,21 +48,15 @@
 		A814555D1924A94000278923 /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = "../../../../Library/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug/libshared.a"; sourceTree = "<group>"; };
 		A84E613A18FE881C007E227E /* BirthClinicController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BirthClinicController.h; path = BirthClinicController/include/BirthClinicController.h; sourceTree = SOURCE_ROOT; };
 		A84E613B18FE883B007E227E /* BirthClinicController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BirthClinicController.cpp; path = BirthClinicController/source/BirthClinicController.cpp; sourceTree = SOURCE_ROOT; };
-		A84F2AE8190A96EB0033F39C /* Organism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Organism.cpp; path = BirthClinicController/source/Organism.cpp; sourceTree = SOURCE_ROOT; };
 		A84F2AEB190A970E0033F39C /* RoombotModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RoombotModule.cpp; path = BirthClinicController/source/RoombotModule.cpp; sourceTree = SOURCE_ROOT; };
-		A84F2AEE190A9DB00033F39C /* Module.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Module.cpp; path = BirthClinicController/source/Module.cpp; sourceTree = SOURCE_ROOT; };
 		A86042641906CD1500972DED /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		A89B150E190941420075DDE2 /* Organism.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Organism.h; path = BirthClinicController/include/Organism.h; sourceTree = SOURCE_ROOT; };
-		A89B150F190946270075DDE2 /* Module.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Module.h; path = BirthClinicController/include/Module.h; sourceTree = SOURCE_ROOT; };
 		A89B1510190946640075DDE2 /* RoombotModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RoombotModule.h; path = BirthClinicController/include/RoombotModule.h; sourceTree = SOURCE_ROOT; };
 		A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "/opt/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<absolute>"; };
 		A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "/opt/local/lib/libboost_system-mt.dylib"; sourceTree = "<absolute>"; };
 		A8C42D93191A5FFF006DAF05 /* Builder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Builder.cpp; path = BirthClinicController/source/Builder.cpp; sourceTree = SOURCE_ROOT; };
-		A8C42D96191A6346006DAF05 /* BuildPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuildPlan.h; path = BirthClinicController/include/BuildPlan.h; sourceTree = SOURCE_ROOT; };
 		A8C42D97191A6346006DAF05 /* RoombotBuildPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoombotBuildPlan.h; path = BirthClinicController/include/RoombotBuildPlan.h; sourceTree = SOURCE_ROOT; };
 		A8C42D98191A6352006DAF05 /* RoombotBuildPlan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RoombotBuildPlan.cpp; path = BirthClinicController/source/RoombotBuildPlan.cpp; sourceTree = SOURCE_ROOT; };
 		A8C42DC1191A63EA006DAF05 /* ActivationValueMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivationValueMatrix.h; path = BirthClinicController/include/ActivationValueMatrix.h; sourceTree = SOURCE_ROOT; };
-		A8C42DC2191A63EA006DAF05 /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bitmap.h; path = BirthClinicController/include/Bitmap.h; sourceTree = SOURCE_ROOT; };
 		A8C42DC3191A63EA006DAF05 /* RelativePosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RelativePosition.h; path = BirthClinicController/include/RelativePosition.h; sourceTree = SOURCE_ROOT; };
 		A8C42DC4191A640C006DAF05 /* ActivationValueMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActivationValueMatrix.cpp; path = BirthClinicController/source/ActivationValueMatrix.cpp; sourceTree = SOURCE_ROOT; };
 		A8C42DC5191A640C006DAF05 /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Bitmap.cpp; path = BirthClinicController/source/Bitmap.cpp; sourceTree = SOURCE_ROOT; };
@@ -139,14 +131,10 @@
 			children = (
 				A84E613A18FE881C007E227E /* BirthClinicController.h */,
 				A8C42DCA191A6A27006DAF05 /* Builder.h */,
-				A8C42D96191A6346006DAF05 /* BuildPlan.h */,
 				A8C42D97191A6346006DAF05 /* RoombotBuildPlan.h */,
-				A89B150E190941420075DDE2 /* Organism.h */,
-				A89B150F190946270075DDE2 /* Module.h */,
 				A89B1510190946640075DDE2 /* RoombotModule.h */,
 				A8C42DC1191A63EA006DAF05 /* ActivationValueMatrix.h */,
 				A8C42DC3191A63EA006DAF05 /* RelativePosition.h */,
-				A8C42DC2191A63EA006DAF05 /* Bitmap.h */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -157,8 +145,6 @@
 				A84E613B18FE883B007E227E /* BirthClinicController.cpp */,
 				A8C42D93191A5FFF006DAF05 /* Builder.cpp */,
 				A8C42D98191A6352006DAF05 /* RoombotBuildPlan.cpp */,
-				A84F2AE8190A96EB0033F39C /* Organism.cpp */,
-				A84F2AEE190A9DB00033F39C /* Module.cpp */,
 				A84F2AEB190A970E0033F39C /* RoombotModule.cpp */,
 				A8C42DC4191A640C006DAF05 /* ActivationValueMatrix.cpp */,
 				A8C42DC6191A640C006DAF05 /* RelativePosition.cpp */,
@@ -222,11 +208,9 @@
 				A8C42D95191A5FFF006DAF05 /* Builder.cpp in Sources */,
 				A8C42DC9191A640C006DAF05 /* RelativePosition.cpp in Sources */,
 				A8C42D99191A6352006DAF05 /* RoombotBuildPlan.cpp in Sources */,
-				A84F2AF0190A9DB00033F39C /* Module.cpp in Sources */,
 				A8C42DC8191A640C006DAF05 /* Bitmap.cpp in Sources */,
 				A8C42DC7191A640C006DAF05 /* ActivationValueMatrix.cpp in Sources */,
 				A84F2AED190A970E0033F39C /* RoombotModule.cpp in Sources */,
-				A84F2AEA190A96EB0033F39C /* Organism.cpp in Sources */,
 				A8E6B63819000AA9000D6E40 /* main.cpp in Sources */,
 				A84E613D18FE883B007E227E /* BirthClinicController.cpp in Sources */,
 			);
@@ -260,11 +244,11 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -305,11 +289,11 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -341,7 +325,6 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
 					/opt/local/lib,
 				);
 				PRODUCT_NAME = BirthClinicController;
@@ -360,7 +343,6 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
 					/opt/local/lib,
 				);
 				PRODUCT_NAME = BirthClinicController;

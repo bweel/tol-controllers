@@ -59,15 +59,6 @@ public:
         M_ROOT = 0x02       // master
     };
     
-    enum Algorithm_Types    // type of learning algorithm
-    {
-        A_UNDEFINED = 0,    // not defined
-        A_NEAT = 1,         // HyperNEAT
-        A_POWER = 2,        // RL PoWER
-        A_CPG = 3,          // ???
-        A_SPLINENEAT = 4    // SplineNEAT
-    };
-    
     // PUBLIC METHODS
     
     RoombotController();             // contructor
@@ -99,6 +90,7 @@ private:
     int organismId;
     
     std::string genome;
+    std::string mindGenome;
     
     std::string logDirectory;                   // directory of the log file
     
@@ -147,7 +139,7 @@ private:
     
     
     // PRIVATE METHODS
-    
+    void initialise();
     boost::property_tree::ptree * _init_parameters(const std::string &);
     
     GPS * _init_gps(double);

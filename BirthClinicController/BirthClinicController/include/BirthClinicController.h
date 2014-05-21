@@ -6,6 +6,7 @@
 #include "Organism.h"
 #include "RoombotModule.h"
 #include "ParametersReader.h"
+#include "MindGenome.h"
 
 #include <webots/Supervisor.hpp>
 #include <stack>
@@ -49,6 +50,7 @@ class BirthClinicController : public Supervisor
     void connectModulesToObjects();
     
     int buildOrganism(CppnGenome genome, id_t forcedId);
+    int buildOrganism(CppnGenome genome, std::string mindGenome);
     
     id_t getNextOrganismId();
     
@@ -63,6 +65,7 @@ class BirthClinicController : public Supervisor
     std::string readUpdateAvailableMessage(std::string message);
     
     void readGenomeMessage(std::string message, std::string * genomeStr, id_t * parent1, id_t * parent2, std::string * fitness1, std::string * fitness2);
+    void readGenomeMessage(std::string message, std::string * genomeStr, std::string * mindStr, id_t * parent1, id_t * parent2);
     
     void readRebuildMessage(std::string message, id_t * organismId, std::string * genomeStr);
     

@@ -19,11 +19,10 @@ using boost::property_tree::write_json;
 /**
  * The Organism class is used to store all information about an organism created by the Organism Manager,
  * such as its time-to-live, its genome and which modules it consists of.
- * An Organism object is created every time an egg successfully hatches,
- * and it is then stored by the organism manager until its time-to-hatch expires.
  */
 class Organism
 {
+protected:
     
     int INFANCY_DURATION = ParametersReader::get<int>("INFANCY_DURATION");
     int ROOMBOT_WAITING_TIME = ParametersReader::get<int>("ROOMBOT_WAITING_TIME");
@@ -32,26 +31,16 @@ class Organism
     
 	
     id_t id;                            //Unique id for this instance of organism.
-	std::vector<Module*> robots; 		//An array of all robots part of this organism.
+    // Used by the evolver
+    double fitness;
     std::string genome;                 //The genome of this organism.
-	Position organismCentre;            //The position used as the basis during organism construction.
-	std::auto_ptr<BuildPlan> buildPlan;	//The build plan used to create this organism.
-    
-
+    std::string mindGenome;             //The genome of this organims' mind.
     
     public:
+
+    Organism(const Organism& other);
     
-	/**
-	 * Constructs the Organism.
-	 * Requires a genome, id, build-plan and position for the organism to be constructed.
-	 *
-	 * @param genome The id of the genome for this organism.
-	 * @param id The id of the organism.
-	 * @param buildPlan The build plan for the organism.
-	 * @param organismCentre The location used as a `centre' used in combination
-	 * with the build plan to determine where the organism will be build.
-	 */
-	Organism(std::string genome, id_t id, std::auto_ptr<BuildPlan> plan, Position organismCentre);
+    Organism(std::string genome, std::string mindGenome, id_t organismID, double fitness);
     
 	/**
 	 * Destructs the organism.
@@ -74,6 +63,24 @@ class Organism
     std::string getGenome();
     
 	/**
+	 * Sets the genome id for this organism.
+	 *
+	 * @param _mind The new mind for this organism.
+	 */
+	void setMind(std::string m);
+    
+	/**
+	 * Returns the genome id of this organism.
+	 *
+	 * @return Returns the mind of this organism.
+	 */
+    std::string getMind();
+    
+    void setFitness(double fitness);
+    
+    double getFitness();
+    
+	/**
 	 * Returns the id of this organism
 	 *
 	 * @return Returns the id of this organism
@@ -81,6 +88,27 @@ class Organism
 	id_t getId();
     
     std::string getName();
+};
+    
+class BuildableOrganism : public Organism {
+private:
+    // Used by the birthclinic
+    std::vector<Module*> robots; 		//An array of all robots part of this organism.
+	Position organismCentre;            //The position used as the basis during organism construction.
+	std::auto_ptr<BuildPlan> buildPlan;	//The build plan used to create this organism.
+    
+public:
+	/**
+	 * Constructs the Organism.
+	 * Requires a genome, id, build-plan and position for the organism to be constructed.
+	 *
+	 * @param genome The id of the genome for this organism.
+	 * @param id The id of the organism.
+	 * @param buildPlan The build plan for the organism.
+	 * @param organismCentre The location used as a `centre' used in combination
+	 * with the build plan to determine where the organism will be build.
+	 */
+	BuildableOrganism(std::string genome, std::string mindGenome, id_t id, std::auto_ptr<BuildPlan> plan, Position organismCentre);
     
 	/**
 	 * Returns the size of this organism.

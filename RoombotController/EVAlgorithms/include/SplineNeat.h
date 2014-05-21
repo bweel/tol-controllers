@@ -64,6 +64,9 @@ public:
     
     unsigned int getGeneration();
     unsigned int getEvaluation();
+    
+    virtual void setInitialMinds(boost::ptr_vector<MindGenome> genomes);
+    virtual boost::ptr_vector<MindGenome> getRandomInitialMinds();
 private:
     void saveIndividual(const int & index, const boost::shared_ptr<NEAT::GeneticIndividual> & individual, const std::string & path);
     void saveGeneration(const int & index, const boost::shared_ptr<NEAT::GeneticGeneration> & generation, const std::string & path);

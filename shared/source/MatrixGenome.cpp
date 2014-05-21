@@ -5,8 +5,17 @@
 //  Created by Berend Weel on 16/05/14.
 //  Copyright (c) 2014 Berend Weel. All rights reserved.
 //
+#include <sstream>
 
 #include "MatrixGenome.h"
+
+
+MatrixGenome::MatrixGenome() {
+    x_size = 0;
+    y_size = 0;
+    
+    random = utils::Random::getInstance();
+}
 
 /**
  * Constructs a random, minimal genome with a matrix of size_x by size_y.
@@ -23,7 +32,13 @@ MatrixGenome::MatrixGenome(int size_x, int size_y) {
     
     genes = std::vector<std::vector<double> >(x_size,std::vector<double>(size_y,0));
     
-    random = new utils::Random();
+    random = utils::Random::getInstance();
+    
+    for(int i=0;i<x_size;i++){
+        for(int j=0;j<y_size;j++){
+            genes[i][j] = random->normal_real();
+        }
+    }
 }
 
 /**
@@ -37,6 +52,8 @@ MatrixGenome::MatrixGenome(const MatrixGenome& genome1) {
     y_size = genome1.y_size;
     
     genes = genome1.genes;
+    
+    random = utils::Random::getInstance();
 }
 
 /**
@@ -47,6 +64,58 @@ MatrixGenome::MatrixGenome(const MatrixGenome& genome1) {
  * @param stream Stream containing the description of a CppnGenome.
  */
 MatrixGenome::MatrixGenome(std::istream& stream) {
+    std::string genomeStr;
+    std::string valuesStr;
+    
+    random = utils::Random::getInstance();
+    
+    stream >> genomeStr >> x_size >> y_size >> valuesStr;
+    
+    genes.resize(x_size);
+    for(int i=0;i<x_size;i++) {
+        genes[i].resize(y_size);
+        for(int j=0;j<y_size;j++){
+            stream >> genes[i][j];
+        }
+    }
+}
+
+/**
+ * Sets the parameters of the genome.
+ * This overwrites any values that have been set before.
+ *
+ * @param The values
+ */
+void MatrixGenome::setValues(std::vector<std::vector<double> > values) {
+    genes = values;
+    
+    x_size = values.size();
+    if(x_size > 0 ){
+        y_size = values[0].size();
+    }else{
+        y_size = 0;
+    }
+}
+
+/**
+ * Destroys the CppnGenome.
+ * Does not actually perform any additional clean-up.
+ */
+MatrixGenome::~MatrixGenome() {
+    
+}
+
+/**
+ * Clone implementation for the use of ptr_vector
+ *
+ */
+MatrixGenome *MatrixGenome::clone () const {
+    return new MatrixGenome(*this);
+}
+
+void MatrixGenome::readString(std::string genome){
+    std::istringstream stream(genome);
+    
     std::string genomeStr;
     std::string valuesStr;
     
@@ -62,14 +131,6 @@ MatrixGenome::MatrixGenome(std::istream& stream) {
 }
 
 /**
- * Destroys the CppnGenome.
- * Does not actually perform any additional clean-up.
- */
-MatrixGenome::~MatrixGenome() {
-    
-}
-
-/**
  * Returns a string of this genome that contains enough information to create
  * an exact copy of this genome.
  * Used in combination with the stream based constructor to write the genome to file,
@@ -79,11 +140,11 @@ MatrixGenome::~MatrixGenome() {
  * @return Returns a string containing all information to reconstruct the genome.
  */
 std::string MatrixGenome::toString() const {
-    std::string result = std::string("genome ");
+    std::string result = std::string("MATRIX ");
     result.append(TO_STR(x_size));
     result.append(" ");
     result.append(TO_STR(y_size));
-    result.append(" values ");
+    result.append(" VALUES ");
     
     std::ostringstream oss;
     for(int i=0;i<x_size;i++) {
@@ -117,13 +178,30 @@ void MatrixGenome::mutate() {
 /**
  * Combines this genome with the input genome and then mutates this genome.
  *
+ * The size of the SMALLEST genome is used to prevent arbitrary values that
+ * do not mean anything for the organism.
+ *
  * Mutation of happens with a chance of SIZE_MUTATION_RATE
  * by adding random numbers drawn from a normal distribution with a mean of zero
  * and a standard deviation of SIZE_MUTATION_STRENGTH
  *
  * @param genome The genome to use in the crossover.
  */
-void MatrixGenome::crossoverAndMutate(const MatrixGenome& genome) {
+void MatrixGenome::crossoverAndMutate(boost::shared_ptr<MindGenome> g) {
+    
+    MatrixGenome genome = *boost::dynamic_pointer_cast<MatrixGenome>(g);
+    if(x_size > genome.x_size){
+        x_size = genome.x_size;
+        genes.resize(x_size);
+    }
+    
+    if(y_size > genome.y_size){
+        y_size = genome.y_size;
+        for (int i=0;i<x_size;i++){
+            genes[0].resize(y_size);
+        }
+    }
+    
     // Uniform crossover
     for (int i=0;i<x_size;i++){
         for(int j=0;j<y_size;j++){

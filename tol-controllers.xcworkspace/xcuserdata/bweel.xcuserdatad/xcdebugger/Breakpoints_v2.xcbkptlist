@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422286702.285155"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
-            landmarkName = "EvolverController::~EvolverController()"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
+            landmarkName = "EvolverController::run()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422286702.285155"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
-            landmarkName = "EvolverController::~EvolverController()"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
+            landmarkName = "EvolverController::run()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422286702.285155"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "EvolverController::EvolverController()"
             landmarkType = "5">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422286702.285155"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "EvolverController::run()"
             landmarkType = "5">
          </BreakpointContent>
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422286702.285155"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "EvolverController::checkEvolutionEnd()"
             landmarkType = "5">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422286702.285155"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "EvolverController::checkEvolutionEnd()"
             landmarkType = "5">
          </BreakpointContent>
@@ -445,7 +445,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "715"
             endingLineNumber = "715"
-            landmarkName = "RoombotController::infancy()"
+            landmarkName = "RoombotController::disableAllConnectors()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -477,7 +477,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "714"
             endingLineNumber = "714"
-            landmarkName = "RoombotController::infancy()"
+            landmarkName = "RoombotController::disableAllConnectors()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -520,13 +520,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "422199642.512031"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "BirthClinicController::readGenomeMessage(std::string message, std::string * genomeStr, std::string * mindStr, id_t * parent1, id_t * parent2)"
-            landmarkType = "5">
+            startingLineNumber = "97"
+            endingLineNumber = "97">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -536,12 +534,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "422286702.285155"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "BirthClinicController::readGenomeMessage(std::string message, std::string * genomeStr, std::string * mindStr, id_t * parent1, id_t * parent2)"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "BirthClinicController::readGenomeMessage(std::string message, std::string * genomeStr, std::string * mindStr, id_t * parent1, id_t * parent2, std::string * fitness1, std::string * fitness2)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -552,11 +550,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422286702.285155"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "EvolverController::EvolverController()"
             landmarkType = "5">
          </BreakpointContent>
@@ -568,11 +566,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422286702.285155"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
             landmarkName = "EvolverController::EvolverController()"
             landmarkType = "5">
          </BreakpointContent>
@@ -584,11 +582,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422286702.285155"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243">
+            startingLineNumber = "239"
+            endingLineNumber = "239"
+            landmarkName = "EvolverController::run()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -598,11 +598,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422286697.207019"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "EvolverController::run()"
             landmarkType = "5">
          </BreakpointContent>
@@ -614,12 +614,26 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "422286729.774876"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGenome)"
+            startingLineNumber = "182"
+            endingLineNumber = "182">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
+            timestampString = "422368762.992552"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "BirthClinicController::connectModulesToObjects()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -630,27 +644,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "422286731.58507"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGenome)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "422286763.302978"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
             landmarkName = "BirthClinicController::run()"
             landmarkType = "5">
          </BreakpointContent>
@@ -694,11 +692,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "422287830.047226"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
+            startingLineNumber = "321"
+            endingLineNumber = "321"
             landmarkName = "BirthClinicController::run()"
             landmarkType = "5">
          </BreakpointContent>
@@ -852,11 +850,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422354463.09325"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
             landmarkName = "EvolverController::EvolverController()"
             landmarkType = "5">
          </BreakpointContent>
@@ -868,11 +866,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422354568.307847"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "EvolverController::selectForMating()"
             landmarkType = "5">
          </BreakpointContent>
@@ -884,11 +882,25 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422354572.213644"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "68"
+            endingLineNumber = "68">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
+            timestampString = "422368762.992552"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "EvolverController::sendDeathMessage(id_t organimsId)"
             landmarkType = "5">
          </BreakpointContent>
@@ -900,27 +912,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422354573.389818"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "EvolverController::sendDeathMessage(id_t organimsId)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422355646.940482"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "EvolverController::selectForMating()"
             landmarkType = "5">
          </BreakpointContent>
@@ -928,16 +924,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "422355691.770837"
+            timestampString = "422368762.992552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "EvolverController::EvolverController()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
+            timestampString = "422369868.60816"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
+            landmarkName = "EvolverController::run()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

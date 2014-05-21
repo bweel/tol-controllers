@@ -31,6 +31,7 @@ private:
     int CHECK_EVOLUTION_END_INTERVAL = ParametersReader::get<int>("CHECK_EVOLUTION_END_INTERVAL");
     
     std::string SHAPE_ENCODING = ParametersReader::get<std::string>("SHAPE_ENCODING");
+    std::string MIND_ENCODING = ParametersReader::get<std::string>("MIND_ENCODING");
     
     
     Receiver * receiver; 
@@ -44,17 +45,14 @@ private:
     
     void generateInitialGenomes();
     
-    void readFitnessMessage(id_t * id, double * fitness, std::string * genome, std::string * mind, std::string message);
-    
     std::vector<id_t> selectForMating();
     
     std::vector<id_t> selectForDying();
     
     bool checkEvolutionEnd();
     
-    void readFitenessMessage(id_t * id, double * fitness, std::string * genome, std::string message);
+    void readFitnessMessage(id_t * id, double * fitness, std::string * genome, std::string * mind, std::string message);
     
-    void sendGenomeToBirthClinic(CppnGenome genome, id_t parent1, id_t parent2);
     void sendGenomeToBirthClinic(std::string genome, std::string newMind, id_t parent1, id_t parent2);
     
     void sendDeathMessage(id_t organimsId);

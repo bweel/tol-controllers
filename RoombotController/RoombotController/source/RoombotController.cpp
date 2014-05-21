@@ -1082,7 +1082,7 @@ void RoombotController::death()
 void RoombotController::askToBeBuiltAgain()
 {
     _emitter->setChannel(CLINIC_CHANNEL);
-    std::string message = "REBUILD" + std::to_string(organismId) + "GENOME" + genome;
+    std::string message = "REBUILD" + std::to_string(organismId) + "GENOME" + genome + "MIND" + mindGenome;
     _emitter->send(message.c_str(), (int)message.length()+1);
     
     storeRebuild();

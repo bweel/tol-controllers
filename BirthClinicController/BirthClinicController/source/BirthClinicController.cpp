@@ -95,6 +95,7 @@ void BirthClinicController::addModuleToReserve(std::string moduleDef)
 
 
 void BirthClinicController::readGenomeMessage(std::string message, std::string * genomeStr, id_t * parent1, id_t * parent2, std::string * fitness1, std::string * fitness2)
+void BirthClinicController::readGenomeMessage(std::string message, std::string * genomeStr, std::string * mindStr, id_t * parent1, id_t * parent2)
 {
     *genomeStr = message.substr(message.find("GENOME")+6, message.find("PARENTS")-6);
     std::string parentsSubStr = message.substr(message.find("PARENTS")+7, message.find("PARENTS_FITNESS")-(message.find("PARENTS")+7));
@@ -177,6 +178,7 @@ void BirthClinicController::connectModulesToObjects()
 
 
 int BirthClinicController::buildOrganism(CppnGenome genome, id_t forcedId)
+int BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGenome)
 {
     std::auto_ptr<BuildPlan> buildPlan = builder->translateGenome(genome);
     
@@ -203,6 +205,7 @@ int BirthClinicController::buildOrganism(CppnGenome genome, id_t forcedId)
                 }
                 
                 Organism * organism = new Organism(genome.toString(), organismId, buildPlan, position);
+                BuildableOrganism * organism = new BuildableOrganism(genome.toString(), mindGenome, getNextOrganismId(), buildPlan, position);
                 std::cout << "NEW ORGANISM CREATED: " << organism->getName() << std::endl;
                 
                 for(size_t i = 0; i < buildPlanSize; i++)
@@ -334,6 +337,11 @@ void BirthClinicController::run()
                 id_t organismId;
                 std::string genomeStr;
                 readRebuildMessage(message, & organismId, & genomeStr);
+                std::string mindStr;
+                id_t parent1;
+                id_t parent2;
+//                std::cout << "Decoding genome message: " << message << std::endl;
+                readGenomeMessage(message, & genomeStr, & mindStr, & parent1, & parent2);
                 
                 std::istringstream stream(genomeStr);
                 CppnGenome genome = builder->getGenomeFromStream(stream);
@@ -355,6 +363,7 @@ void BirthClinicController::run()
                 std::istringstream stream(message);
                 CppnGenome genome = builder->getGenomeFromStream(stream);
                 int buildResponse = buildOrganism(genome, 0);
+                int buildResponse = buildOrganism(genome, mindStr);
                 
                 if (buildResponse == 1)
                 {

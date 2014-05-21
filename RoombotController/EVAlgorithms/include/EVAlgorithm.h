@@ -3,6 +3,10 @@
 
 #include <cstddef>
 #include <string>
+#include <vector>
+#include <boost/ptr_container/ptr_vector.hpp>
+
+#include "MindGenome.h"
 
 class EVAlgorithm
 {
@@ -39,6 +43,9 @@ class EVAlgorithm
     
     virtual unsigned int getGeneration() = 0;
     virtual unsigned int getEvaluation() = 0;
+    
+    virtual void setInitialMinds(boost::ptr_vector<MindGenome> genomes) = 0;
+    virtual boost::ptr_vector<MindGenome> getRandomInitialMinds() = 0;
 
 	virtual void save() = 0;
 

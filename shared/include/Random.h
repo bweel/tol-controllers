@@ -25,6 +25,11 @@ namespace utils
 		 */
 		Random();
 		Random(unsigned int);
+        
+        /**
+         * Destroy
+         */
+        ~Random();
 
 		/**
 		 * Returns the value used to seed the random
@@ -63,6 +68,8 @@ namespace utils
 		 * @return Random value
 		 */
 		unsigned int operator()();
+        
+        static Random *getInstance();
 
 	  private:
 		typedef boost::random::random_device SeedGenerator;
@@ -77,6 +84,7 @@ namespace utils
 		unsigned int _seed;
 
 		Engine _engine;
+        static Random *instance;
 
 		IntegerDist _integer_dist;
 		boost::random::variate_generator<Engine, IntegerDist> _integer_gen;

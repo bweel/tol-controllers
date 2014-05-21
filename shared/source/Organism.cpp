@@ -1,12 +1,36 @@
 #include "Organism.h"
 
-
-Organism::Organism(std::string genome, id_t id, std::auto_ptr<BuildPlan> plan, Position organismCentre) :
-id(id), robots(), genome(genome), organismCentre(organismCentre), buildPlan(plan)
-{
-    //nix
+/**
+ * Copy constructor that does not actually does a deep copy
+ *
+ */
+Organism::Organism(const Organism &other) {
+    id = other.id;
+    genome = other.genome;
+    mindGenome = other.mindGenome;
+    fitness = other.fitness;
 }
 
+/**
+ * Constructs the Organism.
+ * Requires a genome, id, build-plan and position for the organism to be constructed.
+ *
+ * @param genome The id of the genome for this organism.
+ * @param id The id of the organism.
+ * @param buildPlan The build plan for the organism.
+ * @param organismCentre The location used as a `centre' used in combination
+ * with the build plan to determine where the organism will be build.
+ */
+BuildableOrganism::BuildableOrganism(std::string genome, std::string mindGenome, id_t id, std::auto_ptr<BuildPlan> plan, Position organismCentre) :
+Organism(genome,mindGenome,id,-1),
+robots(), organismCentre(organismCentre), buildPlan(plan)
+{
+}
+
+Organism::Organism(std::string genome, std::string mindGenome, id_t organismID, double fitness) :
+    fitness(fitness), id(organismID), genome(genome), mindGenome(mindGenome)
+{
+}
 
 Organism::~Organism()
 {
@@ -29,6 +53,25 @@ std::string Organism::getGenome()
     return genome;
 }
 
+void Organism::setMind(std::string m)
+{
+    mindGenome = m;
+}
+
+
+std::string Organism::getMind()
+{
+    return mindGenome;
+}
+
+void Organism::setFitness(double f) {
+    fitness = f;
+}
+
+double Organism::getFitness() {
+    return fitness;
+}
+
 
 id_t Organism::getId()
 {
@@ -41,19 +84,19 @@ std::string Organism::getName()
 }
 
 
-size_t Organism::getSize()
+size_t BuildableOrganism::getSize()
 {
     return buildPlan->size();
 }
 
 
-void Organism::addModule(Module * module)
+void BuildableOrganism::addModule(Module * module)
 {
     robots.push_back(module);
 }
 
 
-Module * Organism::getModule(int i)
+Module * BuildableOrganism::getModule(int i)
 {
     return robots[i];
 }
@@ -64,7 +107,7 @@ Module * Organism::getModule(int i)
 //**** Other functions *****
 //**************************
 
-std::string Organism::positionsToString()
+std::string BuildableOrganism::positionsToString()
 {
     std::string result = std::string();
     
@@ -75,7 +118,7 @@ std::string Organism::positionsToString()
     return (result);
 }
 
-std::string Organism::createPathForControllerArgs()
+std::string BuildableOrganism::createPathForControllerArgs()
 {
     return CONTROLLER_ARGS_PATH + getName() + ".json";
 }
@@ -85,7 +128,7 @@ std::string Organism::createPathForControllerArgs()
 //**************************
 
 
-void Organism::build()
+void BuildableOrganism::build()
 {
     for(size_t i = 0; i < buildPlan->size(); i++){
         if (robots[i] != 0)
@@ -109,7 +152,7 @@ void Organism::build()
 }
 
 
-void Organism::writeControllerArgsFile(std::string simulationDateAndTime)
+void BuildableOrganism::writeControllerArgsFile(std::string simulationDateAndTime)
 {
     std::cout << "writing ControllerArgs file for " << getName() << std::endl;
     
@@ -193,6 +236,7 @@ void Organism::writeControllerArgsFile(std::string simulationDateAndTime)
     }
     pt.put_child("Robot", child);
     pt.put("Genome", genome);
+    pt.put("MindGenome", mindGenome);
     
     // write and close
     write_json(organismFile, pt, false);
@@ -200,9 +244,9 @@ void Organism::writeControllerArgsFile(std::string simulationDateAndTime)
 }
 
 
-void Organism::activate()
+void BuildableOrganism::activate()
 {
-    for(size_t i = 0; i < buildPlan->size(); i++){
+   for(size_t i = 0; i < buildPlan->size(); i++){
         if (robots[i] != 0)
         {
             // update controllerArgs in Webots

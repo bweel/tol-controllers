@@ -45,13 +45,8 @@ namespace POWER
 
 		/**
 		 * Starts a new trial
-		 * @param
-		 * @param
-		 * @param
-		 * @param
-		 * @param
 		 */
-		Trial(unsigned int, std::size_t, std::size_t, std::size_t, std::size_t, std::size_t, double, double, bool = false);
+		Trial(utils::Random *random, std::size_t, std::size_t, std::size_t, std::size_t, std::size_t, double, double, std::vector<std::vector<double> > parameters, bool = false);
 
 		/**
 		 *
@@ -109,8 +104,9 @@ namespace POWER
 		 */
 		TiXmlElement save_xml() const;
         
-        unsigned int getEvaluationIndex();
+        std::size_t getEvaluationIndex();
 
+        
 	  private:
 		static const double FITNESS_EXP;
 		static const double EPSILON;
@@ -133,8 +129,8 @@ namespace POWER
 		double _variance_decay;
 		std::vector<Policy *> _ranking;
 		std::vector<Policy *> _evaluations;
-
-		Values random_normal_distribution(std::size_t, std::size_t);
+        
+        Values random_normal_distribution(std::size_t, std::size_t);
 		Values random_cauchy_distribution(std::size_t, std::size_t);
 	};
 }

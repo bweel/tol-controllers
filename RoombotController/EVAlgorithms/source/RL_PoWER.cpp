@@ -21,7 +21,9 @@ _flag(false),
 _directory(d_path),
 _ev_step(0),
 _ev_steps(0),
-_globals((p_path.empty()) ? POWER::Globals::init() : POWER::Globals::load(p_path))
+_globals((p_path.empty()) ? POWER::Globals::init() : POWER::Globals::load(p_path)),
+numSplines(numSplines),
+evaluations(evaluations)
 {
 	if (0.0 >= time_step) {
 		throw std::domain_error("Time Step Cannot Be <= 0.0");
@@ -38,16 +40,9 @@ _globals((p_path.empty()) ? POWER::Globals::init() : POWER::Globals::load(p_path
 	}
 
 	_ev_steps = static_cast<std::size_t> (round(time / time_step));
-
-	double variance = _globals->parameter(POWER::Trial::VARIANCE_NAME);
-	double variance_decay = _globals->parameter(POWER::Trial::VARIANCE_DECAY_NAME);
-	std::size_t min_size = static_cast<std::size_t> (_globals->parameter(POWER::Trial::V_SIZE_MIN_NAME));
-	std::size_t max_size = static_cast<std::size_t> (_globals->parameter(POWER::Trial::V_SIZE_MAX_NAME));
-	std::size_t rank_size = static_cast<std::size_t> (_globals->parameter(POWER::Trial::RANKING_SIZE_NAME));
-//	std::size_t ev_size = static_cast<std::size_t> (_globals->parameter(POWER::Trial::EVALUATION_SIZE_NAME));
-
-	_trial = new POWER::Trial(seed, numSplines, min_size, max_size, rank_size, evaluations, variance, variance_decay);
-	_evaluation = (_trial->policy(_ev_steps) - 0.5) * 2.0;
+   
+    _random = new utils::Random(seed);
+   
 }
 
 RL_PoWER::RL_PoWER(const std::string & path, double time_step, double angular_velocity, std::size_t s_size)
@@ -156,6 +151,39 @@ double RL_PoWER::getParameter(std::size_t index)
 	return _evaluation(index, _ev_step);
 }
 
+std::vector<std::vector<double> > RL_PoWER::getInitialParameters(){    
+    return initialParameters;
+}
+
+void RL_PoWER::setInitialParameters(std::vector<std::vector<double> > parameters) {
+    double variance = _globals->parameter(POWER::Trial::VARIANCE_NAME);
+	double variance_decay = _globals->parameter(POWER::Trial::VARIANCE_DECAY_NAME);
+	std::size_t min_size = static_cast<std::size_t> (_globals->parameter(POWER::Trial::V_SIZE_MIN_NAME));
+	std::size_t max_size = static_cast<std::size_t> (_globals->parameter(POWER::Trial::V_SIZE_MAX_NAME));
+	std::size_t rank_size = static_cast<std::size_t> (_globals->parameter(POWER::Trial::RANKING_SIZE_NAME));
+    //	std::size_t ev_size = static_cast<std::size_t> (_globals->parameter(POWER::Trial::EVALUATION_SIZE_NAME));
+    
+    initialParameters = parameters;
+    
+    _trial = new POWER::Trial(_random, numSplines, min_size, max_size, rank_size, evaluations, variance, variance_decay, initialParameters);
+	_evaluation = (_trial->policy(_ev_steps) - 0.5) * 2.0;
+}
+
+std::vector<std::vector<double> > RL_PoWER::getRandomInitialParameters(){
+    double sqrtvariance = std::sqrt(_globals->parameter(POWER::Trial::VARIANCE_NAME));
+    std::size_t min_size = static_cast<std::size_t> (_globals->parameter(POWER::Trial::V_SIZE_MIN_NAME));
+    
+    std::vector<std::vector<double> > parameters(numSplines, std::vector<double>(min_size, 0.5));
+    
+    for (std::size_t spline = 0; spline < numSplines; spline++) {
+        for(std::size_t param = 0; param < min_size; param++){
+            parameters[spline][param] = sqrtvariance * _random->normal_real();
+        }
+    }
+    
+    return parameters;
+}
+
 void RL_PoWER::reset()
 {
 #ifdef DEBUG_ALGORITHM
@@ -231,7 +259,7 @@ void RL_PoWER::setEvaluationFitnessAlt(const std::string & string)
 			<< std::endl;
 #endif
 
-	std::cout << string << std::endl;
+//	std::cout << string << std::endl;
 
 	_trial->policy_fitness_alt(string);
 }

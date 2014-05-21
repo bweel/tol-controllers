@@ -154,7 +154,6 @@
 		A84E611918FE7357007E227E /* source */ = {
 			isa = PBXGroup;
 			children = (
-				A8E6B63619000AA9000D6E40 /* main.cpp */,
 				A84E613B18FE883B007E227E /* BirthClinicController.cpp */,
 				A8C42D93191A5FFF006DAF05 /* Builder.cpp */,
 				A8C42D98191A6352006DAF05 /* RoombotBuildPlan.cpp */,
@@ -164,6 +163,7 @@
 				A8C42DC4191A640C006DAF05 /* ActivationValueMatrix.cpp */,
 				A8C42DC6191A640C006DAF05 /* RelativePosition.cpp */,
 				A8C42DC5191A640C006DAF05 /* Bitmap.cpp */,
+				A8E6B63619000AA9000D6E40 /* main.cpp */,
 			);
 			name = source;
 			sourceTree = "<group>";

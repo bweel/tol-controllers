@@ -124,9 +124,9 @@
 		A84E611918FE7357007E227E /* source */ = {
 			isa = PBXGroup;
 			children = (
-				A8C2754819138273004A85A3 /* main.cpp */,
 				A8C2754C191382FB004A85A3 /* EvolverController.cpp */,
 				A8C42D8C191A576A006DAF05 /* CppnGenomeManager.cpp */,
+				A8C2754819138273004A85A3 /* main.cpp */,
 			);
 			name = source;
 			sourceTree = "<group>";

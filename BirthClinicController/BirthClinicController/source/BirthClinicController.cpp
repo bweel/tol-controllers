@@ -94,12 +94,22 @@ void BirthClinicController::addModuleToReserve(std::string moduleDef)
 }
 
 
-void BirthClinicController::readGenomeMessage(std::string message, std::string * genomeStr, id_t * parent1, id_t * parent2)
+void BirthClinicController::readGenomeMessage(std::string message, std::string * genomeStr, id_t * parent1, id_t * parent2, std::string * fitness1, std::string * fitness2)
 {
     *genomeStr = message.substr(message.find("GENOME")+6, message.find("PARENTS")-6);
-    std::string parentsSubStr = message.substr(message.find("PARENTS")+7, message.length());
+    std::string parentsSubStr = message.substr(message.find("PARENTS")+7, message.find("PARENTS_FITNESS")-(message.find("PARENTS")+7));
     *parent1 = std::atoi(parentsSubStr.substr(0, parentsSubStr.find("-")).c_str());
     *parent2 = std::atoi(parentsSubStr.substr(parentsSubStr.find("-")+1, parentsSubStr.length()).c_str());
+    std::string fitnessSubStr = message.substr(message.find("PARENTS_FITNESS")+15, message.length());
+    *fitness1 = fitnessSubStr.substr(0, fitnessSubStr.find("-")).c_str();
+    *fitness2 = fitnessSubStr.substr(fitnessSubStr.find("-")+1, fitnessSubStr.length()).c_str();
+}
+
+
+void BirthClinicController::readRebuildMessage(std::string message, id_t * organismId, std::string * genomeStr)
+{
+    *organismId = std::atoi(message.substr(7, message.find("GENOME")-7).c_str());
+    *genomeStr = message.substr(message.find("GENOME")+6, message.length());
 }
 
 
@@ -109,11 +119,11 @@ std::string BirthClinicController::readUpdateAvailableMessage(std::string messag
 }
 
 
-void BirthClinicController::storePhilogenyOnFile(id_t parent1, id_t parent2, id_t newBorn)
+void BirthClinicController::storePhilogenyOnFile(id_t parent1, id_t parent2, id_t newBorn, std::string fitness1, std::string fitness2)
 {
     ofstream philogenyFile;
     philogenyFile.open(RESULTS_PATH + simulationDateAndTime + "/philogenetic_tree.txt", ios::app);
-    philogenyFile << std::to_string(parent1) + " " + std::to_string(parent2) + " " + std::to_string(newBorn) + "\n";
+    philogenyFile << std::to_string(getTime()) + " " + std::to_string(newBorn) + " " + std::to_string(parent1) + " " + std::to_string(parent2) + " " + fitness1 + " " + fitness2 + "\n";
     philogenyFile.close();
 }
 
@@ -166,7 +176,7 @@ void BirthClinicController::connectModulesToObjects()
 ////////////////////////////////////////////
 
 
-int BirthClinicController::buildOrganism(CppnGenome genome)
+int BirthClinicController::buildOrganism(CppnGenome genome, id_t forcedId)
 {
     std::auto_ptr<BuildPlan> buildPlan = builder->translateGenome(genome);
     
@@ -181,7 +191,18 @@ int BirthClinicController::buildOrganism(CppnGenome genome)
                 rotate();
                 
                 size_t buildPlanSize = buildPlan->size();   // after creating the new organism the pointer to the build plan disappears
-                Organism * organism = new Organism(genome.toString(), getNextOrganismId(), buildPlan, position);
+                
+                id_t organismId;
+                if (forcedId == 0)
+                {
+                    organismId = getNextOrganismId();
+                }
+                else
+                {
+                    organismId = forcedId;
+                }
+                
+                Organism * organism = new Organism(genome.toString(), organismId, buildPlan, position);
                 std::cout << "NEW ORGANISM CREATED: " << organism->getName() << std::endl;
                 
                 for(size_t i = 0; i < buildPlanSize; i++)
@@ -239,14 +260,14 @@ BirthClinicController::BirthClinicController() : Supervisor()
     receiver->setChannel(CLINIC_CHANNEL);
     emitter = getEmitter(EMITTER_NAME);
     
-    // setup shape encoding
-    switch (SHAPE_ENCODING) {
-        case CPPN:
-            builder = new Builder();
-            break;
-            
-        default:
-            break;
+    // setup builder for shape encoding
+    if (SHAPE_ENCODING == "CPPN")
+    {
+        builder = new Builder();
+    }
+    else
+    {
+        // set builder for other kind of genome
     }
     
     // update id for next organism
@@ -297,30 +318,47 @@ void BirthClinicController::run()
     
     while (step(timeStep) != -1)
     {
-        if(receiver->getQueueLength() > 0)
+        if (receiver->getQueueLength() > 0)
         {
             std::string message = (char*)receiver->getData();
             
-            if(message.substr(0,16).compare("UPDATE_AVAILABLE") == 0)
+            if (message.substr(0,16).compare("UPDATE_AVAILABLE") == 0)
             {
                 std::string moduleDef = readUpdateAvailableMessage(message);
                 addModuleToReserve(moduleDef);
                 receiver->nextPacket();
             }
-            else
+            
+            if (message.substr(0,7).compare("REBUILD") == 0)
+            {
+                id_t organismId;
+                std::string genomeStr;
+                readRebuildMessage(message, & organismId, & genomeStr);
+                
+                std::istringstream stream(genomeStr);
+                CppnGenome genome = builder->getGenomeFromStream(stream);
+                int buildResponse = buildOrganism(genome, organismId);
+                
+                if (buildResponse != 2)
+                {
+                    receiver->nextPacket();
+                }
+            }
+                
+            if (message.substr(0,16).compare("UPDATE_AVAILABLE") != 0 && message.substr(0,7).compare("REBUILD") != 0)
             {
                 std::string genomeStr;
-                id_t parent1;
-                id_t parent2;
-                readGenomeMessage(message, & genomeStr, & parent1, & parent2);
+                id_t parent1, parent2;
+                std::string fitness1, fitness2;
+                readGenomeMessage(message, & genomeStr, & parent1, & parent2, & fitness1, & fitness2);
                 
                 std::istringstream stream(message);
                 CppnGenome genome = builder->getGenomeFromStream(stream);
-                int buildResponse = buildOrganism(genome);
+                int buildResponse = buildOrganism(genome, 0);
                 
                 if (buildResponse == 1)
                 {
-                    storePhilogenyOnFile(parent1, parent2, nextOrganismId-1);
+                    storePhilogenyOnFile(parent1, parent2, nextOrganismId-1, fitness1, fitness2);
                     storeGenomeOnFile(nextOrganismId-1, genomeStr);
                     receiver->nextPacket();
                 }

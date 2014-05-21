@@ -21,6 +21,7 @@
 		61EBFBCD192243B4000E6D71 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Position.h; sourceTree = "<group>"; };
 		61EBFBCF192243B4000E6D71 /* CppnGenome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CppnGenome.cpp; sourceTree = "<group>"; };
 		61EBFBD0192243B4000E6D71 /* Position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Position.cpp; sourceTree = "<group>"; };
+		A8CCFCBD192BA67F00D34ED4 /* ParametersReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParametersReader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +58,7 @@
 				61EBFBCC192243B4000E6D71 /* Defines.h */,
 				61EBFBCB192243B4000E6D71 /* CppnGenome.h */,
 				61EBFBCD192243B4000E6D71 /* Position.h */,
+				A8CCFCBD192BA67F00D34ED4 /* ParametersReader.h */,
 			);
 			path = include;
 			sourceTree = "<group>";

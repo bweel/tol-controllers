@@ -2,6 +2,7 @@
 #define OM_CPPNGENOME_H_
 
 #include "Defines.h"
+#include "ParametersReader.h"
 
 #include "NEAT.h"
 
@@ -100,6 +101,9 @@ class CppnGenome {
     
     
     private:
+    
+    double SIZE_MUTATION_RATE = ParametersReader::get<double>("SIZE_MUTATION_RATE");
+    double SIZE_MUTATION_STRENGTH = ParametersReader::get<double>("SIZE_MUTATION_STRENGTH");
     
     /**
      * Mutates the size gene of this genome.

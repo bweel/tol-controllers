@@ -363,8 +363,8 @@
 		A84E613218FE86A5007E227E /* source */ = {
 			isa = PBXGroup;
 			children = (
-				A84E613718FE8754007E227E /* main.cpp */,
 				A84E613418FE8734007E227E /* RoombotController.cpp */,
+				A84E613718FE8754007E227E /* main.cpp */,
 			);
 			name = source;
 			sourceTree = "<group>";

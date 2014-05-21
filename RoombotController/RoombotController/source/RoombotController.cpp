@@ -26,7 +26,8 @@ _m_index(_parameters->get<std::size_t>("Robot." + getName() + ".Index")/* - _r_i
 _m_type(_parameters->get<int>("Robot." + getName() + ".Type")),
 _ev_type(_parameters->get<int>("Algorithm.Type")),
 totalEvaluations(_parameters->get<unsigned int>("Algorithm.Evaluations")),
-evaluationDuration (_parameters->get<double>("Algorithm.Infancy_Duration")),
+evaluationDuration (_parameters->get<unsigned int>("Algorithm.Infancy_Duration")),
+matureTimeToLive (_parameters->get<unsigned int>("Algorithm.Mature_Time_To_Live")),
 _ev_angular_velocity(_parameters->get<double>("Algorithm.Angular_Velocity")),
 genome(_parameters->get<std::string>("Genome")),
 
@@ -90,9 +91,9 @@ _motors(_m_type ? _init_motors(_time_step) : 0)
     boost::property_tree::ptree connectrsNode = _parameters->get_child("Robot." + getName() + ".Connectors");
     BOOST_FOREACH(boost::property_tree::ptree::value_type &v, connectrsNode)
     {
-        Connector * connecotor = getConnector(v.second.data());
-        connecotor->lock();
-        connectors.push_back(connecotor);
+        Connector * connector = getConnector(v.second.data());
+        connector->lock();
+        connectors.push_back(connector);
     }
     
     
@@ -665,6 +666,53 @@ bool RoombotController::isRoot() {
 }
 
 
+void RoombotController::storeMatureLifeFitnessIntoFile(double fitness)
+{
+    ofstream fitnessFile;
+    fitnessFile.open(RESULTS_PATH + simulationDateAndTime + "/organism_" + std::to_string(organismId) + "/mature_life_fitness.txt", ios::app);
+    fitnessFile << std::to_string(getTime()) + " " + std::to_string(fitness) + "\n";
+    fitnessFile.close();
+}
+
+void RoombotController::storeRebuild()
+{
+    ofstream rebuildFile;
+    rebuildFile.open(RESULTS_PATH + simulationDateAndTime + "/organism_" + std::to_string(organismId) + "/rebuild.txt", ios::app);
+    rebuildFile << std::to_string(getTime()) + "\n";
+    rebuildFile.close();
+}
+
+
+bool RoombotController::allConnectorsOK()
+{
+    for (int i = 0; i < connectors.size(); i++)
+    {
+        if (connectors[i]->getPresence() != 1)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+void RoombotController::enableAllConnectors()
+{
+    for (int i = 0; i < connectors.size(); i++)
+    {
+        connectors[i]->enablePresence(_time_step/4);
+    }
+}
+
+
+void RoombotController::disableAllConnectors()
+{
+    for (int i = 0; i < connectors.size(); i++)
+    {
+        connectors[i]->disablePresence();
+    }
+}
+
 
 /******************************************* INFANCY *******************************************/
 
@@ -843,6 +891,8 @@ void RoombotController::infancy()
 
 void RoombotController::matureLife()
 {
+    double startingTimeMatureLife = getTime();
+    
     // ROOT MODULES BEHAVIOR
     lastFitnessSent = 0;
     
@@ -871,6 +921,8 @@ void RoombotController::matureLife()
         
         while (step(_time_step) != -1)
         {
+            /****************** UNCOMMENT FOR CENTRALIZED DEATH BY THE EVOLVER ******************
+             
             // check if it is time to die
             if(deathReceiver->getQueueLength() > 0)
             {
@@ -880,6 +932,13 @@ void RoombotController::matureLife()
                 {
                     return; // end mature life (so die)
                 }
+            }
+            *************************************************************************************/
+            
+            // check death by fixed time to live
+            if (getTime() - startingTimeMatureLife > matureTimeToLive)
+            {
+                return; // and die
             }
             
             anglesIn = receiveAngles();
@@ -918,7 +977,7 @@ void RoombotController::matureLife()
                 _emitter->send(message.c_str(), (int)message.length()+1);
                 _emitter->setChannel(backup_channel);
                 
-                
+                storeMatureLifeFitnessIntoFile(fitness.first);
                 
                 lastFitnessSent = getTime();
                 _ev_step = 0;
@@ -945,7 +1004,8 @@ void RoombotController::matureLife()
         
         while (step(_time_step) != -1)
         {
-            
+            /****************** UNCOMMENT FOR CENTRALIZED DEATH BY THE EVOLVER ******************
+             
             // check if it is time to die
             if(deathReceiver->getQueueLength() > 0)
             {
@@ -955,6 +1015,13 @@ void RoombotController::matureLife()
                 {
                     return; // end mature life (so die)
                 }
+            }
+            ************************************************************************************/
+            
+            // check death by fixed time to live
+            if (getTime() - startingTimeMatureLife > matureTimeToLive)
+            {
+                return; // and die
             }
             
             for(size_t i=0;i<numMotors;i++)
@@ -988,10 +1055,25 @@ void RoombotController::death()
         _set_motor_position(i, 0);
     }
     
+    _emitter->setChannel(EVOLVER_CHANNEL);
+    std::string message = "SOMEONE_DIED" + std::to_string(organismId);
+    _emitter->send(message.c_str(), (int)message.length()+1);
+    
     _emitter->setChannel(MODIFIER_CHANNEL);
-    std::string message = "TO_RESERVE" + getName();
+    message = "TO_RESERVE" + getName();
     _emitter->send(message.c_str(), (int)message.length()+1);
 }
+
+
+void RoombotController::askToBeBuiltAgain()
+{
+    _emitter->setChannel(CLINIC_CHANNEL);
+    std::string message = "REBUILD" + std::to_string(organismId) + "GENOME" + genome;
+    _emitter->send(message.c_str(), (int)message.length()+1);
+    
+    storeRebuild();
+}
+
 
 /********************************************* RUN *********************************************/
 
@@ -1001,7 +1083,35 @@ void RoombotController::run()
     {
         return;
     }
+    
+    while (_receiver->getQueueLength() > 0)
+    {
+        _receiver->nextPacket();
+    }
+    while (deathReceiver->getQueueLength() > 0)
+    {
+        deathReceiver->nextPacket();
+    }
+    
+    enableAllConnectors();
+    
     double startingTime = getTime();
+    while (getTime() - startingTime < 2)
+    {
+        if (step(_time_step) != -1)
+        {
+            if (!allConnectorsOK())
+            {
+                death();
+                askToBeBuiltAgain();
+                return;
+            }
+        }
+    }
+    
+    disableAllConnectors();
+    
+    startingTime = getTime();
     std::cout << getName() << " starts at " << startingTime << endl;
     while (getTime() - startingTime < ROOMBOT_WAITING_TIME)
     {

@@ -115,8 +115,8 @@
 		A84E611918FE7357007E227E /* source */ = {
 			isa = PBXGroup;
 			children = (
-				A80421D7191CD32700894790 /* main.cpp */,
 				A80421DE191CD39900894790 /* EnvironmentModifierController.cpp */,
+				A80421D7191CD32700894790 /* main.cpp */,
 			);
 			name = source;
 			sourceTree = "<group>";

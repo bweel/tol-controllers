@@ -2,6 +2,7 @@
 #define OM_ACTIVATION_VALUE_MATRIX_H_
 
 #include "Defines.h"
+#include "ParametersReader.h"
 
 #include "NEAT.h"
 #include <boost/numeric/ublas/matrix.hpp>
@@ -161,6 +162,8 @@ class ActivationValueMatrix
     
     
     private:
+    
+    double THRESHOLD = ParametersReader::get<double>("THRESHOLD");
 	
     /**
 	 * Indicates whether a cell has been `used'.

@@ -3,18 +3,56 @@
 
 void EvolverController::generateInitialGenomes()
 {
+    double timeStep = getBasicTimeStep();
+    
     for(id_t i = 0; i < INITIAL_POPULATION; i++)
     {
         CppnGenome newGenome = genomeManager->createGenome(std::vector<CppnGenome>());
         sendGenomeToBirthClinic(newGenome, 0, 0);
+        
+        double startingTime = getTime();
+        int noise = (rand() % 30) - 15;
+        while (getTime() - startingTime < 60 + noise)
+        {
+            step(timeStep);
+        }
     }
+}
+
+
+bool EvolverController::checkEvolutionEnd()
+{
+    for (id_t i = 1; i <= NUMBER_OF_MODULES; i++)
+    {
+        Node * root = getFromDef(MODULE_DEF_BASE_NAME + TO_STR(i));
+        if (root)
+        {
+            Field * controller = root->getField("controller");
+            if (controller->getSFString().compare("void") != 0)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 
 void EvolverController::sendGenomeToBirthClinic(CppnGenome genome, id_t parent1, id_t parent2)
 {
     emitter->setChannel(CLINIC_CHANNEL);
-    std::string message = "GENOME" + genomeManager->genomeToString(genome) + "PARENTS" + std::to_string(parent1) + "-" + std::to_string(parent2);
+    
+    std::string fitness1, fitness2;
+    if (parent1 != 0)
+        fitness1 = std::to_string(std::get<1>(organismsList[searchForOrganism(parent1)]));
+    else
+        fitness1 = "/";
+    if (parent2 != 0)
+        fitness2 = std::to_string(std::get<1>(organismsList[searchForOrganism(parent2)]));
+    else
+        fitness2 = "/";
+    
+    std::string message = "GENOME" + genomeManager->genomeToString(genome) + "PARENTS" + std::to_string(parent1) + "-" + std::to_string(parent2) + "PARENTS_FITNESS" + fitness1 + "-" + fitness2;
     emitter->send(message.c_str(), (int)message.length()+1);
 }
 
@@ -140,23 +178,33 @@ int EvolverController::searchForOrganism(id_t organismId)
 }
 
 
+void EvolverController::storeEventOnFile(std::string log)
+{
+    ofstream organismsListsFile;
+    organismsListsFile.open(RESULTS_PATH + simulationDateAndTime + "/evolver_organisms_list.txt", ios::app);
+    organismsListsFile << log + "\n";
+    organismsListsFile.close();
+}
+
+
+
 ////////////////////////////////////////////////////////////////
 //////////////////////// MAIN FUNCTIONS ////////////////////////
 ////////////////////////////////////////////////////////////////
 
 
 EvolverController::EvolverController() : Supervisor()
-{
+{   
     srand(static_cast<unsigned int>(time(NULL)));
     
     // setup shape encoding
-    switch (SHAPE_ENCODING) {
-        case CPPN:
-            genomeManager = new CppnGenomeManager();
-            break;
-            
-        default:
-            break;
+    if (SHAPE_ENCODING == "CPPN")
+    {
+        genomeManager = new CppnGenomeManager();
+    }
+    else
+    {
+        // set genomeManager for other kind of genome
     }
     
     emitter = getEmitter(EMITTER_NAME);
@@ -204,29 +252,56 @@ void EvolverController::run()
     
     // MAIN CYCLE
     double currentTime = 0;
-    lastMating = 0;
-    lastDeath = 0;
+    double lastMating = 0;
+    //double lastDeath = 0;    // UNCOMMENT FOR CENTRALIZED DEATH BY THE EVOLVER
+    double lastEvolutionEndCheck = 0;
     
     while (step(timeStep) != -1)
     {
         currentTime = getTime();
         
+        if (currentTime - lastEvolutionEndCheck > CHECK_EVOLUTION_END_INTERVAL)
+        {
+            if (checkEvolutionEnd())
+            {
+                generateInitialGenomes();
+            }
+        }
+        
         if(receiver->getQueueLength() > 0)
         {
             std::string message = (char*)receiver->getData();
             
-            id_t organismId;
-            double fitness;
-            std::string genomeStr;
-            readFitenessMessage(& organismId, & fitness, &genomeStr, message);
-            std::istringstream stream(genomeStr);
-            CppnGenome genome = genomeManager->getGenomeFromStream(stream);
-            
-            std::cout << "new message received from organism_" << organismId << std::endl;
-            
-            addToOrganismsList(organismId, fitness, genome);
-            
-            receiver->nextPacket();
+            if (message.substr(0,12).compare("SOMEONE_DIED") == 0)
+            {
+                id_t organimsID = std::atoi(message.substr(12,message.length()).c_str());
+                removeFromOrganismsList(organimsID);
+                
+                std::cout << "organism_" << organimsID << " died: REMOVED FROM LIST" << std::endl;
+                
+                std::string log = std::to_string(getTime()) + " DEATH " + std::to_string(organimsID) + std::to_string(std::get<1>(organismsList[searchForOrganism(organimsID)])) + std::to_string(organismsList.size());
+                storeEventOnFile(log);
+                
+                receiver->nextPacket();
+            }
+            else
+            {
+                id_t organismId;
+                double fitness;
+                std::string genomeStr;
+                readFitenessMessage(& organismId, & fitness, &genomeStr, message);
+                std::istringstream stream(genomeStr);
+                CppnGenome genome = genomeManager->getGenomeFromStream(stream);
+                
+                std::cout << "new message received from organism_" << organismId << std::endl;
+                
+                addToOrganismsList(organismId, fitness, genome);
+                
+                std::string log = std::to_string(getTime()) + " MESSAGE_FROM " + std::to_string(organismId) + std::to_string(std::get<1>(organismsList[searchForOrganism(organismId)])) + std::to_string(organismsList.size());
+                storeEventOnFile(log);
+                
+                receiver->nextPacket();
+            }
         }
         
         if(currentTime - lastMating > MATING_TIME)
@@ -244,15 +319,36 @@ void EvolverController::run()
                 
                 std::cout << "NEW GENOME CREATED FROM organism_" << forMating[0] << " and organism_" << forMating[1] << std::endl;
                 
+                std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(forMating[0]) + " and " + std::to_string(forMating[1]);
+                storeEventOnFile(log);
+                
                 sendGenomeToBirthClinic(newGenome, forMating[0], forMating[1]);
             }
-            else
+            if (forMating.size() == 1)
+            {
+                std::vector<CppnGenome> parentsGenomes = std::vector<CppnGenome>();
+                parentsGenomes.push_back(std::get<2>(organismsList[searchForOrganism(forMating[0])]));
+                CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
+                
+                std::cout << "NEW GENOME CREATED FROM SINGLE PARENT organism_" << forMating[0] << std::endl;
+                
+                std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(forMating[0]);
+                storeEventOnFile(log);
+                
+                sendGenomeToBirthClinic(newGenome, forMating[0], 0);
+            }
+            if (forMating.size() == 0)
             {
                 std::cout << "couple of parents not found" << std::endl;
+                
+                std::string log = std::to_string(getTime()) + " couple of parents not found";
+                storeEventOnFile(log);
             }
             
             lastMating = getTime();
         }
+        
+        /****************** UNCOMMENT FOR CENTRALIZED DEATH BY THE EVOLVER ******************
         
         if(currentTime - lastDeath > DYING_TIME)
         {
@@ -268,5 +364,6 @@ void EvolverController::run()
             
             lastDeath = getTime();
         }
+        ************************************************************************************/
     }
 }

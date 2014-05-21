@@ -4,6 +4,7 @@
 #include "Defines.h"
 #include "GenomeManager.h"
 #include "CppnGenome.h"
+#include "ParametersReader.h"
 
 
 /**
@@ -63,6 +64,11 @@ public:
     std::string genomeToString(CppnGenome genome) const;
     
     CppnGenome getGenomeFromStream(std::istream& stream);
+    
+private:
+    
+    int CPPN_GRID_STARTING_SIZE = ParametersReader::get<int>("CPPN_GRID_STARTING_SIZE");
+
 };
 
 

@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "BuildPlan.h"
 #include "Position.h"
+#include "ParametersReader.h"
 
 #include <vector>
 #include <boost/smart_ptr/scoped_ptr.hpp>
@@ -23,6 +24,12 @@ using boost::property_tree::write_json;
  */
 class Organism
 {
+    
+    int INFANCY_DURATION = ParametersReader::get<int>("INFANCY_DURATION");
+    int ROOMBOT_WAITING_TIME = ParametersReader::get<int>("ROOMBOT_WAITING_TIME");
+    int MATURE_TIME_TO_LIVE = ParametersReader::get<int>("MATURE_TIME_TO_LIVE");
+    
+    
 	
     id_t id;                            //Unique id for this instance of organism.
 	std::vector<Module*> robots; 		//An array of all robots part of this organism.

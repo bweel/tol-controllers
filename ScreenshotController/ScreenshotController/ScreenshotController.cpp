@@ -1,18 +1,7 @@
-//
-//  ScreenshotController.cpp
-//  ScreenshotController
-//
-//  Created by Berend Weel on 14/05/14.
-//  Copyright (c) 2014 Berend Weel. All rights reserved.
-//
-#include <boost/filesystem.hpp>
-#include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
-
 #include "ScreenshotController.h"
-#include "Defines.h"
 
-ScreenshotController::ScreenshotController() : Supervisor() {
+ScreenshotController::ScreenshotController() : Supervisor()
+{
     receiver = getReceiver(RECEIVER_NAME);
     receiver->setChannel(SCREENSHOT_CHANNEL);
 }

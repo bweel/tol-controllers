@@ -3,6 +3,7 @@
 
 #include "Defines.h"
 #include "Position.h"
+#include "ParametersReader.h"
 
 #include <webots/Supervisor.hpp>
 #include <iostream>
@@ -15,6 +16,14 @@ class EnvironmentModifierController : public Supervisor
 {
     
 private:
+    
+    int MODIFIER_CHANNEL = ParametersReader::get<int>("MODIFIER_CHANNEL");
+    int CLINIC_CHANNEL = ParametersReader::get<int>("CLINIC_CHANNEL");
+    int EVOLVER_CHANNEL = ParametersReader::get<int>("EVOLVER_CHANNEL");
+    int SCREENSHOT_CHANNEL = ParametersReader::get<int>("SCREENSHOT_CHANNEL");
+    
+    int NUMBER_OF_MODULES = ParametersReader::get<int>("NUMBER_OF_MODULES");
+    int ARENA_SIZE = ParametersReader::get<int>("ARENA_SIZE");
     
     Receiver * receiver;
     Emitter * emitter;

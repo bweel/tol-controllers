@@ -13,12 +13,22 @@
 #include <stack>
 #include <limits>
 
+#include <boost/filesystem.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/lexical_cast.hpp>
+
+#include "Defines.h"
+#include "ParametersReader.h"
+
 using namespace webots;
 
 class ScreenshotController : public Supervisor
 {
     
 private:
+    
+    int SCREENSHOT_CHANNEL = ParametersReader::get<int>("SCREENSHOT_CHANNEL");
+    
     static const int SCREENSHOT_INTERVAL = 25; // in seconds
 
     double lastScreenshot = -1;

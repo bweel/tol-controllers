@@ -5,6 +5,7 @@
 //#define DEBUG_TIMING
 
 #include "Defines.h"
+#include "ParametersReader.h"
 
 #include "EVAlgorithm.h"
 #include "HyperNEAT.h"
@@ -81,6 +82,14 @@ private:
     
     // ATTRIBUTES
     
+    int CLINIC_CHANNEL = ParametersReader::get<int>("CLINIC_CHANNEL");
+    int DEATH_CHANNEL = ParametersReader::get<int>("DEATH_CHANNEL");
+    int EVOLVER_CHANNEL = ParametersReader::get<int>("EVOLVER_CHANNEL");
+    int MODIFIER_CHANNEL = ParametersReader::get<int>("MODIFIER_CHANNEL");
+    
+    int SEND_FITNESS_TO_EVOLVER_INTERVAL = ParametersReader::get<int>("SEND_FITNESS_TO_EVOLVER_INTERVAL");
+    int ROOMBOT_WAITING_TIME = ParametersReader::get<int>("ROOMBOT_WAITING_TIME");
+    
     std::string simulationDateAndTime;
     double lastFitnessSent;
     
@@ -111,7 +120,8 @@ private:
     std::size_t _ev_step;                       // current evaluation step
     std::size_t _ev_steps_recovery;             // time steps without fitness
     std::size_t _ev_steps_total_infancy;        // time steps to wait before evaluation during infancy
-    double evaluationDuration;
+    unsigned int evaluationDuration;            // total time of infancy
+    unsigned int matureTimeToLive;              // total time to live mature life
     unsigned int totalEvaluations;              // total number of evaluations
     unsigned int generation;                    // current generation
     double _ev_angular_velocity;                // speed of the motors
@@ -190,6 +200,17 @@ private:
      */
     std::pair<double, std::string> _compute_fitness(double, const transforms::Vector_3 &);
     
+    
+    bool allConnectorsOK();
+    
+    void enableAllConnectors();
+    
+    void disableAllConnectors();
+    
+    void storeMatureLifeFitnessIntoFile(double fitness);
+    
+    void storeRebuild();
+    
     double getRealFitness(double fitness);
     
     void logGPS();
@@ -205,6 +226,8 @@ private:
     
     // deactivate
     void death();
+    
+    void askToBeBuiltAgain();
 };
 
 #endif	/* ROOMBOT_CONTROLLER_H */

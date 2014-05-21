@@ -10,6 +10,7 @@
 #define shared_MatrixGenome_h
 
 #include "Defines.h"
+#include "ParametersReader.h"
 
 #include <iostream>
 #include <random>
@@ -20,6 +21,10 @@
 class MatrixGenome {
     
 private:
+    
+    double MATRIX_MUTATION_RATE = ParametersReader::get<double>("MATRIX_MUTATION_RATE");
+    double MATRIX_MUTATION_STRENGTH = ParametersReader::get<double>("MATRIX_MUTATION_STRENGTH");
+    
     std::vector<std::vector<double> > genes;
     std::size_t x_size;
     std::size_t y_size;

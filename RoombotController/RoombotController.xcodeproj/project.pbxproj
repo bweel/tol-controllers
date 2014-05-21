@@ -135,7 +135,7 @@
 		61278C6418967563007D50F4 /* Values.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Values.cpp; sourceTree = "<group>"; };
 		61278C7A189693D5007D50F4 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "/opt/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<absolute>"; };
 		61278C7B189693D5007D50F4 /* libboost_random-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_random-mt.dylib"; path = "/opt/local/lib/libboost_random-mt.dylib"; sourceTree = "<absolute>"; };
-		617B37101926469D001D459C /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = ../dist/Debug/libshared.a; sourceTree = "<group>"; };
+		617B37101926469D001D459C /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = ../../dist/Debug/libshared.a; sourceTree = "<group>"; };
 		61892BED1888175900E9EDCD /* RoombotController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RoombotController; sourceTree = BUILT_PRODUCTS_DIR; };
 		61892C8818881AD800E9EDCD /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = ../../../../../../../../Applications/Webots/lib/libController.dylib; sourceTree = "<group>"; };
 		61892C8918881AD800E9EDCD /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
@@ -311,7 +311,6 @@
 		61892BE41888175900E9EDCD = {
 			isa = PBXGroup;
 			children = (
-				617B37101926469D001D459C /* libshared.a */,
 				61278C1218966833007D50F4 /* Utilities */,
 				61278BFD18966728007D50F4 /* RoombotController */,
 				61278C2518966A78007D50F4 /* EVAlgorithms */,
@@ -345,6 +344,7 @@
 				61AD161B1896AE13003D24DE /* libboost_system-mt.dylib */,
 				61892C8818881AD800E9EDCD /* libController.dylib */,
 				61892C8918881AD800E9EDCD /* libCppController.dylib */,
+				617B37101926469D001D459C /* libshared.a */,
 			);
 			name = Libraries;
 			path = EvoController;

@@ -772,7 +772,7 @@ void RoombotController::infancy()
         double startingTime = getTime();
         
         while (step(_time_step) != -1 && (getTime() - startingTime < evaluationDuration))
-        {
+        {            
             anglesIn = receiveAngles();     // read current angles
             
 #ifdef DEBUG_TIMING

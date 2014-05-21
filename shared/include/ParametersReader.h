@@ -8,7 +8,7 @@
 class ParametersReader {
     
 public:
-	
+    
     template<typename T>
     static T get(std::string parameterName)
     {

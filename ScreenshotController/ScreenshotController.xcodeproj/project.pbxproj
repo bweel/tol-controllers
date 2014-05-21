@@ -1,0 +1,290 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		61746C0D19239869002D8509 /* ScreenshotController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61854A5319235CD900D24E32 /* ScreenshotController */; };
+		61854A5719235CD900D24E32 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61854A5619235CD900D24E32 /* main.cpp */; };
+		61854A6119235D4500D24E32 /* ScreenshotController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61854A5F19235D4500D24E32 /* ScreenshotController.cpp */; };
+		61854A6519236A6000D24E32 /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61854A6319236A6000D24E32 /* libController.dylib */; };
+		61854A6619236A6000D24E32 /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61854A6419236A6000D24E32 /* libCppController.dylib */; };
+		61854A6919236DD800D24E32 /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61854A6719236DD800D24E32 /* libboost_filesystem-mt.dylib */; };
+		61854A6A19236DD800D24E32 /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61854A6819236DD800D24E32 /* libboost_system-mt.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		61854A5119235CD900D24E32 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "~/Documents/projects/tol-project/controllers/ScreenshotController";
+			dstSubfolderSpec = 0;
+			files = (
+				61746C0D19239869002D8509 /* ScreenshotController in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		61854A5319235CD900D24E32 /* ScreenshotController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ScreenshotController; sourceTree = BUILT_PRODUCTS_DIR; };
+		61854A5619235CD900D24E32 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		61854A5F19235D4500D24E32 /* ScreenshotController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScreenshotController.cpp; sourceTree = "<group>"; };
+		61854A6019235D4500D24E32 /* ScreenshotController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenshotController.h; sourceTree = "<group>"; };
+		61854A6319236A6000D24E32 /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = /Applications/Webots/lib/libController.dylib; sourceTree = "<absolute>"; };
+		61854A6419236A6000D24E32 /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = /Applications/Webots/lib/libCppController.dylib; sourceTree = "<absolute>"; };
+		61854A6719236DD800D24E32 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "/opt/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<absolute>"; };
+		61854A6819236DD800D24E32 /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "/opt/local/lib/libboost_system-mt.dylib"; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		61854A5019235CD900D24E32 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61854A6919236DD800D24E32 /* libboost_filesystem-mt.dylib in Frameworks */,
+				61854A6A19236DD800D24E32 /* libboost_system-mt.dylib in Frameworks */,
+				61854A6519236A6000D24E32 /* libController.dylib in Frameworks */,
+				61854A6619236A6000D24E32 /* libCppController.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		61854A4A19235CD900D24E32 = {
+			isa = PBXGroup;
+			children = (
+				61854A5519235CD900D24E32 /* ScreenshotController */,
+				61854A621923600500D24E32 /* Libraries */,
+				61854A5419235CD900D24E32 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		61854A5419235CD900D24E32 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				61854A5319235CD900D24E32 /* ScreenshotController */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		61854A5519235CD900D24E32 /* ScreenshotController */ = {
+			isa = PBXGroup;
+			children = (
+				61854A5619235CD900D24E32 /* main.cpp */,
+				61854A5F19235D4500D24E32 /* ScreenshotController.cpp */,
+				61854A6019235D4500D24E32 /* ScreenshotController.h */,
+			);
+			path = ScreenshotController;
+			sourceTree = "<group>";
+		};
+		61854A621923600500D24E32 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				61854A6719236DD800D24E32 /* libboost_filesystem-mt.dylib */,
+				61854A6819236DD800D24E32 /* libboost_system-mt.dylib */,
+				61854A6319236A6000D24E32 /* libController.dylib */,
+				61854A6419236A6000D24E32 /* libCppController.dylib */,
+			);
+			name = Libraries;
+			path = ScreenshotController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		61854A5219235CD900D24E32 /* ScreenshotController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 61854A5C19235CD900D24E32 /* Build configuration list for PBXNativeTarget "ScreenshotController" */;
+			buildPhases = (
+				61854A4F19235CD900D24E32 /* Sources */,
+				61854A5019235CD900D24E32 /* Frameworks */,
+				61854A5119235CD900D24E32 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScreenshotController;
+			productName = ScreenshotController;
+			productReference = 61854A5319235CD900D24E32 /* ScreenshotController */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		61854A4B19235CD900D24E32 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Berend Weel";
+			};
+			buildConfigurationList = 61854A4E19235CD900D24E32 /* Build configuration list for PBXProject "ScreenshotController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 61854A4A19235CD900D24E32;
+			productRefGroup = 61854A5419235CD900D24E32 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				61854A5219235CD900D24E32 /* ScreenshotController */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		61854A4F19235CD900D24E32 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61854A5719235CD900D24E32 /* main.cpp in Sources */,
+				61854A6119235D4500D24E32 /* ScreenshotController.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		61854A5A19235CD900D24E32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"../lib/**",
+					/opt/local/include/,
+					/Applications/Webots/include/controller/cpp/,
+					../shared/include/,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		61854A5B19235CD900D24E32 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"../lib/**",
+					/opt/local/include/,
+					/Applications/Webots/include/controller/cpp/,
+					../shared/include/,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		61854A5D19235CD900D24E32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_APPS_DIR)/Webots/lib",
+					/opt/local/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		61854A5E19235CD900D24E32 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_APPS_DIR)/Webots/lib",
+					/opt/local/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		61854A4E19235CD900D24E32 /* Build configuration list for PBXProject "ScreenshotController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61854A5A19235CD900D24E32 /* Debug */,
+				61854A5B19235CD900D24E32 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		61854A5C19235CD900D24E32 /* Build configuration list for PBXNativeTarget "ScreenshotController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61854A5D19235CD900D24E32 /* Debug */,
+				61854A5E19235CD900D24E32 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 61854A4B19235CD900D24E32 /* Project object */;
+}

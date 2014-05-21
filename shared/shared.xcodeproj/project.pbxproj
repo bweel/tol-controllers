@@ -413,6 +413,7 @@
 				617B370419263CA7001D459C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		61EBFBBF19224330000E6D71 /* Build configuration list for PBXProject "shared" */ = {
 			isa = XCConfigurationList;

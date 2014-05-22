@@ -12,42 +12,41 @@ const int RoombotController::GPS_LOG_PERIOD = 50;
 
 /********************************************* CONSTRUCTORS *********************************************/
 
-RoombotController::RoombotController() {
-}
-
-void RoombotController::initialise(){
+RoombotController::RoombotController():
 
 // read parameters tree
-    _parameters = _init_parameters(getControllerArguments());
+_parameters(_init_parameters(getControllerArguments())),
 
 // set attributes with the parameters' values
-    _name = _parameters->get<std::string>("Robot.Name");
-    _r_index = _parameters->get<std::size_t>("Robot.Index");
-    _r_index_root = _parameters->get<std::size_t>("Robot.Index_Root");
-    organismSize = _parameters->get<std::size_t>("Robot.Modules_#");
-    _m_index = _parameters->get<std::size_t>("Robot." + getName() + ".Index") ; /* - _r_index*/
-    _m_type = _parameters->get<int>("Robot." + getName() + ".Type");
-    _ev_type = _parameters->get<int>("Algorithm.Type");
-    totalEvaluations = _parameters->get<unsigned int>("Algorithm.Evaluations");
-    evaluationDuration = _parameters->get<double>("Algorithm.Infancy_Duration");
-    _ev_angular_velocity = _parameters->get<double>("Algorithm.Angular_Velocity");
-    genome = _parameters->get<std::string>("Genome");
-    mindGenome = _parameters->get<std::string>("MindGenome");
+_name(_parameters->get<std::string>("Robot.Name")),
+_r_index(_parameters->get<std::size_t>("Robot.Index")),
+_r_index_root(_parameters->get<std::size_t>("Robot.Index_Root")),
+organismSize(_parameters->get<std::size_t>("Robot.Modules_#")),
+_m_index(_parameters->get<std::size_t>("Robot." + getName() + ".Index")/* - _r_index*/),
+_m_type(_parameters->get<int>("Robot." + getName() + ".Type")),
+_ev_type(_parameters->get<int>("Algorithm.Type")),
+totalEvaluations(_parameters->get<unsigned int>("Algorithm.Evaluations")),
+evaluationDuration (_parameters->get<unsigned int>("Algorithm.Infancy_Duration")),
+matureTimeToLive (_parameters->get<unsigned int>("Algorithm.Mature_Time_To_Live")),
+_ev_angular_velocity(_parameters->get<double>("Algorithm.Angular_Velocity")),
+genome(_parameters->get<std::string>("Genome")),
+mindGenome(_parameters->get<std::string>("MindGenome")),
 
 // set other attributes to initial values
-    _seed = 0;
-    _time_step = getBasicTimeStep();
-    _time_start = 0.0;
-    _time_offset = 0.0;
-    _time_end = 0.0;
-    _ev_step = 0;
-    _position_start = transforms::Vector_3::ZERO;
-    _position_end = transforms::Vector_3::ZERO;
-    numMotors = 0;
-    motorRange = 0;
-    _algorithm = 0;
-    _gps = isRoot() ? _init_gps(_time_step) : 0;
-    _motors = _m_type ? _init_motors(_time_step) : 0;
+_seed(0),
+_time_step(getBasicTimeStep()),
+_time_start(0.0),
+_time_offset(0.0),
+_time_end(0.0),
+_ev_step(0),
+_position_start(transforms::Vector_3::ZERO),
+_position_end(transforms::Vector_3::ZERO),
+numMotors(0),
+motorRange(0),
+_algorithm(0),
+_gps(isRoot() ? _init_gps(_time_step) : 0),
+_motors(_m_type ? _init_motors(_time_step) : 0)
+{
     simulationDateAndTime = _parameters->get<std::string>("Simulation");
     
     istringstream(_name.substr(_name.find("_") + 1, _name.length() - 1)) >> organismId;
@@ -123,11 +122,11 @@ void RoombotController::initialise(){
         std::string save_path = _parameters->get<std::string>("Algorithm.Save");
         
         /*boost::posix_time::time_facet *facet = new boost::posix_time::time_facet("%d-%b-%Y %H:%M:%S");
-        cout.imbue(locale(cout.getloc(), facet));
-        std::stringstream dateStream;
-        dateStream << boost::posix_time::second_clock::local_time();
-        logDirectory = RESULTS_PATH + dateStream.str() + "/";
-        std::cout << "LOG PATH: " << logDirectory << std::endl;*/
+         cout.imbue(locale(cout.getloc(), facet));
+         std::stringstream dateStream;
+         dateStream << boost::posix_time::second_clock::local_time();
+         logDirectory = RESULTS_PATH + dateStream.str() + "/";
+         std::cout << "LOG PATH: " << logDirectory << std::endl;*/
         
         
         logDirectory = _parameters->get<std::string>("Algorithm.LogDir","");
@@ -239,7 +238,7 @@ void RoombotController::initialise(){
         }
         
         std::cout << "Algorithm: " << &_algorithm << std::endl;
-                
+        
     }
 }
 
@@ -931,7 +930,7 @@ void RoombotController::matureLife()
         _time_offset = getTime();
         double tMinusOne,tPlusOne;
         
-        _ev_step = 0; // reset evaluation step
+        //_ev_step = 0; // reset evaluation step
         
         while (step(_time_step) != -1)
         {
@@ -978,7 +977,7 @@ void RoombotController::matureLife()
             double now = getTime();
             if (now - lastFitnessSent < SEND_FITNESS_TO_EVOLVER_INTERVAL)
             {
-                _ev_step++;
+                //_ev_step++;
             }
             else
             {
@@ -994,7 +993,7 @@ void RoombotController::matureLife()
                 storeMatureLifeFitnessIntoFile(fitness.first);
                 
                 lastFitnessSent = getTime();
-                _ev_step = 0;
+                //_ev_step = 0;
             }
         }
     }
@@ -1003,10 +1002,10 @@ void RoombotController::matureLife()
     
     else
     {
-        if (step(_time_step) == -1)
+        /*if (step(_time_step) == -1)
         {
             return;
-        }
+        }*/
         
         dvector anglesIn(numMotors,0.0);
         dvector anglesOut(numMotors,0.0);
@@ -1069,13 +1068,27 @@ void RoombotController::death()
         _set_motor_position(i, 0);
     }
     
-    _emitter->setChannel(EVOLVER_CHANNEL);
-    std::string message = "SOMEONE_DIED" + std::to_string(organismId);
-    _emitter->send(message.c_str(), (int)message.length()+1);
+    if (isRoot())
+    {
+        _emitter->setChannel(EVOLVER_CHANNEL);
+        std::string message = "SOMEONE_DIED" + std::to_string(organismId);
+        _emitter->send(message.c_str(), (int)message.length()+1);
+        
+        std::cout << getName() << " root sending death message to evolver" << std::endl;
+    }
     
+    std::cout << getName() << "A" << std::endl;
     _emitter->setChannel(MODIFIER_CHANNEL);
-    message = "TO_RESERVE" + getName();
+    std::cout << getName() << "B" << MODIFIER_CHANNEL << std::endl;
+    std::string message = "TO_RESERVE" + getName();
+    std::cout << getName() << "C" << message << std::endl;
     _emitter->send(message.c_str(), (int)message.length()+1);
+    std::cout << getName() << "D" << std::endl;
+    
+    for(int i = 0; i < 10; i++)
+    {
+        step(_time_step);
+    }
 }
 
 
@@ -1097,7 +1110,6 @@ void RoombotController::run()
     {
         return;
     }
-    initialise();
     
     while (_receiver->getQueueLength() > 0)
     {
@@ -1108,23 +1120,60 @@ void RoombotController::run()
         deathReceiver->nextPacket();
     }
     
+    
+    
+    
+    
+    // check if all modules are correctly locked to each other
+    
     enableAllConnectors();
     
     double startingTime = getTime();
+    bool connectorsOK = true;
     while (getTime() - startingTime < 2)
     {
         if (step(_time_step) != -1)
         {
             if (!allConnectorsOK())
             {
-                death();
-                askToBeBuiltAgain();
-                return;
+                connectorsOK = false;
             }
         }
     }
     
     disableAllConnectors();
+    
+    if (!connectorsOK)
+    {
+        std::string message = "CONNECTORS_PROBLEM";
+        _emitter->send(message.c_str(), (int)message.length()+1);
+    }
+    
+    startingTime = getTime();
+    while (getTime() - startingTime < 1)
+    {
+        step(_time_step);
+        
+        if(_receiver->getQueueLength() > 0)
+        {
+            std::string message = (char*)_receiver->getData();
+            
+            if (message.compare("CONNECTORS_PROBLEM") == 0)
+            {
+                if (isRoot())
+                {
+                    std::string message = "CONNECTORS_PROBLEM";
+                    _emitter->send(message.c_str(), (int)message.length()+1);
+                    askToBeBuiltAgain();
+                }
+                death();
+            }
+            
+            _receiver->nextPacket();
+        }
+    }
+    
+    
     
     startingTime = getTime();
     std::cout << getName() << " starts at " << startingTime << endl;

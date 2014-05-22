@@ -33,7 +33,6 @@ private:
     
 public:
     
-	
     /**
      * Default constructor, the genome will be completely empty.
      *

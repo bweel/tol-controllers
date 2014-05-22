@@ -11,13 +11,13 @@ void EvolverController::generateInitialGenomes()
     {
         CppnGenome newGenome = genomeManager->createGenome(std::vector<CppnGenome>());
         sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), "", 0, 0);
-        
-        double startingTime = getTime();
-        int noise = (rand() % 30) - 15;
-        while (getTime() - startingTime < 60 + noise)
-        {
-            step(timeStep);
-        }
+    }
+    
+    double startingTime = getTime();
+    int noise = (rand() % 30) - 15;
+    while (getTime() - startingTime < 60 + noise)
+    {
+        step(timeStep);
     }
 }
 
@@ -70,7 +70,7 @@ void EvolverController::readFitnessMessage(id_t * id, double * fitness, std::str
 {
     std::string organismStr = message.substr(message.find("NAME")+4, message.find("FITNESS")-4);
     std::string fitnessStr = message.substr(message.find("FITNESS")+7, message.find("MIND")-(organismStr.length()+11));
-    *mind = message.substr(message.find("MIND")+4, message.find("GENOME")-(organismStr.length()+fitnessStr.length()+11));
+    *mind = message.substr(message.find("MIND")+4, message.find("GENOME")-(organismStr.length()+fitnessStr.length()+15));
     *genome = message.substr(message.find("GENOME")+6, message.length());
     
     if (fitnessStr.compare("nan") == 0)
@@ -283,6 +283,8 @@ void EvolverController::run()
         
         if(receiver->getQueueLength() > 0)
         {
+            std:: cout << "message found" << std::endl;
+            
             std::string message = (char*)receiver->getData();
             
             if (message.substr(0,12).compare("SOMEONE_DIED") == 0)
@@ -292,7 +294,7 @@ void EvolverController::run()
                 
                 std::cout << "organism_" << organimsID << " died: REMOVED FROM LIST" << std::endl;
                 
-                std::string log = std::to_string(getTime()) + " DEATH " + std::to_string(organimsID) + std::to_string(organismsList[searchForOrganism(organimsID)].getId()) + std::to_string(organismsList.size());
+                std::string log = std::to_string(getTime()) + " DEATH " + std::to_string(organimsID) + " organismsListSize " + std::to_string(organismsList.size());
                 storeEventOnFile(log);
                 
                 receiver->nextPacket();
@@ -302,20 +304,14 @@ void EvolverController::run()
                 id_t organismId;
                 double fitness;
                 std::string genomeStr;
-            std::string mindStr;
-            readFitnessMessage(& organismId, & fitness, &genomeStr, &mindStr, message);
-                
-//            std::istringstream stream(genomeStr);
-//            CppnGenome genome = genomeManager->getGenomeFromStream(stream);
-            
-//            std::istringstream mindStream(mindStr);
-//            boost::shared_ptr<Mind::MindGenome> mind = mindGenomeManager->getGenomeFromStream(mindStream);
-            
+                std::string mindStr;
+                readFitnessMessage(& organismId, & fitness, &genomeStr, &mindStr, message);
+             
                 std::cout << "new message received from organism_" << organismId << std::endl;
                 
-            addToOrganismsList(organismId, fitness, genomeStr, mindStr);
+                addToOrganismsList(organismId, fitness, genomeStr, mindStr);
                 
-                std::string log = std::to_string(getTime()) + " MESSAGE_FROM " + std::to_string(organismId) + std::to_string(organismsList[searchForOrganism(organismId)].getId()) + std::to_string(organismsList.size());
+                std::string log = std::to_string(getTime()) + " MESSAGE_FROM " + std::to_string(organismId)  + " organismsListSize " + std::to_string(organismsList.size());
                 storeEventOnFile(log);
                 
                 receiver->nextPacket();
@@ -341,7 +337,7 @@ void EvolverController::run()
                 
                 std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
                 std::stringstream mind1(organismsList[searchForOrganism(forMating[0])].getMind());
-                std::stringstream mind2(organismsList[searchForOrganism(forMating[0])].getMind());
+                std::stringstream mind2(organismsList[searchForOrganism(forMating[1])].getMind());
                 
                 boost::shared_ptr<MindGenome> mindGenome1 = mindGenomeManager->getGenomeFromStream(mind1);
                 boost::shared_ptr<MindGenome> mindGenome2 = mindGenomeManager->getGenomeFromStream(mind2);

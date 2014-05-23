@@ -1,6 +1,8 @@
 #include <utility>
 
 #include "EvolverController.h"
+#include "BestTwoParentSelection.h"
+#include "BinaryTournamentParentSelection.h"
 
 
 void EvolverController::generateInitialGenomes()
@@ -85,45 +87,7 @@ void EvolverController::readFitnessMessage(id_t * id, double * fitness, std::str
 
 std::vector<id_t> EvolverController::selectForMating()
 {
-    std::vector<id_t> forMating = std::vector<id_t>();
-    
-    // first
-    int bestPos = -1;
-    double bestFitness = -1;
-    for(int i = 0; i < organismsList.size(); i++)
-    {
-        if (organismsList[i].getFitness() > bestFitness)
-        {
-            bestFitness = organismsList[i].getFitness();
-            bestPos = i;
-        }
-    }
-    if(bestPos == -1)
-    {
-        return forMating;
-    }
-    forMating.push_back(organismsList[bestPos].getId());
-    
-    // second
-    Organism backupBestPair = organismsList[bestPos];
-    organismsList.erase(organismsList.begin()+bestPos);
-    bestPos = -1;
-    bestFitness = -1;
-    for(int i = 0; i < organismsList.size(); i++)
-    {
-        if (organismsList[i].getFitness() > bestFitness)
-        {
-            bestFitness = organismsList[i].getFitness();
-            bestPos = i;
-        }
-    }
-    organismsList.push_back(backupBestPair);
-    if(bestPos == -1)
-    {
-        return forMating;
-    }
-    forMating.push_back(organismsList[bestPos].getId());
-    return forMating;
+    return parentSelectionMechanism->selectParents(organismsList);
 }
 
 
@@ -218,6 +182,14 @@ EvolverController::EvolverController() : Supervisor()
     else
     {
         std::cerr << "Unknown Mind Encoding: " << MIND_ENCODING << std::endl;
+    }
+    
+    if(PARENT_SELECTION == "BESTTWO") {
+        parentSelectionMechanism = new BestTwoParentSelection();
+    } else if(PARENT_SELECTION == "BINARY_TOURNAMENT"){
+        parentSelectionMechanism = new BinaryTournamentParentSelection();
+    } else {
+        std::cerr << "Unknown Parent Selection Mechanism: " << MIND_ENCODING << std::endl;
     }
     
     emitter = getEmitter(EMITTER_NAME);

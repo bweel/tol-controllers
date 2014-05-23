@@ -6,6 +6,7 @@
 #include "ParametersReader.h"
 #include "MatrixGenomeManager.h"
 #include "Organism.h"
+#include "ParentSelectionMechanism.h"
 
 #include <webots/Supervisor.hpp>
 
@@ -32,13 +33,14 @@ private:
     
     std::string SHAPE_ENCODING = ParametersReader::get<std::string>("SHAPE_ENCODING");
     std::string MIND_ENCODING = ParametersReader::get<std::string>("MIND_ENCODING");
-    
+    std::string PARENT_SELECTION = ParametersReader::get<std::string>("PARENT_SELECTION");
     
     Receiver * receiver; 
     Emitter * emitter;
     
     GenomeManager * genomeManager;
     MindGenomeManager * mindGenomeManager;
+    ParentSelectionMechanism * parentSelectionMechanism;
     
     std::vector<Organism> organismsList;
 

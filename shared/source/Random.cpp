@@ -56,6 +56,11 @@ namespace utils
 	{
 		return _integer_gen();
 	}
+    
+    unsigned int Random::uniform_integer(unsigned int min, unsigned int max) {
+        boost::random::uniform_int_distribution<> dist(min, max-1);
+        return dist(_engine);
+    }
 
 	double Random::uniform_real()
 	{

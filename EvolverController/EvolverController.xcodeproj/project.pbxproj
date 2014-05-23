@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		617105D4192F62D5007BF3DB /* BestTwoParentSelection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617105D3192F62D5007BF3DB /* BestTwoParentSelection.cpp */; };
+		617105DA192F66E8007BF3DB /* BinaryTournamentParentSelection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617105D9192F66E8007BF3DB /* BinaryTournamentParentSelection.cpp */; };
 		61746C0C1923980C002D8509 /* EvolverController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61AD162B1897F88A003D24DE /* EvolverController */; };
 		617B371C19265496001D459C /* libboost_random-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 617B371B19265496001D459C /* libboost_random-mt.dylib */; };
 		61AD16401897F90A003D24DE /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163E1897F90A003D24DE /* libController.dylib */; };
@@ -35,6 +37,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		617105CE192F5FFE007BF3DB /* ParentSelectionMechanism.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ParentSelectionMechanism.h; path = EvolverController/include/ParentSelectionMechanism.h; sourceTree = SOURCE_ROOT; };
+		617105D2192F62C9007BF3DB /* BestTwoParentSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BestTwoParentSelection.h; path = EvolverController/include/BestTwoParentSelection.h; sourceTree = SOURCE_ROOT; };
+		617105D3192F62D5007BF3DB /* BestTwoParentSelection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BestTwoParentSelection.cpp; path = EvolverController/source/BestTwoParentSelection.cpp; sourceTree = SOURCE_ROOT; };
+		617105D8192F66E1007BF3DB /* BinaryTournamentParentSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinaryTournamentParentSelection.h; path = EvolverController/include/BinaryTournamentParentSelection.h; sourceTree = SOURCE_ROOT; };
+		617105D9192F66E8007BF3DB /* BinaryTournamentParentSelection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryTournamentParentSelection.cpp; path = EvolverController/source/BinaryTournamentParentSelection.cpp; sourceTree = SOURCE_ROOT; };
 		617B371B19265496001D459C /* libboost_random-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_random-mt.dylib"; path = "../../../../../../../../opt/local/lib/libboost_random-mt.dylib"; sourceTree = "<group>"; };
 		61AD162B1897F88A003D24DE /* EvolverController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EvolverController; sourceTree = BUILT_PRODUCTS_DIR; };
 		61AD163E1897F90A003D24DE /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = ../../../../../../../../Applications/Webots/lib/libController.dylib; sourceTree = "<group>"; };
@@ -118,9 +125,12 @@
 		A84E611818FE734C007E227E /* include */ = {
 			isa = PBXGroup;
 			children = (
+				617105D8192F66E1007BF3DB /* BinaryTournamentParentSelection.h */,
+				617105D2192F62C9007BF3DB /* BestTwoParentSelection.h */,
 				A8C2754B191382E6004A85A3 /* EvolverController.h */,
 				A8C42D8B191A574D006DAF05 /* GenomeManager.h */,
 				A8C42D8A191A574D006DAF05 /* CppnGenomeManager.h */,
+				617105CE192F5FFE007BF3DB /* ParentSelectionMechanism.h */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -128,6 +138,8 @@
 		A84E611918FE7357007E227E /* source */ = {
 			isa = PBXGroup;
 			children = (
+				617105D9192F66E8007BF3DB /* BinaryTournamentParentSelection.cpp */,
+				617105D3192F62D5007BF3DB /* BestTwoParentSelection.cpp */,
 				A8C2754C191382FB004A85A3 /* EvolverController.cpp */,
 				A8C42D8C191A576A006DAF05 /* CppnGenomeManager.cpp */,
 				A8C2754819138273004A85A3 /* main.cpp */,
@@ -188,7 +200,9 @@
 			files = (
 				A8C2754A19138273004A85A3 /* main.cpp in Sources */,
 				A8C42D8D191A576A006DAF05 /* CppnGenomeManager.cpp in Sources */,
+				617105D4192F62D5007BF3DB /* BestTwoParentSelection.cpp in Sources */,
 				A8C2754E191382FB004A85A3 /* EvolverController.cpp in Sources */,
+				617105DA192F66E8007BF3DB /* BinaryTournamentParentSelection.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

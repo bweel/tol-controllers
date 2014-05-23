@@ -1,0 +1,317 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		61746C0E1923987F002D8509 /* EnvironmentModifierController in Copy Files */ = {isa = PBXBuildFile; fileRef = 61AD162B1897F88A003D24DE /* EnvironmentModifierController */; };
+		61AD16401897F90A003D24DE /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163E1897F90A003D24DE /* libController.dylib */; };
+		61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163F1897F90A003D24DE /* libCppController.dylib */; };
+		A80421D9191CD32700894790 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80421D7191CD32700894790 /* main.cpp */; };
+		A80421E0191CD39900894790 /* EnvironmentModifierController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80421DE191CD39900894790 /* EnvironmentModifierController.cpp */; };
+		A814555C1924A8F900278923 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A814555B1924A8F900278923 /* libshared.a */; };
+		A86042651906CD1500972DED /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042641906CD1500972DED /* libz.dylib */; };
+		A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		61AD16291897F88A003D24DE /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "~/Documents/projects/tol-project/controllers/EnvironmentModifierController";
+			dstSubfolderSpec = 0;
+			files = (
+				61746C0E1923987F002D8509 /* EnvironmentModifierController in Copy Files */,
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		61AD162B1897F88A003D24DE /* EnvironmentModifierController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EnvironmentModifierController; sourceTree = BUILT_PRODUCTS_DIR; };
+		61AD163E1897F90A003D24DE /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = ../../../../../../../../Applications/Webots/lib/libController.dylib; sourceTree = "<group>"; };
+		61AD163F1897F90A003D24DE /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
+		61EBFBD919224453000E6D71 /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = ../lib/libNEATLib.a; sourceTree = "<group>"; };
+		61EBFBDA19224453000E6D71 /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = ../lib/libtinyxmlpluslib.a; sourceTree = "<group>"; };
+		A80421D7191CD32700894790 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = EnvironmentModifierController/source/main.cpp; sourceTree = SOURCE_ROOT; };
+		A80421DA191CD37A00894790 /* EnvironmentModifierController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EnvironmentModifierController.h; path = EnvironmentModifierController/include/EnvironmentModifierController.h; sourceTree = SOURCE_ROOT; };
+		A80421DE191CD39900894790 /* EnvironmentModifierController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EnvironmentModifierController.cpp; path = EnvironmentModifierController/source/EnvironmentModifierController.cpp; sourceTree = SOURCE_ROOT; };
+		A814555B1924A8F900278923 /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = "../../../../Library/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug/libshared.a"; sourceTree = "<group>"; };
+		A86042641906CD1500972DED /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "/opt/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<absolute>"; };
+		A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "/opt/local/lib/libboost_system-mt.dylib"; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		61AD16281897F88A003D24DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A814555C1924A8F900278923 /* libshared.a in Frameworks */,
+				A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */,
+				A86042651906CD1500972DED /* libz.dylib in Frameworks */,
+				61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */,
+				61AD16401897F90A003D24DE /* libController.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		61AD16221897F88A003D24DE = {
+			isa = PBXGroup;
+			children = (
+				61AD162D1897F88A003D24DE /* EvolverControllerController */,
+				61AD163D1897F8C7003D24DE /* Libraries */,
+				61AD162C1897F88A003D24DE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		61AD162C1897F88A003D24DE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				61AD162B1897F88A003D24DE /* EnvironmentModifierController */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		61AD162D1897F88A003D24DE /* EvolverControllerController */ = {
+			isa = PBXGroup;
+			children = (
+				A84E611818FE734C007E227E /* include */,
+				A84E611918FE7357007E227E /* source */,
+			);
+			name = EvolverControllerController;
+			path = ToLSupervisor;
+			sourceTree = "<group>";
+		};
+		61AD163D1897F8C7003D24DE /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				61AD163E1897F90A003D24DE /* libController.dylib */,
+				61AD163F1897F90A003D24DE /* libCppController.dylib */,
+				A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */,
+				A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */,
+				A86042641906CD1500972DED /* libz.dylib */,
+				61EBFBD919224453000E6D71 /* libNEATLib.a */,
+				61EBFBDA19224453000E6D71 /* libtinyxmlpluslib.a */,
+				A814555B1924A8F900278923 /* libshared.a */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		A84E611818FE734C007E227E /* include */ = {
+			isa = PBXGroup;
+			children = (
+				A80421DA191CD37A00894790 /* EnvironmentModifierController.h */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		A84E611918FE7357007E227E /* source */ = {
+			isa = PBXGroup;
+			children = (
+				A80421DE191CD39900894790 /* EnvironmentModifierController.cpp */,
+				A80421D7191CD32700894790 /* main.cpp */,
+			);
+			name = source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		61AD162A1897F88A003D24DE /* EnvironmentModifierController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 61AD16341897F88A003D24DE /* Build configuration list for PBXNativeTarget "EnvironmentModifierController" */;
+			buildPhases = (
+				61AD16271897F88A003D24DE /* Sources */,
+				61AD16281897F88A003D24DE /* Frameworks */,
+				61AD16291897F88A003D24DE /* Copy Files */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EnvironmentModifierController;
+			productName = ToLSupervisor;
+			productReference = 61AD162B1897F88A003D24DE /* EnvironmentModifierController */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		61AD16231897F88A003D24DE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Berend Weel";
+			};
+			buildConfigurationList = 61AD16261897F88A003D24DE /* Build configuration list for PBXProject "EnvironmentModifierController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 61AD16221897F88A003D24DE;
+			productRefGroup = 61AD162C1897F88A003D24DE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				61AD162A1897F88A003D24DE /* EnvironmentModifierController */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		61AD16271897F88A003D24DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A80421E0191CD39900894790 /* EnvironmentModifierController.cpp in Sources */,
+				A80421D9191CD32700894790 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		61AD16321897F88A003D24DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Applications/Webots/include/controller/cpp/,
+					/opt/local/include/,
+					"../lib/**",
+					../shared/include/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SYSTEM_APPS_DIR)/Webots/lib",
+					/opt/local/lib,
+					../lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		61AD16331897F88A003D24DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Applications/Webots/include/controller/cpp/,
+					/opt/local/include/,
+					"../lib/**",
+					../shared/include/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SYSTEM_APPS_DIR)/Webots/lib",
+					/opt/local/lib,
+					../lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		61AD16351897F88A003D24DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = EnvironmentModifierController;
+			};
+			name = Debug;
+		};
+		61AD16361897F88A003D24DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = EnvironmentModifierController;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		61AD16261897F88A003D24DE /* Build configuration list for PBXProject "EnvironmentModifierController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61AD16321897F88A003D24DE /* Debug */,
+				61AD16331897F88A003D24DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		61AD16341897F88A003D24DE /* Build configuration list for PBXNativeTarget "EnvironmentModifierController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61AD16351897F88A003D24DE /* Debug */,
+				61AD16361897F88A003D24DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 61AD16231897F88A003D24DE /* Project object */;
+}

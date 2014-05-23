@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "MatrixGenome::crossoverAndMutate(boost::shared_ptr&lt;MindGenome&gt;):MatrixGenome.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "BuildableOrganism::writeControllerArgsFile(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;):Organism.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "ScreenshotController::run():ScreenshotController.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "getTime() - lastScreenshot">
+            </PersistentString>
+            <PersistentString
+               value = "getTime()">
+            </PersistentString>
+            <PersistentString
+               value = "now - lastScreenshot">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RoombotController::infancy():RoombotController.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "EvolverController::run():EvolverController.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentTime - lastMating">
+            </PersistentString>
+            <PersistentString
+               value = "currentTime - lastDeath">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RoombotController::matureLife():RoombotController.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "now - lastFitnessSent">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MatrixGenomeManager::createGenome(std::__1::vector&lt;boost::shared_ptr&lt;MindGenome&gt;, std::__1::allocator&lt;boost::shared_ptr&lt;MindGenome&gt; &gt; &gt; const&amp;):MatrixGenomeManager.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "MatrixGenomeManager::readStringToArray(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;):MatrixGenomeManager.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "genomeArray.find(&quot;MATRIX&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

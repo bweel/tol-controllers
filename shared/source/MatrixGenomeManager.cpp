@@ -20,7 +20,6 @@ MatrixGenomeManager::~MatrixGenomeManager()
     //nix
 }
 
-
 boost::shared_ptr<MindGenome> MatrixGenomeManager::createGenome(const std::vector<boost::shared_ptr<MindGenome> > & parentsGenomes)
 {
     // empty genome

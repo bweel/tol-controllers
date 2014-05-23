@@ -118,8 +118,8 @@ void BirthClinicController::readRebuildMessage(std::string message, id_t * organ
     // Template:
     // <organismId>GENOME<genome-data>MIND<mind-data>
     *organismId = std::atoi(message.substr(7, message.find("GENOME")-7).c_str());
-    *genomeStr = message.substr(message.find("GENOME")+6, message.find("MIND")-6);
-    *mindStr = message.substr(message.find("MIND")+4,std::string::npos);
+    *genomeStr = message.substr(message.find("GENOME")+6, message.find("MIND")-(message.find("GENOME")+6));
+    *mindStr = message.substr(message.find("MIND")+4,message.length());
 }
 
 
@@ -356,7 +356,7 @@ void BirthClinicController::run()
                 }
             }
                 
-            if (message.substr(0,16).compare("UPDATE_AVAILABLE") != 0 && message.substr(0,7).compare("REBUILD") != 0)
+            if (message.substr(0,6).compare("GENOME") == 0)
             {
                 std::string genomeStr;
                 std::string mindStr;
@@ -364,7 +364,7 @@ void BirthClinicController::run()
                 std::string fitness1, fitness2;
                 readGenomeMessage(message, & genomeStr, & mindStr, & parent1, & parent2, & fitness1, & fitness2);
                 
-                std::istringstream stream(message);
+                std::istringstream stream(genomeStr);
                 CppnGenome genome = builder->getGenomeFromStream(stream);
                 int buildResponse = buildOrganism(genome, mindStr, 0);
                 

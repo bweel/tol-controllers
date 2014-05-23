@@ -75,9 +75,9 @@
 		61854A5519235CD900D24E32 /* ScreenshotController */ = {
 			isa = PBXGroup;
 			children = (
-				61854A5619235CD900D24E32 /* main.cpp */,
-				61854A5F19235D4500D24E32 /* ScreenshotController.cpp */,
 				61854A6019235D4500D24E32 /* ScreenshotController.h */,
+				61854A5F19235D4500D24E32 /* ScreenshotController.cpp */,
+				61854A5619235CD900D24E32 /* main.cpp */,
 			);
 			path = ScreenshotController;
 			sourceTree = "<group>";

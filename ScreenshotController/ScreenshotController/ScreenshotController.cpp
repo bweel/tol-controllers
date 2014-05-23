@@ -40,15 +40,38 @@ void ScreenshotController::run() {
         boost::filesystem::create_directories(dirpath);
     }
     
+    unsigned int counter = 1;
+    int numberOfDigits = 15;
+    
     while (step(timeStep) != -1) {
         double now = getTime();
-        if(lastScreenshot < 0 || now - lastScreenshot > SCREENSHOT_INTERVAL){
+        if(lastScreenshot < 0 || now - lastScreenshot > SCREENSHOT_INTERVAL)
+        {
             boost::filesystem::path filepath = dirpath;
-            filepath /= boost::lexical_cast<std::string>(now) + ".jpg";
+            
+            int actualDigits = 1;
+            int tmp = counter;
+            while (tmp/10 > 0)
+            {
+                actualDigits++;
+                tmp = tmp / 10;
+            }
+            int zeroDigits = numberOfDigits - actualDigits;
+            std::string name = "";
+            for (int i = 0; i < zeroDigits; i++)
+            {
+                name = name + "0";
+            }
+            name = name + std::to_string(counter);
+            
+            filepath /= name + ".jpg";
+//            filepath /= boost::lexical_cast<std::string>(now) + ".jpg";
             
 //            std::cout << "Screenshot taken." << std::endl;
             exportImage(filepath.string(), 100);
             lastScreenshot = now;
+            
+            counter++;
         }
     }
 }

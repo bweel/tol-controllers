@@ -43,6 +43,12 @@ namespace utils
 		 */
 		unsigned int uniform_integer();
 
+        /**
+         * Returns a random unsigned integer between [min,max)
+         *
+         */
+        unsigned int uniform_integer(unsigned int min, unsigned int max);
+        
 		/**
 		 * Returns a random double from an uniform distribution in [0.0, 1.0]
 		 * @return Random double evenly distributed

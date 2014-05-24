@@ -30,6 +30,8 @@ class BirthClinicController : public Supervisor
     
     std::string SHAPE_ENCODING = ParametersReader::get<std::string>("SHAPE_ENCODING");
     
+    int TIME_STEP = ParametersReader::get<int>("TIME_STEP");
+    
     
     Node * platform;
     

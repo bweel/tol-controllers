@@ -10,14 +10,13 @@ ScreenshotController::~ScreenshotController() {
     
 }
 
-void ScreenshotController::run() {
-    double timeStep = getBasicTimeStep();
-    
-    receiver->enable(timeStep);
+void ScreenshotController::run()
+{
+    receiver->enable(TIME_STEP);
     
     // wait unitil EnvironmentModifierController sais the environment is ok
     bool environmentOk = false;
-    while (step(timeStep) != -1 && !environmentOk)
+    while (step(TIME_STEP) != -1 && !environmentOk)
     {
         if(receiver->getQueueLength() > 0)
         {
@@ -43,7 +42,7 @@ void ScreenshotController::run() {
     unsigned int counter = 1;
     int numberOfDigits = 15;
     
-    while (step(timeStep) != -1) {
+    while (step(TIME_STEP) != -1) {
         double now = getTime();
         if(lastScreenshot < 0 || now - lastScreenshot > SCREENSHOT_INTERVAL)
         {

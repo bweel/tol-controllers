@@ -151,9 +151,7 @@ EnvironmentModifierController::~EnvironmentModifierController()
 
 void EnvironmentModifierController::run()
 {
-    double timeStep = getBasicTimeStep();
-    
-    receiver->enable(timeStep);
+    receiver->enable(TIME_STEP);
     while (receiver->getQueueLength() > 0)
     {
         receiver->nextPacket();
@@ -163,7 +161,7 @@ void EnvironmentModifierController::run()
     
     sendInitializedEnvironmentMessage();
     
-    while (step(timeStep) != -1)
+    while (step(TIME_STEP) != -1)
     {
         if(receiver->getQueueLength() > 0)
         {

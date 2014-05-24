@@ -7,19 +7,20 @@
 
 void EvolverController::generateInitialGenomes()
 {
-    double timeStep = getBasicTimeStep();
-    
     for(id_t i = 0; i < INITIAL_POPULATION; i++)
     {
         CppnGenome newGenome = genomeManager->createGenome(std::vector<CppnGenome>());
-        sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), "", 0, 0);
-    }
-    
-    double startingTime = getTime();
-    int noise = (rand() % 30) - 15;
-    while (getTime() - startingTime < 60 + noise)
-    {
-        step(timeStep);
+        sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), "", 0, 0, 0, 0);
+        
+        if (i != INITIAL_POPULATION -1)
+        {
+            double startingTime = getTime();
+            int noise = (rand() % 30) - 15;
+            while (getTime() - startingTime < 60 + noise)
+            {
+                step(TIME_STEP);
+            }
+        }
     }
 }
 
@@ -42,21 +43,21 @@ bool EvolverController::checkEvolutionEnd()
 }
 
 
-void EvolverController::sendGenomeToBirthClinic(std::string genome, std::string newMind, id_t parent1, id_t parent2)
+void EvolverController::sendGenomeToBirthClinic(std::string genome, std::string newMind, id_t parent1, id_t parent2, double fitness1, double fitness2)
 {
     emitter->setChannel(CLINIC_CHANNEL);
     
-    std::string fitness1, fitness2;
+    std::string fitness1Str, fitness2Str;
     if (parent1 != 0)
-        fitness1 = std::to_string(organismsList[searchForOrganism(parent1)].getFitness());
+        fitness1Str = std::to_string(fitness1);
     else
-        fitness1 = "/";
+        fitness1Str = "/";
     if (parent2 != 0)
-        fitness2 = std::to_string(organismsList[searchForOrganism(parent2)].getFitness());
+        fitness2Str = std::to_string(fitness2);
     else
-        fitness2 = "/";
+        fitness2Str = "/";
     
-    std::string message = "GENOME" + genome + "MIND" + newMind + "PARENTS" + std::to_string(parent1) + "-" + std::to_string(parent2) + "PARENTS_FITNESS" + fitness1 + "-" + fitness2;
+    std::string message = "GENOME" + genome + "MIND" + newMind + "PARENTS" + std::to_string(parent1) + "-" + std::to_string(parent2) + "PARENTS_FITNESS" + fitness1Str + "-" + fitness2Str;
     emitter->send(message.c_str(), (int)message.length()+1);
 }
 
@@ -67,6 +68,7 @@ void EvolverController::sendDeathMessage(id_t organimsId)
     std::string message = std::to_string(organimsId);
     emitter->send(message.c_str(), (int)message.length()+1);
 }
+
 
 void EvolverController::readFitnessMessage(id_t * id, double * fitness, std::string * genome, std::string * mind, std::string message)
 {
@@ -82,6 +84,19 @@ void EvolverController::readFitnessMessage(id_t * id, double * fitness, std::str
     
     std::string idStr = organismStr.substr(organismStr.find("_")+1, organismStr.length());
     *id = std::atoi(idStr.c_str());
+}
+
+
+void EvolverController::readCoupleMessage(std::string message, id_t * id1, double * fitness1, std::string * genome1, std::string * mind1, id_t * id2, double * fitness2, std::string * genome2, std::string * mind2)
+{
+    * id1 = std::atoi(MessagesManager::get(message, "ID1").c_str());
+    * fitness1 = std::atof(MessagesManager::get(message, "FITNESS1").c_str());
+    * genome1 = MessagesManager::get(message, "GENOME1");
+    * mind1 = MessagesManager::get(message, "MIND1");
+    * id2 = std::atoi(MessagesManager::get(message, "ID2").c_str());
+    * fitness2 = std::atof(MessagesManager::get(message, "FITNESS2").c_str());
+    * genome2 = MessagesManager::get(message, "GENOME2");
+    * mind2 = MessagesManager::get(message, "MIND2");
 }
 
 
@@ -207,9 +222,7 @@ EvolverController::~EvolverController()
 
 void EvolverController::run()
 {
-    double timeStep = getBasicTimeStep();
-    
-    receiver->enable(timeStep);
+    receiver->enable(TIME_STEP);
     while (receiver->getQueueLength() > 0)
     {
         receiver->nextPacket();
@@ -217,7 +230,7 @@ void EvolverController::run()
     
     // wait unitil EnvironmentModifierController sais the environment is ok
     bool environmentOk = false;
-    while (step(timeStep) != -1 && !environmentOk)
+    while (step(TIME_STEP) != -1 && !environmentOk)
     {
         if(receiver->getQueueLength() > 0)
         {
@@ -237,11 +250,11 @@ void EvolverController::run()
     
     // MAIN CYCLE
     double currentTime = 0;
-    double lastMating = 0;
-    //double lastDeath = 0;    // UNCOMMENT FOR CENTRALIZED DEATH BY THE EVOLVER
+    //double lastMating = 0;    // UNCOMMENT FOR CENTRALIZED REPRODUCTION BY THE EVOLVER
+    //double lastDeath = 0;     // UNCOMMENT FOR CENTRALIZED DEATH BY THE EVOLVER
     double lastEvolutionEndCheck = 0;
     
-    while (step(timeStep) != -1)
+    while (step(TIME_STEP) != -1)
     {
         currentTime = getTime();
         
@@ -251,12 +264,11 @@ void EvolverController::run()
             {
                 generateInitialGenomes();
             }
+            lastEvolutionEndCheck = getTime();
         }
         
         if(receiver->getQueueLength() > 0)
         {
-            std:: cout << "message found" << std::endl;
-            
             std::string message = (char*)receiver->getData();
             
             if (message.substr(0,12).compare("SOMEONE_DIED") == 0)
@@ -268,9 +280,44 @@ void EvolverController::run()
                 
                 std::string log = std::to_string(getTime()) + " DEATH " + std::to_string(organimsID) + " organismsListSize " + std::to_string(organismsList.size());
                 storeEventOnFile(log);
-                
-                receiver->nextPacket();
             }
+            
+            if (message.substr(0,16).compare("[COUPLE_MESSAGE]") == 0)
+            {
+                // read message with couple
+                id_t id1, id2;
+                double fitness1, fitness2;
+                std::string genome1, genome2;
+                std::string mind1, mind2;
+                readCoupleMessage(message, & id1, & fitness1, & genome1, & mind1, & id2, & fitness2, & genome2, & mind2);
+                
+                // recombine genomes
+                std::vector<CppnGenome> parentsGenomes = std::vector<CppnGenome>();
+                std::stringstream genomeAsStream1(genome1);
+                std::stringstream genomeAsStream2(genome2);
+                parentsGenomes.push_back(CppnGenome(genomeAsStream1));
+                parentsGenomes.push_back(CppnGenome(genomeAsStream2));
+                CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
+                
+                // recombine minds
+                std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
+                std::stringstream mindAsStream1(mind1);
+                std::stringstream mindAsStream2(mind2);
+                parentMindGenomes.push_back(mindGenomeManager->getGenomeFromStream(mindAsStream1));
+                parentMindGenomes.push_back(mindGenomeManager->getGenomeFromStream(mindAsStream2));
+                boost::shared_ptr<MindGenome> newMind = mindGenomeManager->createGenome(parentMindGenomes);
+                
+                std::cout << "NEW GENOME CREATED FROM organism_" << id1 << " and organism_" << id2 << std::endl;
+                
+                // store event into file
+                std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(id1) + " and " + std::to_string(id2);
+                storeEventOnFile(log);
+                
+                sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), id1, id2, fitness1, fitness2);
+            }
+            
+            /****************** UNCOMMENT FOR CENTRALIZED REPRODUCTION BY THE EVOLVER ******************
+             
             else
             {
                 id_t organismId;
@@ -285,10 +332,13 @@ void EvolverController::run()
                 
                 std::string log = std::to_string(getTime()) + " MESSAGE_FROM " + std::to_string(organismId)  + " organismsListSize " + std::to_string(organismsList.size());
                 storeEventOnFile(log);
-                
-                receiver->nextPacket();
             }
+            ************************************************************************************/
+            
+            receiver->nextPacket();
         }
+        
+        /****************** UNCOMMENT FOR CENTRALIZED REPRODUCTION BY THE EVOLVER ******************
         
         if(currentTime - lastMating > MATING_TIME)
         {
@@ -318,13 +368,14 @@ void EvolverController::run()
                 parentMindGenomes.push_back(mindGenome2);
                 boost::shared_ptr<MindGenome> newMind = mindGenomeManager->createGenome(parentMindGenomes);
                 
-                
                 std::cout << "NEW GENOME CREATED FROM organism_" << forMating[0] << " and organism_" << forMating[1] << std::endl;
                 
                 std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(forMating[0]) + " and " + std::to_string(forMating[1]);
                 storeEventOnFile(log);
                 
-                sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), forMating[0], forMating[1]);
+                double fitness1 = organismsList[searchForOrganism(forMating[0])].getFitness();
+                double fitness2 = organismsList[searchForOrganism(forMating[1])].getFitness();
+                sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), forMating[0], forMating[1], fitness1, fitness2);
             }
             if (forMating.size() == 1)
             {
@@ -348,7 +399,8 @@ void EvolverController::run()
                 std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(forMating[0]);
                 storeEventOnFile(log);
                 
-                sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), forMating[0], 0);
+                double fitness = organismsList[searchForOrganism(forMating[0])].getFitness();
+                sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), forMating[0], 0, fitness, -1);
             }
             if (forMating.size() == 0)
             {
@@ -360,6 +412,7 @@ void EvolverController::run()
             
             lastMating = getTime();
         }
+        ************************************************************************************/
         
         /****************** UNCOMMENT FOR CENTRALIZED DEATH BY THE EVOLVER ******************
         

@@ -125,11 +125,11 @@
 		A84E611818FE734C007E227E /* include */ = {
 			isa = PBXGroup;
 			children = (
-				617105D8192F66E1007BF3DB /* BinaryTournamentParentSelection.h */,
-				617105D2192F62C9007BF3DB /* BestTwoParentSelection.h */,
 				A8C2754B191382E6004A85A3 /* EvolverController.h */,
 				A8C42D8B191A574D006DAF05 /* GenomeManager.h */,
 				A8C42D8A191A574D006DAF05 /* CppnGenomeManager.h */,
+				617105D2192F62C9007BF3DB /* BestTwoParentSelection.h */,
+				617105D8192F66E1007BF3DB /* BinaryTournamentParentSelection.h */,
 				617105CE192F5FFE007BF3DB /* ParentSelectionMechanism.h */,
 			);
 			name = include;
@@ -138,10 +138,10 @@
 		A84E611918FE7357007E227E /* source */ = {
 			isa = PBXGroup;
 			children = (
-				617105D9192F66E8007BF3DB /* BinaryTournamentParentSelection.cpp */,
-				617105D3192F62D5007BF3DB /* BestTwoParentSelection.cpp */,
 				A8C2754C191382FB004A85A3 /* EvolverController.cpp */,
 				A8C42D8C191A576A006DAF05 /* CppnGenomeManager.cpp */,
+				617105D9192F66E8007BF3DB /* BinaryTournamentParentSelection.cpp */,
+				617105D3192F62D5007BF3DB /* BestTwoParentSelection.cpp */,
 				A8C2754819138273004A85A3 /* main.cpp */,
 			);
 			name = source;

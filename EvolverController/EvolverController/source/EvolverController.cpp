@@ -250,7 +250,7 @@ void EvolverController::run()
     
     // MAIN CYCLE
     double currentTime = 0;
-    //double lastMating = 0;    // UNCOMMENT FOR CENTRALIZED REPRODUCTION BY THE EVOLVER
+    double lastMating = 0;    // UNCOMMENT FOR CENTRALIZED REPRODUCTION BY THE EVOLVER
     //double lastDeath = 0;     // UNCOMMENT FOR CENTRALIZED DEATH BY THE EVOLVER
     double lastEvolutionEndCheck = 0;
     
@@ -282,7 +282,9 @@ void EvolverController::run()
                 storeEventOnFile(log);
             }
             
-            if (message.substr(0,16).compare("[COUPLE_MESSAGE]") == 0)
+            /****************************************************** DISTRIBUTED REPRODUCTION ******************************************************/
+            
+            /*if (message.substr(0,16).compare("[COUPLE_MESSAGE]") == 0)
             {
                 // read message with couple
                 id_t id1, id2;
@@ -314,9 +316,11 @@ void EvolverController::run()
                 storeEventOnFile(log);
                 
                 sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), id1, id2, fitness1, fitness2);
-            }
+            }*/
             
-            /****************** UNCOMMENT FOR CENTRALIZED REPRODUCTION BY THE EVOLVER ******************
+            /*************************************************************************************************************************************/
+            
+            /****************************************************** CENTRALIZED REPRODUCTION ******************************************************/
              
             else
             {
@@ -333,12 +337,13 @@ void EvolverController::run()
                 std::string log = std::to_string(getTime()) + " MESSAGE_FROM " + std::to_string(organismId)  + " organismsListSize " + std::to_string(organismsList.size());
                 storeEventOnFile(log);
             }
-            ************************************************************************************/
+            
+            /*************************************************************************************************************************************/
             
             receiver->nextPacket();
         }
         
-        /****************** UNCOMMENT FOR CENTRALIZED REPRODUCTION BY THE EVOLVER ******************
+        /****************************************************** CENTRALIZED REPRODUCTION ******************************************************/
         
         if(currentTime - lastMating > MATING_TIME)
         {
@@ -412,7 +417,8 @@ void EvolverController::run()
             
             lastMating = getTime();
         }
-        ************************************************************************************/
+        
+        /*************************************************************************************************************************************/
         
         /****************** UNCOMMENT FOR CENTRALIZED DEATH BY THE EVOLVER ******************
         

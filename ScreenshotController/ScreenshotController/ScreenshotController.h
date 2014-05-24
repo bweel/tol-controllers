@@ -29,7 +29,9 @@ private:
     
     int SCREENSHOT_CHANNEL = ParametersReader::get<int>("SCREENSHOT_CHANNEL");
     
-    static const int SCREENSHOT_INTERVAL = 25; // in seconds
+    int TIME_STEP = ParametersReader::get<int>("TIME_STEP");
+    
+    static const int SCREENSHOT_INTERVAL = 5; // in seconds
 
     double lastScreenshot = -1;
     std::string simulationDateAndTime;

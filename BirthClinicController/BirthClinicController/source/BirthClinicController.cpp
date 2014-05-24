@@ -293,9 +293,7 @@ BirthClinicController::~BirthClinicController()
 
 void BirthClinicController::run()
 {
-    double timeStep = getBasicTimeStep();
-    
-    receiver->enable(timeStep);
+    receiver->enable(TIME_STEP);
     while (receiver->getQueueLength() > 0)
     {
         receiver->nextPacket();
@@ -303,7 +301,7 @@ void BirthClinicController::run()
     
     // wait unitil EnvironmentModifierController sais the environment is ok
     bool environmentOk = false;
-    while (step(timeStep) != -1 && !environmentOk)
+    while (step(TIME_STEP) != -1 && !environmentOk)
     {
         if(receiver->getQueueLength() > 0)
         {
@@ -326,7 +324,7 @@ void BirthClinicController::run()
     
     connectModulesToObjects();
     
-    while (step(timeStep) != -1)
+    while (step(TIME_STEP) != -1)
     {
         if (receiver->getQueueLength() > 0)
         {

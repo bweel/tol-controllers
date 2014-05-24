@@ -136,7 +136,6 @@ void BuildableOrganism::build()
             // set moduele position
             Position position = buildPlan->getPosition(organismCentre, i);
             robots[i]->setPosition(position);
-            std::cout << robots[i]->getName() << " placed in position "; position.print();
             
             // lock connectors
             std::cout << robots[i]->getName() << ": ";

@@ -1057,7 +1057,7 @@ void RoombotController::matureLife()
             
             /******************************** CENTRALIZED REPRODUCTION WITH EVOLVER ********************************/
             
-            /*double now = getTime();
+            double now = getTime();
             if (now - lastFitnessSent > SEND_FITNESS_TO_EVOLVER_INTERVAL)
             {
                 // compute fitness
@@ -1079,12 +1079,12 @@ void RoombotController::matureLife()
                 _time_start = getTime();
                 _position_start = _get_gps();
                 lastFitnessSent = getTime();
-            }*/
+            }
             
             /******************************************************************************************************/
             
             /**************************** DISTRIBUTED REPRODUCTION WITH ROOMBOT EMITTER ***************************/
-            
+            /*
             // sending
             
             if (getTime() - lastFitnessSent > SPREAD_FITNESS_INTERVAL)
@@ -1160,7 +1160,7 @@ void RoombotController::matureLife()
                 organismsToMateWith = std::vector<Organism>();
                 
                 lastMating = getTime();
-            }
+            }*/
             
             /******************************************************************************************************/
             

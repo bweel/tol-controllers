@@ -25,6 +25,8 @@ private:
     int NUMBER_OF_MODULES = ParametersReader::get<int>("NUMBER_OF_MODULES");
     int ARENA_SIZE = ParametersReader::get<int>("ARENA_SIZE");
     
+    int TIME_STEP = ParametersReader::get<int>("TIME_STEP");
+    
     Receiver * receiver;
     Emitter * emitter;
     

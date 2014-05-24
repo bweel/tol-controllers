@@ -34,7 +34,6 @@ mindGenome(_parameters->get<std::string>("MindGenome")),
 
 // set other attributes to initial values
 _seed(0),
-_time_step(getBasicTimeStep()),
 _time_start(0.0),
 _time_offset(0.0),
 _time_end(0.0),
@@ -44,14 +43,14 @@ _position_end(transforms::Vector_3::ZERO),
 numMotors(0),
 motorRange(0),
 _algorithm(0),
-_gps(isRoot() ? _init_gps(_time_step) : 0),
-_motors(_m_type ? _init_motors(_time_step) : 0)
+_gps(isRoot() ? _init_gps(TIME_STEP) : 0),
+_motors(_m_type ? _init_motors(TIME_STEP) : 0)
 {
     simulationDateAndTime = _parameters->get<std::string>("Simulation");
     
     istringstream(_name.substr(_name.find("_") + 1, _name.length() - 1)) >> organismId;
     
-    std::cout << "[" << getTime() << "] " << getName() << ": " << "Starting Controller, timestep: " << _time_step  << std::endl;
+    std::cout << "[" << getTime() << "] " << getName() << ": " << "Starting Controller, timestep: " << TIME_STEP  << std::endl;
 #ifdef DEBUG_CONTROLLER
     std::cout << "[" << getTime() << "] " << getName() << ": "
     << _parameters << " "
@@ -82,11 +81,14 @@ _motors(_m_type ? _init_motors(_time_step) : 0)
     
     deathReceiver = getReceiver(ROOMBOT_DEATH_RECEIVER_NAME);
     deathReceiver->setChannel(DEATH_CHANNEL);
-    deathReceiver->enable(_time_step);
+    deathReceiver->enable(TIME_STEP);
     while (deathReceiver->getQueueLength() > 0)
     {
         deathReceiver->nextPacket();
     }
+    
+    genomeReceiver = getReceiver(ROOMBOT_GENOME_RECEIVER_NAME);
+    genomeEmitter = getEmitter(ROOMBOT_GENOME_EMITTER_NAME);
     
     // lock connectors
     boost::property_tree::ptree connectrsNode = _parameters->get_child("Robot." + getName() + ".Connectors");
@@ -103,7 +105,10 @@ _motors(_m_type ? _init_motors(_time_step) : 0)
     {
         // set non-root module's emitter and receiver using the intex of the root
         _emitter = _init_emitter(static_cast<int> (organismId));
-        _receiver = _init_receiver(_time_step, static_cast<int> (EVOLVER_CHANNEL-1 - organismId));
+        _receiver = _init_receiver(TIME_STEP, static_cast<int> (EVOLVER_CHANNEL-1 - organismId));
+        
+        genomeReceiver->disable();
+        
         return;
     }
     
@@ -113,8 +118,16 @@ _motors(_m_type ? _init_motors(_time_step) : 0)
         // set root module's emitter and receiver as inverse of the ones for non-root modules
         // in order to make possible the communitation between master and slave
         _emitter = _init_emitter(static_cast<int> (EVOLVER_CHANNEL-1 - organismId));
-        _receiver = _init_receiver(_time_step, static_cast<int> (organismId));
+        _receiver = _init_receiver(TIME_STEP, static_cast<int> (organismId));
         
+        genomeEmitter->setRange(ORGANISM_GENOME_EMITTER_RANGE);
+        genomeEmitter->setChannel(GENOME_EXCHANGE_CHANNEL);
+        genomeReceiver->setChannel(GENOME_EXCHANGE_CHANNEL);
+        genomeReceiver->enable(TIME_STEP);
+        while (genomeReceiver->getQueueLength() > 0)
+        {
+            genomeReceiver->nextPacket();
+        }
         
         // set variables for writing on files
         utils::Random rng;
@@ -185,7 +198,7 @@ _motors(_m_type ? _init_motors(_time_step) : 0)
                                               _seed,
                                               "",
                                               logDirectory,
-                                              _time_step * 1e-3,    // Webots time step converted from ms to s
+                                              TIME_STEP * 1e-3,    // Webots time step converted from ms to s
                                               _ev_angular_velocity,
                                               totalEvaluations,
                                               organismSize * numMotors
@@ -194,7 +207,7 @@ _motors(_m_type ? _init_motors(_time_step) : 0)
                 else {
                     _algorithm = new RL_PoWER(
                                               save_path,
-                                              _time_step * 1e-3, // Webots time step converted from ms to s
+                                              TIME_STEP * 1e-3, // Webots time step converted from ms to s
                                               _ev_angular_velocity,
                                               organismSize * numMotors);
                 }
@@ -225,7 +238,7 @@ _motors(_m_type ? _init_motors(_time_step) : 0)
                                             logDirectory,
                                             initialiseModuleMapping(_r_index, organismSize, _name, _parameters->get_child("Robot")),
                                             numMotors,
-                                            _time_step * 1e-3,  // Webots time step converted from ms to s
+                                            TIME_STEP * 1e-3,  // Webots time step converted from ms to s
                                             _ev_angular_velocity,
                                             (unsigned int)organismSize);
                 
@@ -647,7 +660,7 @@ std::vector<transforms::Vector_3> RoombotController::initialiseModuleMapping(std
         
         result[index] = transforms::Vector_3(p_index.z(), p_index.x(), p_index.y());
         
-        std::cout << index << " -> " << result[index] << std::endl;
+        //std::cout << index << " -> " << result[index] << std::endl;
     }
 #ifdef DEBUG_CONTROLLER
     std::cout << "[" << getTime() << "] " << getName() << ": Init Servo Mapping" << std::endl;
@@ -701,7 +714,7 @@ void RoombotController::enableAllConnectors()
 {
     for (int i = 0; i < connectors.size(); i++)
     {
-        connectors[i]->enablePresence(_time_step/4);
+        connectors[i]->enablePresence(TIME_STEP/4);
     }
 }
 
@@ -712,6 +725,48 @@ void RoombotController::disableAllConnectors()
     {
         connectors[i]->disablePresence();
     }
+}
+
+
+void RoombotController::readMateMessage(std::string message, id_t * mateId, double * mateFitness, std::string * mateGenome, std::string * mateMind)
+{
+    * mateId = std::atoi(MessagesManager::get(message, "ID").c_str());
+    * mateFitness = std::atof(MessagesManager::get(message, "FITNESS").c_str());
+    * mateGenome = MessagesManager::get(message, "GENOME");
+    * mateMind = MessagesManager::get(message, "MIND");
+}
+
+
+void RoombotController::updateOrganismsToMateWithList(id_t mateId, double mateFitness, std::string mateGenome, std::string mateMind)
+{
+    for (int i = 0; i < organismsToMateWith.size(); i++)
+    {
+        if (organismsToMateWith[i].getId() == mateId)
+        {
+            organismsToMateWith[i].setFitness(mateFitness);
+            organismsToMateWith[i].setGenome(mateGenome);
+            organismsToMateWith[i].setMind(mateMind);
+            return;
+        }
+    }
+    Organism newMate = Organism(mateGenome, mateMind, mateId, mateFitness);
+    organismsToMateWith.push_back(newMate);
+}
+
+
+int RoombotController::selectMate()
+{
+    int bestIdx = -1;
+    double bestFitness = -1;
+    for(int i = 0; i < organismsToMateWith.size(); i++)
+    {
+        if (organismsToMateWith[i].getFitness() > bestFitness)
+        {
+            bestIdx = i;
+            bestFitness = organismsToMateWith[i].getFitness();
+        }
+    }
+    return bestIdx;
 }
 
 
@@ -752,7 +807,7 @@ void RoombotController::infancy()
         }
         
         double singleEvaluationTime = evaluationDuration / totalEvaluations;
-        double timeStep = getBasicTimeStep() / 1000.0;
+        double timeStep = TIME_STEP / 1000.0;
         int totalEvaluationSteps = singleEvaluationTime / timeStep;
         _ev_steps_recovery = totalEvaluationSteps / 10;
         _ev_steps_total_infancy = totalEvaluationSteps - _ev_steps_recovery;
@@ -770,9 +825,9 @@ void RoombotController::infancy()
         _algorithm->setInitialMinds(genomes);
         
         // two first steps (one more than non-root modules)
-        if (step(_time_step) == -1)
+        if (step(TIME_STEP) == -1)
             return;
-        if (step(_time_step) == -1)
+        if (step(TIME_STEP) == -1)
             return;
         
         // main cycle for root
@@ -784,7 +839,7 @@ void RoombotController::infancy()
         
         double startingTime = getTime();
         
-        while (step(_time_step) != -1 && (getTime() - startingTime < evaluationDuration))
+        while (step(TIME_STEP) != -1 && (getTime() - startingTime < evaluationDuration))
         {            
             anglesIn = receiveAngles();     // read current angles
             
@@ -869,14 +924,14 @@ void RoombotController::infancy()
         }
         
         // one first step
-        if (step(_time_step) == -1)
+        if (step(TIME_STEP) == -1)
             return;
         
         // main cycle for non-root
         
         double startingTime = getTime();
         
-        while (step(_time_step) != -1 && (getTime() - startingTime < evaluationDuration))
+        while (step(TIME_STEP) != -1 && (getTime() - startingTime < evaluationDuration))
         {
             // read angles for each motor
             for(size_t i=0;i<numMotors;i++){
@@ -907,10 +962,13 @@ void RoombotController::matureLife()
     double startingTimeMatureLife = getTime();
     
     // ROOT MODULES BEHAVIOR
-    lastFitnessSent = 0;
     
     if (isRoot())
     {
+        std::pair<double, std::string> fitness = std::pair<double, std::string>();
+        double lastFitnessSent = 0;
+        double lastMating = 0;
+        
         doubledvector anglesIn;
         doubledvector anglesOut;
         dvector anglesTMinusOne;
@@ -932,12 +990,18 @@ void RoombotController::matureLife()
         
         //_ev_step = 0; // reset evaluation step
         
-        while (step(_time_step) != -1)
+        _time_start = getTime();        // save initial time
+        _position_start = _get_gps();
+        
+        while (step(TIME_STEP) != -1)
         {
-            /****************** UNCOMMENT FOR CENTRALIZED DEATH BY THE EVOLVER ******************
+            /*******************
+             *** CHECK DEATH ***
+             *******************/
+            
+            /******************************** CENTRALIZED DEATH BY THE EVOLVER ********************************/
              
-            // check if it is time to die
-            if(deathReceiver->getQueueLength() > 0)
+            /*if(deathReceiver->getQueueLength() > 0)
             {
                 std::string message = (char*)deathReceiver->getData();
                 deathReceiver->nextPacket();
@@ -945,14 +1009,25 @@ void RoombotController::matureLife()
                 {
                     return; // end mature life (so die)
                 }
-            }
-            *************************************************************************************/
+            }*/
+            
+            /***************************************************************************************************/
+            
+            /******************************** DISTRIBUTED DEATH BY TIME TO LIVE ********************************/
             
             // check death by fixed time to live
             if (getTime() - startingTimeMatureLife > matureTimeToLive)
             {
                 return; // and die
             }
+            
+            /***************************************************************************************************/
+            
+            
+            
+            /*******************
+             *** STEP MOTORS ***
+             *******************/
             
             anglesIn = receiveAngles();
             
@@ -974,27 +1049,135 @@ void RoombotController::matureLife()
                 tPlusOne = getTime();
             }
             
-            double now = getTime();
-            if (now - lastFitnessSent < SEND_FITNESS_TO_EVOLVER_INTERVAL)
-            {
-                //_ev_step++;
-            }
-            else
+            
+            
+            /*******************
+             *** SEND GENOME ***
+             *******************/
+            
+            /******************************** CENTRALIZED REPRODUCTION WITH EVOLVER ********************************/
+            
+            /*double now = getTime();
+            if (now - lastFitnessSent > SEND_FITNESS_TO_EVOLVER_INTERVAL)
             {
                 // compute fitness
+                _time_end = getTime();
+                _position_end = _get_gps();
                 std::pair<double, std::string> fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));
                 
+                // send genome and fitness to evolver
                 int backup_channel = _emitter->getChannel();
                 _emitter->setChannel(EVOLVER_CHANNEL);
                 string message = "NAME" + _name + "FITNESS" + std::to_string(fitness.first) + "MIND" + mindGenome  + "GENOME" + genome;
                 _emitter->send(message.c_str(), (int)message.length()+1);
                 _emitter->setChannel(backup_channel);
                 
+                // store in file
                 storeMatureLifeFitnessIntoFile(fitness.first);
                 
+                // reset time, position and lastFitnessSent for next fitness evaluation
+                _time_start = getTime();
+                _position_start = _get_gps();
                 lastFitnessSent = getTime();
-                //_ev_step = 0;
+            }*/
+            
+            /******************************************************************************************************/
+            
+            /**************************** DISTRIBUTED REPRODUCTION WITH ROOMBOT EMITTER ***************************/
+            
+            // sending
+            
+            if (getTime() - lastFitnessSent > SPREAD_FITNESS_INTERVAL)
+            {
+                // compute fitness
+                _time_end = getTime();
+                _position_end = _get_gps();
+                fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));
+                
+                // spread genome and fitness
+                std::string genomeMessage = "[GENOME_SPREAD_MESSAGE]";
+                genomeMessage = MessagesManager::add(genomeMessage, "ID", std::to_string(organismId));
+                genomeMessage = MessagesManager::add(genomeMessage, "FITNESS", std::to_string(fitness.first));
+                genomeMessage = MessagesManager::add(genomeMessage, "GENOME", genome);
+                genomeMessage = MessagesManager::add(genomeMessage, "MIND", mindGenome);
+                
+                genomeEmitter->send(genomeMessage.c_str(), (int)genomeMessage.length()+1);
+                
+                // reset time, position and lastFitnessSent for next fitness evaluation
+                _time_start = getTime();
+                _position_start = _get_gps();
+                lastFitnessSent = getTime();
             }
+            
+            // receiving
+            
+            if(genomeReceiver->getQueueLength() > 0)
+            {
+                std::string message = (char*)genomeReceiver->getData();
+                
+                if (message.substr(0,23).compare("[GENOME_SPREAD_MESSAGE]") == 0)
+                {                    
+                    id_t mateId;
+                    double mateFitness;
+                    std::string mateGenome;
+                    std::string mateMind;
+                    readMateMessage(message, & mateId, & mateFitness, & mateGenome, & mateMind);
+                    
+                    updateOrganismsToMateWithList(mateId, mateFitness, mateGenome, mateMind);
+                }
+                
+                genomeReceiver->nextPacket();
+            }
+            
+            // mate
+            
+            if (getTime() - lastMating > INDIVIDUAL_MATING_TIME)
+            {
+                if (organismsToMateWith.size() > 0)
+                {
+                    int idx = selectMate();
+                    
+                    // send couple of genomes to evolver
+                    int backup_channel = _emitter->getChannel();
+                    _emitter->setChannel(EVOLVER_CHANNEL);
+                    
+                    std::string message = "[COUPLE_MESSAGE]";
+                    message = MessagesManager::add(message, "ID1", std::to_string(organismId));
+                    message = MessagesManager::add(message, "FITNESS1", std::to_string(fitness.first));
+                    message = MessagesManager::add(message, "GENOME1", genome);
+                    message = MessagesManager::add(message, "MIND1", mindGenome);
+                    message = MessagesManager::add(message, "ID2", std::to_string(organismsToMateWith[idx].getId()));
+                    message = MessagesManager::add(message, "FITNESS2", std::to_string(organismsToMateWith[idx].getFitness()));
+                    message = MessagesManager::add(message, "GENOME2", organismsToMateWith[idx].getGenome());
+                    message = MessagesManager::add(message, "MIND2", organismsToMateWith[idx].getMind());
+                    
+                    _emitter->send(message.c_str(), (int)message.length()+1);
+                    _emitter->setChannel(backup_channel);
+                    
+                    std::cout << organismId << " chose to mate with " << organismsToMateWith[idx].getId() << std::endl;
+                }
+                
+                organismsToMateWith = std::vector<Organism>();
+                
+                lastMating = getTime();
+            }
+            
+            /******************************************************************************************************/
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         }
     }
     
@@ -1015,7 +1198,7 @@ void RoombotController::matureLife()
             _set_motor_position(i,0.0);
         }
         
-        while (step(_time_step) != -1)
+        while (step(TIME_STEP) != -1)
         {
             /****************** UNCOMMENT FOR CENTRALIZED DEATH BY THE EVOLVER ******************
              
@@ -1073,21 +1256,15 @@ void RoombotController::death()
         _emitter->setChannel(EVOLVER_CHANNEL);
         std::string message = "SOMEONE_DIED" + std::to_string(organismId);
         _emitter->send(message.c_str(), (int)message.length()+1);
-        
-        std::cout << getName() << " root sending death message to evolver" << std::endl;
     }
     
-    std::cout << getName() << "A" << std::endl;
     _emitter->setChannel(MODIFIER_CHANNEL);
-    std::cout << getName() << "B" << MODIFIER_CHANNEL << std::endl;
     std::string message = "TO_RESERVE" + getName();
-    std::cout << getName() << "C" << message << std::endl;
     _emitter->send(message.c_str(), (int)message.length()+1);
-    std::cout << getName() << "D" << std::endl;
     
     for(int i = 0; i < 10; i++)
     {
-        step(_time_step);
+        step(TIME_STEP);
     }
 }
 
@@ -1106,7 +1283,7 @@ void RoombotController::askToBeBuiltAgain()
 
 void RoombotController::run()
 {
-    if (step(_time_step) == -1)
+    if (step(TIME_STEP) == -1)
     {
         return;
     }
@@ -1132,7 +1309,7 @@ void RoombotController::run()
     bool connectorsOK = true;
     while (getTime() - startingTime < 2)
     {
-        if (step(_time_step) != -1)
+        if (step(TIME_STEP) != -1)
         {
             if (!allConnectorsOK())
             {
@@ -1152,7 +1329,7 @@ void RoombotController::run()
     startingTime = getTime();
     while (getTime() - startingTime < 1)
     {
-        step(_time_step);
+        step(TIME_STEP);
         
         if(_receiver->getQueueLength() > 0)
         {
@@ -1176,10 +1353,9 @@ void RoombotController::run()
     
     
     startingTime = getTime();
-    std::cout << getName() << " starts at " << startingTime << endl;
     while (getTime() - startingTime < ROOMBOT_WAITING_TIME)
     {
-        if (step(_time_step) == -1)
+        if (step(TIME_STEP) == -1)
         {
             return;
         }

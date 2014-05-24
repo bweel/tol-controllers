@@ -70,6 +70,8 @@ static const std::vector<std::string> CONNECTOR_NAMES = {
 #define ROOMBOT_EMITTER_NAME "Emitter"		//The name of the main emitter of the supervisor
 #define ROOMBOT_RECEIVER_NAME "Receiver"	//The name of the main receiver of the supervisor
 #define ROOMBOT_DEATH_RECEIVER_NAME "DeathReceiver"
+#define ROOMBOT_GENOME_RECEIVER_NAME "GenomeReceiver"
+#define ROOMBOT_GENOME_EMITTER_NAME "GenomeEmitter"
 
 
 

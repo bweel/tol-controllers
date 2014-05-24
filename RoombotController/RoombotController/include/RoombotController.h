@@ -6,11 +6,13 @@
 
 #include "Defines.h"
 #include "ParametersReader.h"
+#include "MessagesManager.h"
 
 #include "EVAlgorithm.h"
 #include "HyperNEAT.h"
 #include "RL_PoWER.h"
 #include "SplineNeat.h"
+#include "Organism.h"
 
 #include "MyMath.h"
 #include "Vector_3.h"
@@ -77,12 +79,18 @@ private:
     int DEATH_CHANNEL = ParametersReader::get<int>("DEATH_CHANNEL");
     int EVOLVER_CHANNEL = ParametersReader::get<int>("EVOLVER_CHANNEL");
     int MODIFIER_CHANNEL = ParametersReader::get<int>("MODIFIER_CHANNEL");
+    int GENOME_EXCHANGE_CHANNEL = ParametersReader::get<int>("GENOME_EXCHANGE_CHANNEL");
     
-    int SEND_FITNESS_TO_EVOLVER_INTERVAL = ParametersReader::get<int>("SEND_FITNESS_TO_EVOLVER_INTERVAL");
+    double ORGANISM_GENOME_EMITTER_RANGE = ParametersReader::get<double>("ORGANISM_GENOME_EMITTER_RANGE");
+    
+    int SEND_FITNESS_TO_EVOLVER_INTERVAL = ParametersReader::get<int>("SEND_FITNESS_TO_EVOLVER_INTERVAL");  // FOR CENTRALIZED REPRODUCTION
+    int SPREAD_FITNESS_INTERVAL = ParametersReader::get<int>("SPREAD_FITNESS_INTERVAL");                    // FOR DISTRIBUTED REPRODUCTION
+    int INDIVIDUAL_MATING_TIME = ParametersReader::get<int>("INDIVIDUAL_MATING_TIME");                      // FOR DISTRIBUTED REPRODUCTION
     int ROOMBOT_WAITING_TIME = ParametersReader::get<int>("ROOMBOT_WAITING_TIME");
     
+    int TIME_STEP = ParametersReader::get<int>("TIME_STEP");
+    
     std::string simulationDateAndTime;
-    double lastFitnessSent;
     
     boost::property_tree::ptree * _parameters;  // parameters tree
     
@@ -103,7 +111,6 @@ private:
     std::size_t _m_index;                       // module's index
     int _m_type;                                // module's type (0=static, 1=slave, 2=master)
     
-    double _time_step;                          // time - step
     double _time_start;                         // time - start
     double _time_offset;                        // time - offset
     double _time_end;                           // time - end
@@ -130,6 +137,10 @@ private:
     Emitter * _emitter;                         // emitter
     Receiver * _receiver;                       // receiver
     Receiver * deathReceiver;
+    Emitter * genomeEmitter;
+    Receiver * genomeReceiver;
+    
+    std::vector<Organism> organismsToMateWith = std::vector<Organism>();
     
     Motor ** _motors;                           // motors
     
@@ -220,6 +231,12 @@ private:
     void death();
     
     void askToBeBuiltAgain();
+    
+    void readMateMessage(std::string message, id_t * mateId, double * mateFitness, std::string * mateGenome, std::string * mateMind);
+    
+    void updateOrganismsToMateWithList(id_t mateId, double mateFitness, std::string mateGenome, std::string mateMind);
+    
+    int selectMate();
 };
 
 #endif	/* ROOMBOT_CONTROLLER_H */

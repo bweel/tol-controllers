@@ -221,6 +221,9 @@ private:
     // checks whether the module is root or not
     bool isRoot();
     
+    // before starting
+    bool checkLocks();
+    
     // initial learning
     void infancy();
     

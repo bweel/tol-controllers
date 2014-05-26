@@ -4,6 +4,7 @@
 #include "Defines.h"
 #include "Position.h"
 #include "ParametersReader.h"
+#include "MessagesManager.h"
 
 #include <webots/Supervisor.hpp>
 #include <iostream>
@@ -40,9 +41,7 @@ private:
     void sendInitializedEnvironmentMessage();
     
     void sendUpdateAvailableMessageToBirthClinic(std::string moduleDef);
-    
-    std::string readToReserveMessage(std::string message);
-    
+        
     
     
 public:

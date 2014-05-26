@@ -96,7 +96,8 @@ void EnvironmentModifierController::putModuleToReserve(std::string moduleName)
 
 void EnvironmentModifierController::sendInitializedEnvironmentMessage()
 {
-    std::string message = "ENVIRONMENT_OK" + simulationDateAndTime;
+    std::string message = "[ENVIRONMENT_OK_MESSAGE]";
+    message = MessagesManager::add(message, "SDAT", simulationDateAndTime);
     emitter->setChannel(EVOLVER_CHANNEL);
     emitter->send(message.c_str(), (int)message.length()+1);
     emitter->setChannel(CLINIC_CHANNEL);
@@ -109,15 +110,9 @@ void EnvironmentModifierController::sendInitializedEnvironmentMessage()
 void EnvironmentModifierController::sendUpdateAvailableMessageToBirthClinic(std::string moduleDef)
 {
     emitter->setChannel(CLINIC_CHANNEL);
-    std::string message = "UPDATE_AVAILABLE" + moduleDef;
+    std::string message = "[UPDATE_AVAILABLE_MESSAGE]";
+    message = MessagesManager::add(message, "DEF", moduleDef);
     emitter->send(message.c_str(), (int)message.length()+1);
-}
-
-
-std::string EnvironmentModifierController::readToReserveMessage(std::string message)
-{
-    std::string name = message.substr(message.find("TO_RESERVE")+10, message.length());
-    return name;
 }
 
 
@@ -167,9 +162,11 @@ void EnvironmentModifierController::run()
         {
             std::string message = (char*)receiver->getData();
             
-            std::string moduleName = readToReserveMessage(message);
-            
-            putModuleToReserve(moduleName);
+            if (message.substr(0,20).compare("[TO_RESERVE_MESSAGE]") == 0)
+            {
+                std::string moduleName = MessagesManager::get(message, "NAME");
+                putModuleToReserve(moduleName);
+            }
             
             receiver->nextPacket();
         }

@@ -67,14 +67,6 @@ Position BirthClinicController::getFreeRandomPosition(double size)
 }
 
 
-void BirthClinicController::sendStartMessage(int channel)
-{
-    emitter->setChannel(channel);
-    std::string message = "START";
-    emitter->send(message.c_str(), (int)message.length()+1);
-}
-
-
 void BirthClinicController::addModuleToReserve(std::string moduleDef)
 {
     Node * root = getFromDef(moduleDef);
@@ -99,15 +91,14 @@ void BirthClinicController::readGenomeMessage(std::string message, std::string *
     // Template:
     // GENOME<genome data>MIND<mind data>PARENTSparent1-parent2PARENTS_FITNESSfitness1-fitness2
     
-    *genomeStr = message.substr(message.find("GENOME")+6, message.find("MIND")-6);
+    *genomeStr = MessagesManager::get(message, "GENOME");
+    *mindStr = MessagesManager::get(message, "MIND");
     
-    *mindStr = message.substr(message.find("MIND")+4,message.find("PARENTS")-(genomeStr->length()+10));
-    
-    std::string parentsSubStr = message.substr(message.find("PARENTS")+7, message.find("PARENTS_FITNESS")-(message.find("PARENTS")+7));
+    std::string parentsSubStr = MessagesManager::get(message, "PARENTS");
     *parent1 = std::atoi(parentsSubStr.substr(0, parentsSubStr.find("-")).c_str());
     *parent2 = std::atoi(parentsSubStr.substr(parentsSubStr.find("-")+1, parentsSubStr.length()).c_str());
     
-    std::string fitnessSubStr = message.substr(message.find("PARENTS_FITNESS")+15, message.length());
+    std::string fitnessSubStr = MessagesManager::get(message, "PARENTS_FITNESS");
     *fitness1 = fitnessSubStr.substr(0, fitnessSubStr.find("-")).c_str();
     *fitness2 = fitnessSubStr.substr(fitnessSubStr.find("-")+1, fitnessSubStr.length()).c_str();
 }
@@ -117,15 +108,9 @@ void BirthClinicController::readRebuildMessage(std::string message, id_t * organ
 {
     // Template:
     // <organismId>GENOME<genome-data>MIND<mind-data>
-    *organismId = std::atoi(message.substr(7, message.find("GENOME")-7).c_str());
-    *genomeStr = message.substr(message.find("GENOME")+6, message.find("MIND")-(message.find("GENOME")+6));
-    *mindStr = message.substr(message.find("MIND")+4,message.length());
-}
-
-
-std::string BirthClinicController::readUpdateAvailableMessage(std::string message)
-{
-    return message.substr(16, message.length());
+    *organismId = std::atoi(MessagesManager::get(message, "ID").c_str());
+    *genomeStr = MessagesManager::get(message, "GENOME");
+    *mindStr = MessagesManager::get(message, "MIND");
 }
 
 
@@ -306,11 +291,11 @@ void BirthClinicController::run()
         if(receiver->getQueueLength() > 0)
         {
             std::string message = (char*)receiver->getData();
-            if (message.substr(0,14).compare("ENVIRONMENT_OK") == 0)
+            if (message.substr(0,24).compare("[ENVIRONMENT_OK_MESSAGE]") == 0)
             {
                 environmentOk = true;
                 
-                simulationDateAndTime = message.substr(14,message.length());
+                simulationDateAndTime = MessagesManager::get(message, "SDAT");
                 
                 boost::filesystem::path path(RESULTS_PATH + simulationDateAndTime);
                 if (boost::filesystem::exists(path) && boost::filesystem::is_directory(path)) {
@@ -330,14 +315,14 @@ void BirthClinicController::run()
         {
             std::string message = (char*)receiver->getData();
             
-            if (message.substr(0,16).compare("UPDATE_AVAILABLE") == 0)
+            if (message.substr(0,26).compare("[UPDATE_AVAILABLE_MESSAGE]") == 0)
             {
-                std::string moduleDef = readUpdateAvailableMessage(message);
+                std::string moduleDef = MessagesManager::get(message, "DEF");
                 addModuleToReserve(moduleDef);
                 receiver->nextPacket();
             }
             
-            if (message.substr(0,7).compare("REBUILD") == 0)
+            if (message.substr(0,17).compare("[REBUILD_MESSAGE]") == 0)
             {
                 id_t organismId;
                 std::string genomeStr;
@@ -354,7 +339,7 @@ void BirthClinicController::run()
                 }
             }
                 
-            if (message.substr(0,6).compare("GENOME") == 0)
+            if (message.substr(0,26).compare("[GENOME_TO_CLINIC_MESSAGE]") == 0)
             {
                 std::string genomeStr;
                 std::string mindStr;

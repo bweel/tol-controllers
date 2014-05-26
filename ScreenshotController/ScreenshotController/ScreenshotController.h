@@ -19,6 +19,7 @@
 
 #include "Defines.h"
 #include "ParametersReader.h"
+#include "MessagesManager.h"
 
 using namespace webots;
 

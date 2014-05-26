@@ -6,6 +6,7 @@
 #include "Organism.h"
 #include "RoombotModule.h"
 #include "ParametersReader.h"
+#include "MessagesManager.h"
 #include "MindGenome.h"
 
 #include <webots/Supervisor.hpp>
@@ -60,11 +61,7 @@ class BirthClinicController : public Supervisor
 	bool positionFree(Position position, double size);
     
 	Position getFreeRandomPosition(double size);
-    
-    void sendStartMessage(int channel);
-    
-    std::string readUpdateAvailableMessage(std::string message);
-    
+        
     void readGenomeMessage(std::string message, std::string * genomeStr, std::string * mindStr, id_t * parent1, id_t * parent2, std::string * fitness1, std::string * fitness2);
     
     void readRebuildMessage(std::string message, id_t * organismId, std::string * genomeStr, std::string * mindStr);

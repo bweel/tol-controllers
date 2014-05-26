@@ -12,7 +12,7 @@ void EvolverController::generateInitialGenomes()
         CppnGenome newGenome = genomeManager->createGenome(std::vector<CppnGenome>());
         sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), "", 0, 0, 0, 0);
         
-        if (i != INITIAL_POPULATION -1)
+        /*if (i != INITIAL_POPULATION -1)
         {
             double startingTime = getTime();
             int noise = (rand() % 30) - 15;
@@ -20,7 +20,7 @@ void EvolverController::generateInitialGenomes()
             {
                 step(TIME_STEP);
             }
-        }
+        }*/
     }
 }
 
@@ -57,7 +57,12 @@ void EvolverController::sendGenomeToBirthClinic(std::string genome, std::string 
     else
         fitness2Str = "/";
     
-    std::string message = "GENOME" + genome + "MIND" + newMind + "PARENTS" + std::to_string(parent1) + "-" + std::to_string(parent2) + "PARENTS_FITNESS" + fitness1Str + "-" + fitness2Str;
+    std::string message = "[GENOME_TO_CLINIC_MESSAGE]";
+    message = MessagesManager::add(message, "GENOME", genome);
+    message = MessagesManager::add(message, "MIND", newMind);
+    message = MessagesManager::add(message, "PARENTS", std::to_string(parent1) + "-" + std::to_string(parent2));
+    message = MessagesManager::add(message, "PARENTS_FITNESS", fitness1Str + "-" + fitness2Str);
+    
     emitter->send(message.c_str(), (int)message.length()+1);
 }
 
@@ -72,18 +77,14 @@ void EvolverController::sendDeathMessage(id_t organimsId)
 
 void EvolverController::readFitnessMessage(id_t * id, double * fitness, std::string * genome, std::string * mind, std::string message)
 {
-    std::string organismStr = message.substr(message.find("NAME")+4, message.find("FITNESS")-4);
-    std::string fitnessStr = message.substr(message.find("FITNESS")+7, message.find("MIND")-(organismStr.length()+11));
-    *mind = message.substr(message.find("MIND")+4, message.find("GENOME")-(organismStr.length()+fitnessStr.length()+15));
-    *genome = message.substr(message.find("GENOME")+6, message.length());
-    
+    *id = std::atoi(MessagesManager::get(message, "ID").c_str());
+    std::string fitnessStr = MessagesManager::get(message, "FITNESS");
     if (fitnessStr.compare("nan") == 0)
         *fitness = 0.0;
     else
         *fitness = std::atof(fitnessStr.c_str());
-    
-    std::string idStr = organismStr.substr(organismStr.find("_")+1, organismStr.length());
-    *id = std::atoi(idStr.c_str());
+    *genome = MessagesManager::get(message, "GENOME");
+    *mind = MessagesManager::get(message, "MIND");
 }
 
 
@@ -235,10 +236,10 @@ void EvolverController::run()
         if(receiver->getQueueLength() > 0)
         {
             std::string message = (char*)receiver->getData();
-            if (message.substr(0,14).compare("ENVIRONMENT_OK") == 0)
+            if (message.substr(0,24).compare("[ENVIRONMENT_OK_MESSAGE]") == 0)
             {
                 environmentOk = true;
-                simulationDateAndTime = message.substr(14,message.length());
+                simulationDateAndTime = MessagesManager::get(message, "SDAT");
             }
             receiver->nextPacket();
         }
@@ -271,9 +272,9 @@ void EvolverController::run()
         {
             std::string message = (char*)receiver->getData();
             
-            if (message.substr(0,12).compare("SOMEONE_DIED") == 0)
+            if (message.substr(0,28).compare("[DEATH_ANNOUNCEMENT_MESSAGE]") == 0)
             {
-                id_t organimsID = std::atoi(message.substr(12,message.length()).c_str());
+                id_t organimsID = std::atoi(MessagesManager::get(message, "ID").c_str());
                 removeFromOrganismsList(organimsID);
                 
                 std::cout << "organism_" << organimsID << " died: REMOVED FROM LIST" << std::endl;
@@ -322,7 +323,7 @@ void EvolverController::run()
             
             /****************************************************** CENTRALIZED REPRODUCTION ******************************************************/
              
-            else
+            if (message.substr(0,27).compare("[GENOME_TO_EVOLVER_MESSAGE]") == 0)
             {
                 id_t organismId;
                 double fitness;

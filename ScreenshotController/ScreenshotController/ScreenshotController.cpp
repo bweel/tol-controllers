@@ -21,10 +21,10 @@ void ScreenshotController::run()
         if(receiver->getQueueLength() > 0)
         {
             std::string message = (char*)receiver->getData();
-            if (message.substr(0,14).compare("ENVIRONMENT_OK") == 0)
+            if (message.substr(0,24).compare("[ENVIRONMENT_OK_MESSAGE]") == 0)
             {
                 environmentOk = true;
-                simulationDateAndTime = message.substr(14,message.length());
+                simulationDateAndTime = MessagesManager::get(message, "SDAT");
             }
             receiver->nextPacket();
         }

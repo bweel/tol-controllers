@@ -48,7 +48,7 @@ _motors(_m_type ? _init_motors(TIME_STEP) : 0)
 {
     simulationDateAndTime = _parameters->get<std::string>("Simulation");
     
-    istringstream(_name.substr(_name.find("_") + 1, _name.length() - 1)) >> organismId;
+    istringstream(_name.substr(_name.find("_") + 1, _name.length())) >> organismId;
     
     std::cout << "[" << getTime() << "] " << getName() << ": " << "Starting Controller, timestep: " << TIME_STEP  << std::endl;
 #ifdef DEBUG_CONTROLLER
@@ -770,6 +770,70 @@ int RoombotController::selectMate()
 }
 
 
+
+
+/******************************************* BEFORE STARTING *******************************************/
+
+bool RoombotController::checkLocks()
+{
+    enableAllConnectors();
+    
+    double startingTime = getTime();
+    bool connectorsOK = true;
+    while (getTime() - startingTime < 2)
+    {
+        if (step(TIME_STEP) != -1)
+        {
+            if (!allConnectorsOK())
+            {
+                connectorsOK = false;
+            }
+        }
+    }
+    
+    disableAllConnectors();
+    
+    if (!connectorsOK)
+    {
+        std::string message = "CONNECTORS_PROBLEM";
+        _emitter->send(message.c_str(), (int)message.length()+1);
+        if (isRoot())
+        {
+            askToBeBuiltAgain();
+        }
+        death();
+        return false;
+    }
+    
+    startingTime = getTime();
+    while (getTime() - startingTime < 1)
+    {
+        step(TIME_STEP);
+        
+        if(_receiver->getQueueLength() > 0)
+        {
+            std::string message = (char*)_receiver->getData();
+            
+            if (message.compare("CONNECTORS_PROBLEM") == 0)
+            {
+                if (isRoot())
+                {
+                    std::string message = "CONNECTORS_PROBLEM";
+                    _emitter->send(message.c_str(), (int)message.length()+1);
+                    askToBeBuiltAgain();
+                }
+                death();
+                return false;
+            }
+            
+            _receiver->nextPacket();
+        }
+    }
+    return connectorsOK;
+}
+
+
+
 /******************************************* INFANCY *******************************************/
 
 // initial learning phase of the organism's life
@@ -967,7 +1031,7 @@ void RoombotController::matureLife()
     {
         std::pair<double, std::string> fitness = std::pair<double, std::string>();
         double lastFitnessSent = 0;
-        double lastMating = 0;
+        //double lastMating = 0;
         
         doubledvector anglesIn;
         doubledvector anglesOut;
@@ -1068,7 +1132,13 @@ void RoombotController::matureLife()
                 // send genome and fitness to evolver
                 int backup_channel = _emitter->getChannel();
                 _emitter->setChannel(EVOLVER_CHANNEL);
-                string message = "NAME" + _name + "FITNESS" + std::to_string(fitness.first) + "MIND" + mindGenome  + "GENOME" + genome;
+                
+                string message = "[GENOME_TO_EVOLVER_MESSAGE]";
+                message = MessagesManager::add(message, "ID", std::to_string(organismId));
+                message = MessagesManager::add(message, "FITNESS", std::to_string(fitness.first));
+                message = MessagesManager::add(message, "GENOME", genome);
+                message = MessagesManager::add(message, "MIND", mindGenome);
+                                
                 _emitter->send(message.c_str(), (int)message.length()+1);
                 _emitter->setChannel(backup_channel);
                 
@@ -1164,20 +1234,6 @@ void RoombotController::matureLife()
             
             /******************************************************************************************************/
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
         }
     }
     
@@ -1254,12 +1310,14 @@ void RoombotController::death()
     if (isRoot())
     {
         _emitter->setChannel(EVOLVER_CHANNEL);
-        std::string message = "SOMEONE_DIED" + std::to_string(organismId);
+        std::string message = "[DEATH_ANNOUNCEMENT_MESSAGE]";
+        message = MessagesManager::add(message, "ID", std::to_string(organismId));
         _emitter->send(message.c_str(), (int)message.length()+1);
     }
     
     _emitter->setChannel(MODIFIER_CHANNEL);
-    std::string message = "TO_RESERVE" + getName();
+    std::string message = "[TO_RESERVE_MESSAGE]";
+    message = MessagesManager::add(message, "NAME", getName());
     _emitter->send(message.c_str(), (int)message.length()+1);
     
     for(int i = 0; i < 10; i++)
@@ -1272,7 +1330,12 @@ void RoombotController::death()
 void RoombotController::askToBeBuiltAgain()
 {
     _emitter->setChannel(CLINIC_CHANNEL);
-    std::string message = "REBUILD" + std::to_string(organismId) + "GENOME" + genome + "MIND" + mindGenome;
+    
+    std::string message = "[REBUILD_MESSAGE]";
+    message = MessagesManager::add(message, "ID", std::to_string(organismId));
+    message = MessagesManager::add(message, "GENOME", genome);
+    message = MessagesManager::add(message, "MIND", mindGenome);
+    
     _emitter->send(message.c_str(), (int)message.length()+1);
     
     storeRebuild();
@@ -1297,62 +1360,15 @@ void RoombotController::run()
         deathReceiver->nextPacket();
     }
     
-    
-    
-    
-    
     // check if all modules are correctly locked to each other
     
-    enableAllConnectors();
+    if (!checkLocks())
+    {
+        return;
+    }
     
+    // wait for module to not move after sliding down from clinic
     double startingTime = getTime();
-    bool connectorsOK = true;
-    while (getTime() - startingTime < 2)
-    {
-        if (step(TIME_STEP) != -1)
-        {
-            if (!allConnectorsOK())
-            {
-                connectorsOK = false;
-            }
-        }
-    }
-    
-    disableAllConnectors();
-    
-    if (!connectorsOK)
-    {
-        std::string message = "CONNECTORS_PROBLEM";
-        _emitter->send(message.c_str(), (int)message.length()+1);
-    }
-    
-    startingTime = getTime();
-    while (getTime() - startingTime < 1)
-    {
-        step(TIME_STEP);
-        
-        if(_receiver->getQueueLength() > 0)
-        {
-            std::string message = (char*)_receiver->getData();
-            
-            if (message.compare("CONNECTORS_PROBLEM") == 0)
-            {
-                if (isRoot())
-                {
-                    std::string message = "CONNECTORS_PROBLEM";
-                    _emitter->send(message.c_str(), (int)message.length()+1);
-                    askToBeBuiltAgain();
-                }
-                death();
-            }
-            
-            _receiver->nextPacket();
-        }
-    }
-    
-    
-    
-    startingTime = getTime();
     while (getTime() - startingTime < ROOMBOT_WAITING_TIME)
     {
         if (step(TIME_STEP) == -1)

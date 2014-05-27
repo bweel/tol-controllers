@@ -6,16 +6,20 @@
 
 
 class ParametersReader {
+private:
+    static boost::property_tree::ptree * parametersTree;
     
 public:
     
     template<typename T>
     static T get(std::string parameterName)
     {
-        std::string path = "../../parameters.json";
+        if(parametersTree == NULL){
+            std::string path = "../../parameters.json";
         
-        boost::property_tree::ptree * parametersTree = new boost::property_tree::ptree();
-        boost::property_tree::read_json(path, (* parametersTree));
+            parametersTree = new boost::property_tree::ptree();
+            boost::property_tree::read_json(path, (* parametersTree));
+        }
         
         T parameter = parametersTree->get<T>(parameterName);
         

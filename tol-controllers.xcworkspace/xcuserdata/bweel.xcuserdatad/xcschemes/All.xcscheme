@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "61EBFBC319224330000E6D71"
+               BuildableName = "libshared.a"
+               BlueprintName = "shared"
+               ReferencedContainer = "container:shared/shared.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "61AD162A1897F88A003D24DE"
                BuildableName = "BirthClinicController"
                BlueprintName = "BirthClinicController"
@@ -73,6 +87,20 @@
                BlueprintIdentifier = "61854A5219235CD900D24E32"
                BuildableName = "ScreenshotController"
                BlueprintName = "ScreenshotController"
+               ReferencedContainer = "container:ScreenshotController/ScreenshotController.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "618F2E141934C5CA001500A0"
+               BuildableName = "TimingController"
+               BlueprintName = "TimingController"
                ReferencedContainer = "container:ScreenshotController/ScreenshotController.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

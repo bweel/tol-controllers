@@ -17,6 +17,7 @@
 		617B37221929FFF8001D459C /* MatrixGenomeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B37211929FFF8001D459C /* MatrixGenomeManager.cpp */; };
 		617B3725192A3298001D459C /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBC419224330000E6D71 /* libshared.a */; };
 		617B3727192A32CC001D459C /* MindGenome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B3726192A32CC001D459C /* MindGenome.cpp */; };
+		618F2E221934C6D6001500A0 /* ParametersReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618F2E211934C6D6001500A0 /* ParametersReader.cpp */; };
 		61C68B83192A4A4F00AD6D19 /* Organism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C68B82192A4A4F00AD6D19 /* Organism.cpp */; };
 		61C68B85192A4ABF00AD6D19 /* Module.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C68B84192A4ABF00AD6D19 /* Module.h */; };
 		61C68B87192A4AC600AD6D19 /* Module.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C68B86192A4AC600AD6D19 /* Module.cpp */; };
@@ -60,6 +61,7 @@
 		617B371F1929FFF1001D459C /* MatrixGenomeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatrixGenomeManager.h; sourceTree = "<group>"; };
 		617B37211929FFF8001D459C /* MatrixGenomeManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MatrixGenomeManager.cpp; sourceTree = "<group>"; };
 		617B3726192A32CC001D459C /* MindGenome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MindGenome.cpp; sourceTree = "<group>"; };
+		618F2E211934C6D6001500A0 /* ParametersReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParametersReader.cpp; sourceTree = "<group>"; };
 		61C68B81192A4A4700AD6D19 /* Organism.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Organism.h; sourceTree = "<group>"; };
 		61C68B82192A4A4F00AD6D19 /* Organism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Organism.cpp; sourceTree = "<group>"; };
 		61C68B84192A4ABF00AD6D19 /* Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Module.h; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				61EBFBD0192243B4000E6D71 /* Position.cpp */,
 				617B36F319263624001D459C /* MatrixGenome.cpp */,
 				617B3726192A32CC001D459C /* MindGenome.cpp */,
+				618F2E211934C6D6001500A0 /* ParametersReader.cpp */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				617B3713192646CC001D459C /* Random.cpp in Sources */,
 				61C68B87192A4AC600AD6D19 /* Module.cpp in Sources */,
 				617B36F519263624001D459C /* MatrixGenome.cpp in Sources */,
+				618F2E221934C6D6001500A0 /* ParametersReader.cpp in Sources */,
 				61C68B83192A4A4F00AD6D19 /* Organism.cpp in Sources */,
 				617B37221929FFF8001D459C /* MatrixGenomeManager.cpp in Sources */,
 				61EBFBD6192243B4000E6D71 /* Position.cpp in Sources */,

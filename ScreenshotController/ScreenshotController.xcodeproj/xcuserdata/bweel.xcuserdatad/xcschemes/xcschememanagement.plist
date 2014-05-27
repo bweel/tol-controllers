@@ -9,10 +9,20 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
+		<key>TimingController.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>61854A5219235CD900D24E32</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>618F2E141934C5CA001500A0</key>
 		<dict>
 			<key>primary</key>
 			<true/>

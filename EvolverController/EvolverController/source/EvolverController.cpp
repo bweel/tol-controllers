@@ -12,7 +12,7 @@ void EvolverController::generateInitialGenomes()
         CppnGenome newGenome = genomeManager->createGenome(std::vector<CppnGenome>());
         sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), "", 0, 0, 0, 0);
         
-        /*if (i != INITIAL_POPULATION -1)
+        if (i != INITIAL_POPULATION -1)
         {
             double startingTime = getTime();
             int noise = (rand() % 30) - 15;
@@ -20,7 +20,7 @@ void EvolverController::generateInitialGenomes()
             {
                 step(TIME_STEP);
             }
-        }*/
+        }
     }
 }
 
@@ -323,7 +323,7 @@ void EvolverController::run()
             
             /****************************************************** CENTRALIZED REPRODUCTION ******************************************************/
              
-            if (message.substr(0,27).compare("[GENOME_TO_EVOLVER_MESSAGE]") == 0)
+            if (message.substr(0,23).compare("[GENOME_SPREAD_MESSAGE]") == 0)
             {
                 id_t organismId;
                 double fitness;

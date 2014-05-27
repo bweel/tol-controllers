@@ -175,7 +175,7 @@ void BuildableOrganism::writeControllerArgsFile(std::string simulationDateAndTim
     child.put("Infancy_Duration",INFANCY_DURATION);
     child.put("Waiting_Time", ROOMBOT_WAITING_TIME);
     child.put("Mature_Time_To_Live", MATURE_TIME_TO_LIVE);
-    child.put("Evaluations", "50");
+    child.put("Evaluations", "200");
     child.put("Angular_Velocity", "2.6");
     pt.put_child("Algorithm", child);
     // Shape

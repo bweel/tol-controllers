@@ -120,14 +120,24 @@ _motors(_m_type ? _init_motors(TIME_STEP) : 0)
         _emitter = _init_emitter(static_cast<int> (EVOLVER_CHANNEL-1 - organismId));
         _receiver = _init_receiver(TIME_STEP, static_cast<int> (organismId));
         
-        genomeEmitter->setRange(ORGANISM_GENOME_EMITTER_RANGE);
-        genomeEmitter->setChannel(GENOME_EXCHANGE_CHANNEL);
-        genomeReceiver->setChannel(GENOME_EXCHANGE_CHANNEL);
+        
+        
+        
+        genomeEmitter->setRange(ORGANISM_GENOME_EMITTER_RANGE); // SHOULD BE -1 FOR CENTRALIZED REPRODUCTION
+        
+        genomeEmitter->setChannel(EVOLVER_CHANNEL);             // FOR CENTRALIZED REPRODUCTION
+        //genomeEmitter->setChannel(GENOME_EXCHANGE_CHANNEL);   // FOR DISTRIBUTED REPRODUCTION
+        
+        genomeReceiver->setChannel(GENOME_EXCHANGE_CHANNEL);    // USED ONLY FOR DISTRIBUTED REPRODUCTION
+        
         genomeReceiver->enable(TIME_STEP);
         while (genomeReceiver->getQueueLength() > 0)
         {
             genomeReceiver->nextPacket();
         }
+        
+        
+        
         
         // set variables for writing on files
         utils::Random rng;
@@ -795,7 +805,7 @@ bool RoombotController::checkLocks()
     
     if (!connectorsOK)
     {
-        std::string message = "CONNECTORS_PROBLEM";
+        std::string message = "[CONNECTORS_PROBLEM_MESSAGE]";
         _emitter->send(message.c_str(), (int)message.length()+1);
         if (isRoot())
         {
@@ -814,11 +824,11 @@ bool RoombotController::checkLocks()
         {
             std::string message = (char*)_receiver->getData();
             
-            if (message.compare("CONNECTORS_PROBLEM") == 0)
+            if (message.compare("[CONNECTORS_PROBLEM_MESSAGE]") == 0)
             {
                 if (isRoot())
                 {
-                    std::string message = "CONNECTORS_PROBLEM";
+                    std::string message = "[CONNECTORS_PROBLEM_MESSAGE]";
                     _emitter->send(message.c_str(), (int)message.length()+1);
                     askToBeBuiltAgain();
                 }
@@ -1130,17 +1140,12 @@ void RoombotController::matureLife()
                 std::pair<double, std::string> fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));
                 
                 // send genome and fitness to evolver
-                int backup_channel = _emitter->getChannel();
-                _emitter->setChannel(EVOLVER_CHANNEL);
-                
-                string message = "[GENOME_TO_EVOLVER_MESSAGE]";
+                string message = "[GENOME_SPREAD_MESSAGE]";
                 message = MessagesManager::add(message, "ID", std::to_string(organismId));
                 message = MessagesManager::add(message, "FITNESS", std::to_string(fitness.first));
                 message = MessagesManager::add(message, "GENOME", genome);
                 message = MessagesManager::add(message, "MIND", mindGenome);
-                                
-                _emitter->send(message.c_str(), (int)message.length()+1);
-                _emitter->setChannel(backup_channel);
+                genomeEmitter->send(message.c_str(), (int)message.length()+1);
                 
                 // store in file
                 storeMatureLifeFitnessIntoFile(fitness.first);

@@ -12,9 +12,10 @@
 		61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163F1897F90A003D24DE /* libCppController.dylib */; };
 		A80421D9191CD32700894790 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80421D7191CD32700894790 /* main.cpp */; };
 		A80421E0191CD39900894790 /* EnvironmentModifierController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A80421DE191CD39900894790 /* EnvironmentModifierController.cpp */; };
+		A80FD39C193603AC00F3D13F /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A80FD39B193603AC00F3D13F /* libboost_filesystem-mt.dylib */; };
+		A80FD39E193603BB00F3D13F /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A80FD39D193603BB00F3D13F /* libboost_system-mt.dylib */; };
 		A814555C1924A8F900278923 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A814555B1924A8F900278923 /* libshared.a */; };
 		A86042651906CD1500972DED /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042641906CD1500972DED /* libz.dylib */; };
-		A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,10 +41,10 @@
 		A80421D7191CD32700894790 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = EnvironmentModifierController/source/main.cpp; sourceTree = SOURCE_ROOT; };
 		A80421DA191CD37A00894790 /* EnvironmentModifierController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EnvironmentModifierController.h; path = EnvironmentModifierController/include/EnvironmentModifierController.h; sourceTree = SOURCE_ROOT; };
 		A80421DE191CD39900894790 /* EnvironmentModifierController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EnvironmentModifierController.cpp; path = EnvironmentModifierController/source/EnvironmentModifierController.cpp; sourceTree = SOURCE_ROOT; };
+		A80FD39B193603AC00F3D13F /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "../../../../../opt/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<group>"; };
+		A80FD39D193603BB00F3D13F /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "../../../../../opt/local/lib/libboost_system-mt.dylib"; sourceTree = "<group>"; };
 		A814555B1924A8F900278923 /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = "../../../../Library/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug/libshared.a"; sourceTree = "<group>"; };
 		A86042641906CD1500972DED /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "/opt/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<absolute>"; };
-		A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "/opt/local/lib/libboost_system-mt.dylib"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +52,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A80FD39E193603BB00F3D13F /* libboost_system-mt.dylib in Frameworks */,
+				A80FD39C193603AC00F3D13F /* libboost_filesystem-mt.dylib in Frameworks */,
 				A814555C1924A8F900278923 /* libshared.a in Frameworks */,
-				A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */,
 				A86042651906CD1500972DED /* libz.dylib in Frameworks */,
 				61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */,
 				61AD16401897F90A003D24DE /* libController.dylib in Frameworks */,
@@ -65,6 +67,8 @@
 		61AD16221897F88A003D24DE = {
 			isa = PBXGroup;
 			children = (
+				A80FD39D193603BB00F3D13F /* libboost_system-mt.dylib */,
+				A80FD39B193603AC00F3D13F /* libboost_filesystem-mt.dylib */,
 				61AD162D1897F88A003D24DE /* EvolverControllerController */,
 				61AD163D1897F8C7003D24DE /* Libraries */,
 				61AD162C1897F88A003D24DE /* Products */,
@@ -94,8 +98,6 @@
 			children = (
 				61AD163E1897F90A003D24DE /* libController.dylib */,
 				61AD163F1897F90A003D24DE /* libCppController.dylib */,
-				A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */,
-				A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */,
 				A86042641906CD1500972DED /* libz.dylib */,
 				61EBFBD919224453000E6D71 /* libNEATLib.a */,
 				61EBFBDA19224453000E6D71 /* libtinyxmlpluslib.a */,
@@ -277,7 +279,11 @@
 		61AD16351897F88A003D24DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/emanuele/Desktop/tol-controllers/lib",
+					/opt/local/lib,
+				);
 				PRODUCT_NAME = EnvironmentModifierController;
 			};
 			name = Debug;
@@ -285,7 +291,11 @@
 		61AD16361897F88A003D24DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/emanuele/Desktop/tol-controllers/lib",
+					/opt/local/lib,
+				);
 				PRODUCT_NAME = EnvironmentModifierController;
 			};
 			name = Release;

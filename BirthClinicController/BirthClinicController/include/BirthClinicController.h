@@ -72,6 +72,8 @@ class BirthClinicController : public Supervisor
     
     void storeGenomeOnFile(id_t organismId, std::string genomeStr);
     
+    void storeMindGenomeOnFile(id_t organismId, std::string mindGenomeStr);
+    
     void rotate();
     
 

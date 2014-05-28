@@ -118,9 +118,9 @@ std::string BuildableOrganism::positionsToString()
     return (result);
 }
 
-std::string BuildableOrganism::createPathForControllerArgs()
+std::string BuildableOrganism::createPathForControllerArgs(std::string simulationDateAndTime)
 {
-    return CONTROLLER_ARGS_PATH + getName() + ".json";
+    return CONTROLLER_ARGS_PATH + simulationDateAndTime + "/" + getName() + ".json";
 }
 
 //**************************
@@ -160,7 +160,7 @@ void BuildableOrganism::writeControllerArgsFile(std::string simulationDateAndTim
     std::string size = std::to_string(getSize());
     
     // open file
-    std::string filePath = createPathForControllerArgs();
+    std::string filePath = createPathForControllerArgs(simulationDateAndTime);
     ofstream organismFile(filePath);
     
     // build tree
@@ -243,13 +243,13 @@ void BuildableOrganism::writeControllerArgsFile(std::string simulationDateAndTim
 }
 
 
-void BuildableOrganism::activate()
+void BuildableOrganism::activate(std::string simulationDateAndTime)
 {
    for(size_t i = 0; i < buildPlan->size(); i++){
         if (robots[i] != 0)
         {
             // update controllerArgs in Webots
-            robots[i]->setControllerArgs(createPathForControllerArgs());
+            robots[i]->setControllerArgs(createPathForControllerArgs(simulationDateAndTime));
             std::cout << robots[i]->getDef() << " -> controllerArgs has been updated" << std::endl;
             
             // update controller in Webots

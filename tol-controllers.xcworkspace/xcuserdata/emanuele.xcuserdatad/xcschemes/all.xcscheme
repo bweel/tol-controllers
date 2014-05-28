@@ -76,6 +76,20 @@
                ReferencedContainer = "container:ScreenshotController/ScreenshotController.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "618F2E141934C5CA001500A0"
+               BuildableName = "TimingController"
+               BlueprintName = "TimingController"
+               ReferencedContainer = "container:ScreenshotController/ScreenshotController.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

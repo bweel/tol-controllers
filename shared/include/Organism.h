@@ -136,7 +136,7 @@ public:
 	 */
 	void build();
     
-    void activate();
+    void activate(std::string simulationDateAndTime);
     
     void writeControllerArgsFile(std::string simulationDateAndTime);
     
@@ -148,7 +148,7 @@ public:
 	 */
 	std::string positionsToString();
     
-    std::string createPathForControllerArgs();
+    std::string createPathForControllerArgs(std::string simulationDateAndTime);
 };
 
 #endif /* ORGANISM_H_ */

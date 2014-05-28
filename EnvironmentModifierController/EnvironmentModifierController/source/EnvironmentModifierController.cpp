@@ -131,6 +131,14 @@ EnvironmentModifierController::EnvironmentModifierController()
     std::strftime(buffer,80,"%Y-%m-%d-%H.%M.%S",timeinfo);
     simulationDateAndTime = buffer;
     
+    std::string argumentsDirectory = CONTROLLER_ARGS_PATH + simulationDateAndTime;
+    boost::filesystem::path path(argumentsDirectory);
+    std::cout << "AAAAAAAAA " << path.string() << std::endl;
+    if (boost::filesystem::exists(path) && boost::filesystem::is_directory(path)) {
+        throw std::runtime_error("Directory Already Existing");
+    }
+    boost::filesystem::create_directories(path);
+    
     emitter = getEmitter(EMITTER_NAME);
     emitter->setChannel(EVOLVER_CHANNEL);
     receiver = getReceiver(RECEIVER_NAME);

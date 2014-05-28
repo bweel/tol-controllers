@@ -149,6 +149,18 @@ void BirthClinicController::rotate()
     rotation->setSFRotation(r);
 }
 
+void BirthClinicController::sendOrganismBuiltMessage(id_t parent1, id_t parent2, id_t organism, unsigned int size)
+{
+    std::string orgbuilt = "[ORGANISM_BUILT_MESSAGE]";
+    MessagesManager::add(orgbuilt, "PARENT1", std::to_string(parent1));
+    MessagesManager::add(orgbuilt, "PARENT2", std::to_string(parent2));
+    MessagesManager::add(orgbuilt, "ORGANISMID", std::to_string(organism));
+    MessagesManager::add(orgbuilt, "SIZE", std::to_string(size));
+    
+    emitter->setChannel(EVOLVER_CHANNEL);
+    emitter->send(orgbuilt.c_str(), (int)orgbuilt.length()+1);
+}
+
 
 ////////////////////////////////////////////
 ////////////// INITIALIZATION //////////////
@@ -227,24 +239,24 @@ int BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGeno
                 organism->build();
                 organism->writeControllerArgsFile(simulationDateAndTime);
                 organism->activate(simulationDateAndTime);
-                return 1;
+                return buildPlan->size();
             }
             else
             {
                 //std::cout << "ORGANISM NOT CREATED: waiting for clinic to be free" << std::endl;
-                return 2;
+                return -2;
             }
         }
         else
         {
             std::cout << "ORGANISM NOT CREATED: not enough nodules available" << std::endl;
-            return 3;
+            return -3;
         }
     }
     else
     {
         std::cout << "ORGANISM NOT CREATED: the build plan was empty or made of only one module" << std::endl;
-        return 3;
+        return -3;
     }
 }
 
@@ -360,20 +372,25 @@ void BirthClinicController::run()
                 CppnGenome genome = builder->getGenomeFromStream(stream);
                 int buildResponse = buildOrganism(genome, mindStr, 0);
                 
-                if (buildResponse == 1)
+                if (buildResponse > 0)
                 {
                     storePhilogenyOnFile(parent1, parent2, nextOrganismId-1, fitness1, fitness2);
                     storeGenomeOnFile(nextOrganismId-1, genomeStr);
                     storeMindGenomeOnFile(nextOrganismId-1, mindStr);
-                    receiver->nextPacket();
-                }
-                if (buildResponse == 3)
-                {
-                    receiver->nextPacket();
-                }
-                if (buildResponse == 2)
-                {
                     
+                    sendOrganismBuiltMessage(parent1, parent2, nextOrganismId-1, buildResponse);
+                    
+                    receiver->nextPacket();
+                }
+                if (buildResponse == -3)
+                {
+                    // There are not enough modules, or the buildplan is too small
+                    // Skip to the next shape
+                    receiver->nextPacket();
+                }
+                if (buildResponse == -2)
+                {
+                    // Clinic is still busy. Keep packets and wait a while.
                 }
             }
         }

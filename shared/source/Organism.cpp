@@ -9,6 +9,10 @@ Organism::Organism(const Organism &other) {
     genome = other.genome;
     mindGenome = other.mindGenome;
     fitness = other.fitness;
+    parents = other.parents;
+    offspring = other.offspring;
+    size = other.size;
+    state = other.state;
 }
 
 /**
@@ -22,13 +26,13 @@ Organism::Organism(const Organism &other) {
  * with the build plan to determine where the organism will be build.
  */
 BuildableOrganism::BuildableOrganism(std::string genome, std::string mindGenome, id_t id, std::auto_ptr<BuildPlan> plan, Position organismCentre) :
-Organism(genome,mindGenome,id,-1),
+Organism(genome,mindGenome,id,-1,0,0,std::vector<id_t>(),INFANT),
 robots(), organismCentre(organismCentre), buildPlan(plan)
 {
 }
 
-Organism::Organism(std::string genome, std::string mindGenome, id_t organismID, double fitness) :
-    fitness(fitness), id(organismID), genome(genome), mindGenome(mindGenome)
+Organism::Organism(std::string genome, std::string mindGenome, id_t organismID, double fitness, unsigned int size, unsigned int offspring, std::vector<id_t> parents, State state) :
+    fitness(fitness), id(organismID), genome(genome), mindGenome(mindGenome), size(size), offspring(offspring), parents(parents), state(state)
 {
 }
 
@@ -83,6 +87,37 @@ std::string Organism::getName()
     return ORGANISM_BASE_NAME + std::to_string(id);
 }
 
+void Organism::setState(State s) {
+    state = s;
+}
+
+Organism::State Organism::getState() {
+    return state;
+}
+
+void Organism::setSize(unsigned int s) {
+    size = s;
+}
+
+unsigned int Organism::getSize() {
+    return size;
+}
+
+void Organism::setOffspring(unsigned int o) {
+    offspring = o;
+}
+
+unsigned int Organism::getOffspring() {
+    return offspring;
+}
+
+void Organism::setParents(std::vector<id_t> p) {
+    parents = p;
+}
+
+std::vector<id_t> Organism::getParents() {
+    return parents;
+}
 
 size_t BuildableOrganism::getSize()
 {
@@ -100,8 +135,6 @@ Module * BuildableOrganism::getModule(int i)
 {
     return robots[i];
 }
-
-
 
 //**************************
 //**** Other functions *****

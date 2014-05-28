@@ -23,6 +23,7 @@ class BirthClinicController : public Supervisor
     std::string simulationDateAndTime;
     
     int CLINIC_CHANNEL = ParametersReader::get<int>("CLINIC_CHANNEL");
+    int EVOLVER_CHANNEL = ParametersReader::get<int>("EVOLVER_CHANNEL");
     
     int ARENA_SIZE = ParametersReader::get<int>("ARENA_SIZE");
     int NUMBER_OF_MODULES = ParametersReader::get<int>("NUMBER_OF_MODULES");
@@ -76,7 +77,7 @@ class BirthClinicController : public Supervisor
     
     void rotate();
     
-
+    void sendOrganismBuiltMessage(id_t parent1, id_t parent2, id_t organism, unsigned int size);
 
     public:
     

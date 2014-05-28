@@ -759,8 +759,9 @@ void RoombotController::updateOrganismsToMateWithList(id_t mateId, double mateFi
             return;
         }
     }
-    Organism newMate = Organism(mateGenome, mateMind, mateId, mateFitness);
-    organismsToMateWith.push_back(newMate);
+    // TODO: FIX!
+//    Organism newMate = Organism(mateGenome, mateMind, mateId, mateFitness);
+//    organismsToMateWith.push_back(newMate);
 }
 
 

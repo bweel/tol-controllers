@@ -22,25 +22,30 @@ using boost::property_tree::write_json;
  */
 class Organism
 {
+public:
+    enum State {INFANT, ADULT, DEAD};
+    
 protected:
     
     int INFANCY_DURATION = ParametersReader::get<int>("INFANCY_DURATION");
     int ROOMBOT_WAITING_TIME = ParametersReader::get<int>("ROOMBOT_WAITING_TIME");
     int MATURE_TIME_TO_LIVE = ParametersReader::get<int>("MATURE_TIME_TO_LIVE");
-    
-    
 	
     id_t id;                            //Unique id for this instance of organism.
+    State state;
     // Used by the evolver
     double fitness;
+    unsigned int size;
+    unsigned int offspring;
+    std::vector<id_t> parents;
     std::string genome;                 //The genome of this organism.
     std::string mindGenome;             //The genome of this organims' mind.
     
-    public:
+public:
 
     Organism(const Organism& other);
     
-    Organism(std::string genome, std::string mindGenome, id_t organismID, double fitness);
+    Organism(std::string genome, std::string mindGenome, id_t organismID, double fitness, unsigned int size, unsigned int offspring, std::vector<id_t> parents, State state);
     
 	/**
 	 * Destructs the organism.
@@ -79,6 +84,22 @@ protected:
     void setFitness(double fitness);
     
     double getFitness();
+    
+    void setState(State state);
+    
+    State getState();
+    
+    void setSize(unsigned int size);
+    
+    unsigned int getSize();
+    
+    void setOffspring(unsigned int offspring);
+    
+    unsigned int getOffspring();
+    
+    void setParents(std::vector<id_t> parents);
+    
+    std::vector<id_t> getParents();
     
 	/**
 	 * Returns the id of this organism

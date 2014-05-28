@@ -103,7 +103,13 @@ void EvolverController::readCoupleMessage(std::string message, id_t * id1, doubl
 
 std::vector<id_t> EvolverController::selectForMating()
 {
-    return parentSelectionMechanism->selectParents(organismsList);
+    std::vector<Organism> candidates;
+    for(int i=0;i<organismsList.size();i++){
+        if(organismsList[i].getState()==Organism::ADULT){
+            candidates.push_back(organismsList[i]);
+        }
+    }
+    return parentSelectionMechanism->selectParents(candidates);
 }
 
 
@@ -132,7 +138,8 @@ void EvolverController::removeFromOrganismsList(id_t organimsID)
 }
 
 
-void EvolverController::addToOrganismsList(id_t organismID, double fitness, std::string genome, std::string mindGenome)
+void EvolverController::addToOrganismsList(id_t organismID, double fitness, std::string genome, std::string mindGenome,
+                                           unsigned int size, unsigned int offspring, std::vector<id_t> parents, Organism::State state)
 {
     for(int i = 0; i < organismsList.size(); i++)
     {
@@ -144,7 +151,7 @@ void EvolverController::addToOrganismsList(id_t organismID, double fitness, std:
             return;
         }
     }
-    Organism organism(genome, mindGenome, organismID, fitness);
+    Organism organism(genome, mindGenome, organismID, fitness, size, offspring, parents, state);
     organismsList.push_back(organism);
 }
 
@@ -166,7 +173,7 @@ void EvolverController::storeEventOnFile(std::string log)
 {
     ofstream organismsListsFile;
     organismsListsFile.open(RESULTS_PATH + simulationDateAndTime + "/evolver_organisms_list.txt", ios::app);
-    organismsListsFile << log + "\n";
+    organismsListsFile << log << std::endl;
     organismsListsFile.close();
 }
 
@@ -254,6 +261,7 @@ void EvolverController::run()
     double lastMating = 0;    // UNCOMMENT FOR CENTRALIZED REPRODUCTION BY THE EVOLVER
     //double lastDeath = 0;     // UNCOMMENT FOR CENTRALIZED DEATH BY THE EVOLVER
     double lastEvolutionEndCheck = 0;
+    double lastOffspringLoggingTime = 30;
     
     while (step(TIME_STEP) != -1)
     {
@@ -275,11 +283,44 @@ void EvolverController::run()
             if (message.substr(0,28).compare("[DEATH_ANNOUNCEMENT_MESSAGE]") == 0)
             {
                 id_t organimsID = std::atoi(MessagesManager::get(message, "ID").c_str());
-                removeFromOrganismsList(organimsID);
+//                removeFromOrganismsList(organimsID);
+                int index = searchForOrganism(organimsID);
+                if(index > 0){
+                    organismsList[searchForOrganism(organimsID)].setState(Organism::DEAD);
                 
-                std::cout << "organism_" << organimsID << " died: REMOVED FROM LIST" << std::endl;
+                    std::cout << "organism_" << organimsID << " died: REMOVED FROM LIST" << std::endl;
                 
-                std::string log = std::to_string(getTime()) + " DEATH " + std::to_string(organimsID) + " organismsListSize " + std::to_string(organismsList.size());
+                    std::string log = std::to_string(getTime()) + " DEATH " + std::to_string(organimsID) + " organismsListSize " + std::to_string(organismsList.size());
+                    storeEventOnFile(log);
+                }
+            }
+            
+            if (message.substr(0,24).compare("[ORGANISM_BUILT_MESSAGE]") == 0)
+            {
+                id_t parent1 = std::atoi(MessagesManager::get(message, "PARENT1").c_str());
+                id_t parent2 = std::atoi(MessagesManager::get(message, "PARENT2").c_str());
+                id_t organismId = std::atoi(MessagesManager::get(message, "ORGANISMID").c_str());
+                unsigned int size = std::atoi(MessagesManager::get(message, "SIZE").c_str());
+                
+                if(parent1 > 0){
+                    std::size_t index = searchForOrganism(parent1);
+                    assert(index > 0);
+                    organismsList[index].setOffspring(organismsList[index].getOffspring()+1);
+                }
+                
+                if(parent2 > 0){
+                    std::size_t index = searchForOrganism(parent2);
+                    assert(index > 0);
+                    organismsList[index].setOffspring(organismsList[index].getOffspring()+1);
+                }
+                
+                std::vector<id_t> parents;
+                parents.push_back(parent1);
+                parents.push_back(parent2);
+                
+                addToOrganismsList(organismId, 0, "", "", size, 0, parents, Organism::INFANT);
+               
+                std::string log = std::to_string(getTime()) + " PROCREATE " + std::to_string(parent1) + " and "  + std::to_string(parent2) + " succesfully had a child";
                 storeEventOnFile(log);
             }
             
@@ -333,7 +374,8 @@ void EvolverController::run()
              
                 std::cout << "new message received from organism_" << organismId << std::endl;
                 
-                addToOrganismsList(organismId, fitness, genomeStr, mindStr);
+                // get the organism with id organismId
+                organismsList[searchForOrganism(organismId)].setState(Organism::ADULT);
                 
                 std::string log = std::to_string(getTime()) + " MESSAGE_FROM " + std::to_string(organismId)  + " organismsListSize " + std::to_string(organismsList.size());
                 storeEventOnFile(log);
@@ -417,6 +459,12 @@ void EvolverController::run()
             }
             
             lastMating = getTime();
+        }
+        
+        if(currentTime - lastOffspringLoggingTime > MATING_TIME)
+        {
+            // LOG EVERY ADULT ORGANISM
+            lastOffspringLoggingTime = getTime();
         }
         
         /*************************************************************************************************************************************/

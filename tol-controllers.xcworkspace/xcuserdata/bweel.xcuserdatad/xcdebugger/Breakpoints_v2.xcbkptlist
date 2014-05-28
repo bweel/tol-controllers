@@ -78,9 +78,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "782"
-            endingLineNumber = "782"
-            landmarkName = "RoombotController::infancy()"
-            landmarkType = "5">
+            endingLineNumber = "782">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -95,7 +93,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "755"
             endingLineNumber = "755"
-            landmarkName = "RoombotController::infancy()"
+            landmarkName = "RoombotController::updateOrganismsToMateWithList(id_t mateId, double mateFitness, std::string mateGenome, std::string mateMind)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -111,7 +109,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "736"
             endingLineNumber = "736"
-            landmarkName = "RoombotController::infancy()"
+            landmarkName = "RoombotController::disableAllConnectors()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -126,9 +124,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "784"
-            endingLineNumber = "784"
-            landmarkName = "RoombotController::infancy()"
-            landmarkType = "5">
+            endingLineNumber = "784">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -143,7 +139,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "803"
             endingLineNumber = "803"
-            landmarkName = "RoombotController::infancy()"
+            landmarkName = "RoombotController::checkLocks()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -159,7 +155,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "804"
             endingLineNumber = "804"
-            landmarkName = "RoombotController::infancy()"
+            landmarkName = "RoombotController::checkLocks()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -445,7 +441,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "715"
             endingLineNumber = "715"
-            landmarkName = "RoombotController::disableAllConnectors()"
+            landmarkName = "RoombotController::allConnectorsOK()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -461,7 +457,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
             endingLineNumber = "21"
-            landmarkName = "RoombotController::initialise()"
+            landmarkName = "RoombotController::RoombotController()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -477,7 +473,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "714"
             endingLineNumber = "714"
-            landmarkName = "RoombotController::disableAllConnectors()"
+            landmarkName = "RoombotController::allConnectorsOK()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -493,7 +489,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "928"
             endingLineNumber = "928"
-            landmarkName = "RoombotController::matureLife()"
+            landmarkName = "RoombotController::infancy()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -509,7 +505,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "923"
             endingLineNumber = "923"
-            landmarkName = "RoombotController::matureLife()"
+            landmarkName = "RoombotController::infancy()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -557,7 +553,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "227"
             endingLineNumber = "227"
-            landmarkName = "EvolverController::run()"
+            landmarkName = "EvolverController::~EvolverController()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -618,9 +614,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "182"
-            endingLineNumber = "182"
-            landmarkName = "BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGenome, id_t forcedId)"
-            landmarkType = "5">
+            endingLineNumber = "182">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -634,9 +628,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "181"
-            endingLineNumber = "181"
-            landmarkName = "BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGenome, id_t forcedId)"
-            landmarkType = "5">
+            endingLineNumber = "181">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -856,7 +848,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "222"
-            endingLineNumber = "222">
+            endingLineNumber = "222"
+            landmarkName = "EvolverController::EvolverController()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -901,7 +895,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "226"
             endingLineNumber = "226"
-            landmarkName = "EvolverController::run()"
+            landmarkName = "EvolverController::~EvolverController()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

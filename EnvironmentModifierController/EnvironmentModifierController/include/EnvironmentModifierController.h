@@ -7,6 +7,13 @@
 #include "MessagesManager.h"
 
 #include <webots/Supervisor.hpp>
+#include <boost/filesystem.hpp>
+#include <boost/property_tree/exceptions.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/foreach.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/posix_time/posix_time_io.hpp>
 #include <iostream>
 
 

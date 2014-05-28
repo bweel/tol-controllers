@@ -132,6 +132,15 @@ void BirthClinicController::storeGenomeOnFile(id_t organismId, std::string genom
 }
 
 
+void BirthClinicController::storeMindGenomeOnFile(id_t organismId, std::string mindGenomeStr)
+{
+    ofstream mindGenomesFile;
+    mindGenomesFile.open(RESULTS_PATH + simulationDateAndTime + "/mind_genomes.txt", ios::app);
+    mindGenomesFile << "organism_" + std::to_string(organismId) + ": " + mindGenomeStr + "\n";
+    mindGenomesFile.close();
+}
+
+
 void BirthClinicController::rotate()
 {
     Field * rotation = platform->getField("rotation");
@@ -217,7 +226,7 @@ int BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGeno
                 // build organism, write relative ControllerArgs file and activate it (set controller and arguments fields on Webots)
                 organism->build();
                 organism->writeControllerArgsFile(simulationDateAndTime);
-                organism->activate();
+                organism->activate(simulationDateAndTime);
                 return 1;
             }
             else
@@ -355,6 +364,7 @@ void BirthClinicController::run()
                 {
                     storePhilogenyOnFile(parent1, parent2, nextOrganismId-1, fitness1, fitness2);
                     storeGenomeOnFile(nextOrganismId-1, genomeStr);
+                    storeMindGenomeOnFile(nextOrganismId-1, mindStr);
                     receiver->nextPacket();
                 }
                 if (buildResponse == 3)

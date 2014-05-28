@@ -396,6 +396,7 @@
 				618F2E1C1934C5CA001500A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

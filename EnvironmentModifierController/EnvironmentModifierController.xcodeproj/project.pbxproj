@@ -67,8 +67,6 @@
 		61AD16221897F88A003D24DE = {
 			isa = PBXGroup;
 			children = (
-				A80FD39D193603BB00F3D13F /* libboost_system-mt.dylib */,
-				A80FD39B193603AC00F3D13F /* libboost_filesystem-mt.dylib */,
 				61AD162D1897F88A003D24DE /* EvolverControllerController */,
 				61AD163D1897F8C7003D24DE /* Libraries */,
 				61AD162C1897F88A003D24DE /* Products */,
@@ -99,6 +97,8 @@
 				61AD163E1897F90A003D24DE /* libController.dylib */,
 				61AD163F1897F90A003D24DE /* libCppController.dylib */,
 				A86042641906CD1500972DED /* libz.dylib */,
+				A80FD39D193603BB00F3D13F /* libboost_system-mt.dylib */,
+				A80FD39B193603AC00F3D13F /* libboost_filesystem-mt.dylib */,
 				61EBFBD919224453000E6D71 /* libNEATLib.a */,
 				61EBFBDA19224453000E6D71 /* libtinyxmlpluslib.a */,
 				A814555B1924A8F900278923 /* libshared.a */,

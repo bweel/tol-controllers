@@ -10,7 +10,8 @@
 #include "BinaryTournamentParentSelection.h"
 
 std::vector<id_t> BinaryTournamentParentSelection::selectParents(std::vector<Organism> candidates) {
-    std::vector<id_t> parents;
+    
+    std::vector<id_t> parents = std::vector<id_t>();
     
     if(candidates.size() == 0){
         return parents;

@@ -137,7 +137,7 @@
 		61EBFBFB19224C66000E6D71 /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = ../lib/libNEATLib.a; sourceTree = "<group>"; };
 		61EBFBFC19224C66000E6D71 /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = ../lib/libtinyxmlpluslib.a; sourceTree = "<group>"; };
 		61EBFBFF19224CD1000E6D71 /* libboard.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboard.a; path = ../lib/libboard.a; sourceTree = "<group>"; };
-		A821A96C192DF34E0088748C /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = "../../../../Library/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug/libshared.a"; sourceTree = "<group>"; };
+		A821A96C192DF34E0088748C /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = "../../../../../Library/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug/libshared.a"; sourceTree = "<group>"; };
 		A84E613318FE8702007E227E /* RoombotController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RoombotController.h; path = RoombotController/include/RoombotController.h; sourceTree = SOURCE_ROOT; };
 		A84E613418FE8734007E227E /* RoombotController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RoombotController.cpp; path = RoombotController/source/RoombotController.cpp; sourceTree = SOURCE_ROOT; };
 		A84E613718FE8754007E227E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = RoombotController/source/main.cpp; sourceTree = SOURCE_ROOT; };
@@ -297,7 +297,6 @@
 		61892BE41888175900E9EDCD = {
 			isa = PBXGroup;
 			children = (
-				A821A96C192DF34E0088748C /* libshared.a */,
 				61278C1218966833007D50F4 /* Utilities */,
 				61278BFD18966728007D50F4 /* RoombotController */,
 				61278C2518966A78007D50F4 /* EVAlgorithms */,
@@ -321,6 +320,7 @@
 		61892C8718881AB400E9EDCD /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A821A96C192DF34E0088748C /* libshared.a */,
 				61EBFBFB19224C66000E6D71 /* libNEATLib.a */,
 				61EBFBFC19224C66000E6D71 /* libtinyxmlpluslib.a */,
 				61EBFBFF19224CD1000E6D71 /* libboard.a */,

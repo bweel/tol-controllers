@@ -9,7 +9,8 @@
 #include "BestTwoParentSelection.h"
 
 std::vector<id_t> BestTwoParentSelection::selectParents(std::vector<Organism> candidates) {
-    std::vector<id_t> forMating;
+    
+    std::vector<id_t> forMating = std::vector<id_t>();
     
     // first
     int bestPos = -1;

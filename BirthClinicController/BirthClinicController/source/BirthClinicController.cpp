@@ -149,13 +149,15 @@ void BirthClinicController::rotate()
     rotation->setSFRotation(r);
 }
 
-void BirthClinicController::sendOrganismBuiltMessage(id_t parent1, id_t parent2, id_t organism, unsigned int size)
+void BirthClinicController::sendOrganismBuiltMessage(id_t parent1, id_t parent2, id_t organism, unsigned int size, std::string genome, std::string mind)
 {
     std::string orgbuilt = "[ORGANISM_BUILT_MESSAGE]";
-    MessagesManager::add(orgbuilt, "PARENT1", std::to_string(parent1));
-    MessagesManager::add(orgbuilt, "PARENT2", std::to_string(parent2));
-    MessagesManager::add(orgbuilt, "ORGANISMID", std::to_string(organism));
-    MessagesManager::add(orgbuilt, "SIZE", std::to_string(size));
+    orgbuilt = MessagesManager::add(orgbuilt, "PARENT1", std::to_string(parent1));
+    orgbuilt = MessagesManager::add(orgbuilt, "PARENT2", std::to_string(parent2));
+    orgbuilt = MessagesManager::add(orgbuilt, "ORGANISM_ID", std::to_string(organism));
+    orgbuilt = MessagesManager::add(orgbuilt, "SIZE", std::to_string(size));
+    orgbuilt = MessagesManager::add(orgbuilt, "GENOME", genome);
+    orgbuilt = MessagesManager::add(orgbuilt, "MIND", mind);
     
     emitter->setChannel(EVOLVER_CHANNEL);
     emitter->send(orgbuilt.c_str(), (int)orgbuilt.length()+1);
@@ -239,7 +241,7 @@ int BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGeno
                 organism->build();
                 organism->writeControllerArgsFile(simulationDateAndTime);
                 organism->activate(simulationDateAndTime);
-                return buildPlan->size();
+                return buildPlanSize;
             }
             else
             {
@@ -378,7 +380,7 @@ void BirthClinicController::run()
                     storeGenomeOnFile(nextOrganismId-1, genomeStr);
                     storeMindGenomeOnFile(nextOrganismId-1, mindStr);
                     
-                    sendOrganismBuiltMessage(parent1, parent2, nextOrganismId-1, buildResponse);
+                    sendOrganismBuiltMessage(parent1, parent2, nextOrganismId-1, buildResponse, genomeStr, mindStr);
                     
                     receiver->nextPacket();
                 }

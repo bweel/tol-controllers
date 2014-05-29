@@ -47,9 +47,7 @@ private:
     
     std::vector<Organism> organismsList;
 
-    
-    void generateInitialGenomes();
-    
+        
     std::vector<id_t> selectForMating();
     
     std::vector<id_t> selectForDying();
@@ -66,12 +64,13 @@ private:
     
     void removeFromOrganismsList(id_t organimsID);
     
-    void addToOrganismsList(id_t organimsID, double fitness, std::string genome, std::string mindGenome, unsigned int size, unsigned int offspring, std::vector<id_t> parents, Organism::State state);
+    //void updateOrganismsList(id_t organimsID, double fitness, std::string genome, std::string mindGenome, unsigned int size, unsigned int offspring, std::vector<id_t> parents, Organism::State state);
     
     int searchForOrganism(id_t organismId);
     
     void storeEventOnFile(std::string log);
     
+    void storeParentsOnFile(double currentTime);
     
     
 public:

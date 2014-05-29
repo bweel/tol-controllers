@@ -77,7 +77,7 @@ class BirthClinicController : public Supervisor
     
     void rotate();
     
-    void sendOrganismBuiltMessage(id_t parent1, id_t parent2, id_t organism, unsigned int size);
+    void sendOrganismBuiltMessage(id_t parent1, id_t parent2, id_t organism, unsigned int size, std::string genome, std::string mind);
 
     public:
     

@@ -133,7 +133,6 @@ EnvironmentModifierController::EnvironmentModifierController()
     
     std::string argumentsDirectory = CONTROLLER_ARGS_PATH + simulationDateAndTime;
     boost::filesystem::path path(argumentsDirectory);
-    std::cout << "AAAAAAAAA " << path.string() << std::endl;
     if (boost::filesystem::exists(path) && boost::filesystem::is_directory(path)) {
         throw std::runtime_error("Directory Already Existing");
     }

@@ -34,6 +34,9 @@ private:
     
     int TIME_STEP = ParametersReader::get<int>("TIME_STEP");
     
+    int WAITING_INTERVAL_GENOMES_INITIALIZATION = ParametersReader::get<int>("WAITING_INTERVAL_GENOMES_INITIALIZATION");
+    int NOISE_GENOMES_INITIALIZATION = ParametersReader::get<int>("NOISE_GENOMES_INITIALIZATION");
+    
     std::string SHAPE_ENCODING = ParametersReader::get<std::string>("SHAPE_ENCODING");
     std::string MIND_ENCODING = ParametersReader::get<std::string>("MIND_ENCODING");
     std::string PARENT_SELECTION = ParametersReader::get<std::string>("PARENT_SELECTION");
@@ -71,6 +74,8 @@ private:
     void storeEventOnFile(std::string log);
     
     void storeParentsOnFile(double currentTime);
+    
+    int getRandomWait();
     
     
 public:

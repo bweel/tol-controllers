@@ -175,6 +175,13 @@ void EvolverController::storeParentsOnFile(double currentTime)
 }
 
 
+int EvolverController::getRandomWait()
+{
+    int noise = (rand() % NOISE_GENOMES_INITIALIZATION) - (NOISE_GENOMES_INITIALIZATION/2);
+    return WAITING_INTERVAL_GENOMES_INITIALIZATION + noise;
+}
+
+
 
 ////////////////////////////////////////////////////////////////
 //////////////////////// MAIN FUNCTIONS ////////////////////////
@@ -257,8 +264,7 @@ void EvolverController::run()
     // MAIN CYCLE
     
     int generated = 1;
-    int noise = (rand() % 30) - 15;
-    int initPopulationWaitingTime = 60 + noise;
+    int initPopulationWaitingTime = getRandomWait();
     double lastGeneratedTime = 0;
     
     double currentTime = 0;
@@ -298,8 +304,7 @@ void EvolverController::run()
             sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), "", 0, 0, 0, 0);
             generated++;
             lastGeneratedTime = getTime();
-            noise = (rand() % 30) - 15;
-            initPopulationWaitingTime = 60 + noise;
+            initPopulationWaitingTime = getRandomWait();
         }
         
         

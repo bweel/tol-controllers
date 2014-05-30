@@ -321,7 +321,7 @@ void EvolverController::run()
                 id_t organimsID = std::atoi(MessagesManager::get(message, "ID").c_str());
 //                removeFromOrganismsList(organimsID);
                 int index = searchForOrganism(organimsID);
-                if(index > 0){
+                if(index >= 0){
                     organismsList[searchForOrganism(organimsID)].setState(Organism::DEAD);
                 
                     std::cout << "organism_" << organimsID << " died: REMOVED FROM LIST" << std::endl;
@@ -357,7 +357,13 @@ void EvolverController::run()
                 parents.push_back(parent2);
                 
                 Organism newOrganism = Organism(genome, mind, organismId, 0, size, 0, parents, Organism::INFANT);
+                int idx = searchForOrganism(organismId);
+                if (idx >= 0)
+                {
+                    organismsList.erase(organismsList.begin()+idx);
+                }
                 organismsList.push_back(newOrganism);
+                
                
                 std::string log = std::to_string(getTime()) + " PROCREATE " + std::to_string(parent1) + " and "  + std::to_string(parent2) + " succesfully had a child";
                 storeEventOnFile(log);

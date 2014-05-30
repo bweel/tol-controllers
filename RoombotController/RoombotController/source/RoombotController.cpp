@@ -99,7 +99,6 @@ _motors(_m_type ? _init_motors(TIME_STEP) : 0)
         connectors.push_back(connector);
     }
     
-    
     // initialization for non-root module
     if (!isRoot())
     {
@@ -121,8 +120,6 @@ _motors(_m_type ? _init_motors(TIME_STEP) : 0)
         _receiver = _init_receiver(TIME_STEP, static_cast<int> (organismId));
         
         
-        
-        
         genomeEmitter->setRange(ORGANISM_GENOME_EMITTER_RANGE); // SHOULD BE -1 FOR CENTRALIZED REPRODUCTION
         
         genomeEmitter->setChannel(EVOLVER_CHANNEL);             // FOR CENTRALIZED REPRODUCTION
@@ -136,9 +133,6 @@ _motors(_m_type ? _init_motors(TIME_STEP) : 0)
             genomeReceiver->nextPacket();
         }
         
-        
-        
-        
         // set variables for writing on files
         utils::Random rng;
         std::string parametersPath = _parameters->get<std::string>("Algorithm.Parameters");
@@ -150,7 +144,6 @@ _motors(_m_type ? _init_motors(TIME_STEP) : 0)
          dateStream << boost::posix_time::second_clock::local_time();
          logDirectory = RESULTS_PATH + dateStream.str() + "/";
          std::cout << "LOG PATH: " << logDirectory << std::endl;*/
-        
         
         logDirectory = _parameters->get<std::string>("Algorithm.LogDir","");
         
@@ -263,6 +256,7 @@ _motors(_m_type ? _init_motors(TIME_STEP) : 0)
         std::cout << "Algorithm: " << &_algorithm << std::endl;
         
     }
+    
 }
 
 
@@ -635,7 +629,8 @@ std::string RoombotController::_init_directory(const std::string & directory, co
     //    path /= boost::lexical_cast<std::string>(instance);
     
     if (boost::filesystem::exists(path) && boost::filesystem::is_directory(path)) {
-        throw std::runtime_error("Directory Already Existing");
+        boost::filesystem::remove_all(path);
+        //throw std::runtime_error("Directory Already Existing");
     }
     
     boost::filesystem::create_directories(path);
@@ -694,15 +689,15 @@ void RoombotController::storeMatureLifeFitnessIntoFile(double fitness)
 {
     ofstream fitnessFile;
     fitnessFile.open(RESULTS_PATH + simulationDateAndTime + "/organism_" + std::to_string(organismId) + "/mature_life_fitness.txt", ios::app);
-    fitnessFile << std::to_string(getTime()) + " " + std::to_string(fitness) + "\n";
+    fitnessFile << getTime() << " " << fitness << std::endl;
     fitnessFile.close();
 }
 
 void RoombotController::storeRebuild()
 {
     ofstream rebuildFile;
-    rebuildFile.open(RESULTS_PATH + simulationDateAndTime + "/organism_" + std::to_string(organismId) + "/rebuild.txt", ios::app);
-    rebuildFile << std::to_string(getTime()) + "\n";
+    rebuildFile.open(RESULTS_PATH + simulationDateAndTime + "/rebuild.txt", ios::app);
+    rebuildFile << getTime() << " " << organismId << std::endl;
     rebuildFile.close();
 }
 
@@ -806,13 +801,10 @@ bool RoombotController::checkLocks()
     
     if (!connectorsOK)
     {
+        std::cout << getName() << " detected connectors problem" << std::endl;
+        
         std::string message = "[CONNECTORS_PROBLEM_MESSAGE]";
         _emitter->send(message.c_str(), (int)message.length()+1);
-        if (isRoot())
-        {
-            askToBeBuiltAgain();
-        }
-        death();
         return false;
     }
     
@@ -827,22 +819,24 @@ bool RoombotController::checkLocks()
             
             if (message.compare("[CONNECTORS_PROBLEM_MESSAGE]") == 0)
             {
+                std::cout << getName() << " receiverd connectors problem message" << std::endl;
+                
                 if (isRoot())
                 {
+                    std::cout << getName() << " forwarded connectors problem" << std::endl;
+                    
                     std::string message = "[CONNECTORS_PROBLEM_MESSAGE]";
                     _emitter->send(message.c_str(), (int)message.length()+1);
-                    askToBeBuiltAgain();
                 }
-                death();
                 return false;
             }
             
             _receiver->nextPacket();
         }
     }
+    
     return connectorsOK;
 }
-
 
 
 /******************************************* INFANCY *******************************************/
@@ -1343,8 +1337,6 @@ void RoombotController::askToBeBuiltAgain()
     message = MessagesManager::add(message, "MIND", mindGenome);
     
     _emitter->send(message.c_str(), (int)message.length()+1);
-    
-    storeRebuild();
 }
 
 
@@ -1370,6 +1362,12 @@ void RoombotController::run()
     
     if (!checkLocks())
     {
+        if (isRoot())
+        {
+            askToBeBuiltAgain();
+            storeRebuild();
+        }
+        death();
         return;
     }
     

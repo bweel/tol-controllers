@@ -352,11 +352,17 @@ void BirthClinicController::run()
                 std::string mindStr;
                 readRebuildMessage(message, &organismId, &genomeStr, &mindStr);
                 
+                double time = getTime();
+                while (getTime() - time < 3)
+                {
+                    step(TIME_STEP);
+                }
+                
                 std::istringstream stream(genomeStr);
                 CppnGenome genome = builder->getGenomeFromStream(stream);
                 int buildResponse = buildOrganism(genome, mindStr, organismId);
                 
-                if (buildResponse != 2)
+                if (buildResponse != -2)
                 {
                     receiver->nextPacket();
                 }

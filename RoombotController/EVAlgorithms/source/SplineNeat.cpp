@@ -88,7 +88,7 @@ double SplineNeat::getParameter(std::size_t index) {
     return evaluation(index, evaluationCurrentStep);
 }
 
-void SplineNeat::setInitialMinds(boost::ptr_vector<MindGenome> genomes) {
+void SplineNeat::setInitialMinds(boost::ptr_vector<MindGenome> genomes,std::size_t numMotors,std::size_t organismSize) {
     
 }
 

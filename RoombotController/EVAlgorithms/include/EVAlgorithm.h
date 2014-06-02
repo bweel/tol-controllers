@@ -44,7 +44,7 @@ class EVAlgorithm
     virtual unsigned int getGeneration() = 0;
     virtual unsigned int getEvaluation() = 0;
     
-    virtual void setInitialMinds(boost::ptr_vector<MindGenome> genomes) = 0;
+    virtual void setInitialMinds(boost::ptr_vector<MindGenome> genomes,std::size_t numMotors,std::size_t organismSize) = 0;
     virtual boost::ptr_vector<MindGenome> getRandomInitialMinds() = 0;
 
 	virtual void save() = 0;

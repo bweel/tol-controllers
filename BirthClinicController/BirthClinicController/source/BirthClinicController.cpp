@@ -152,9 +152,15 @@ void BirthClinicController::rotate()
 void BirthClinicController::sendOrganismBuiltMessage(id_t parent1, id_t parent2, id_t organism, unsigned int size, std::string genome, std::string mind)
 {
     std::string orgbuilt = "[ORGANISM_BUILT_MESSAGE]";
+    orgbuilt = MessagesManager::add(orgbuilt, "ORGANISM_ID", std::to_string(organism));
+    
+    // Let the screenshot controller know to make a screenshot
+    emitter->setChannel(SCREENSHOT_CHANNEL);
+    emitter->send(orgbuilt.c_str(), (int)orgbuilt.length()+1);
+    
+    
     orgbuilt = MessagesManager::add(orgbuilt, "PARENT1", std::to_string(parent1));
     orgbuilt = MessagesManager::add(orgbuilt, "PARENT2", std::to_string(parent2));
-    orgbuilt = MessagesManager::add(orgbuilt, "ORGANISM_ID", std::to_string(organism));
     orgbuilt = MessagesManager::add(orgbuilt, "SIZE", std::to_string(size));
     orgbuilt = MessagesManager::add(orgbuilt, "GENOME", genome);
     orgbuilt = MessagesManager::add(orgbuilt, "MIND", mind);

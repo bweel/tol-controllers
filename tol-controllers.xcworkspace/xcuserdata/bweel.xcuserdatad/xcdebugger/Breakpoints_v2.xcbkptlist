@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScreenshotController/ScreenshotController/ScreenshotController.cpp"
-            timestampString = "421836878.627895"
+            timestampString = "423415945.344906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "ScreenshotController::run()"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScreenshotController/ScreenshotController/ScreenshotController.cpp"
-            timestampString = "421836878.627895"
+            timestampString = "423415945.344906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "ScreenshotController::run()"
             landmarkType = "5">
          </BreakpointContent>
@@ -198,11 +198,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScreenshotController/ScreenshotController/ScreenshotController.cpp"
-            timestampString = "421836878.627895"
+            timestampString = "423415945.344906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "ScreenshotController::run()"
             landmarkType = "5">
          </BreakpointContent>
@@ -610,11 +610,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "422368762.992552"
+            timestampString = "423415251.034846"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182">
+            startingLineNumber = "188"
+            endingLineNumber = "188"
+            landmarkName = "BirthClinicController::connectModulesToObjects()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -624,11 +626,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "422368762.992552"
+            timestampString = "423415251.034846"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181">
+            startingLineNumber = "187"
+            endingLineNumber = "187"
+            landmarkName = "BirthClinicController::connectModulesToObjects()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -638,11 +642,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "422368762.992552"
+            timestampString = "423415251.034846"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
             landmarkName = "BirthClinicController::run()"
             landmarkType = "5">
          </BreakpointContent>
@@ -686,11 +690,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "422368762.992552"
+            timestampString = "423415251.034846"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
             landmarkName = "BirthClinicController::run()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1008,6 +1012,54 @@
             startingLineNumber = "156"
             endingLineNumber = "156"
             landmarkName = "RL_PoWER::setInitialMinds(boost::ptr_vector&lt;MindGenome&gt; genomes,std::size_t numMotors,std::size_t organismSize)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScreenshotController/ScreenshotController/ScreenshotController.cpp"
+            timestampString = "423415251.034846"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "ScreenshotController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScreenshotController/ScreenshotController/ScreenshotController.cpp"
+            timestampString = "423415035.078477"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "ScreenshotController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScreenshotController/ScreenshotController/ScreenshotController.cpp"
+            timestampString = "423415637.628627"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "ScreenshotController::run()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

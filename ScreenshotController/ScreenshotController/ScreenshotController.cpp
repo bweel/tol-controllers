@@ -33,17 +33,54 @@ void ScreenshotController::run()
     boost::filesystem::path dirpath(getProjectPath());
     dirpath /= "Results";
     dirpath /= simulationDateAndTime;
+    
+    boost::filesystem::path organismsPath(dirpath);
+    
+    organismsPath /= "organisms";
     dirpath /= "screenshots";
     
     if(!boost::filesystem::exists(dirpath)){
         boost::filesystem::create_directories(dirpath);
     }
+    if(!boost::filesystem::exists(organismsPath)){
+        boost::filesystem::create_directories(organismsPath);
+    }
     
     unsigned int counter = 1;
     int numberOfDigits = 15;
     
+    Camera *camera = getCamera("camera");
+    camera->enable(TIME_STEP);
+    
+    bool takeOrganismScreenshot = false;
+    id_t organismId = 0;
     while (step(TIME_STEP) != -1) {
         double now = getTime();
+        
+        if(takeOrganismScreenshot){
+            
+            boost::filesystem::path filepath = organismsPath;
+            filepath /= "Organism_"+std::to_string(organismId) + ".jpg";
+            
+            camera->getImage();
+            camera->saveImage(filepath.string(), 100);
+            
+            takeOrganismScreenshot = false;
+        }
+        
+        while(receiver->getQueueLength() > 0)
+        {
+            std::string message = (char*)receiver->getData();
+            
+            if (message.substr(0,24).compare("[ORGANISM_BUILT_MESSAGE]") == 0)
+            {
+                organismId = std::atoi(MessagesManager::get(message, "ORGANISM_ID").c_str());
+                takeOrganismScreenshot = true;
+            }
+            
+            receiver->nextPacket();
+        }
+        
         if(lastScreenshot < 0 || now - lastScreenshot > SCREENSHOT_INTERVAL)
         {
             boost::filesystem::path filepath = dirpath;

@@ -24,6 +24,7 @@ class BirthClinicController : public Supervisor
     
     int CLINIC_CHANNEL = ParametersReader::get<int>("CLINIC_CHANNEL");
     int EVOLVER_CHANNEL = ParametersReader::get<int>("EVOLVER_CHANNEL");
+    int SCREENSHOT_CHANNEL = ParametersReader::get<int>("SCREENSHOT_CHANNEL");
     
     int ARENA_SIZE = ParametersReader::get<int>("ARENA_SIZE");
     int NUMBER_OF_MODULES = ParametersReader::get<int>("NUMBER_OF_MODULES");

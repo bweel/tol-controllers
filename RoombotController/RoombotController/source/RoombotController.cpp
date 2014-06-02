@@ -891,7 +891,7 @@ void RoombotController::infancy()
             genomes = manager.readStringToArray(mindGenome);
         }
         
-        _algorithm->setInitialMinds(genomes);
+        _algorithm->setInitialMinds(genomes,numMotors,organismSize);
         
         // two first steps (one more than non-root modules)
         if (step(TIME_STEP) == -1)

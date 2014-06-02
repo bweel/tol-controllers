@@ -157,7 +157,7 @@ unsigned int HyperNEAT::getEvaluation() {
     return _i_index_last;
 }
 
-void HyperNEAT::setInitialMinds(boost::ptr_vector<MindGenome> genomes) {
+void HyperNEAT::setInitialMinds(boost::ptr_vector<MindGenome> genomes,std::size_t numMotors,std::size_t organismSize) {
     
 }
 

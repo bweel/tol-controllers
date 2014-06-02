@@ -152,9 +152,10 @@ double RL_PoWER::getParameter(std::size_t index)
 	return _evaluation(index, _ev_step);
 }
 
-void RL_PoWER::setInitialMinds(boost::ptr_vector<MindGenome> genomes) {
+void RL_PoWER::setInitialMinds(boost::ptr_vector<MindGenome> genomes,std::size_t numMotors,std::size_t organismSize) {
     double variance = _globals->parameter(POWER::Trial::VARIANCE_NAME);
 	double variance_decay = _globals->parameter(POWER::Trial::VARIANCE_DECAY_NAME);
+    double sqrtvariance = std::sqrt(_globals->parameter(POWER::Trial::VARIANCE_NAME));
 	std::size_t min_size = static_cast<std::size_t> (_globals->parameter(POWER::Trial::V_SIZE_MIN_NAME));
 	std::size_t max_size = static_cast<std::size_t> (_globals->parameter(POWER::Trial::V_SIZE_MAX_NAME));
 	std::size_t rank_size = static_cast<std::size_t> (_globals->parameter(POWER::Trial::RANKING_SIZE_NAME));
@@ -162,6 +163,25 @@ void RL_PoWER::setInitialMinds(boost::ptr_vector<MindGenome> genomes) {
    
     MatrixGenome *genes = static_cast<MatrixGenome*>(&genomes[0]);
     initialParameters = genes->getMatrix();
+    
+    std::size_t totalParameters = organismSize * numMotors;
+    std::cout << "Setting initial mind of size: " << initialParameters.size() << " actual number size needed: " << totalParameters << std::endl;
+    if(initialParameters.size() < totalParameters) {
+        // If the size of the parent's mind is too low
+        // Add extra splines here
+        std::size_t extraParameters = totalParameters - initialParameters.size();
+        
+        std::cout << "Parent mind did not have enough parameters, adding " << extraParameters << " parameter vectors" << std::endl;
+        
+        for(std::size_t i=0;i<extraParameters;i++){
+            std::vector<double> parameters(min_size, 0.5);
+            
+            for(std::size_t param = 0; param < min_size; param++){
+                parameters[param] += sqrtvariance * _random->normal_real();
+            }
+            initialParameters.push_back(parameters);
+        }
+    }
     
     _trial = new POWER::Trial(_random, numSplines, min_size, max_size, rank_size, evaluations, variance, variance_decay, initialParameters);
 	_evaluation = (_trial->policy(_ev_steps) - 0.5) * 2.0;

@@ -165,7 +165,7 @@ void EnvironmentModifierController::run()
     
     while (step(TIME_STEP) != -1)
     {
-        if(receiver->getQueueLength() > 0)
+        while(receiver->getQueueLength() > 0)
         {
             std::string message = (char*)receiver->getData();
             

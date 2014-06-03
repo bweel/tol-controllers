@@ -386,7 +386,9 @@ void BirthClinicController::run()
                 double time = getTime();
                 while (getTime() - time < 3)
                 {
-                    step(TIME_STEP);
+                    if(step(TIME_STEP) == -1){
+                        return;
+                    }
                 }
                 
                 std::istringstream stream(genomeStr);

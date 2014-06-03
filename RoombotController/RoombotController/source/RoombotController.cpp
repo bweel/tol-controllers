@@ -866,7 +866,9 @@ bool RoombotController::checkLocks()
     startingTime = getTime();
     while (getTime() - startingTime < 1)
     {
-        step(TIME_STEP);
+        if(step(TIME_STEP) == -1) {
+            return connectorsOK;
+        }
         
         if(_receiver->getQueueLength() > 0)
         {
@@ -874,7 +876,7 @@ bool RoombotController::checkLocks()
             
             if (message.compare("[CONNECTORS_PROBLEM_MESSAGE]") == 0)
             {
-                std::cout << getName() << " receiverd connectors problem message" << std::endl;
+                std::cout << getName() << " received connectors problem message" << std::endl;
                 
                 if (isRoot())
                 {
@@ -1410,9 +1412,18 @@ void RoombotController::death()
         connectors[i]->unlock();
     }
     
-    for(int i = 0; i < numMotors; i++)
+    double startingTime = getTime();
+    while (getTime() - startingTime < 3)
     {
-        _set_motor_position(i, 0);
+        for(int i = 0; i < numMotors; i++)
+        {
+            _set_motor_position(i, 0);
+        }
+        
+        if (step(TIME_STEP) == -1)
+        {
+            return;
+        }
     }
     
     if (isRoot())
@@ -1430,6 +1441,10 @@ void RoombotController::death()
     
     while (true)
     {
+        for(int i = 0; i < numMotors; i++)
+        {
+            _set_motor_position(i, 0);
+        }
         if (step(TIME_STEP) == -1)
         {
             return;

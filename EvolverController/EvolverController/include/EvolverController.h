@@ -40,6 +40,11 @@ private:
     std::string SHAPE_ENCODING = ParametersReader::get<std::string>("SHAPE_ENCODING");
     std::string MIND_ENCODING = ParametersReader::get<std::string>("MIND_ENCODING");
     std::string PARENT_SELECTION = ParametersReader::get<std::string>("PARENT_SELECTION");
+    std::string MATING_SELECTION = ParametersReader::get<std::string>("MATING_SELECTION");
+    std::string DEATH_SELECTION = ParametersReader::get<std::string>("DEATH_SELECTION");
+    
+    MatingType matingType;
+    DeathType deathType;
     
     Receiver * receiver; 
     Emitter * emitter;

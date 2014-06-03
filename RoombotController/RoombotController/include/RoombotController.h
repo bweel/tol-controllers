@@ -4,15 +4,19 @@
 //#define DEBUG_CONTROLLER
 //#define DEBUG_TIMING
 
+#include "Organism.h"
 #include "Defines.h"
 #include "ParametersReader.h"
 #include "MessagesManager.h"
+#include "ParentSelectionMechanism.h"
+#include "BestTwoParentSelection.h"
+#include "BinaryTournamentParentSelection.h"
+#include "RandomSelection.h"
 
 #include "EVAlgorithm.h"
 #include "HyperNEAT.h"
 #include "RL_PoWER.h"
 #include "SplineNeat.h"
-#include "Organism.h"
 
 #include "MyMath.h"
 #include "Vector_3.h"
@@ -87,10 +91,22 @@ private:
     int SPREAD_FITNESS_INTERVAL = ParametersReader::get<int>("SPREAD_FITNESS_INTERVAL");                    // FOR DISTRIBUTED REPRODUCTION
     int INDIVIDUAL_MATING_TIME = ParametersReader::get<int>("INDIVIDUAL_MATING_TIME");                      // FOR DISTRIBUTED REPRODUCTION
     int ROOMBOT_WAITING_TIME = ParametersReader::get<int>("ROOMBOT_WAITING_TIME");
+    int UPDATE_FITNESS_IN_EVOLVER = ParametersReader::get<int>("MATING_TIME");      // FOR DISTRIBUTED REPRODUCTION
+    
+    double FERTILITY_DISTANCE = ParametersReader::get<double>("FERTILITY_DISTANCE");
+    
+    std::string PARENT_SELECTION = ParametersReader::get<std::string>("PARENT_SELECTION");
+    std::string MATING_SELECTION = ParametersReader::get<std::string>("MATING_SELECTION");
+    std::string DEATH_SELECTION = ParametersReader::get<std::string>("DEATH_SELECTION");
     
     int TIME_STEP = ParametersReader::get<int>("TIME_STEP");
     
     std::string simulationDateAndTime;
+    
+    bool fertile;
+    
+    MatingType matingType;
+    DeathType deathType;
     
     boost::property_tree::ptree * _parameters;  // parameters tree
     
@@ -148,9 +164,9 @@ private:
     
     std::vector<Connector *> connectors = std::vector<Connector *>();
     
+    ParentSelectionMechanism * parentSelectionMechanism;
     
     // PRIVATE METHODS
-    void initialise();
     boost::property_tree::ptree * _init_parameters(const std::string &);
     
     GPS * _init_gps(double);
@@ -239,7 +255,13 @@ private:
     
     void updateOrganismsToMateWithList(id_t mateId, double mateFitness, std::string mateGenome, std::string mateMind);
     
-    int selectMate();
+    id_t selectMate();
+    
+    int searchForOrganism(id_t organismId);
+    
+    void sendAdultAnnouncement();
+    
+    void sendFitnessUpdateToEvolver(double fitness);
 };
 
 #endif	/* ROOMBOT_CONTROLLER_H */

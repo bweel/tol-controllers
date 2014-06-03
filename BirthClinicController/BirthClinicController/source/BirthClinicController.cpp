@@ -307,6 +307,11 @@ void BirthClinicController::run()
         receiver->nextPacket();
     }
     
+    
+    /*******************************************
+     ***** WAIT UNTIL ENVIRONMENT IS READY *****
+     *******************************************/
+    
     // wait unitil EnvironmentModifierController sais the environment is ok
     bool environmentOk = false;
     while (step(TIME_STEP) != -1 && !environmentOk)
@@ -330,13 +335,28 @@ void BirthClinicController::run()
         }
     }
     
+    
+    /**************************************
+     ******* MODULES INITIALIZATION *******
+     **************************************/
+    
     connectModulesToObjects();
+    
     
     while (step(TIME_STEP) != -1)
     {
+        /*******************************
+         ******* MANAGE MESSAGES *******
+         *******************************/
+        
         if (receiver->getQueueLength() > 0)
         {
             std::string message = (char*)receiver->getData();
+            
+            
+            /****************************************
+             ******* UPDATE AVAILABLE MODULES *******
+             ****************************************/
             
             if (message.substr(0,26).compare("[UPDATE_AVAILABLE_MESSAGE]") == 0)
             {
@@ -344,6 +364,11 @@ void BirthClinicController::run()
                 addModuleToReserve(moduleDef);
                 receiver->nextPacket();
             }
+            
+            
+            /********************************
+             ******* REBUILD ORGANISM *******
+             ********************************/
             
             if (message.substr(0,17).compare("[REBUILD_MESSAGE]") == 0)
             {
@@ -367,7 +392,12 @@ void BirthClinicController::run()
                     receiver->nextPacket();
                 }
             }
-                
+            
+            
+            /**********************************
+             ******* BUILD NEW ORGANISM *******
+             **********************************/
+            
             if (message.substr(0,26).compare("[GENOME_TO_CLINIC_MESSAGE]") == 0)
             {
                 std::string genomeStr;

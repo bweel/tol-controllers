@@ -147,7 +147,6 @@ template <class T> inline std::string to_string (const T& t){
 //Type definitions
 typedef id_t GenomeID;
 
-
 enum Algorithm_Types    // type of learning algorithm
 {
     A_UNDEFINED = 0,    // not defined
@@ -157,6 +156,17 @@ enum Algorithm_Types    // type of learning algorithm
     A_SPLINENEAT = 4    // SplineNEAT
 };
 
+enum MatingType
+{
+    MATING_SELECTION_BY_EVOLVER = 0,
+    MATING_SELECTION_BY_ORGANISMS = 1
+};
+
+enum DeathType
+{
+    DEATH_SELECTION_BY_EVOLVER = 0,
+    DEATH_SELECTION_BY_TIME_TO_LIVE = 1
+};
 
 
 

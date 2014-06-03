@@ -33,6 +33,7 @@ genome(_parameters->get<std::string>("Genome")),
 mindGenome(_parameters->get<std::string>("MindGenome")),
 
 // set other attributes to initial values
+fertile(false),
 _seed(0),
 _time_start(0.0),
 _time_offset(0.0),
@@ -79,6 +80,32 @@ _motors(_m_type ? _init_motors(TIME_STEP) : 0)
     << std::endl;
 #endif
     
+    if(PARENT_SELECTION == "BESTTWO") {
+        parentSelectionMechanism = new BestTwoParentSelection();
+    } else if(PARENT_SELECTION == "BINARY_TOURNAMENT"){
+        parentSelectionMechanism = new BinaryTournamentParentSelection();
+    } else if (PARENT_SELECTION == "RANDOM") {
+        parentSelectionMechanism = new RandomSelection();
+    } else {
+        std::cerr << "Unknown Parent Selection Mechanism: " << std::endl;
+    }
+    
+    if(MATING_SELECTION == "EVOLVER") {
+        matingType = MATING_SELECTION_BY_EVOLVER;
+    } else if(MATING_SELECTION == "ORGANISMS"){
+        matingType = MATING_SELECTION_BY_ORGANISMS;
+    } else {
+        std::cerr << "Unknown Mating Selection Mechanism: " << MATING_SELECTION << std::endl;
+    }
+    
+    if(DEATH_SELECTION == "EVOLVER") {
+        deathType = DEATH_SELECTION_BY_EVOLVER;
+    } else if(DEATH_SELECTION == "TIME_TO_LIVE"){
+        deathType = DEATH_SELECTION_BY_TIME_TO_LIVE;
+    } else {
+        std::cerr << "Unknown Death Selection Mechanism: " << DEATH_SELECTION << std::endl;
+    }
+    
     deathReceiver = getReceiver(ROOMBOT_DEATH_RECEIVER_NAME);
     deathReceiver->setChannel(DEATH_CHANNEL);
     deathReceiver->enable(TIME_STEP);
@@ -119,12 +146,16 @@ _motors(_m_type ? _init_motors(TIME_STEP) : 0)
         _emitter = _init_emitter(static_cast<int> (EVOLVER_CHANNEL-1 - organismId));
         _receiver = _init_receiver(TIME_STEP, static_cast<int> (organismId));
         
-        
-        genomeEmitter->setRange(ORGANISM_GENOME_EMITTER_RANGE); // SHOULD BE -1 FOR CENTRALIZED REPRODUCTION
-        
-        genomeEmitter->setChannel(EVOLVER_CHANNEL);             // FOR CENTRALIZED REPRODUCTION
-        //genomeEmitter->setChannel(GENOME_EXCHANGE_CHANNEL);   // FOR DISTRIBUTED REPRODUCTION
-        
+        if (matingType == MATING_SELECTION_BY_EVOLVER)
+        {
+            genomeEmitter->setRange(-1);
+            genomeEmitter->setChannel(EVOLVER_CHANNEL);
+        }
+        else if (matingType == MATING_SELECTION_BY_ORGANISMS)
+        {
+            genomeEmitter->setRange(ORGANISM_GENOME_EMITTER_RANGE);
+            genomeEmitter->setChannel(GENOME_EXCHANGE_CHANNEL);
+        }
         genomeReceiver->setChannel(GENOME_EXCHANGE_CHANNEL);    // USED ONLY FOR DISTRIBUTED REPRODUCTION
         
         genomeReceiver->enable(TIME_STEP);
@@ -256,7 +287,6 @@ _motors(_m_type ? _init_motors(TIME_STEP) : 0)
         std::cout << "Algorithm: " << &_algorithm << std::endl;
         
     }
-    
 }
 
 
@@ -749,33 +779,58 @@ void RoombotController::updateOrganismsToMateWithList(id_t mateId, double mateFi
         if (organismsToMateWith[i].getId() == mateId)
         {
             organismsToMateWith[i].setFitness(mateFitness);
-            organismsToMateWith[i].setGenome(mateGenome);
-            organismsToMateWith[i].setMind(mateMind);
             return;
         }
     }
-    // TODO: FIX!
-//    Organism newMate = Organism(mateGenome, mateMind, mateId, mateFitness);
-//    organismsToMateWith.push_back(newMate);
+    Organism newMate = Organism(mateGenome, mateMind, mateId, mateFitness, -1, -1, std::vector<id_t>(), Organism::ADULT);
+    organismsToMateWith.push_back(newMate);
 }
 
 
-int RoombotController::selectMate()
+id_t RoombotController::selectMate()
 {
-    int bestIdx = -1;
-    double bestFitness = -1;
+    std::vector<id_t> selected = parentSelectionMechanism->selectParents(organismsToMateWith);
+    if (selected.size() > 0)
+    {
+        return selected[0];
+    }
+    return 0;
+}
+
+
+int RoombotController::searchForOrganism(id_t organismId)
+{
     for(int i = 0; i < organismsToMateWith.size(); i++)
     {
-        if (organismsToMateWith[i].getFitness() > bestFitness)
+        if (organismsToMateWith[i].getId() == organismId)
         {
-            bestIdx = i;
-            bestFitness = organismsToMateWith[i].getFitness();
+            return i;
         }
     }
-    return bestIdx;
+    return -1;
 }
 
 
+void RoombotController::sendAdultAnnouncement()
+{
+    int backupChannel = _emitter->getChannel();
+    _emitter->setChannel(EVOLVER_CHANNEL);
+    std::string message = "[ADULT_ANNOUNCEMENT]";
+    message = MessagesManager::add(message, "ID", std::to_string(organismId));
+    _emitter->send(message.c_str(), (int)message.length()+1);
+    _emitter->setChannel(backupChannel);
+}
+
+void RoombotController::sendFitnessUpdateToEvolver(double fitness)
+{
+    int backupChannel = _emitter->getChannel();
+    _emitter->setChannel(EVOLVER_CHANNEL);
+    std::string message = "[FITNESS_UPDATE]";
+    message = MessagesManager::add(message, "ID", std::to_string(organismId));
+    message = MessagesManager::add(message, "FITNESS", std::to_string(fitness));
+    _emitter->send(message.c_str(), (int)message.length()+1);
+    _emitter->setChannel(backupChannel);
+}
 
 
 /******************************************* BEFORE STARTING *******************************************/
@@ -837,6 +892,7 @@ bool RoombotController::checkLocks()
     
     return connectorsOK;
 }
+
 
 
 /******************************************* INFANCY *******************************************/
@@ -1024,6 +1080,8 @@ void RoombotController::infancy()
     }
 }
 
+
+
 /***************************************** MATURE LIFE *****************************************/
 
 void RoombotController::matureLife()
@@ -1036,7 +1094,8 @@ void RoombotController::matureLife()
     {
         std::pair<double, std::string> fitness = std::pair<double, std::string>();
         double lastFitnessSent = 0;
-        //double lastMating = 0;
+        double lastMating = 0;
+        double lastEvolverUpdate = 0;
         
         doubledvector anglesIn;
         doubledvector anglesOut;
@@ -1064,34 +1123,73 @@ void RoombotController::matureLife()
         
         while (step(TIME_STEP) != -1)
         {
-            /*******************
-             *** CHECK DEATH ***
-             *******************/
             
-            /******************************** CENTRALIZED DEATH BY THE EVOLVER ********************************/
-             
-            /*if(deathReceiver->getQueueLength() > 0)
+            
+            /***************************************************************
+             ****** CHECK FERTILITY FOR MATING SELECTION BY ORGANISMS ******
+             ***************************************************************/
+            
+            if (matingType == MATING_SELECTION_BY_ORGANISMS)
             {
-                std::string message = (char*)deathReceiver->getData();
-                deathReceiver->nextPacket();
-                if (message.compare(std::to_string(organismId)) == 0 )
+                if (!fertile)
+                {
+                    const double * position = _gps->getValues();
+                    double x = position[0];
+                    double z = position[2];
+                    double distanceFromCenter = sqrt((x*x) + (z*z));
+                    
+                    if (distanceFromCenter > FERTILITY_DISTANCE)
+                    {
+                        fertile = true;
+                        std::cout << organismId << " became fertile" << std::endl;
+                    }
+                }
+            }
+            
+            
+            /********************************************
+             ***** CHECK DEATH BY EVOLVER SELECTION *****
+             ********************************************/
+            
+            if (deathType == DEATH_SELECTION_BY_EVOLVER)
+            {
+                if(deathReceiver->getQueueLength() > 0)
+                {
+                    std::string message = (char*)deathReceiver->getData();
+                    deathReceiver->nextPacket();
+                    if (message.compare(std::to_string(organismId)) == 0 )
+                    {
+                        return; // end mature life (so die)
+                    }
+                }
+            }
+            
+            
+            /********************************************
+             ***** CHECK DEATH BY EVOLVER SELECTION *****
+             ********************************************/
+            
+            if (deathType == DEATH_SELECTION_BY_TIME_TO_LIVE)
+            {
+                if (getTime() - startingTimeMatureLife > matureTimeToLive)
                 {
                     return; // end mature life (so die)
                 }
-            }*/
-            
-            /***************************************************************************************************/
-            
-            /******************************** DISTRIBUTED DEATH BY TIME TO LIVE ********************************/
-            
-            // check death by fixed time to live
-            if (getTime() - startingTimeMatureLife > matureTimeToLive)
-            {
-                return; // and die
             }
             
-            /***************************************************************************************************/
             
+            /*************************************
+             ***** UPDATE FITNESS IN EVOLVER *****
+             *************************************/
+            
+            if (matingType == MATING_SELECTION_BY_ORGANISMS)
+            {
+                if (getTime() - lastEvolverUpdate > UPDATE_FITNESS_IN_EVOLVER)
+                {
+                    sendFitnessUpdateToEvolver(fitness.first);
+                    lastEvolverUpdate = getTime();
+                }
+            }
             
             
             /*******************
@@ -1120,119 +1218,126 @@ void RoombotController::matureLife()
             
             
             
-            /*******************
-             *** SEND GENOME ***
-             *******************/
+            /**********************************
+             ***** SEND GENOME TO EVOLVER *****
+             **********************************/
             
-            /******************************** CENTRALIZED REPRODUCTION WITH EVOLVER ********************************/
-            
-            double now = getTime();
-            if (now - lastFitnessSent > SEND_FITNESS_TO_EVOLVER_INTERVAL)
+            if (matingType == MATING_SELECTION_BY_EVOLVER)
             {
-                // compute fitness
-                _time_end = getTime();
-                _position_end = _get_gps();
-                std::pair<double, std::string> fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));
-                
-                // send genome and fitness to evolver
-                string message = "[GENOME_SPREAD_MESSAGE]";
-                message = MessagesManager::add(message, "ID", std::to_string(organismId));
-                message = MessagesManager::add(message, "FITNESS", std::to_string(fitness.first));
-                message = MessagesManager::add(message, "GENOME", genome);
-                message = MessagesManager::add(message, "MIND", mindGenome);
-                genomeEmitter->send(message.c_str(), (int)message.length()+1);
-                
-                // store in file
-                storeMatureLifeFitnessIntoFile(fitness.first);
-                
-                // reset time, position and lastFitnessSent for next fitness evaluation
-                _time_start = getTime();
-                _position_start = _get_gps();
-                lastFitnessSent = getTime();
-            }
-            
-            /******************************************************************************************************/
-            
-            /**************************** DISTRIBUTED REPRODUCTION WITH ROOMBOT EMITTER ***************************/
-            /*
-            // sending
-            
-            if (getTime() - lastFitnessSent > SPREAD_FITNESS_INTERVAL)
-            {
-                // compute fitness
-                _time_end = getTime();
-                _position_end = _get_gps();
-                fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));
-                
-                // spread genome and fitness
-                std::string genomeMessage = "[GENOME_SPREAD_MESSAGE]";
-                genomeMessage = MessagesManager::add(genomeMessage, "ID", std::to_string(organismId));
-                genomeMessage = MessagesManager::add(genomeMessage, "FITNESS", std::to_string(fitness.first));
-                genomeMessage = MessagesManager::add(genomeMessage, "GENOME", genome);
-                genomeMessage = MessagesManager::add(genomeMessage, "MIND", mindGenome);
-                
-                genomeEmitter->send(genomeMessage.c_str(), (int)genomeMessage.length()+1);
-                
-                // reset time, position and lastFitnessSent for next fitness evaluation
-                _time_start = getTime();
-                _position_start = _get_gps();
-                lastFitnessSent = getTime();
-            }
-            
-            // receiving
-            
-            if(genomeReceiver->getQueueLength() > 0)
-            {
-                std::string message = (char*)genomeReceiver->getData();
-                
-                if (message.substr(0,23).compare("[GENOME_SPREAD_MESSAGE]") == 0)
-                {                    
-                    id_t mateId;
-                    double mateFitness;
-                    std::string mateGenome;
-                    std::string mateMind;
-                    readMateMessage(message, & mateId, & mateFitness, & mateGenome, & mateMind);
-                    
-                    updateOrganismsToMateWithList(mateId, mateFitness, mateGenome, mateMind);
-                }
-                
-                genomeReceiver->nextPacket();
-            }
-            
-            // mate
-            
-            if (getTime() - lastMating > INDIVIDUAL_MATING_TIME)
-            {
-                if (organismsToMateWith.size() > 0)
+                if (getTime() - lastFitnessSent > SEND_FITNESS_TO_EVOLVER_INTERVAL)
                 {
-                    int idx = selectMate();
+                    // compute fitness
+                    _time_end = getTime();
+                    _position_end = _get_gps();
+                    std::pair<double, std::string> fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));
                     
-                    // send couple of genomes to evolver
-                    int backup_channel = _emitter->getChannel();
-                    _emitter->setChannel(EVOLVER_CHANNEL);
+                    // send genome and fitness to evolver
+                    string message = "[GENOME_SPREAD_MESSAGE]";
+                    message = MessagesManager::add(message, "ID", std::to_string(organismId));
+                    message = MessagesManager::add(message, "FITNESS", std::to_string(fitness.first));
+                    message = MessagesManager::add(message, "GENOME", genome);
+                    message = MessagesManager::add(message, "MIND", mindGenome);
+                    genomeEmitter->send(message.c_str(), (int)message.length()+1);
                     
-                    std::string message = "[COUPLE_MESSAGE]";
-                    message = MessagesManager::add(message, "ID1", std::to_string(organismId));
-                    message = MessagesManager::add(message, "FITNESS1", std::to_string(fitness.first));
-                    message = MessagesManager::add(message, "GENOME1", genome);
-                    message = MessagesManager::add(message, "MIND1", mindGenome);
-                    message = MessagesManager::add(message, "ID2", std::to_string(organismsToMateWith[idx].getId()));
-                    message = MessagesManager::add(message, "FITNESS2", std::to_string(organismsToMateWith[idx].getFitness()));
-                    message = MessagesManager::add(message, "GENOME2", organismsToMateWith[idx].getGenome());
-                    message = MessagesManager::add(message, "MIND2", organismsToMateWith[idx].getMind());
+                    // store in file
+                    storeMatureLifeFitnessIntoFile(fitness.first);
                     
-                    _emitter->send(message.c_str(), (int)message.length()+1);
-                    _emitter->setChannel(backup_channel);
-                    
-                    std::cout << organismId << " chose to mate with " << organismsToMateWith[idx].getId() << std::endl;
+                    // reset time, position and lastFitnessSent for next fitness evaluation
+                    _time_start = getTime();
+                    _position_start = _get_gps();
+                    lastFitnessSent = getTime();
                 }
-                
-                organismsToMateWith = std::vector<Organism>();
-                
-                lastMating = getTime();
-            }*/
+            }
             
-            /******************************************************************************************************/
+            
+            /***********************************************
+             ***** MATING USING SELECTION BY ORGANISMS *****
+             ***********************************************/
+            
+            if (matingType == MATING_SELECTION_BY_ORGANISMS)
+            {
+                if (fertile)
+                {
+                    // sending
+                    
+                    if (getTime() - lastFitnessSent > SPREAD_FITNESS_INTERVAL)
+                    {
+                        // compute fitness
+                        _time_end = getTime();
+                        _position_end = _get_gps();
+                        fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));
+                        
+                        // spread genome and fitness
+                        std::string genomeMessage = "[GENOME_SPREAD_MESSAGE]";
+                        genomeMessage = MessagesManager::add(genomeMessage, "ID", std::to_string(organismId));
+                        genomeMessage = MessagesManager::add(genomeMessage, "FITNESS", std::to_string(fitness.first));
+                        genomeMessage = MessagesManager::add(genomeMessage, "GENOME", genome);
+                        genomeMessage = MessagesManager::add(genomeMessage, "MIND", mindGenome);
+                        
+                        genomeEmitter->send(genomeMessage.c_str(), (int)genomeMessage.length()+1);
+                        
+                        // reset time, position and lastFitnessSent for next fitness evaluation
+                        _time_start = getTime();
+                        _position_start = _get_gps();
+                        lastFitnessSent = getTime();
+                    }
+                    
+                    // receiving
+                    
+                    if(genomeReceiver->getQueueLength() > 0)
+                    {
+                        std::string message = (char*)genomeReceiver->getData();
+                        
+                        if (message.substr(0,23).compare("[GENOME_SPREAD_MESSAGE]") == 0)
+                        {
+                            id_t mateId;
+                            double mateFitness;
+                            std::string mateGenome;
+                            std::string mateMind;
+                            readMateMessage(message, & mateId, & mateFitness, & mateGenome, & mateMind);
+                            
+                            updateOrganismsToMateWithList(mateId, mateFitness, mateGenome, mateMind);
+                        }
+                        
+                        genomeReceiver->nextPacket();
+                    }
+                    
+                    // mate
+                    
+                    if (getTime() - lastMating > INDIVIDUAL_MATING_TIME)
+                    {
+                        if (organismsToMateWith.size() > 0)
+                        {
+                            id_t mateId = selectMate();
+                            int mateIndex = searchForOrganism(mateId);
+                            assert(mateIndex >= 0);
+                            
+                            // send couple of genomes to evolver
+                            int backup_channel = _emitter->getChannel();
+                            _emitter->setChannel(EVOLVER_CHANNEL);
+                            
+                            std::string message = "[COUPLE_MESSAGE]";
+                            message = MessagesManager::add(message, "ID1", std::to_string(organismId));
+                            message = MessagesManager::add(message, "FITNESS1", std::to_string(fitness.first));
+                            message = MessagesManager::add(message, "GENOME1", genome);
+                            message = MessagesManager::add(message, "MIND1", mindGenome);
+                            message = MessagesManager::add(message, "ID2", std::to_string(mateId));
+                            message = MessagesManager::add(message, "FITNESS2", std::to_string(organismsToMateWith[mateIndex].getFitness()));
+                            message = MessagesManager::add(message, "GENOME2", organismsToMateWith[mateIndex].getGenome());
+                            message = MessagesManager::add(message, "MIND2", organismsToMateWith[mateIndex].getMind());
+                            
+                            _emitter->send(message.c_str(), (int)message.length()+1);
+                            _emitter->setChannel(backup_channel);
+                            
+                            std::cout << organismId << " chose to mate with " << mateId << std::endl;
+                        }
+                        
+                        organismsToMateWith = std::vector<Organism>();
+                        
+                        lastMating = getTime();
+                    }
+                }
+            }
             
         }
     }
@@ -1256,25 +1361,28 @@ void RoombotController::matureLife()
         
         while (step(TIME_STEP) != -1)
         {
-            /****************** UNCOMMENT FOR CENTRALIZED DEATH BY THE EVOLVER ******************
-             
-            // check if it is time to die
-            if(deathReceiver->getQueueLength() > 0)
+            
+            if (deathType == DEATH_SELECTION_BY_EVOLVER)
             {
-                std::string message = (char*)deathReceiver->getData();
-                deathReceiver->nextPacket();
-                if (message.compare(std::to_string(organismId)) == 0 )
+                if(deathReceiver->getQueueLength() > 0)
                 {
-                    return; // end mature life (so die)
+                    std::string message = (char*)deathReceiver->getData();
+                    deathReceiver->nextPacket();
+                    if (message.compare(std::to_string(organismId)) == 0 )
+                    {
+                        return; // end mature life (so die)
+                    }
                 }
             }
-            ************************************************************************************/
             
-            // check death by fixed time to live
-            if (getTime() - startingTimeMatureLife > matureTimeToLive)
+            else if (deathType == DEATH_SELECTION_BY_TIME_TO_LIVE)
             {
-                return; // and die
+                if (getTime() - startingTimeMatureLife > matureTimeToLive)
+                {
+                    return; // and die
+                }
             }
+            
             
             for(size_t i=0;i<numMotors;i++)
             {
@@ -1320,9 +1428,12 @@ void RoombotController::death()
     message = MessagesManager::add(message, "NAME", getName());
     _emitter->send(message.c_str(), (int)message.length()+1);
     
-    for(int i = 0; i < 10; i++)
+    while (true)
     {
-        step(TIME_STEP);
+        if (step(TIME_STEP) == -1)
+        {
+            return;
+        }
     }
 }
 
@@ -1386,6 +1497,11 @@ void RoombotController::run()
     infancy();
     
     std::cout << getName() << " STARTS MATURE LIFE" << std::endl;
+    
+    if (isRoot())
+    {
+        sendAdultAnnouncement();
+    }
     
     matureLife();
     

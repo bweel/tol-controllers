@@ -44,6 +44,7 @@ namespace utils
     Random::~Random() {
         if(Random::instance){
             delete Random::instance;
+            Random::instance = NULL;
         }
     }
 

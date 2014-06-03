@@ -180,10 +180,6 @@ namespace POWER
 
 	Trial::~Trial()
 	{
-		if (_random) {
-			delete (_random);
-		}
-
 		for (PIterator it = _evaluations.begin(); it != _evaluations.end(); it++) {
 			if (*it) {
 				delete(* it);

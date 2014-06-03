@@ -29,8 +29,6 @@
 		61278C6E18967563007D50F4 /* Spline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61278C6218967563007D50F4 /* Spline.cpp */; };
 		61278C6F18967563007D50F4 /* Trial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61278C6318967563007D50F4 /* Trial.cpp */; };
 		61278C7018967563007D50F4 /* Values.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61278C6418967563007D50F4 /* Values.cpp */; };
-		61278C7C189693D5007D50F4 /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C7A189693D5007D50F4 /* libboost_filesystem-mt.dylib */; };
-		61278C7D189693D5007D50F4 /* libboost_random-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C7B189693D5007D50F4 /* libboost_random-mt.dylib */; };
 		61278C87189694EC007D50F4 /* libUtilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C0C189667FF007D50F4 /* libUtilities.a */; };
 		61278C88189694FC007D50F4 /* libEVAlgorithms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C2118966A5A007D50F4 /* libEVAlgorithms.a */; };
 		61278C89189694FC007D50F4 /* libRLPower.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C521896755A007D50F4 /* libRLPower.a */; };
@@ -39,16 +37,18 @@
 		61746C0F19239893002D8509 /* RoombotController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61892BED1888175900E9EDCD /* RoombotController */; };
 		61892C8A18881AD800E9EDCD /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61892C8818881AD800E9EDCD /* libController.dylib */; };
 		61892C8B18881AD800E9EDCD /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61892C8918881AD800E9EDCD /* libCppController.dylib */; };
-		61AD161C1896AE13003D24DE /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD161B1896AE13003D24DE /* libboost_system-mt.dylib */; };
-		61AD161E1896AE29003D24DE /* libgsl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD161D1896AE29003D24DE /* libgsl.dylib */; };
-		61AD16201896AE3A003D24DE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD161F1896AE3A003D24DE /* libz.dylib */; };
 		61B4068C18A8E78900154961 /* SplineNeat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61B4068B18A8E78900154961 /* SplineNeat.cpp */; };
 		61EBFBFD19224C66000E6D71 /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBFB19224C66000E6D71 /* libNEATLib.a */; };
 		61EBFBFE19224C66000E6D71 /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBFC19224C66000E6D71 /* libtinyxmlpluslib.a */; };
 		61EBFC0019224CD1000E6D71 /* libboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBFF19224CD1000E6D71 /* libboard.a */; };
-		A821A96D192DF34E0088748C /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A821A96C192DF34E0088748C /* libshared.a */; };
 		A84E613618FE8734007E227E /* RoombotController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84E613418FE8734007E227E /* RoombotController.cpp */; };
 		A84E613918FE8754007E227E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84E613718FE8754007E227E /* main.cpp */; };
+		A8634367193DF30F0014C737 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8634366193DF30F0014C737 /* libshared.a */; };
+		A863436D193DF3550014C737 /* libboost_filesystem-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8634368193DF3550014C737 /* libboost_filesystem-mt.a */; };
+		A863436E193DF3550014C737 /* libboost_random-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8634369193DF3550014C737 /* libboost_random-mt.a */; };
+		A863436F193DF3550014C737 /* libboost_system-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A863436A193DF3550014C737 /* libboost_system-mt.a */; };
+		A8634370193DF3550014C737 /* libgsl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A863436B193DF3550014C737 /* libgsl.a */; };
+		A8634371193DF3550014C737 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A863436C193DF3550014C737 /* libz.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,26 +121,25 @@
 		61278C6218967563007D50F4 /* Spline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Spline.cpp; sourceTree = "<group>"; };
 		61278C6318967563007D50F4 /* Trial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Trial.cpp; sourceTree = "<group>"; };
 		61278C6418967563007D50F4 /* Values.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Values.cpp; sourceTree = "<group>"; };
-		61278C7A189693D5007D50F4 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "/opt/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<absolute>"; };
-		61278C7B189693D5007D50F4 /* libboost_random-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_random-mt.dylib"; path = "/opt/local/lib/libboost_random-mt.dylib"; sourceTree = "<absolute>"; };
 		61710597192B7A3A007BF3DB /* Vector_3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector_3.h; sourceTree = "<group>"; };
 		61710599192B7A43007BF3DB /* Vector_3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector_3.cpp; sourceTree = "<group>"; };
-		617B37101926469D001D459C /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = ../../dist/Debug/libshared.a; sourceTree = "<group>"; };
 		61892BED1888175900E9EDCD /* RoombotController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RoombotController; sourceTree = BUILT_PRODUCTS_DIR; };
 		61892C8818881AD800E9EDCD /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = ../../../../../../../../Applications/Webots/lib/libController.dylib; sourceTree = "<group>"; };
 		61892C8918881AD800E9EDCD /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
-		61AD161B1896AE13003D24DE /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "../../../../../../../../opt/local/lib/libboost_system-mt.dylib"; sourceTree = "<group>"; };
-		61AD161D1896AE29003D24DE /* libgsl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgsl.dylib; path = ../../../../../../../../opt/local/lib/libgsl.dylib; sourceTree = "<group>"; };
-		61AD161F1896AE3A003D24DE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = ../../../../../../../../opt/local/lib/libz.dylib; sourceTree = "<group>"; };
 		61B4068A18A8E65700154961 /* SplineNeat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplineNeat.h; sourceTree = "<group>"; };
 		61B4068B18A8E78900154961 /* SplineNeat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SplineNeat.cpp; sourceTree = "<group>"; };
 		61EBFBFB19224C66000E6D71 /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = ../lib/libNEATLib.a; sourceTree = "<group>"; };
 		61EBFBFC19224C66000E6D71 /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = ../lib/libtinyxmlpluslib.a; sourceTree = "<group>"; };
 		61EBFBFF19224CD1000E6D71 /* libboard.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboard.a; path = ../lib/libboard.a; sourceTree = "<group>"; };
-		A821A96C192DF34E0088748C /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = "../../../../../Library/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug/libshared.a"; sourceTree = "<group>"; };
 		A84E613318FE8702007E227E /* RoombotController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RoombotController.h; path = RoombotController/include/RoombotController.h; sourceTree = SOURCE_ROOT; };
 		A84E613418FE8734007E227E /* RoombotController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RoombotController.cpp; path = RoombotController/source/RoombotController.cpp; sourceTree = SOURCE_ROOT; };
 		A84E613718FE8754007E227E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = RoombotController/source/main.cpp; sourceTree = SOURCE_ROOT; };
+		A8634366193DF30F0014C737 /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = "../../../../../Library/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug/libshared.a"; sourceTree = "<group>"; };
+		A8634368193DF3550014C737 /* libboost_filesystem-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_filesystem-mt.a"; path = "../../lib/libboost_filesystem-mt.a"; sourceTree = "<group>"; };
+		A8634369193DF3550014C737 /* libboost_random-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_random-mt.a"; path = "../../lib/libboost_random-mt.a"; sourceTree = "<group>"; };
+		A863436A193DF3550014C737 /* libboost_system-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_system-mt.a"; path = "../../lib/libboost_system-mt.a"; sourceTree = "<group>"; };
+		A863436B193DF3550014C737 /* libgsl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgsl.a; path = ../../lib/libgsl.a; sourceTree = "<group>"; };
+		A863436C193DF3550014C737 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../../lib/libz.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,20 +168,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A821A96D192DF34E0088748C /* libshared.a in Frameworks */,
+				A863436D193DF3550014C737 /* libboost_filesystem-mt.a in Frameworks */,
+				A863436E193DF3550014C737 /* libboost_random-mt.a in Frameworks */,
+				A863436F193DF3550014C737 /* libboost_system-mt.a in Frameworks */,
+				A8634370193DF3550014C737 /* libgsl.a in Frameworks */,
+				A8634371193DF3550014C737 /* libz.a in Frameworks */,
+				A8634367193DF30F0014C737 /* libshared.a in Frameworks */,
 				61278C88189694FC007D50F4 /* libEVAlgorithms.a in Frameworks */,
 				61278C89189694FC007D50F4 /* libRLPower.a in Frameworks */,
 				61278C87189694EC007D50F4 /* libUtilities.a in Frameworks */,
 				61EBFC0019224CD1000E6D71 /* libboard.a in Frameworks */,
-				61AD16201896AE3A003D24DE /* libz.dylib in Frameworks */,
-				61278C7C189693D5007D50F4 /* libboost_filesystem-mt.dylib in Frameworks */,
 				61EBFBFE19224C66000E6D71 /* libtinyxmlpluslib.a in Frameworks */,
 				61EBFBFD19224C66000E6D71 /* libNEATLib.a in Frameworks */,
-				61AD161C1896AE13003D24DE /* libboost_system-mt.dylib in Frameworks */,
-				61278C7D189693D5007D50F4 /* libboost_random-mt.dylib in Frameworks */,
 				61892C8B18881AD800E9EDCD /* libCppController.dylib in Frameworks */,
 				61892C8A18881AD800E9EDCD /* libController.dylib in Frameworks */,
-				61AD161E1896AE29003D24DE /* libgsl.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,18 +319,17 @@
 		61892C8718881AB400E9EDCD /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				A821A96C192DF34E0088748C /* libshared.a */,
+				A8634366193DF30F0014C737 /* libshared.a */,
+				A8634368193DF3550014C737 /* libboost_filesystem-mt.a */,
+				A8634369193DF3550014C737 /* libboost_random-mt.a */,
+				A863436A193DF3550014C737 /* libboost_system-mt.a */,
+				A863436B193DF3550014C737 /* libgsl.a */,
+				A863436C193DF3550014C737 /* libz.a */,
 				61EBFBFB19224C66000E6D71 /* libNEATLib.a */,
 				61EBFBFC19224C66000E6D71 /* libtinyxmlpluslib.a */,
 				61EBFBFF19224CD1000E6D71 /* libboard.a */,
-				61AD161F1896AE3A003D24DE /* libz.dylib */,
-				61AD161D1896AE29003D24DE /* libgsl.dylib */,
-				61278C7A189693D5007D50F4 /* libboost_filesystem-mt.dylib */,
-				61278C7B189693D5007D50F4 /* libboost_random-mt.dylib */,
-				61AD161B1896AE13003D24DE /* libboost_system-mt.dylib */,
 				61892C8818881AD800E9EDCD /* libController.dylib */,
 				61892C8918881AD800E9EDCD /* libCppController.dylib */,
-				617B37101926469D001D459C /* libshared.a */,
 			);
 			name = Libraries;
 			path = EvoController;
@@ -736,6 +734,7 @@
 					"$(PROJECT_DIR)/lib",
 					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/dist/Debug",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
+					"/Users/emanuele/Documents/projects/tol-controllers/lib",
 				);
 				PRODUCT_NAME = RoombotController;
 			};
@@ -750,6 +749,7 @@
 					"$(PROJECT_DIR)/lib",
 					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/dist/Debug",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
+					"/Users/emanuele/Documents/projects/tol-controllers/lib",
 				);
 				PRODUCT_NAME = RoombotController;
 			};

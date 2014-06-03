@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		61746C0C1923980C002D8509 /* EvolverController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61AD162B1897F88A003D24DE /* EvolverController */; };
-		617B371C19265496001D459C /* libboost_random-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 617B371B19265496001D459C /* libboost_random-mt.dylib */; };
 		61AD16401897F90A003D24DE /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163E1897F90A003D24DE /* libController.dylib */; };
 		61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163F1897F90A003D24DE /* libCppController.dylib */; };
 		A821A96B192DF3450088748C /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8AF10231923BD3800D639E1 /* libshared.a */; };
-		A86042651906CD1500972DED /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A86042641906CD1500972DED /* libz.dylib */; };
-		A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */; };
+		A8634362193DF2990014C737 /* libboost_filesystem-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A863435E193DF2990014C737 /* libboost_filesystem-mt.a */; };
+		A8634363193DF2990014C737 /* libboost_random-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A863435F193DF2990014C737 /* libboost_random-mt.a */; };
+		A8634364193DF2990014C737 /* libboost_system-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8634360193DF2990014C737 /* libboost_system-mt.a */; };
+		A8634365193DF2990014C737 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8634361193DF2990014C737 /* libz.a */; };
 		A8AF10211923BD0D00D639E1 /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8AF101F1923BD0D00D639E1 /* libNEATLib.a */; };
 		A8AF10221923BD0D00D639E1 /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8AF10201923BD0D00D639E1 /* libtinyxmlpluslib.a */; };
 		A8C2754A19138273004A85A3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8C2754819138273004A85A3 /* main.cpp */; };
@@ -35,13 +36,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		617B371B19265496001D459C /* libboost_random-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_random-mt.dylib"; path = "../../../../../../../../opt/local/lib/libboost_random-mt.dylib"; sourceTree = "<group>"; };
 		61AD162B1897F88A003D24DE /* EvolverController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EvolverController; sourceTree = BUILT_PRODUCTS_DIR; };
 		61AD163E1897F90A003D24DE /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = ../../../../../../../../Applications/Webots/lib/libController.dylib; sourceTree = "<group>"; };
 		61AD163F1897F90A003D24DE /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
-		A86042641906CD1500972DED /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "/opt/local/lib/libboost_filesystem-mt.dylib"; sourceTree = "<absolute>"; };
-		A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "/opt/local/lib/libboost_system-mt.dylib"; sourceTree = "<absolute>"; };
+		A863435E193DF2990014C737 /* libboost_filesystem-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_filesystem-mt.a"; path = "../lib/libboost_filesystem-mt.a"; sourceTree = "<group>"; };
+		A863435F193DF2990014C737 /* libboost_random-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_random-mt.a"; path = "../lib/libboost_random-mt.a"; sourceTree = "<group>"; };
+		A8634360193DF2990014C737 /* libboost_system-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_system-mt.a"; path = "../lib/libboost_system-mt.a"; sourceTree = "<group>"; };
+		A8634361193DF2990014C737 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../lib/libz.a; sourceTree = "<group>"; };
 		A8AF101F1923BD0D00D639E1 /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = ../lib/libNEATLib.a; sourceTree = "<group>"; };
 		A8AF10201923BD0D00D639E1 /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = ../lib/libtinyxmlpluslib.a; sourceTree = "<group>"; };
 		A8AF10231923BD3800D639E1 /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = "../../../../Library/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug/libshared.a"; sourceTree = "<group>"; };
@@ -58,13 +59,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8634362193DF2990014C737 /* libboost_filesystem-mt.a in Frameworks */,
+				A8634363193DF2990014C737 /* libboost_random-mt.a in Frameworks */,
+				A8634364193DF2990014C737 /* libboost_system-mt.a in Frameworks */,
+				A8634365193DF2990014C737 /* libz.a in Frameworks */,
 				A821A96B192DF3450088748C /* libshared.a in Frameworks */,
 				A8AF10211923BD0D00D639E1 /* libNEATLib.a in Frameworks */,
 				A8AF10221923BD0D00D639E1 /* libtinyxmlpluslib.a in Frameworks */,
-				A89E5B881907A042008C9CDD /* libboost_system-mt.dylib in Frameworks */,
-				A86042651906CD1500972DED /* libz.dylib in Frameworks */,
 				61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */,
-				617B371C19265496001D459C /* libboost_random-mt.dylib in Frameworks */,
 				61AD16401897F90A003D24DE /* libController.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,10 +106,10 @@
 			children = (
 				61AD163E1897F90A003D24DE /* libController.dylib */,
 				61AD163F1897F90A003D24DE /* libCppController.dylib */,
-				A89E5B871907A042008C9CDD /* libboost_system-mt.dylib */,
-				617B371B19265496001D459C /* libboost_random-mt.dylib */,
-				A89E5B851907A01C008C9CDD /* libboost_filesystem-mt.dylib */,
-				A86042641906CD1500972DED /* libz.dylib */,
+				A863435E193DF2990014C737 /* libboost_filesystem-mt.a */,
+				A863435F193DF2990014C737 /* libboost_random-mt.a */,
+				A8634360193DF2990014C737 /* libboost_system-mt.a */,
+				A8634361193DF2990014C737 /* libz.a */,
 				A8AF101F1923BD0D00D639E1 /* libNEATLib.a */,
 				A8AF10201923BD0D00D639E1 /* libtinyxmlpluslib.a */,
 				A8AF10231923BD3800D639E1 /* libshared.a */,
@@ -291,6 +293,7 @@
 					/opt/local/lib,
 					../lib,
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
+					"/Users/emanuele/Documents/projects/tol-controllers/lib",
 				);
 				PRODUCT_NAME = EvolverController;
 			};
@@ -308,6 +311,7 @@
 					/opt/local/lib,
 					../lib,
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
+					"/Users/emanuele/Documents/projects/tol-controllers/lib",
 				);
 				PRODUCT_NAME = EvolverController;
 			};

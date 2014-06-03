@@ -154,5 +154,20 @@
       <FileRef
          location = "group:libtinyxmlpluslib.a">
       </FileRef>
+      <FileRef
+         location = "group:libboost_filesystem-mt.a">
+      </FileRef>
+      <FileRef
+         location = "group:libboost_random-mt.a">
+      </FileRef>
+      <FileRef
+         location = "group:libboost_system-mt.a">
+      </FileRef>
+      <FileRef
+         location = "group:libgsl.a">
+      </FileRef>
+      <FileRef
+         location = "group:libz.a">
+      </FileRef>
    </Group>
 </Workspace>

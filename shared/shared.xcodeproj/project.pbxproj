@@ -12,7 +12,6 @@
 		617B370619263D3A001D459C /* gtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 617B370519263D3A001D459C /* gtest.framework */; };
 		617B3713192646CC001D459C /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B3712192646CC001D459C /* Random.cpp */; };
 		617B3715192646D3001D459C /* Random.h in Headers */ = {isa = PBXBuildFile; fileRef = 617B3714192646D3001D459C /* Random.h */; };
-		617B3718192647CC001D459C /* libboost_random-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 617B3717192647CC001D459C /* libboost_random-mt.dylib */; };
 		617B37201929FFF1001D459C /* MatrixGenomeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 617B371F1929FFF1001D459C /* MatrixGenomeManager.h */; };
 		617B37221929FFF8001D459C /* MatrixGenomeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B37211929FFF8001D459C /* MatrixGenomeManager.cpp */; };
 		617B3725192A3298001D459C /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBC419224330000E6D71 /* libshared.a */; };
@@ -39,6 +38,7 @@
 		A84062B1193CD1A600964153 /* ParentSelectionMechanism.h in Headers */ = {isa = PBXBuildFile; fileRef = A84062AE193CD1A600964153 /* ParentSelectionMechanism.h */; };
 		A84062B4193CD1B700964153 /* BinaryTournamentParentSelection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84062B2193CD1B700964153 /* BinaryTournamentParentSelection.cpp */; };
 		A84062B5193CD1B700964153 /* BestTwoParentSelection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84062B3193CD1B700964153 /* BestTwoParentSelection.cpp */; };
+		A8634377193DF3DC0014C737 /* libboost_random-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8634376193DF3DC0014C737 /* libboost_random-mt.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,7 +62,6 @@
 		617B370519263D3A001D459C /* gtest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = gtest.framework; path = ../../../../../../../../../Library/Frameworks/gtest.framework; sourceTree = "<group>"; };
 		617B3712192646CC001D459C /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
 		617B3714192646D3001D459C /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Random.h; sourceTree = "<group>"; };
-		617B3717192647CC001D459C /* libboost_random-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_random-mt.dylib"; path = "../../../../../../../../opt/local/lib/libboost_random-mt.dylib"; sourceTree = "<group>"; };
 		617B371D1929F5DB001D459C /* MindGenome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MindGenome.h; sourceTree = "<group>"; };
 		617B371E1929FD25001D459C /* MindGenomeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MindGenomeManager.h; sourceTree = "<group>"; };
 		617B371F1929FFF1001D459C /* MatrixGenomeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatrixGenomeManager.h; sourceTree = "<group>"; };
@@ -88,6 +87,7 @@
 		A84062AE193CD1A600964153 /* ParentSelectionMechanism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentSelectionMechanism.h; sourceTree = "<group>"; };
 		A84062B2193CD1B700964153 /* BinaryTournamentParentSelection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryTournamentParentSelection.cpp; sourceTree = "<group>"; };
 		A84062B3193CD1B700964153 /* BestTwoParentSelection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BestTwoParentSelection.cpp; sourceTree = "<group>"; };
+		A8634376193DF3DC0014C737 /* libboost_random-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_random-mt.a"; path = "../lib/libboost_random-mt.a"; sourceTree = "<group>"; };
 		A8CCFCBD192BA67F00D34ED4 /* ParametersReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParametersReader.h; sourceTree = "<group>"; };
 		A8E16AE9192F494600A5F17B /* MessagesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessagesManager.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,7 +98,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				617B3725192A3298001D459C /* libshared.a in Frameworks */,
-				617B3718192647CC001D459C /* libboost_random-mt.dylib in Frameworks */,
 				617B370619263D3A001D459C /* gtest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8634377193DF3DC0014C737 /* libboost_random-mt.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +133,7 @@
 		617B3716192647A6001D459C /* Libaries */ = {
 			isa = PBXGroup;
 			children = (
-				617B3717192647CC001D459C /* libboost_random-mt.dylib */,
+				A8634376193DF3DC0014C737 /* libboost_random-mt.a */,
 			);
 			name = Libaries;
 			sourceTree = "<group>";
@@ -450,6 +450,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/emanuele/Documents/projects/tol-controllers/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -458,6 +462,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/emanuele/Documents/projects/tol-controllers/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

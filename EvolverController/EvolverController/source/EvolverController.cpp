@@ -172,7 +172,7 @@ void EvolverController::storeParentsOnFile(double currentTime)
         Organism org = organismsList[i];
         if (org.getState() == Organism::ADULT)
         {
-            parentsFile << currentTime << " " << org.getId() << " " << org.getSize() << " " << org.getFitness() << " " << org.getOffspring() << std::endl;
+            parentsFile << currentTime << " " << org.getId() << " " << org.getSize() << " " << org.getFitness() << " " << org.getOffspring() << " " << org.getState() << std::endl;
         }
     }
     parentsFile.close();

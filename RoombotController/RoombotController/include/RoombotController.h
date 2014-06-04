@@ -92,6 +92,7 @@ private:
     int INDIVIDUAL_MATING_TIME = ParametersReader::get<int>("INDIVIDUAL_MATING_TIME");                      // FOR DISTRIBUTED REPRODUCTION
     int ROOMBOT_WAITING_TIME = ParametersReader::get<int>("ROOMBOT_WAITING_TIME");
     int UPDATE_FITNESS_IN_EVOLVER = ParametersReader::get<int>("MATING_TIME");      // FOR DISTRIBUTED REPRODUCTION
+    int UPDATE_FITNESS_INTERVAL = ParametersReader::get<int>("UPDATE_FITNESS_INTERVAL");
     
     double FERTILITY_DISTANCE = ParametersReader::get<double>("FERTILITY_DISTANCE");
     
@@ -229,6 +230,8 @@ private:
     void storeMatureLifeFitnessIntoFile(double fitness);
     
     void storeRebuild();
+    
+    void storeFertilityOnFile();
     
     double getRealFitness(double fitness);
     

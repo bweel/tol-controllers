@@ -723,6 +723,16 @@ void RoombotController::storeMatureLifeFitnessIntoFile(double fitness)
     fitnessFile.close();
 }
 
+
+void RoombotController::storeFertilityOnFile()
+{
+    ofstream fitnessFile;
+    fitnessFile.open(RESULTS_PATH + simulationDateAndTime + "/fertility.txt", ios::app);
+    fitnessFile << getTime() << " " << organismId << std::endl;
+    fitnessFile.close();
+}
+
+
 void RoombotController::storeRebuild()
 {
     ofstream rebuildFile;
@@ -1095,7 +1105,10 @@ void RoombotController::matureLife()
     if (isRoot())
     {
         std::pair<double, std::string> fitness = std::pair<double, std::string>();
+        fitness.first = 0;
+        fitness.second = "";
         double lastFitnessSent = 0;
+        double lastFitnessUpdate = 0;
         double lastMating = 0;
         double lastEvolverUpdate = 0;
         
@@ -1125,7 +1138,7 @@ void RoombotController::matureLife()
         
         while (step(TIME_STEP) != -1)
         {
-            
+            double now = getTime();
             
             /***************************************************************
              ****** CHECK FERTILITY FOR MATING SELECTION BY ORGANISMS ******
@@ -1143,6 +1156,8 @@ void RoombotController::matureLife()
                     if (distanceFromCenter > FERTILITY_DISTANCE)
                     {
                         fertile = true;
+                        
+                        storeFertilityOnFile();
                         std::cout << organismId << " became fertile" << std::endl;
                     }
                 }
@@ -1173,10 +1188,28 @@ void RoombotController::matureLife()
             
             if (deathType == DEATH_SELECTION_BY_TIME_TO_LIVE)
             {
-                if (getTime() - startingTimeMatureLife > matureTimeToLive)
+                if (now - startingTimeMatureLife > matureTimeToLive)
                 {
                     return; // end mature life (so die)
                 }
+            }
+            
+            
+            /**************************
+             ***** UPDATE FITNESS *****
+             **************************/
+            
+            if (now - lastFitnessUpdate > UPDATE_FITNESS_INTERVAL)
+            {
+                // compute fitness
+                _time_end = getTime();
+                _position_end = _get_gps();
+                fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));
+                
+                // reset time, position and lastFitnessSent for next fitness evaluation
+                _time_start = getTime();
+                _position_start = _get_gps();
+                lastFitnessUpdate = getTime();
             }
             
             
@@ -1186,7 +1219,7 @@ void RoombotController::matureLife()
             
             if (matingType == MATING_SELECTION_BY_ORGANISMS)
             {
-                if (getTime() - lastEvolverUpdate > UPDATE_FITNESS_IN_EVOLVER)
+                if (now - lastEvolverUpdate > UPDATE_FITNESS_IN_EVOLVER)
                 {
                     sendFitnessUpdateToEvolver(fitness.first);
                     lastEvolverUpdate = getTime();
@@ -1219,20 +1252,14 @@ void RoombotController::matureLife()
             }
             
             
-            
             /**********************************
              ***** SEND GENOME TO EVOLVER *****
              **********************************/
             
             if (matingType == MATING_SELECTION_BY_EVOLVER)
             {
-                if (getTime() - lastFitnessSent > SEND_FITNESS_TO_EVOLVER_INTERVAL)
+                if (now - lastFitnessSent > SEND_FITNESS_TO_EVOLVER_INTERVAL)
                 {
-                    // compute fitness
-                    _time_end = getTime();
-                    _position_end = _get_gps();
-                    std::pair<double, std::string> fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));
-                    
                     // send genome and fitness to evolver
                     string message = "[GENOME_SPREAD_MESSAGE]";
                     message = MessagesManager::add(message, "ID", std::to_string(organismId));
@@ -1244,9 +1271,6 @@ void RoombotController::matureLife()
                     // store in file
                     storeMatureLifeFitnessIntoFile(fitness.first);
                     
-                    // reset time, position and lastFitnessSent for next fitness evaluation
-                    _time_start = getTime();
-                    _position_start = _get_gps();
                     lastFitnessSent = getTime();
                 }
             }
@@ -1262,13 +1286,8 @@ void RoombotController::matureLife()
                 {
                     // sending
                     
-                    if (getTime() - lastFitnessSent > SPREAD_FITNESS_INTERVAL)
+                    if (now - lastFitnessSent > SPREAD_FITNESS_INTERVAL)
                     {
-                        // compute fitness
-                        _time_end = getTime();
-                        _position_end = _get_gps();
-                        fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));
-                        
                         // spread genome and fitness
                         std::string genomeMessage = "[GENOME_SPREAD_MESSAGE]";
                         genomeMessage = MessagesManager::add(genomeMessage, "ID", std::to_string(organismId));
@@ -1278,9 +1297,6 @@ void RoombotController::matureLife()
                         
                         genomeEmitter->send(genomeMessage.c_str(), (int)genomeMessage.length()+1);
                         
-                        // reset time, position and lastFitnessSent for next fitness evaluation
-                        _time_start = getTime();
-                        _position_start = _get_gps();
                         lastFitnessSent = getTime();
                     }
                     
@@ -1306,7 +1322,7 @@ void RoombotController::matureLife()
                     
                     // mate
                     
-                    if (getTime() - lastMating > INDIVIDUAL_MATING_TIME)
+                    if (now - lastMating > INDIVIDUAL_MATING_TIME)
                     {
                         if (organismsToMateWith.size() > 0)
                         {

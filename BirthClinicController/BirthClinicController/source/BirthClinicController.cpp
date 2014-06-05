@@ -74,10 +74,25 @@ void BirthClinicController::addModuleToReserve(std::string moduleDef)
     {
         int idx = std::atoi(moduleDef.substr(moduleDef.find("_")+1, moduleDef.length()).c_str());
         
-        std::cout << "module " << idx << " added to available" << std::endl;
-        
         moduleMap[idx]->toReserve();
-        availableModules.push(idx);
+        
+        bool alreadyAvailable = false;
+        std::stack<id_t> stackCopy = availableModules;
+        while (!stackCopy.empty())
+        {
+            id_t i = stackCopy.top();
+            stackCopy.pop();
+            if (i == idx)
+            {
+                alreadyAvailable = true;
+            }
+        }
+        if (!alreadyAvailable)
+        {
+            availableModules.push(idx);
+        }
+        
+        std::cout << "module " << idx << " added to available" << std::endl;
     }
     else
     {

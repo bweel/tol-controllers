@@ -25,6 +25,25 @@ bool EvolverController::checkEvolutionEnd()
 }
 
 
+CppnGenome EvolverController::createRandomGenome()
+{
+    Builder * builder = new Builder();
+    while (true)
+    {
+        std::cout << "creating genome" << std::endl;
+        CppnGenome newGenome = genomeManager->createGenome(std::vector<CppnGenome>());
+        std::auto_ptr<BuildPlan> buildPlan = builder->translateGenome(newGenome);
+        std::cout << buildPlan->size() << std::endl;
+        if (buildPlan->size() > 1)
+        {
+            delete builder;
+            return newGenome;
+        }
+    }
+    delete builder;
+}
+
+
 void EvolverController::sendGenomeToBirthClinic(std::string genome, std::string newMind, id_t parent1, id_t parent2, double fitness1, double fitness2)
 {
     emitter->setChannel(CLINIC_CHANNEL);
@@ -288,13 +307,13 @@ void EvolverController::run()
      ******* CREATE THE FIRST GENOME *******
      ***************************************/
     
-    CppnGenome newGenome = genomeManager->createGenome(std::vector<CppnGenome>());
+    CppnGenome newGenome = createRandomGenome();
     sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), "", 0, 0, 0, 0);
     
     
     // MAIN CYCLE
     
-    int generated = 1;
+    bool initialization = true;
     int initPopulationWaitingTime = getRandomWait();
     double lastGeneratedTime = 0;
     
@@ -318,7 +337,7 @@ void EvolverController::run()
         {
             if (checkEvolutionEnd())
             {
-                generated = 0;
+                initialization = true;
                 initPopulationWaitingTime = 0;
             }
             lastEvolutionEndCheck = getTime();
@@ -329,11 +348,10 @@ void EvolverController::run()
          ***** POPULATION INITIALIZATION *****
          *************************************/
         
-        if (generated < INITIAL_POPULATION and currentTime - lastGeneratedTime > initPopulationWaitingTime)
+        if (initialization && (currentTime - lastGeneratedTime > initPopulationWaitingTime))
         {
-            CppnGenome newGenome = genomeManager->createGenome(std::vector<CppnGenome>());
+            CppnGenome newGenome = createRandomGenome();
             sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), "", 0, 0, 0, 0);
-            generated++;
             lastGeneratedTime = getTime();
             initPopulationWaitingTime = getRandomWait();
         }
@@ -476,7 +494,11 @@ void EvolverController::run()
                     std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(id1) + " and " + std::to_string(id2);
                     storeEventOnFile(log);
                     
+                    // send new genome to birth clinic
                     sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), id1, id2, fitness1, fitness2);
+                    
+                    // stop initialization
+                    initialization = false;
                 }
             }
             
@@ -556,6 +578,8 @@ void EvolverController::run()
                     double fitness1 = organismsList[searchForOrganism(forMating[0])].getFitness();
                     double fitness2 = organismsList[searchForOrganism(forMating[1])].getFitness();
                     sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), forMating[0], forMating[1], fitness1, fitness2);
+                    
+                    initialization = false;
                 }
                 if (forMating.size() == 1)
                 {
@@ -581,6 +605,8 @@ void EvolverController::run()
                     
                     double fitness = organismsList[searchForOrganism(forMating[0])].getFitness();
                     sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), forMating[0], 0, fitness, -1);
+                    
+                    initialization = false;
                 }
                 if (forMating.size() == 0)
                 {

@@ -229,9 +229,11 @@ private:
     
     void storeMatureLifeFitnessIntoFile(double fitness);
     
-    void storeRebuild();
+    void storeRebuild(std::string message);
     
     void storeFertilityOnFile();
+    
+    void storeDeathProblem(std::string message);
     
     double getRealFitness(double fitness);
     
@@ -242,6 +244,8 @@ private:
     
     // before starting
     bool checkLocks();
+    
+    bool checkFallenInside();
     
     // initial learning
     void infancy();

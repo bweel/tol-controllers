@@ -733,12 +733,20 @@ void RoombotController::storeFertilityOnFile()
 }
 
 
-void RoombotController::storeRebuild()
+void RoombotController::storeRebuild(std::string message)
 {
     ofstream rebuildFile;
     rebuildFile.open(RESULTS_PATH + simulationDateAndTime + "/rebuild.txt", ios::app);
-    rebuildFile << getTime() << " " << organismId << std::endl;
+    rebuildFile << getTime() << " " << organismId << " " << message << std::endl;
     rebuildFile.close();
+}
+
+void RoombotController::storeDeathProblem(std::string message)
+{
+    ofstream deathFile;
+    deathFile.open(RESULTS_PATH + simulationDateAndTime + "/death_problems.txt", ios::app);
+    deathFile << getTime() << " " << getName() << " " << message << std::endl;
+    deathFile.close();
 }
 
 
@@ -903,6 +911,55 @@ bool RoombotController::checkLocks()
     }
     
     return connectorsOK;
+}
+
+
+bool RoombotController::checkFallenInside()
+{
+    bool positionOK = true;
+    
+    if (isRoot())
+    {
+        const double * position = _gps->getValues();
+        double x = position[0];
+        double z = position[2];
+        double distanceFromCenter = sqrt((x*x) + (z*z));
+        
+        if (distanceFromCenter < 2)
+        {
+            std::cout << getName() << " detected fallen into cylinder problem" << std::endl;
+            
+            std::string message = "[CYLINDER_PROBLEM_MESSAGE]";
+            _emitter->send(message.c_str(), (int)message.length()+1);
+            return false;
+        }
+    }
+    else
+    {
+        double startingTime = getTime();
+        while (getTime() - startingTime < 1)
+        {
+            if(step(TIME_STEP) == -1) {
+                return positionOK;
+            }
+            
+            if(_receiver->getQueueLength() > 0)
+            {
+                std::string message = (char*)_receiver->getData();
+                
+                if (message.compare("[CYLINDER_PROBLEM_MESSAGE]") == 0)
+                {
+                    std::cout << getName() << " received fallen into cylinder problem" << std::endl;
+                    
+                    return false;
+                }
+                
+                _receiver->nextPacket();
+            }
+        }
+    }
+    
+    return positionOK;
 }
 
 
@@ -1423,48 +1480,71 @@ void RoombotController::matureLife()
 
 void RoombotController::death()
 {
-    for(int i = 0; i < connectors.size(); i++)
-    {
-        connectors[i]->unlock();
-    }
-    
-    double startingTime = getTime();
-    while (getTime() - startingTime < 3)
-    {
-        for(int i = 0; i < numMotors; i++)
+    try {
+        for(int i = 0; i < connectors.size(); i++)
         {
-            _set_motor_position(i, 0);
+            connectors[i]->unlock();
         }
         
-        if (step(TIME_STEP) == -1)
+        double startingTime = getTime();
+        while (getTime() - startingTime < 3)
         {
-            return;
+            for(int i = 0; i < numMotors; i++)
+            {
+                _set_motor_position(i, 0);
+            }
+            
+            if (step(TIME_STEP) == -1)
+            {
+                return;
+            }
         }
-    }
-    
-    if (isRoot())
-    {
-        _emitter->setChannel(EVOLVER_CHANNEL);
-        std::string message = "[DEATH_ANNOUNCEMENT_MESSAGE]";
-        message = MessagesManager::add(message, "ID", std::to_string(organismId));
+        
+        if (isRoot())
+        {
+            _emitter->setChannel(EVOLVER_CHANNEL);
+            std::string message = "[DEATH_ANNOUNCEMENT_MESSAGE]";
+            message = MessagesManager::add(message, "ID", std::to_string(organismId));
+            _emitter->send(message.c_str(), (int)message.length()+1);
+        }
+        
+        _emitter->setChannel(MODIFIER_CHANNEL);
+        std::string message = "[TO_RESERVE_MESSAGE]";
+        message = MessagesManager::add(message, "NAME", getName());
         _emitter->send(message.c_str(), (int)message.length()+1);
+        
+        while (true)
+        {
+            for(int i = 0; i < numMotors; i++)
+            {
+                _set_motor_position(i, 0);
+            }
+            if (step(TIME_STEP) == -1)
+            {
+                return;
+            }
+        }
     }
-    
-    _emitter->setChannel(MODIFIER_CHANNEL);
-    std::string message = "[TO_RESERVE_MESSAGE]";
-    message = MessagesManager::add(message, "NAME", getName());
-    _emitter->send(message.c_str(), (int)message.length()+1);
-    
-    while (true)
-    {
-        for(int i = 0; i < numMotors; i++)
-        {
-            _set_motor_position(i, 0);
-        }
-        if (step(TIME_STEP) == -1)
-        {
-            return;
-        }
+    catch (int err) {
+        std::string message = "error number" + std::to_string(err);
+        std::cerr << "DEATH PROBLEM: " << message << std::endl;
+        storeDeathProblem(message);
+        death();
+        return;
+    }
+    catch (std::exception e) {
+        std::string message = e.what();
+        std::cerr << "DEATH PROBLEM: " << message << std::endl;
+        storeDeathProblem(message);
+        death();
+        return;
+    }
+    catch (...) {
+        std::string message = "something else";
+        std::cerr << "DEATH PROBLEM: " << message << std::endl;
+        storeDeathProblem(message);
+        death();
+        return;
     }
 }
 
@@ -1507,7 +1587,7 @@ void RoombotController::run()
         if (isRoot())
         {
             askToBeBuiltAgain();
-            storeRebuild();
+            storeRebuild("connection problem");
         }
         death();
         return;
@@ -1521,6 +1601,18 @@ void RoombotController::run()
         {
             return;
         }
+    }
+    
+    // check if it fell inside the cylinder
+    if (!checkFallenInside())
+    {
+        if (isRoot())
+        {
+            askToBeBuiltAgain();
+            storeRebuild("fallen into cylinder");
+        }
+        death();
+        return;
     }
     
     std::cout << getName() << " STARTS INFANCY" << std::endl;

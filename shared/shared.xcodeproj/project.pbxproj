@@ -31,6 +31,15 @@
 		61EBFBD4192243B4000E6D71 /* Position.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EBFBCD192243B4000E6D71 /* Position.h */; };
 		61EBFBD5192243B4000E6D71 /* CppnGenome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61EBFBCF192243B4000E6D71 /* CppnGenome.cpp */; };
 		61EBFBD6192243B4000E6D71 /* Position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61EBFBD0192243B4000E6D71 /* Position.cpp */; };
+		A82391991940C29A00F3267C /* Builder.h in Headers */ = {isa = PBXBuildFile; fileRef = A82391981940C29A00F3267C /* Builder.h */; };
+		A823919B1940C2A500F3267C /* Builder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A823919A1940C2A500F3267C /* Builder.cpp */; };
+		A823919E1940C4CE00F3267C /* RelativePosition.h in Headers */ = {isa = PBXBuildFile; fileRef = A823919C1940C4CE00F3267C /* RelativePosition.h */; };
+		A823919F1940C4CE00F3267C /* RoombotBuildPlan.h in Headers */ = {isa = PBXBuildFile; fileRef = A823919D1940C4CE00F3267C /* RoombotBuildPlan.h */; };
+		A82391A21940C4DA00F3267C /* RelativePosition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82391A01940C4DA00F3267C /* RelativePosition.cpp */; };
+		A82391A31940C4DA00F3267C /* RoombotBuildPlan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82391A11940C4DA00F3267C /* RoombotBuildPlan.cpp */; };
+		A82391A51940C52F00F3267C /* ActivationValueMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = A82391A41940C52F00F3267C /* ActivationValueMatrix.h */; };
+		A82391A81940C53F00F3267C /* ActivationValueMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82391A61940C53F00F3267C /* ActivationValueMatrix.cpp */; };
+		A82391A91940C53F00F3267C /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82391A71940C53F00F3267C /* Bitmap.cpp */; };
 		A84062A9193CD14100964153 /* RandomSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = A84062A8193CD14100964153 /* RandomSelection.h */; };
 		A84062AB193CD15700964153 /* RandomSelection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84062AA193CD15700964153 /* RandomSelection.cpp */; };
 		A84062AF193CD1A600964153 /* BestTwoParentSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = A84062AC193CD1A600964153 /* BestTwoParentSelection.h */; };
@@ -79,6 +88,15 @@
 		61EBFBCD192243B4000E6D71 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Position.h; sourceTree = "<group>"; };
 		61EBFBCF192243B4000E6D71 /* CppnGenome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CppnGenome.cpp; sourceTree = "<group>"; };
 		61EBFBD0192243B4000E6D71 /* Position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Position.cpp; sourceTree = "<group>"; };
+		A82391981940C29A00F3267C /* Builder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Builder.h; sourceTree = "<group>"; };
+		A823919A1940C2A500F3267C /* Builder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Builder.cpp; sourceTree = "<group>"; };
+		A823919C1940C4CE00F3267C /* RelativePosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelativePosition.h; sourceTree = "<group>"; };
+		A823919D1940C4CE00F3267C /* RoombotBuildPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoombotBuildPlan.h; sourceTree = "<group>"; };
+		A82391A01940C4DA00F3267C /* RelativePosition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RelativePosition.cpp; sourceTree = "<group>"; };
+		A82391A11940C4DA00F3267C /* RoombotBuildPlan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoombotBuildPlan.cpp; sourceTree = "<group>"; };
+		A82391A41940C52F00F3267C /* ActivationValueMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivationValueMatrix.h; sourceTree = "<group>"; };
+		A82391A61940C53F00F3267C /* ActivationValueMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActivationValueMatrix.cpp; sourceTree = "<group>"; };
+		A82391A71940C53F00F3267C /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
 		A84062A8193CD14100964153 /* RandomSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomSelection.h; sourceTree = "<group>"; };
 		A84062AA193CD15700964153 /* RandomSelection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RandomSelection.cpp; sourceTree = "<group>"; };
 		A84062AC193CD1A600964153 /* BestTwoParentSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BestTwoParentSelection.h; sourceTree = "<group>"; };
@@ -160,6 +178,10 @@
 		61EBFBCE192243B4000E6D71 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				A82391A41940C52F00F3267C /* ActivationValueMatrix.h */,
+				A823919C1940C4CE00F3267C /* RelativePosition.h */,
+				A823919D1940C4CE00F3267C /* RoombotBuildPlan.h */,
+				A82391981940C29A00F3267C /* Builder.h */,
 				A84062A8193CD14100964153 /* RandomSelection.h */,
 				A84062AC193CD1A600964153 /* BestTwoParentSelection.h */,
 				A84062AD193CD1A600964153 /* BinaryTournamentParentSelection.h */,
@@ -185,6 +207,11 @@
 		61EBFBD1192243B4000E6D71 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				A82391A61940C53F00F3267C /* ActivationValueMatrix.cpp */,
+				A82391A71940C53F00F3267C /* Bitmap.cpp */,
+				A82391A01940C4DA00F3267C /* RelativePosition.cpp */,
+				A82391A11940C4DA00F3267C /* RoombotBuildPlan.cpp */,
+				A823919A1940C2A500F3267C /* Builder.cpp */,
 				A84062B2193CD1B700964153 /* BinaryTournamentParentSelection.cpp */,
 				A84062B3193CD1B700964153 /* BestTwoParentSelection.cpp */,
 				A84062AA193CD15700964153 /* RandomSelection.cpp */,
@@ -209,10 +236,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				61C68B88192A4ADC00AD6D19 /* Organism.h in Headers */,
+				A823919E1940C4CE00F3267C /* RelativePosition.h in Headers */,
 				61C68B89192A4ADC00AD6D19 /* MatrixGenome.h in Headers */,
 				A84062AF193CD1A600964153 /* BestTwoParentSelection.h in Headers */,
 				61C68B8A192A4ADC00AD6D19 /* MindGenome.h in Headers */,
+				A82391A51940C52F00F3267C /* ActivationValueMatrix.h in Headers */,
 				61C68B8B192A4ADC00AD6D19 /* MindGenomeManager.h in Headers */,
+				A823919F1940C4CE00F3267C /* RoombotBuildPlan.h in Headers */,
 				A84062B1193CD1A600964153 /* ParentSelectionMechanism.h in Headers */,
 				61EBFBD2192243B4000E6D71 /* CppnGenome.h in Headers */,
 				61C68B8D192A4B1400AD6D19 /* BuildPlan.h in Headers */,
@@ -224,6 +254,7 @@
 				617B37201929FFF1001D459C /* MatrixGenomeManager.h in Headers */,
 				A84062B0193CD1A600964153 /* BinaryTournamentParentSelection.h in Headers */,
 				A84062A9193CD14100964153 /* RandomSelection.h in Headers */,
+				A82391991940C29A00F3267C /* Builder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,15 +337,20 @@
 			files = (
 				617B3713192646CC001D459C /* Random.cpp in Sources */,
 				61C68B87192A4AC600AD6D19 /* Module.cpp in Sources */,
+				A82391A31940C4DA00F3267C /* RoombotBuildPlan.cpp in Sources */,
 				617B36F519263624001D459C /* MatrixGenome.cpp in Sources */,
 				A84062AB193CD15700964153 /* RandomSelection.cpp in Sources */,
 				618F2E221934C6D6001500A0 /* ParametersReader.cpp in Sources */,
+				A823919B1940C2A500F3267C /* Builder.cpp in Sources */,
 				61C68B83192A4A4F00AD6D19 /* Organism.cpp in Sources */,
 				617B37221929FFF8001D459C /* MatrixGenomeManager.cpp in Sources */,
 				61EBFBD6192243B4000E6D71 /* Position.cpp in Sources */,
 				617B3727192A32CC001D459C /* MindGenome.cpp in Sources */,
 				61EBFBD5192243B4000E6D71 /* CppnGenome.cpp in Sources */,
+				A82391A91940C53F00F3267C /* Bitmap.cpp in Sources */,
 				A84062B4193CD1B700964153 /* BinaryTournamentParentSelection.cpp in Sources */,
+				A82391A21940C4DA00F3267C /* RelativePosition.cpp in Sources */,
+				A82391A81940C53F00F3267C /* ActivationValueMatrix.cpp in Sources */,
 				A84062B5193CD1B700964153 /* BestTwoParentSelection.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

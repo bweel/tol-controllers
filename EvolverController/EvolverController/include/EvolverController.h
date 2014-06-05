@@ -8,6 +8,7 @@
 #include "MatrixGenomeManager.h"
 #include "Organism.h"
 #include "ParentSelectionMechanism.h"
+#include "Builder.h"
 
 #include <webots/Supervisor.hpp>
 
@@ -26,7 +27,7 @@ private:
     int DEATH_CHANNEL = ParametersReader::get<int>("DEATH_CHANNEL");
     
     int NUMBER_OF_MODULES = ParametersReader::get<int>("NUMBER_OF_MODULES");
-    int INITIAL_POPULATION = ParametersReader::get<int>("INITIAL_POPULATION");
+    //int INITIAL_POPULATION = ParametersReader::get<int>("INITIAL_POPULATION");
     
     int MATING_TIME = ParametersReader::get<int>("MATING_TIME");
     int DYING_TIME = ParametersReader::get<int>("DYING_TIME");
@@ -65,6 +66,8 @@ private:
     void readFitnessMessage(id_t * id, double * fitness, std::string * genome, std::string * mind, std::string message);
     
     void readCoupleMessage(std::string message, id_t * id1, double * fitness1, std::string * genome1, std::string * mind1, id_t * id2, double * fitness2, std::string * genome2, std::string * mind2);
+    
+    CppnGenome createRandomGenome();
     
     void sendGenomeToBirthClinic(std::string genome, std::string newMind, id_t parent1, id_t parent2, double fitness1, double fitness2);
     

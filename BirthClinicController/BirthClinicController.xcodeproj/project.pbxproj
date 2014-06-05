@@ -18,11 +18,6 @@
 		A863435B193DF2210014C737 /* libboost_filesystem-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8634358193DF2210014C737 /* libboost_filesystem-mt.a */; };
 		A863435C193DF2210014C737 /* libboost_system-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8634359193DF2210014C737 /* libboost_system-mt.a */; };
 		A863435D193DF2210014C737 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A863435A193DF2210014C737 /* libz.a */; };
-		A8C42D95191A5FFF006DAF05 /* Builder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8C42D93191A5FFF006DAF05 /* Builder.cpp */; };
-		A8C42D99191A6352006DAF05 /* RoombotBuildPlan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8C42D98191A6352006DAF05 /* RoombotBuildPlan.cpp */; };
-		A8C42DC7191A640C006DAF05 /* ActivationValueMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8C42DC4191A640C006DAF05 /* ActivationValueMatrix.cpp */; };
-		A8C42DC8191A640C006DAF05 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8C42DC5191A640C006DAF05 /* Bitmap.cpp */; };
-		A8C42DC9191A640C006DAF05 /* RelativePosition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8C42DC6191A640C006DAF05 /* RelativePosition.cpp */; };
 		A8E6B63819000AA9000D6E40 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8E6B63619000AA9000D6E40 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -53,15 +48,6 @@
 		A8634359193DF2210014C737 /* libboost_system-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_system-mt.a"; path = "../lib/libboost_system-mt.a"; sourceTree = "<group>"; };
 		A863435A193DF2210014C737 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../lib/libz.a; sourceTree = "<group>"; };
 		A89B1510190946640075DDE2 /* RoombotModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RoombotModule.h; path = BirthClinicController/include/RoombotModule.h; sourceTree = SOURCE_ROOT; };
-		A8C42D93191A5FFF006DAF05 /* Builder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Builder.cpp; path = BirthClinicController/source/Builder.cpp; sourceTree = SOURCE_ROOT; };
-		A8C42D97191A6346006DAF05 /* RoombotBuildPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoombotBuildPlan.h; path = BirthClinicController/include/RoombotBuildPlan.h; sourceTree = SOURCE_ROOT; };
-		A8C42D98191A6352006DAF05 /* RoombotBuildPlan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RoombotBuildPlan.cpp; path = BirthClinicController/source/RoombotBuildPlan.cpp; sourceTree = SOURCE_ROOT; };
-		A8C42DC1191A63EA006DAF05 /* ActivationValueMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivationValueMatrix.h; path = BirthClinicController/include/ActivationValueMatrix.h; sourceTree = SOURCE_ROOT; };
-		A8C42DC3191A63EA006DAF05 /* RelativePosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RelativePosition.h; path = BirthClinicController/include/RelativePosition.h; sourceTree = SOURCE_ROOT; };
-		A8C42DC4191A640C006DAF05 /* ActivationValueMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActivationValueMatrix.cpp; path = BirthClinicController/source/ActivationValueMatrix.cpp; sourceTree = SOURCE_ROOT; };
-		A8C42DC5191A640C006DAF05 /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Bitmap.cpp; path = BirthClinicController/source/Bitmap.cpp; sourceTree = SOURCE_ROOT; };
-		A8C42DC6191A640C006DAF05 /* RelativePosition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RelativePosition.cpp; path = BirthClinicController/source/RelativePosition.cpp; sourceTree = SOURCE_ROOT; };
-		A8C42DCA191A6A27006DAF05 /* Builder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Builder.h; path = BirthClinicController/include/Builder.h; sourceTree = SOURCE_ROOT; };
 		A8E6B63619000AA9000D6E40 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = BirthClinicController/source/main.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -130,11 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				A84E613A18FE881C007E227E /* BirthClinicController.h */,
-				A8C42DCA191A6A27006DAF05 /* Builder.h */,
-				A8C42D97191A6346006DAF05 /* RoombotBuildPlan.h */,
 				A89B1510190946640075DDE2 /* RoombotModule.h */,
-				A8C42DC1191A63EA006DAF05 /* ActivationValueMatrix.h */,
-				A8C42DC3191A63EA006DAF05 /* RelativePosition.h */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -143,12 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				A84E613B18FE883B007E227E /* BirthClinicController.cpp */,
-				A8C42D93191A5FFF006DAF05 /* Builder.cpp */,
-				A8C42D98191A6352006DAF05 /* RoombotBuildPlan.cpp */,
 				A84F2AEB190A970E0033F39C /* RoombotModule.cpp */,
-				A8C42DC4191A640C006DAF05 /* ActivationValueMatrix.cpp */,
-				A8C42DC6191A640C006DAF05 /* RelativePosition.cpp */,
-				A8C42DC5191A640C006DAF05 /* Bitmap.cpp */,
 				A8E6B63619000AA9000D6E40 /* main.cpp */,
 			);
 			name = source;
@@ -205,11 +182,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8C42D95191A5FFF006DAF05 /* Builder.cpp in Sources */,
-				A8C42DC9191A640C006DAF05 /* RelativePosition.cpp in Sources */,
-				A8C42D99191A6352006DAF05 /* RoombotBuildPlan.cpp in Sources */,
-				A8C42DC8191A640C006DAF05 /* Bitmap.cpp in Sources */,
-				A8C42DC7191A640C006DAF05 /* ActivationValueMatrix.cpp in Sources */,
 				A84F2AED190A970E0033F39C /* RoombotModule.cpp in Sources */,
 				A8E6B63819000AA9000D6E40 /* main.cpp in Sources */,
 				A84E613D18FE883B007E227E /* BirthClinicController.cpp in Sources */,

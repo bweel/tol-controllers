@@ -27,20 +27,26 @@ bool EvolverController::checkEvolutionEnd()
 
 CppnGenome EvolverController::createRandomGenome()
 {
-    Builder * builder = new Builder();
     while (true)
     {
-        std::cout << "creating genome" << std::endl;
         CppnGenome newGenome = genomeManager->createGenome(std::vector<CppnGenome>());
-        std::auto_ptr<BuildPlan> buildPlan = builder->translateGenome(newGenome);
-        std::cout << buildPlan->size() << std::endl;
-        if (buildPlan->size() > 1)
+        bool empty = checkEmptyPlan(newGenome);
+        if (!empty)
         {
-            delete builder;
             return newGenome;
         }
     }
-    delete builder;
+}
+
+
+bool EvolverController::checkEmptyPlan(CppnGenome genome)
+{
+    std::auto_ptr<BuildPlan> buildPlan = builder->translateGenome(genome);
+    if (buildPlan->size() > 1)
+    {
+        return false;
+    }
+    return true;
 }
 
 
@@ -264,6 +270,8 @@ EvolverController::EvolverController() : Supervisor()
     emitter->setChannel(CLINIC_CHANNEL);
     receiver = getReceiver(RECEIVER_NAME);
     receiver->setChannel(EVOLVER_CHANNEL);
+    
+    builder = new Builder();
 }
 
 
@@ -481,7 +489,13 @@ void EvolverController::run()
                     std::stringstream genomeAsStream2(genome2);
                     parentsGenomes.push_back(CppnGenome(genomeAsStream1));
                     parentsGenomes.push_back(CppnGenome(genomeAsStream2));
-                    CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
+                    
+                    bool done = false;
+                    for (int i = 0; i < 100 && !done; i ++)
+                    {
+                        CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
+                        done = checkEmptyPlan(newGenome);
+                    }
                     
                     // recombine minds
                     std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
@@ -560,7 +574,12 @@ void EvolverController::run()
                     parentsGenomes.push_back(CppnGenome(stream1));
                     parentsGenomes.push_back(CppnGenome(stream2));
                     
-                    CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
+                    bool done = false;
+                    for (int i = 0; i < 100 && !done; i ++)
+                    {
+                        CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
+                        done = checkEmptyPlan(newGenome);
+                    }
                     
                     std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
                     std::stringstream mind1(organismsList[searchForOrganism(forMating[0])].getMind());
@@ -591,7 +610,12 @@ void EvolverController::run()
                     
                     parentsGenomes.push_back(CppnGenome(stream1));
                     
-                    CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
+                    bool done = false;
+                    for (int i = 0; i < 100 && !done; i ++)
+                    {
+                        CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
+                        done = checkEmptyPlan(newGenome);
+                    }
                     
                     std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
                     std::stringstream mind1(organismsList[searchForOrganism(forMating[0])].getMind());

@@ -50,6 +50,8 @@ private:
     Receiver * receiver; 
     Emitter * emitter;
     
+    Builder * builder;
+    
     GenomeManager * genomeManager;
     MindGenomeManager * mindGenomeManager;
     ParentSelectionMechanism * parentSelectionMechanism;
@@ -85,6 +87,7 @@ private:
     
     int getRandomWait();
     
+    bool checkEmptyPlan(CppnGenome genome);
     
 public:
     

@@ -85,8 +85,6 @@ void EnvironmentModifierController::putModuleToReserve(std::string moduleName)
                 std::cout << moduleName << " to reserve" << std::endl;
                 
                 sendUpdateAvailableMessageToBirthClinic(MODULE_DEF_BASE_NAME + TO_STR(i));
-                
-                return;
             }
         }
         else

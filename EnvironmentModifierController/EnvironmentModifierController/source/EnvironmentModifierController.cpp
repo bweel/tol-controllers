@@ -38,7 +38,10 @@ void EnvironmentModifierController::putModuleToReserve(std::string moduleName)
         {
             Field * name = root->getField("name");
             
-            if (moduleName.compare(name->getSFString()) == 0)
+            std::string toRemoveSubStr = moduleName.substr(0,moduleName.find(":"));
+            std::string toCheckSubStr = name->getSFString().substr(0,name->getSFString().find(":"));
+            
+            if (toRemoveSubStr.compare(toCheckSubStr) == 0)
             {
                 Field * controller = root->getField("controller");
                 controller->setSFString("void");

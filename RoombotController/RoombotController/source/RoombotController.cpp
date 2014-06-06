@@ -741,12 +741,12 @@ void RoombotController::storeRebuild(std::string message)
     rebuildFile.close();
 }
 
-void RoombotController::storeDeathProblem(std::string message)
+void RoombotController::storeProblem(std::string message, std::string phase)
 {
-    ofstream deathFile;
-    deathFile.open(RESULTS_PATH + simulationDateAndTime + "/death_problems.txt", ios::app);
-    deathFile << getTime() << " " << getName() << " " << message << std::endl;
-    deathFile.close();
+    ofstream problemFile;
+    problemFile.open(RESULTS_PATH + simulationDateAndTime + "/problems.txt", ios::app);
+    problemFile << getTime() << " " << getName() << " PROBLEM IN " << phase << ": " << message << std::endl;
+    problemFile.close();
 }
 
 
@@ -1480,7 +1480,8 @@ void RoombotController::matureLife()
 
 void RoombotController::death()
 {
-    try {
+    try
+    {
         for(int i = 0; i < connectors.size(); i++)
         {
             connectors[i]->unlock();
@@ -1500,16 +1501,13 @@ void RoombotController::death()
             }
         }
         
-        if (isRoot())
-        {
-            _emitter->setChannel(EVOLVER_CHANNEL);
-            std::string message = "[DEATH_ANNOUNCEMENT_MESSAGE]";
-            message = MessagesManager::add(message, "ID", std::to_string(organismId));
-            _emitter->send(message.c_str(), (int)message.length()+1);
-        }
+        _emitter->setChannel(EVOLVER_CHANNEL);
+        std::string message = "[DEATH_ANNOUNCEMENT_MESSAGE]";
+        message = MessagesManager::add(message, "ID", std::to_string(organismId));
+        _emitter->send(message.c_str(), (int)message.length()+1);
         
         _emitter->setChannel(MODIFIER_CHANNEL);
-        std::string message = "[TO_RESERVE_MESSAGE]";
+        message = "[TO_RESERVE_MESSAGE]";
         message = MessagesManager::add(message, "NAME", getName());
         _emitter->send(message.c_str(), (int)message.length()+1);
         
@@ -1528,21 +1526,21 @@ void RoombotController::death()
     catch (int err) {
         std::string message = "error number" + std::to_string(err);
         std::cerr << "DEATH PROBLEM: " << message << std::endl;
-        storeDeathProblem(message);
+        storeProblem(message, "DEATH");
         death();
         return;
     }
     catch (std::exception e) {
         std::string message = e.what();
         std::cerr << "DEATH PROBLEM: " << message << std::endl;
-        storeDeathProblem(message);
+        storeProblem(message, "DEATH");
         death();
         return;
     }
     catch (...) {
         std::string message = "something else";
         std::cerr << "DEATH PROBLEM: " << message << std::endl;
-        storeDeathProblem(message);
+        storeProblem(message, "DEATH");
         death();
         return;
     }
@@ -1615,18 +1613,39 @@ void RoombotController::run()
         return;
     }
     
-    std::cout << getName() << " STARTS INFANCY" << std::endl;
-    
-    infancy();
-    
-    std::cout << getName() << " STARTS MATURE LIFE" << std::endl;
-    
-    if (isRoot())
+    std::string phase = "INFANCY";
+    try
     {
-        sendAdultAnnouncement();
+        std::cout << getName() << " STARTS INFANCY" << std::endl;
+        
+        infancy();
+        
+        std::cout << getName() << " STARTS MATURE LIFE" << std::endl;
+        
+        phase = "MATURE LIFE";
+        
+        if (isRoot())
+        {
+            sendAdultAnnouncement();
+        }
+        
+        matureLife();
     }
-    
-    matureLife();
+    catch (int err) {
+        std::string message = "error number" + std::to_string(err);
+        std::cerr << "PROBLEM in " << phase << ": " << message << std::endl;
+        storeProblem(message, phase);
+    }
+    catch (std::exception e) {
+        std::string message = e.what();
+        std::cerr << "PROBLEM in " << phase << ": " << message << std::endl;
+        storeProblem(message, phase);
+    }
+    catch (...) {
+        std::string message = "something else";
+        std::cerr << "PROBLEM in " << phase << ": " << message << std::endl;
+        storeProblem(message, phase);
+    }
     
     std::cout << getName() << " STARTS DEATH" << std::endl;
     

@@ -315,8 +315,8 @@ void EvolverController::run()
      ******* CREATE THE FIRST GENOME *******
      ***************************************/
     
-    CppnGenome newGenome = createRandomGenome();
-    sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), "", 0, 0, 0, 0);
+    CppnGenome genome = createRandomGenome();
+    sendGenomeToBirthClinic(genomeManager->genomeToString(genome), "", 0, 0, 0, 0);
     
     
     // MAIN CYCLE
@@ -476,53 +476,54 @@ void EvolverController::run()
                 
                 if (message.substr(0,16).compare("[COUPLE_MESSAGE]") == 0)
                 {
-                    // read message with couple
-                    id_t id1, id2;
-                    double fitness1, fitness2;
-                    std::string genome1, genome2;
-                    std::string mind1, mind2;
-                    readCoupleMessage(message, & id1, & fitness1, & genome1, & mind1, & id2, & fitness2, & genome2, & mind2);
-                    
-                    // recombine genomes
-                    std::vector<CppnGenome> parentsGenomes = std::vector<CppnGenome>();
-                    std::stringstream genomeAsStream1(genome1);
-                    std::stringstream genomeAsStream2(genome2);
-                    parentsGenomes.push_back(CppnGenome(genomeAsStream1));
-                    parentsGenomes.push_back(CppnGenome(genomeAsStream2));
-                    
-                    bool done = false;
-                    for (int i = 0; i < 100 && !done; i ++)
-                    {
-                        try {
+                    try {
+                        // read message with couple
+                        id_t id1, id2;
+                        double fitness1, fitness2;
+                        std::string genome1, genome2;
+                        std::string mind1, mind2;
+                        readCoupleMessage(message, & id1, & fitness1, & genome1, & mind1, & id2, & fitness2, & genome2, & mind2);
+                        
+                        // recombine genomes
+                        std::vector<CppnGenome> parentsGenomes = std::vector<CppnGenome>();
+                        std::stringstream genomeAsStream1(genome1);
+                        std::stringstream genomeAsStream2(genome2);
+                        parentsGenomes.push_back(CppnGenome(genomeAsStream1));
+                        parentsGenomes.push_back(CppnGenome(genomeAsStream2));
+                        
+                        bool empty = true;
+                        for (int i = 0; i < 100 && empty; i ++)
+                        {
                             CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
-                            done = checkEmptyPlan(newGenome);
-                        }catch(LocatedException &e){
-                            std::cout << "Mating failed, genomeManager threw a located exception: " << e.what();
-                        }catch(std::exception &e){
-                            std::cout << "Mating failed, genomeManager threw a normal exception: " << e.what();
+                            empty = checkEmptyPlan(newGenome);
+                        
+                            if(!empty) {
+                                // recombine minds
+                                std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
+                                std::stringstream mindAsStream1(mind1);
+                                std::stringstream mindAsStream2(mind2);
+                                parentMindGenomes.push_back(mindGenomeManager->getGenomeFromStream(mindAsStream1));
+                                parentMindGenomes.push_back(mindGenomeManager->getGenomeFromStream(mindAsStream2));
+                                boost::shared_ptr<MindGenome> newMind = mindGenomeManager->createGenome(parentMindGenomes);
+                                
+                                std::cout << "NEW GENOME CREATED FROM organism_" << id1 << " and organism_" << id2 << std::endl;
+                                
+                                // store event into file
+                                std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(id1) + " and " + std::to_string(id2);
+                                storeEventOnFile(log);
+                                
+                                // send new genome to birth clinic
+                                sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), id1, id2, fitness1, fitness2);
+                                
+                                // stop initialization
+                                initialization = false;
+                            }
                         }
+                    }catch(LocatedException &e){
+                        std::cout << "Mating failed, genomeManager threw a located exception: " << e.what();
+                    }catch(std::exception &e){
+                        std::cout << "Mating failed, genomeManager threw a normal exception: " << e.what();
                     }
-                    
-                    // recombine minds
-                    std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
-                    std::stringstream mindAsStream1(mind1);
-                    std::stringstream mindAsStream2(mind2);
-                    parentMindGenomes.push_back(mindGenomeManager->getGenomeFromStream(mindAsStream1));
-                    parentMindGenomes.push_back(mindGenomeManager->getGenomeFromStream(mindAsStream2));
-                    boost::shared_ptr<MindGenome> newMind = mindGenomeManager->createGenome(parentMindGenomes);
-                    
-                    std::cout << "NEW GENOME CREATED FROM organism_" << id1 << " and organism_" << id2 << std::endl;
-                    
-                    // store event into file
-                    std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(id1) + " and " + std::to_string(id2);
-                    storeEventOnFile(log);
-                    
-                    // send new genome to birth clinic
-                    sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), id1, id2, fitness1, fitness2);
-                    
-                    // stop initialization
-                    initialization = false;
-                    
                 }
             }
             
@@ -574,85 +575,89 @@ void EvolverController::run()
                 
                 if (forMating.size() == 2)
                 {
-                    std::vector<CppnGenome> parentsGenomes = std::vector<CppnGenome>();
-                    std::stringstream stream1(organismsList[searchForOrganism(forMating[0])].getGenome());
-                    std::stringstream stream2(organismsList[searchForOrganism(forMating[1])].getGenome());
-                    
-                    parentsGenomes.push_back(CppnGenome(stream1));
-                    parentsGenomes.push_back(CppnGenome(stream2));
-                    
-                    bool done = false;
-                    for (int i = 0; i < 100 && !done; i ++)
-                    {
-                        try {
+                    try {
+                        std::vector<CppnGenome> parentsGenomes = std::vector<CppnGenome>();
+                        std::stringstream stream1(organismsList[searchForOrganism(forMating[0])].getGenome());
+                        std::stringstream stream2(organismsList[searchForOrganism(forMating[1])].getGenome());
+                        
+                        parentsGenomes.push_back(CppnGenome(stream1));
+                        parentsGenomes.push_back(CppnGenome(stream2));
+                        
+                        bool empty = true;
+                        for (int i = 0; i < 100 && empty; i ++)
+                        {
                             CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
-                            done = checkEmptyPlan(newGenome);
-                        }catch(LocatedException &e){
-                            std::cout << "Mating failed, genomeManager threw a located exception: " << e.what();
-                        }catch(std::exception &e){
-                            std::cout << "Mating failed, genomeManager threw a normal exception: " << e.what();
+                            empty = checkEmptyPlan(newGenome);
+                        
+                            if(!empty) {
+                                std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
+                                std::stringstream mind1(organismsList[searchForOrganism(forMating[0])].getMind());
+                                std::stringstream mind2(organismsList[searchForOrganism(forMating[1])].getMind());
+                                
+                                boost::shared_ptr<MindGenome> mindGenome1 = mindGenomeManager->getGenomeFromStream(mind1);
+                                boost::shared_ptr<MindGenome> mindGenome2 = mindGenomeManager->getGenomeFromStream(mind2);
+                                
+                                parentMindGenomes.push_back(mindGenome1);
+                                parentMindGenomes.push_back(mindGenome2);
+                                boost::shared_ptr<MindGenome> newMind = mindGenomeManager->createGenome(parentMindGenomes);
+                                
+                                std::cout << "NEW GENOME CREATED FROM organism_" << forMating[0] << " and organism_" << forMating[1] << std::endl;
+                                
+                                std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(forMating[0]) + " and " + std::to_string(forMating[1]);
+                                storeEventOnFile(log);
+                                
+                                double fitness1 = organismsList[searchForOrganism(forMating[0])].getFitness();
+                                double fitness2 = organismsList[searchForOrganism(forMating[1])].getFitness();
+                                sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), forMating[0], forMating[1], fitness1, fitness2);
+                                
+                                initialization = false;
+                            }
                         }
+                    }catch(LocatedException &e){
+                        std::cout << "Mating failed, genomeManager threw a located exception: " << e.what();
+                    }catch(std::exception &e){
+                        std::cout << "Mating failed, genomeManager threw a normal exception: " << e.what();
                     }
-                    
-                    std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
-                    std::stringstream mind1(organismsList[searchForOrganism(forMating[0])].getMind());
-                    std::stringstream mind2(organismsList[searchForOrganism(forMating[1])].getMind());
-                    
-                    boost::shared_ptr<MindGenome> mindGenome1 = mindGenomeManager->getGenomeFromStream(mind1);
-                    boost::shared_ptr<MindGenome> mindGenome2 = mindGenomeManager->getGenomeFromStream(mind2);
-                    
-                    parentMindGenomes.push_back(mindGenome1);
-                    parentMindGenomes.push_back(mindGenome2);
-                    boost::shared_ptr<MindGenome> newMind = mindGenomeManager->createGenome(parentMindGenomes);
-                    
-                    std::cout << "NEW GENOME CREATED FROM organism_" << forMating[0] << " and organism_" << forMating[1] << std::endl;
-                    
-                    std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(forMating[0]) + " and " + std::to_string(forMating[1]);
-                    storeEventOnFile(log);
-                    
-                    double fitness1 = organismsList[searchForOrganism(forMating[0])].getFitness();
-                    double fitness2 = organismsList[searchForOrganism(forMating[1])].getFitness();
-                    sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), forMating[0], forMating[1], fitness1, fitness2);
-                    
-                    initialization = false;
                 }
                 if (forMating.size() == 1)
                 {
-                    std::vector<CppnGenome> parentsGenomes = std::vector<CppnGenome>();
-                    std::stringstream stream1(organismsList[searchForOrganism(forMating[0])].getGenome());
-                    
-                    parentsGenomes.push_back(CppnGenome(stream1));
-                    
-                    bool done = false;
-                    for (int i = 0; i < 100 && !done; i ++)
-                    {
-                        try{
+                    try{
+                        std::vector<CppnGenome> parentsGenomes = std::vector<CppnGenome>();
+                        std::stringstream stream1(organismsList[searchForOrganism(forMating[0])].getGenome());
+                        
+                        parentsGenomes.push_back(CppnGenome(stream1));
+                        
+                        bool empty = true;
+                        for (int i = 0; i < 100 && empty; i ++)
+                        {
                             CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
-                            done = checkEmptyPlan(newGenome);
-                        }catch(LocatedException &e){
-                            std::cout << "Mating failed, genomeManager threw a located exception: " << e.what();
-                        }catch(std::exception &e){
-                            std::cout << "Mating failed, genomeManager threw a normal exception: " << e.what();
-                        }
-                    }
-                    
-                    std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
-                    std::stringstream mind1(organismsList[searchForOrganism(forMating[0])].getMind());
+                            empty = checkEmptyPlan(newGenome);
+                        
+                            if(!empty){
+                                std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
+                                std::stringstream mind1(organismsList[searchForOrganism(forMating[0])].getMind());
 
-                    boost::shared_ptr<MindGenome> mindGenome1 = mindGenomeManager->getGenomeFromStream(mind1);
-                    
-                    parentMindGenomes.push_back(mindGenome1);
-                    boost::shared_ptr<MindGenome> newMind = mindGenomeManager->createGenome(parentMindGenomes);
-                    
-                    std::cout << "NEW GENOME CREATED FROM SINGLE PARENT organism_" << forMating[0] << std::endl;
-                    
-                    std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(forMating[0]);
-                    storeEventOnFile(log);
-                    
-                    double fitness = organismsList[searchForOrganism(forMating[0])].getFitness();
-                    sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), forMating[0], 0, fitness, -1);
-                    
-                    initialization = false;
+                                boost::shared_ptr<MindGenome> mindGenome1 = mindGenomeManager->getGenomeFromStream(mind1);
+                                
+                                parentMindGenomes.push_back(mindGenome1);
+                                boost::shared_ptr<MindGenome> newMind = mindGenomeManager->createGenome(parentMindGenomes);
+                                
+                                std::cout << "NEW GENOME CREATED FROM SINGLE PARENT organism_" << forMating[0] << std::endl;
+                                
+                                std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(forMating[0]);
+                                storeEventOnFile(log);
+                                
+                                double fitness = organismsList[searchForOrganism(forMating[0])].getFitness();
+                                sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), forMating[0], 0, fitness, -1);
+                                
+                                initialization = false;
+                            }
+                        }
+                    }catch(LocatedException &e){
+                        std::cout << "Mating failed, genomeManager threw a located exception: " << e.what();
+                    }catch(std::exception &e){
+                        std::cout << "Mating failed, genomeManager threw a normal exception: " << e.what();
+                    }
                 }
                 if (forMating.size() == 0)
                 {

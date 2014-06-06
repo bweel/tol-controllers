@@ -493,8 +493,14 @@ void EvolverController::run()
                     bool done = false;
                     for (int i = 0; i < 100 && !done; i ++)
                     {
-                        CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
-                        done = checkEmptyPlan(newGenome);
+                        try {
+                            CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
+                            done = checkEmptyPlan(newGenome);
+                        }catch(LocatedException &e){
+                            std::cout << "Mating failed, genomeManager threw a located exception: " << e.what();
+                        }catch(std::exception &e){
+                            std::cout << "Mating failed, genomeManager threw a normal exception: " << e.what();
+                        }
                     }
                     
                     // recombine minds
@@ -516,6 +522,7 @@ void EvolverController::run()
                     
                     // stop initialization
                     initialization = false;
+                    
                 }
             }
             
@@ -577,8 +584,14 @@ void EvolverController::run()
                     bool done = false;
                     for (int i = 0; i < 100 && !done; i ++)
                     {
-                        CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
-                        done = checkEmptyPlan(newGenome);
+                        try {
+                            CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
+                            done = checkEmptyPlan(newGenome);
+                        }catch(LocatedException &e){
+                            std::cout << "Mating failed, genomeManager threw a located exception: " << e.what();
+                        }catch(std::exception &e){
+                            std::cout << "Mating failed, genomeManager threw a normal exception: " << e.what();
+                        }
                     }
                     
                     std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
@@ -613,8 +626,14 @@ void EvolverController::run()
                     bool done = false;
                     for (int i = 0; i < 100 && !done; i ++)
                     {
-                        CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
-                        done = checkEmptyPlan(newGenome);
+                        try{
+                            CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
+                            done = checkEmptyPlan(newGenome);
+                        }catch(LocatedException &e){
+                            std::cout << "Mating failed, genomeManager threw a located exception: " << e.what();
+                        }catch(std::exception &e){
+                            std::cout << "Mating failed, genomeManager threw a normal exception: " << e.what();
+                        }
                     }
                     
                     std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;

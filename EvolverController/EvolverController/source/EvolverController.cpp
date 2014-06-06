@@ -377,12 +377,15 @@ void EvolverController::run()
                 
                 assert(index >= 0);
                 
-                organismsList[searchForOrganism(organimsID)].setState(Organism::DEAD);
-                
-                std::cout << "organism_" << organimsID << " died: REMOVED FROM LIST" << std::endl;
-            
-                std::string log = std::to_string(getTime()) + " DEATH " + std::to_string(organimsID) + " organismsListSize " + std::to_string(organismsList.size());
-                storeEventOnFile(log);
+                if (organismsList[index].getState() != Organism::DEAD)
+                {
+                    organismsList[index].setState(Organism::DEAD);
+                    
+                    std::cout << "organism_" << organimsID << " died: REMOVED FROM LIST" << std::endl;
+                    
+                    std::string log = std::to_string(getTime()) + " DEATH " + std::to_string(organimsID) + " organismsListSize " + std::to_string(organismsList.size());
+                    storeEventOnFile(log);
+                }
             }
             
             

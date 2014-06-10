@@ -75,8 +75,6 @@ private:
     
     void sendDeathMessage(id_t organimsId);
     
-    void removeFromOrganismsList(id_t organimsID);
-    
     //void updateOrganismsList(id_t organimsID, double fitness, std::string genome, std::string mindGenome, unsigned int size, unsigned int offspring, std::vector<id_t> parents, Organism::State state);
     
     int searchForOrganism(id_t organismId);
@@ -85,9 +83,13 @@ private:
     
     void storeParentsOnFile(double currentTime);
     
+    void logListProblem(std::string event, std::string message, std::string fields);
+    
     int getRandomWait();
     
     bool checkEmptyPlan(CppnGenome genome);
+    
+    std::string getOrganismsListAsString();
     
 public:
     

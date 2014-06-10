@@ -234,7 +234,7 @@ private:
     void storeFertilityOnFile();
     
     void storeProblem(std::string message, std::string phase);
-
+    
     double getRealFitness(double fitness);
     
     void logGPS();

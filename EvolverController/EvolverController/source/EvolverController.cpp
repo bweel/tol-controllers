@@ -132,19 +132,6 @@ std::vector<id_t> EvolverController::selectForDying()
 }
 
 
-void EvolverController::removeFromOrganismsList(id_t organimsID)
-{
-    for(int i = 0; i < organismsList.size(); i++)
-    {
-        if (organismsList[i].getId() == organimsID)
-        {
-            organismsList.erase(organismsList.begin() + i);
-            return;
-        }
-    }
-}
-
-
 /*void EvolverController::updateOrganismsList(id_t organismID, double fitness, std::string genome, std::string mindGenome,
                                            unsigned int size, unsigned int offspring, std::vector<id_t> parents, Organism::State state)
 {
@@ -204,12 +191,37 @@ void EvolverController::storeParentsOnFile(double currentTime)
 }
 
 
+void EvolverController::logListProblem(std::string event, std::string message, std::string fields)
+{
+    ofstream file;
+    file.open(RESULTS_PATH + simulationDateAndTime + "/list_problems.txt", ios::app);
+    file << "TIME: " << getTime() << std::endl;
+    file << "EVENT: " << event << std::endl;
+    file << "MESSAGE:\n" << message << std::endl;
+    file << "FIELDS:\n" << fields << std::endl;
+    file << "LIST:\n" << getOrganismsListAsString() << std::endl;
+    file << std::endl;
+    file.close();
+}
+
+
 int EvolverController::getRandomWait()
 {
     int noise = (rand() % NOISE_GENOMES_INITIALIZATION) - (NOISE_GENOMES_INITIALIZATION/2);
     return WAITING_INTERVAL_GENOMES_INITIALIZATION + noise;
 }
 
+
+std::string EvolverController::getOrganismsListAsString()
+{
+    std::string text = "";
+    for (int i = 0; i < organismsList.size(); i++)
+    {
+        Organism org = organismsList[i];
+        text = text + std::to_string(i) + ") " + "ID: " + std::to_string(org.getId()) + "NAME: " + org.getName() + "STATE: " + std::to_string(org.getState()) + "\n";
+    }
+    return text;
+}
 
 
 ////////////////////////////////////////////////////////////////
@@ -345,6 +357,11 @@ void EvolverController::run()
         {
             if (checkEvolutionEnd())
             {
+                // set all prevoius organisms to DEAD state (should not be necessary though)
+                for (int i = 0; i < organismsList.size(); i++)
+                {
+                    organismsList[i].setState(Organism::DEAD);
+                }
                 initialization = true;
                 initPopulationWaitingTime = 0;
             }
@@ -383,16 +400,23 @@ void EvolverController::run()
                 id_t organimsID = std::atoi(MessagesManager::get(message, "ID").c_str());
                 int index = searchForOrganism(organimsID);
                 
-                assert(index >= 0);
-                
-                if (organismsList[index].getState() != Organism::DEAD)
+                if (index >= 0)
                 {
-                    organismsList[index].setState(Organism::DEAD);
-                    
-                    std::cout << "organism_" << organimsID << " died: REMOVED FROM LIST" << std::endl;
-                    
-                    std::string log = std::to_string(getTime()) + " DEATH " + std::to_string(organimsID) + " organismsListSize " + std::to_string(organismsList.size());
-                    storeEventOnFile(log);
+                    if (organismsList[index].getState() != Organism::DEAD)
+                    {
+                        organismsList[index].setState(Organism::DEAD);
+                        
+                        std::cout << "organism_" << organimsID << " died: REMOVED FROM LIST" << std::endl;
+                        
+                        std::string log = std::to_string(getTime()) + " DEATH " + std::to_string(organimsID) + " organismsListSize " + std::to_string(organismsList.size());
+                        storeEventOnFile(log);
+                    }
+                }
+                else
+                {
+                    std::string fields = "ID: " + std::to_string(organimsID) + "\n";
+                    std::string event = "DEATH_ANNOUNCEMENT_MESSAGE";
+                    logListProblem(event, message, fields);
                 }
             }
             
@@ -412,14 +436,41 @@ void EvolverController::run()
                 
                 if(parent1 > 0){
                     int index = searchForOrganism(parent1);
-                    assert(index >= 0);
-                    organismsList[index].setOffspring(organismsList[index].getOffspring()+1);
+                    if (index >= 0)
+                    {
+                        organismsList[index].setOffspring(organismsList[index].getOffspring()+1);
+                    }
+                    else
+                    {
+                        std::string event = "ORGANISM_BUILT_MESSAGE (parent1)";
+                        std::string fields = "PARENT1: " + std::to_string(parent1) + "\n" +
+                                            "PARENT2: " + std::to_string(parent2) + "\n" +
+                                            "ORGANISM_ID: " + std::to_string(organismId) + "\n" +
+                                            "SIZE: " + std::to_string(size) + "\n" +
+                                            "GENOME: " + genome + "\n" +
+                                            "MIND: " + mind + "\n";
+                        logListProblem(event, message, fields);
+                    }
                 }
                 
                 if(parent2 > 0){
                     int index = searchForOrganism(parent2);
-                    assert(index >= 0);
-                    organismsList[index].setOffspring(organismsList[index].getOffspring()+1);
+                    if (index >= 0)
+                    {
+                        organismsList[index].setOffspring(organismsList[index].getOffspring()+1);
+                    }
+                    else
+                    {
+                        std::string event = "ORGANISM_BUILT_MESSAGE (parent2)";
+                        std::string fields = "PARENT1: " + std::to_string(parent1) + "\n" +
+                                            "PARENT2: " + std::to_string(parent2) + "\n" +
+                                            "ORGANISM_ID: " + std::to_string(organismId) + "\n" +
+                                            "SIZE: " + std::to_string(size) + "\n" +
+                                            "GENOME: " + genome + "\n" +
+                                            "MIND: " + mind + "\n";
+                        logListProblem(event, message, fields);
+                    }
+                    
                 }
                 
                 std::vector<id_t> parents;
@@ -447,8 +498,16 @@ void EvolverController::run()
             {
                 id_t organismId = atoi(MessagesManager::get(message, "ID").c_str());
                 int idx = searchForOrganism(organismId);
-                assert(idx >= 0);
-                organismsList[searchForOrganism(organismId)].setState(Organism::ADULT);
+                if (idx >= 0)
+                {
+                    organismsList[searchForOrganism(organismId)].setState(Organism::ADULT);
+                }
+                else
+                {
+                    std::string event = "ADULT_ANNOUNCEMENT";
+                    std::string fields = "ID: " + std::to_string(organismId) + "\n";
+                    logListProblem(event, message, fields);
+                }
             }
             
             
@@ -462,8 +521,16 @@ void EvolverController::run()
                 id_t organismId = atoi(MessagesManager::get(message, "ID").c_str());
                 double fitness = atof(MessagesManager::get(message, "FITNESS").c_str());
                 int idx = searchForOrganism(organismId);
-                assert(idx >= 0);
-                organismsList[searchForOrganism(organismId)].setFitness(fitness);
+                if (idx >= 0)
+                {
+                    organismsList[searchForOrganism(organismId)].setFitness(fitness);
+                }
+                else
+                {
+                    std::string event = "FITNESS_UPDATE";
+                    std::string fields = "ID: " + std::to_string(organismId) + "\n" + "FITNESS: " + std::to_string(fitness) + "\n";
+                    logListProblem(event, message, fields);
+                }
             }
             
             
@@ -542,13 +609,26 @@ void EvolverController::run()
                     std::string mindStr;
                     readFitnessMessage(& organismId, & fitness, &genomeStr, &mindStr, message);
                  
-                    // update fitness and state
-                    organismsList[searchForOrganism(organismId)].setFitness(fitness);
-                    organismsList[searchForOrganism(organismId)].setState(Organism::ADULT);
-                    organismsList[searchForOrganism(organismId)].setMind(mindStr);          // useful only for the first message from organisms not created from parents
-                    
-                    std::string log = std::to_string(getTime()) + " MESSAGE_FROM " + std::to_string(organismId)  + " organismsListSize " + std::to_string(organismsList.size());
-                    storeEventOnFile(log);
+                    int idx = searchForOrganism(organismId);
+                    if (idx >= 0)
+                    {
+                        // update fitness and state
+                        organismsList[idx].setFitness(fitness);
+                        organismsList[idx].setState(Organism::ADULT);   // redundant
+                        organismsList[idx].setMind(mindStr);            // useful only for the first message from organisms not created from parents
+                        
+                        std::string log = std::to_string(getTime()) + " MESSAGE_FROM " + std::to_string(organismId)  + " organismsListSize " + std::to_string(organismsList.size());
+                        storeEventOnFile(log);
+                    }
+                    else
+                    {
+                        std::string event = "GENOME_SPREAD_MESSAGE";
+                        std::string fields = "ID: " + std::to_string(organismId) + "\n" +
+                                            "FITNESS: " + std::to_string(fitness) + "\n" +
+                                            "GENOME: " + genomeStr + "\n" +
+                                            "MIND: " + mindStr + "\n";
+                        logListProblem(event, message, fields);
+                    }
                 }
             }
             
@@ -696,7 +776,6 @@ void EvolverController::run()
                 for (int i = 0; i < forDying.size(); i++)
                 {
                     sendDeathMessage(forDying[i]);
-                    removeFromOrganismsList(forDying[i]);
                     
                     std::cout << "organism_" << forDying[i] << " SELECTED FOR DEATH" << std::endl;
                 }

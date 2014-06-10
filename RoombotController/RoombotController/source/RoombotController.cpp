@@ -47,245 +47,263 @@ _algorithm(0),
 _gps(isRoot() ? _init_gps(TIME_STEP) : 0),
 _motors(_m_type ? _init_motors(TIME_STEP) : 0)
 {
-    simulationDateAndTime = _parameters->get<std::string>("Simulation");
-    
-    istringstream(_name.substr(_name.find("_") + 1, _name.length())) >> organismId;
-    
-    std::cout << "[" << getTime() << "] " << getName() << ": " << "Starting Controller, timestep: " << TIME_STEP  << std::endl;
+    std::string phase = "constructor";
+    try
+    {
+        simulationDateAndTime = _parameters->get<std::string>("Simulation");
+        
+        istringstream(_name.substr(_name.find("_") + 1, _name.length())) >> organismId;
+        
+        std::cout << "[" << getTime() << "] " << getName() << ": " << "Starting Controller, timestep: " << TIME_STEP  << std::endl;
 #ifdef DEBUG_CONTROLLER
-    std::cout << "[" << getTime() << "] " << getName() << ": "
-    << _parameters << " "
-    << _name << " "
-    << _seed << " "
-    << _r_index << " "
-    << _r_index_root << " "
-    << _r_size << " "
-    << _m_index << " "
-    << _m_type << " "
-    << _time_step << " "
-    << _time_start << " "
-    << _time_offset << " "
-    << _time_end << " "
-    << _ev_type << " "
-    << _ev_step << " "
-    << _ev_steps_recovery << " "
-    << _ev_steps_total << " "
-    << _position_start << " "
-    << _position_end << " "
-    << _algorithm << " "
-    << _gps << " "
-    << _emitter << " "
-    << _receiver << " "
-    << _motors << " "
-    << std::endl;
+        std::cout << "[" << getTime() << "] " << getName() << ": "
+        << _parameters << " "
+        << _name << " "
+        << _seed << " "
+        << _r_index << " "
+        << _r_index_root << " "
+        << _r_size << " "
+        << _m_index << " "
+        << _m_type << " "
+        << _time_step << " "
+        << _time_start << " "
+        << _time_offset << " "
+        << _time_end << " "
+        << _ev_type << " "
+        << _ev_step << " "
+        << _ev_steps_recovery << " "
+        << _ev_steps_total << " "
+        << _position_start << " "
+        << _position_end << " "
+        << _algorithm << " "
+        << _gps << " "
+        << _emitter << " "
+        << _receiver << " "
+        << _motors << " "
+        << std::endl;
 #endif
-    
-    if(PARENT_SELECTION == "BESTTWO") {
-        parentSelectionMechanism = new BestTwoParentSelection();
-    } else if(PARENT_SELECTION == "BINARY_TOURNAMENT"){
-        parentSelectionMechanism = new BinaryTournamentParentSelection();
-    } else if (PARENT_SELECTION == "RANDOM") {
-        parentSelectionMechanism = new RandomSelection();
-    } else {
-        std::cerr << "Unknown Parent Selection Mechanism: " << std::endl;
-    }
-    
-    if(MATING_SELECTION == "EVOLVER") {
-        matingType = MATING_SELECTION_BY_EVOLVER;
-    } else if(MATING_SELECTION == "ORGANISMS"){
-        matingType = MATING_SELECTION_BY_ORGANISMS;
-    } else {
-        std::cerr << "Unknown Mating Selection Mechanism: " << MATING_SELECTION << std::endl;
-    }
-    
-    if(DEATH_SELECTION == "EVOLVER") {
-        deathType = DEATH_SELECTION_BY_EVOLVER;
-    } else if(DEATH_SELECTION == "TIME_TO_LIVE"){
-        deathType = DEATH_SELECTION_BY_TIME_TO_LIVE;
-    } else {
-        std::cerr << "Unknown Death Selection Mechanism: " << DEATH_SELECTION << std::endl;
-    }
-    
-    deathReceiver = getReceiver(ROOMBOT_DEATH_RECEIVER_NAME);
-    deathReceiver->setChannel(DEATH_CHANNEL);
-    deathReceiver->enable(TIME_STEP);
-    while (deathReceiver->getQueueLength() > 0)
-    {
-        deathReceiver->nextPacket();
-    }
-    
-    genomeReceiver = getReceiver(ROOMBOT_GENOME_RECEIVER_NAME);
-    genomeEmitter = getEmitter(ROOMBOT_GENOME_EMITTER_NAME);
-    
-    // lock connectors
-    boost::property_tree::ptree connectrsNode = _parameters->get_child("Robot." + getName() + ".Connectors");
-    BOOST_FOREACH(boost::property_tree::ptree::value_type &v, connectrsNode)
-    {
-        Connector * connector = getConnector(v.second.data());
-        connector->lock();
-        connectors.push_back(connector);
-    }
-    
-    // initialization for non-root module
-    if (!isRoot())
-    {
-        // set non-root module's emitter and receiver using the intex of the root
-        _emitter = _init_emitter(static_cast<int> (organismId));
-        _receiver = _init_receiver(TIME_STEP, static_cast<int> (EVOLVER_CHANNEL-1 - organismId));
         
-        genomeReceiver->disable();
-        
-        return;
-    }
-    
-    // initialization for root module
-    else
-    {
-        // set root module's emitter and receiver as inverse of the ones for non-root modules
-        // in order to make possible the communitation between master and slave
-        _emitter = _init_emitter(static_cast<int> (EVOLVER_CHANNEL-1 - organismId));
-        _receiver = _init_receiver(TIME_STEP, static_cast<int> (organismId));
-        
-        if (matingType == MATING_SELECTION_BY_EVOLVER)
-        {
-            genomeEmitter->setRange(-1);
-            genomeEmitter->setChannel(EVOLVER_CHANNEL);
-        }
-        else if (matingType == MATING_SELECTION_BY_ORGANISMS)
-        {
-            genomeEmitter->setRange(ORGANISM_GENOME_EMITTER_RANGE);
-            genomeEmitter->setChannel(GENOME_EXCHANGE_CHANNEL);
-        }
-        genomeReceiver->setChannel(GENOME_EXCHANGE_CHANNEL);    // USED ONLY FOR DISTRIBUTED REPRODUCTION
-        
-        genomeReceiver->enable(TIME_STEP);
-        while (genomeReceiver->getQueueLength() > 0)
-        {
-            genomeReceiver->nextPacket();
+        if(PARENT_SELECTION == "BESTTWO") {
+            parentSelectionMechanism = new BestTwoParentSelection();
+        } else if(PARENT_SELECTION == "BINARY_TOURNAMENT"){
+            parentSelectionMechanism = new BinaryTournamentParentSelection();
+        } else if (PARENT_SELECTION == "RANDOM") {
+            parentSelectionMechanism = new RandomSelection();
+        } else {
+            std::cerr << "Unknown Parent Selection Mechanism: " << std::endl;
         }
         
-        // set variables for writing on files
-        utils::Random rng;
-        std::string parametersPath = _parameters->get<std::string>("Algorithm.Parameters");
-        std::string save_path = _parameters->get<std::string>("Algorithm.Save");
-        
-        /*boost::posix_time::time_facet *facet = new boost::posix_time::time_facet("%d-%b-%Y %H:%M:%S");
-         cout.imbue(locale(cout.getloc(), facet));
-         std::stringstream dateStream;
-         dateStream << boost::posix_time::second_clock::local_time();
-         logDirectory = RESULTS_PATH + dateStream.str() + "/";
-         std::cout << "LOG PATH: " << logDirectory << std::endl;*/
-        
-        logDirectory = _parameters->get<std::string>("Algorithm.LogDir","");
-        
-        // set attributes for specific algorithm
-        
-        bool flag = true;   // needed for the generetion of an unused seed
-        
-        switch (_ev_type)
-        {
-                
-            case A_NEAT:
-                
-                while (flag) {
-                    flag = false;
-                    try {
-                        _seed = rng.seed();
-                        logDirectory = _init_directory(getProjectPath(), _name, "HyperNEAT", logDirectory, _seed);
-                    }
-                    catch (...) {
-                        flag = true;
-                    }
-                }
-                
-                if (save_path.empty()) {
-                    _algorithm = new HyperNEAT(
-                                               _seed,
-                                               parametersPath,
-                                               logDirectory,
-                                               _init_shape_size(_parameters->get_child("Shape")),
-                                               initialiseModuleMapping(_r_index, organismSize, _name, _parameters->get_child("Robot")),
-                                               numMotors,
-                                               1);
-                }
-                else {
-                    //_algorithm = new HyperNEAT(save_path);
-                }
-                
-                break;
-                
-            case A_POWER:
-                
-                while (flag) {
-                    flag = false;
-                    try {
-                        _seed = rng.seed();
-                        logDirectory = _init_directory(getProjectPath(), _name, "RL_PoWER", logDirectory, _seed);
-                    }
-                    catch (...) {
-                        flag = true;
-                    }
-                }
-                
-                if (save_path.empty()) {
-                    _algorithm = new RL_PoWER(
-                                              _seed,
-                                              "",
-                                              logDirectory,
-                                              TIME_STEP * 1e-3,    // Webots time step converted from ms to s
-                                              _ev_angular_velocity,
-                                              totalEvaluations,
-                                              organismSize * numMotors
-                                              );
-                }
-                else {
-                    _algorithm = new RL_PoWER(
-                                              save_path,
-                                              TIME_STEP * 1e-3, // Webots time step converted from ms to s
-                                              _ev_angular_velocity,
-                                              organismSize * numMotors);
-                }
-                
-                break;
-                
-            case A_CPG:
-                
-                throw std::runtime_error("Algorithm Unsupported");
-                break;
-                
-            case A_SPLINENEAT:
-                
-                while (flag) {
-                    flag = false;
-                    try {
-                        _seed = rng.seed();
-                        logDirectory = _init_directory(getProjectPath(), _name, "SplineNEAT", logDirectory, _seed);
-                    }
-                    catch (...) {
-                        flag = true;
-                    }
-                }
-                
-                _algorithm = new SplineNeat(
-                                            _seed,
-                                            parametersPath,
-                                            logDirectory,
-                                            initialiseModuleMapping(_r_index, organismSize, _name, _parameters->get_child("Robot")),
-                                            numMotors,
-                                            TIME_STEP * 1e-3,  // Webots time step converted from ms to s
-                                            _ev_angular_velocity,
-                                            (unsigned int)organismSize);
-                
-                break;
-                
-            default:
-                
-                throw std::runtime_error("Algorithm Unknown");
-                break;
+        if(MATING_SELECTION == "EVOLVER") {
+            matingType = MATING_SELECTION_BY_EVOLVER;
+        } else if(MATING_SELECTION == "ORGANISMS"){
+            matingType = MATING_SELECTION_BY_ORGANISMS;
+        } else {
+            std::cerr << "Unknown Mating Selection Mechanism: " << MATING_SELECTION << std::endl;
         }
         
-        std::cout << "Algorithm: " << &_algorithm << std::endl;
+        if(DEATH_SELECTION == "EVOLVER") {
+            deathType = DEATH_SELECTION_BY_EVOLVER;
+        } else if(DEATH_SELECTION == "TIME_TO_LIVE"){
+            deathType = DEATH_SELECTION_BY_TIME_TO_LIVE;
+        } else {
+            std::cerr << "Unknown Death Selection Mechanism: " << DEATH_SELECTION << std::endl;
+        }
         
+        deathReceiver = getReceiver(ROOMBOT_DEATH_RECEIVER_NAME);
+        deathReceiver->setChannel(DEATH_CHANNEL);
+        deathReceiver->enable(TIME_STEP);
+        while (deathReceiver->getQueueLength() > 0)
+        {
+            deathReceiver->nextPacket();
+        }
+        
+        genomeReceiver = getReceiver(ROOMBOT_GENOME_RECEIVER_NAME);
+        genomeEmitter = getEmitter(ROOMBOT_GENOME_EMITTER_NAME);
+        
+        // lock connectors
+        boost::property_tree::ptree connectrsNode = _parameters->get_child("Robot." + getName() + ".Connectors");
+        BOOST_FOREACH(boost::property_tree::ptree::value_type &v, connectrsNode)
+        {
+            Connector * connector = getConnector(v.second.data());
+            connector->lock();
+            connectors.push_back(connector);
+        }
+        
+        // initialization for non-root module
+        if (!isRoot())
+        {
+            // set non-root module's emitter and receiver using the intex of the root
+            _emitter = _init_emitter(static_cast<int> (organismId));
+            _receiver = _init_receiver(TIME_STEP, static_cast<int> (EVOLVER_CHANNEL-1 - organismId));
+            
+            genomeReceiver->disable();
+            
+            return;
+        }
+        
+        // initialization for root module
+        else
+        {
+            // set root module's emitter and receiver as inverse of the ones for non-root modules
+            // in order to make possible the communitation between master and slave
+            _emitter = _init_emitter(static_cast<int> (EVOLVER_CHANNEL-1 - organismId));
+            _receiver = _init_receiver(TIME_STEP, static_cast<int> (organismId));
+            
+            if (matingType == MATING_SELECTION_BY_EVOLVER)
+            {
+                genomeEmitter->setRange(-1);
+                genomeEmitter->setChannel(EVOLVER_CHANNEL);
+            }
+            else if (matingType == MATING_SELECTION_BY_ORGANISMS)
+            {
+                genomeEmitter->setRange(ORGANISM_GENOME_EMITTER_RANGE);
+                genomeEmitter->setChannel(GENOME_EXCHANGE_CHANNEL);
+            }
+            genomeReceiver->setChannel(GENOME_EXCHANGE_CHANNEL);    // USED ONLY FOR DISTRIBUTED REPRODUCTION
+            
+            genomeReceiver->enable(TIME_STEP);
+            while (genomeReceiver->getQueueLength() > 0)
+            {
+                genomeReceiver->nextPacket();
+            }
+            
+            // set variables for writing on files
+            utils::Random rng;
+            std::string parametersPath = _parameters->get<std::string>("Algorithm.Parameters");
+            std::string save_path = _parameters->get<std::string>("Algorithm.Save");
+            
+            /*boost::posix_time::time_facet *facet = new boost::posix_time::time_facet("%d-%b-%Y %H:%M:%S");
+             cout.imbue(locale(cout.getloc(), facet));
+             std::stringstream dateStream;
+             dateStream << boost::posix_time::second_clock::local_time();
+             logDirectory = RESULTS_PATH + dateStream.str() + "/";
+             std::cout << "LOG PATH: " << logDirectory << std::endl;*/
+            
+            logDirectory = _parameters->get<std::string>("Algorithm.LogDir","");
+            
+            // set attributes for specific algorithm
+            
+            bool flag = true;   // needed for the generetion of an unused seed
+            
+            switch (_ev_type)
+            {
+                    
+                case A_NEAT:
+                    
+                    while (flag) {
+                        flag = false;
+                        try {
+                            _seed = rng.seed();
+                            logDirectory = _init_directory(getProjectPath(), _name, "HyperNEAT", logDirectory, _seed);
+                        }
+                        catch (...) {
+                            flag = true;
+                        }
+                    }
+                    
+                    if (save_path.empty()) {
+                        _algorithm = new HyperNEAT(
+                                                   _seed,
+                                                   parametersPath,
+                                                   logDirectory,
+                                                   _init_shape_size(_parameters->get_child("Shape")),
+                                                   initialiseModuleMapping(_r_index, organismSize, _name, _parameters->get_child("Robot")),
+                                                   numMotors,
+                                                   1);
+                    }
+                    else {
+                        //_algorithm = new HyperNEAT(save_path);
+                    }
+                    
+                    break;
+                    
+                case A_POWER:
+                    
+                    while (flag) {
+                        flag = false;
+                        try {
+                            _seed = rng.seed();
+                            logDirectory = _init_directory(getProjectPath(), _name, "RL_PoWER", logDirectory, _seed);
+                        }
+                        catch (...) {
+                            flag = true;
+                        }
+                    }
+                    
+                    if (save_path.empty()) {
+                        _algorithm = new RL_PoWER(
+                                                  _seed,
+                                                  "",
+                                                  logDirectory,
+                                                  TIME_STEP * 1e-3,    // Webots time step converted from ms to s
+                                                  _ev_angular_velocity,
+                                                  totalEvaluations,
+                                                  organismSize * numMotors
+                                                  );
+                    }
+                    else {
+                        _algorithm = new RL_PoWER(
+                                                  save_path,
+                                                  TIME_STEP * 1e-3, // Webots time step converted from ms to s
+                                                  _ev_angular_velocity,
+                                                  organismSize * numMotors);
+                    }
+                    
+                    break;
+                    
+                case A_CPG:
+                    
+                    throw std::runtime_error("Algorithm Unsupported");
+                    break;
+                    
+                case A_SPLINENEAT:
+                    
+                    while (flag) {
+                        flag = false;
+                        try {
+                            _seed = rng.seed();
+                            logDirectory = _init_directory(getProjectPath(), _name, "SplineNEAT", logDirectory, _seed);
+                        }
+                        catch (...) {
+                            flag = true;
+                        }
+                    }
+                    
+                    _algorithm = new SplineNeat(
+                                                _seed,
+                                                parametersPath,
+                                                logDirectory,
+                                                initialiseModuleMapping(_r_index, organismSize, _name, _parameters->get_child("Robot")),
+                                                numMotors,
+                                                TIME_STEP * 1e-3,  // Webots time step converted from ms to s
+                                                _ev_angular_velocity,
+                                                (unsigned int)organismSize);
+                    
+                    break;
+                    
+                default:
+                    
+                    throw std::runtime_error("Algorithm Unknown");
+                    break;
+            }
+            
+            std::cout << "Algorithm: " << &_algorithm << std::endl;
+            
+        }
+    }catch (int err) {
+        std::string message = "error number" + std::to_string(err);
+        std::cerr << "PROBLEM in " << phase << ": " << message << std::endl;
+        storeProblem(message, phase);
+    }
+    catch (std::exception e) {
+        std::string message = e.what();
+        std::cerr << "PROBLEM in " << phase << ": " << message << std::endl;
+        storeProblem(message, phase);
+    }
+    catch (...) {
+        std::string message = "something else";
+        std::cerr << "PROBLEM in " << phase << ": " << message << std::endl;
+        storeProblem(message, phase);
     }
 }
 
@@ -360,7 +378,7 @@ doubledvector RoombotController::receiveAngles()
         ptree data;
         std::istringstream stream((char*)_receiver->getData());
         boost::property_tree::json_parser::read_json(stream, data);
-                
+        
         int index = data.get<double>("index");
         for(int j=0;j<numMotors;j++)
         {
@@ -640,11 +658,11 @@ std::string RoombotController::_init_directory(const std::string & directory, co
     path /= RoombotController::RESULTS_DIR;
     
     /*std::time_t rawtime;
-    std::tm* timeinfo;
-    char buffer [80];
-    std::time(&rawtime);
-    timeinfo = std::localtime(&rawtime);
-    std::strftime(buffer,80,"%Y-%m-%d-%H.%M.%S",timeinfo);*/
+     std::tm* timeinfo;
+     char buffer [80];
+     std::time(&rawtime);
+     timeinfo = std::localtime(&rawtime);
+     std::strftime(buffer,80,"%Y-%m-%d-%H.%M.%S",timeinfo);*/
     
     path /= simulationDateAndTime;
     
@@ -1034,7 +1052,7 @@ void RoombotController::infancy()
         double startingTime = getTime();
         
         while (step(TIME_STEP) != -1 && (getTime() - startingTime < evaluationDuration))
-        {            
+        {
             anglesIn = receiveAngles();     // read current angles
             
 #ifdef DEBUG_TIMING
@@ -1083,7 +1101,7 @@ void RoombotController::infancy()
             // if it is time for evaluation
             else
             {
-//                std::cout << "Organism " << organismId << " evaluation " << _algorithm->getGeneration() << ":  ";
+                //                std::cout << "Organism " << organismId << " evaluation " << _algorithm->getGeneration() << ":  ";
                 
                 _time_end = getTime();      // get final time
                 _position_end = _get_gps(); // get final position
@@ -1422,9 +1440,9 @@ void RoombotController::matureLife()
     else
     {
         /*if (step(_time_step) == -1)
-        {
-            return;
-        }*/
+         {
+         return;
+         }*/
         
         dvector anglesIn(numMotors,0.0);
         dvector anglesOut(numMotors,0.0);
@@ -1564,59 +1582,69 @@ void RoombotController::askToBeBuiltAgain()
 
 void RoombotController::run()
 {
-    if (step(TIME_STEP) == -1)
-    {
-        return;
-    }
-    
-    while (_receiver->getQueueLength() > 0)
-    {
-        _receiver->nextPacket();
-    }
-    while (deathReceiver->getQueueLength() > 0)
-    {
-        deathReceiver->nextPacket();
-    }
-    
-    // check if all modules are correctly locked to each other
-    
-    if (!checkLocks())
-    {
-        if (isRoot())
-        {
-            askToBeBuiltAgain();
-            storeRebuild("connection problem");
-        }
-        death();
-        return;
-    }
-    
-    // wait for module to not move after sliding down from clinic
-    double startingTime = getTime();
-    while (getTime() - startingTime < ROOMBOT_WAITING_TIME)
+    std::string phase = "start";
+    try
     {
         if (step(TIME_STEP) == -1)
         {
             return;
         }
-    }
-    
-    // check if it fell inside the cylinder
-    if (!checkFallenInside())
-    {
-        if (isRoot())
+        
+        phase = "removing packets from receivers";
+        
+        while (_receiver->getQueueLength() > 0)
         {
-            askToBeBuiltAgain();
-            storeRebuild("fallen into cylinder");
+            _receiver->nextPacket();
         }
-        death();
-        return;
-    }
-    
-    std::string phase = "INFANCY";
-    try
-    {
+        while (deathReceiver->getQueueLength() > 0)
+        {
+            deathReceiver->nextPacket();
+        }
+        
+        // check if all modules are correctly locked to each other
+        
+        phase = "checking locks";
+        
+        if (!checkLocks())
+        {
+            if (isRoot())
+            {
+                askToBeBuiltAgain();
+                storeRebuild("connection problem");
+            }
+            death();
+            return;
+        }
+        
+        phase = "waiting";
+        
+        // wait for module to not move after sliding down from clinic
+        double startingTime = getTime();
+        while (getTime() - startingTime < ROOMBOT_WAITING_TIME)
+        {
+            if (step(TIME_STEP) == -1)
+            {
+                return;
+            }
+        }
+        
+        phase = "checking inside cylinder";
+        
+        // check if it fell inside the cylinder
+        if (!checkFallenInside())
+        {
+            if (isRoot())
+            {
+                askToBeBuiltAgain();
+                storeRebuild("fallen into cylinder");
+            }
+            death();
+            return;
+        }
+        
         std::cout << getName() << " STARTS INFANCY" << std::endl;
+        
+        phase = "INFANCY";
         
         infancy();
         

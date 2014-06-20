@@ -100,9 +100,9 @@ private:
     std::string MATING_SELECTION = ParametersReader::get<std::string>("MATING_SELECTION");
     std::string DEATH_SELECTION = ParametersReader::get<std::string>("DEATH_SELECTION");
     
-    int TIME_STEP = ParametersReader::get<int>("TIME_STEP");
-    
     std::string simulationDateAndTime;
+    
+    double TIME_STEP;
     
     bool fertile;
     

@@ -30,8 +30,6 @@ private:
     
     int SCREENSHOT_CHANNEL = ParametersReader::get<int>("SCREENSHOT_CHANNEL");
     
-    int TIME_STEP = ParametersReader::get<int>("TIME_STEP");
-    
     static const int SCREENSHOT_INTERVAL = 5; // in seconds
 
     double lastScreenshot = -1;

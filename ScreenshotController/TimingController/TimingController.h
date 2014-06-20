@@ -17,7 +17,6 @@ using namespace webots;
 class TimingController : public Supervisor {
 private:
     double experimentLength = ParametersReader::get<double>("EXPERIMENT_TIME");
-    int TIME_STEP = ParametersReader::get<int>("TIME_STEP");
     
 public:
     void run ();

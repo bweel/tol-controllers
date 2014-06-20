@@ -14,7 +14,7 @@ bool EnableCoreDumps()
 
 int main(int arg_c, char ** arg_v)
 {
-    EnableCoreDumps();
+//    EnableCoreDumps();
 	RoombotController * robot = new RoombotController();
 	robot->run();
 	delete(robot);

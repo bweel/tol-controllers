@@ -12,6 +12,8 @@ ScreenshotController::~ScreenshotController() {
 
 void ScreenshotController::run()
 {
+    double TIME_STEP = getBasicTimeStep();
+    
     receiver->enable(TIME_STEP);
     
     // wait unitil EnvironmentModifierController sais the environment is ok

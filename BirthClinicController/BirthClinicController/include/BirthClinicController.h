@@ -29,11 +29,7 @@ class BirthClinicController : public Supervisor
     int ARENA_SIZE = ParametersReader::get<int>("ARENA_SIZE");
     int NUMBER_OF_MODULES = ParametersReader::get<int>("NUMBER_OF_MODULES");
     
-    int CLINIC_SAFE_DISTANCE = ParametersReader::get<int>("CLINIC_SAFE_DISTANCE");
-    
     std::string SHAPE_ENCODING = ParametersReader::get<std::string>("SHAPE_ENCODING");
-    
-    int TIME_STEP = ParametersReader::get<int>("TIME_STEP");
     
     
     Node * platform;
@@ -57,6 +53,8 @@ class BirthClinicController : public Supervisor
     int buildOrganism(CppnGenome genome, std::string mindGenome, id_t forcedId);
     
     id_t getNextOrganismId();
+    
+    bool isClinicFree();
     
     int countInRadius(Position position, double radius);
     

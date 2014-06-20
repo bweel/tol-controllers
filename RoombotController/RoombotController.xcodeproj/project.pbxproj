@@ -732,9 +732,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
-					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/dist/Debug",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
-					"/Users/emanuele/Documents/projects/tol-controllers/lib",
 				);
 				PRODUCT_NAME = RoombotController;
 			};
@@ -747,9 +744,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
-					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/dist/Debug",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
-					"/Users/emanuele/Documents/projects/tol-controllers/lib",
 				);
 				PRODUCT_NAME = RoombotController;
 			};

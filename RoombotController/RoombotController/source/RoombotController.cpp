@@ -319,8 +319,6 @@ RoombotController::~RoombotController()
     }
 }
 
-
-
 /********************************************* MINOR FUNCTIONS *********************************************/
 
 // read parameters tree
@@ -657,12 +655,16 @@ std::string RoombotController::_init_directory(const std::string & directory, co
     
     path /= RoombotController::RESULTS_DIR;
     
-    /*std::time_t rawtime;
-     std::tm* timeinfo;
-     char buffer [80];
-     std::time(&rawtime);
-     timeinfo = std::localtime(&rawtime);
-     std::strftime(buffer,80,"%Y-%m-%d-%H.%M.%S",timeinfo);*/
+    if(simulationDateAndTime == "random"){
+        std::time_t rawtime;
+        std::tm* timeinfo;
+        char buffer [80];
+        std::time(&rawtime);
+        timeinfo = std::localtime(&rawtime);
+        std::strftime(buffer,80,"%Y-%m-%d-%H.%M.%S",timeinfo);
+        
+        simulationDateAndTime = buffer;
+    }
     
     path /= simulationDateAndTime;
     
@@ -1021,7 +1023,7 @@ void RoombotController::infancy()
         double singleEvaluationTime = evaluationDuration / totalEvaluations;
         double timeStep = TIME_STEP / 1000.0;
         int totalEvaluationSteps = singleEvaluationTime / timeStep;
-        _ev_steps_recovery = totalEvaluationSteps / 10;
+        _ev_steps_recovery = 0;// totalEvaluationSteps / 10;
         _ev_steps_total_infancy = totalEvaluationSteps - _ev_steps_recovery;
         
         
@@ -1120,6 +1122,7 @@ void RoombotController::infancy()
                 _ev_step = 0;
             }
         }
+        _algorithm->save();
     }
     
     // NON-ROOT MODULES BEHAVIOR
@@ -1631,7 +1634,7 @@ void RoombotController::run()
         phase = "checking inside cylinder";
         
         // check if it fell inside the cylinder
-        if (!checkFallenInside())
+        if (checkInsideCylinder && !checkFallenInside())
         {
             if (isRoot())
             {

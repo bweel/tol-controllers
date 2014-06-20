@@ -211,20 +211,20 @@ void BuildableOrganism::writeControllerArgsFile(std::string simulationDateAndTim
     child.put("Evaluations", "200");
     child.put("Angular_Velocity", "2.6");
     pt.put_child("Algorithm", child);
-    // Shape
-    child.clear();
-    child.put("X", "3");
-    child.put("Y", "1");
-    child.put("Z", "5");
-    pt.put_child("Shape", child);
+//    // Shape              Not used
+//    child.clear();
+//    child.put("X", "3");
+//    child.put("Y", "1");
+//    child.put("Z", "5");
+//    pt.put_child("Shape", child);
     // Robot
     child.clear();
     child.put("Index", "0");
     child.put("Index_Root", "0");
     child.put("Name", getName());
     child.put("Modules_#", size);
-    child.put("Controller", ROOMBOT_CONTROLLER_NAME);
-    child.put("Arguments", filePath);
+//    child.put("Controller", ROOMBOT_CONTROLLER_NAME); // not used
+//    child.put("Arguments", filePath);
         // Motor
         ptree child2;
         child2.put("Number", "3");

@@ -63,6 +63,22 @@ private:
     
     std::vector<id_t> selectForDying();
     
+    /*************************
+     *******  Timing *********
+     *************************/
+    bool initialization;
+    int initPopulationWaitingTime;
+    
+    double lastGeneratedTime;
+    double currentTime;
+    double lastMating;      // FOR CENTRALIZED REPRODUCTION BY THE EVOLVER
+    double lastDeath;       // FOR CENTRALIZED DEATH BY THE EVOLVER
+    double lastEvolutionEndCheck;
+    double lastOffspringLoggingTime;
+    
+    /*************************
+     ******* Functions *******
+     *************************/
     bool checkEvolutionEnd();
     
     void readFitnessMessage(id_t * id, double * fitness, std::string * genome, std::string * mind, std::string message);
@@ -79,12 +95,37 @@ private:
     
     int searchForOrganism(id_t organismId);
     
+    void checkEndEvolution(double currentTime);
+    
+    /*************************
+     ******* Logging *********
+     *************************/
     void storeEventOnFile(std::string log);
     
     void storeParentsOnFile(double currentTime);
     
+    void storePopulationSizesOnFile(double currentTime);
+    
     void logListProblem(std::string event, std::string message, std::string fields);
     
+    /*************************
+     **** MessageHandlers ****
+     *************************/
+    void deathMessage(std::string message, double currentTime);
+    
+    void birthMessage(std::string message, double currentTime);
+    
+    void adultMessage(std::string message, double currentTime);
+    
+    void fitnessUpdateMessage(std::string message, double currentTime);
+    
+    void coupleMessage(std::string message,double currentTime);
+    
+    void genomeSpreadMessage(std::string message, double currentTime);
+
+    /*************************
+     ******* Utility *********
+     *************************/
     int getRandomWait();
     
     bool checkEmptyPlan(CppnGenome genome);

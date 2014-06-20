@@ -165,6 +165,23 @@ int EvolverController::searchForOrganism(id_t organismId)
     return -1;
 }
 
+void EvolverController::checkEndEvolution(double currentTime) {
+    if (currentTime - lastEvolutionEndCheck > CHECK_EVOLUTION_END_INTERVAL)
+    {
+        if (checkEvolutionEnd())
+        {
+            // set all prevoius organisms to DEAD state (should not be necessary though)
+            for (int i = 0; i < organismsList.size(); i++)
+            {
+                organismsList[i].setState(Organism::DEAD);
+            }
+            initialization = true;
+            initPopulationWaitingTime = 0;
+        }
+        lastEvolutionEndCheck = getTime();
+    }
+}
+
 
 void EvolverController::storeEventOnFile(std::string log)
 {
@@ -178,7 +195,13 @@ void EvolverController::storeEventOnFile(std::string log)
 void EvolverController::storeParentsOnFile(double currentTime)
 {
     ofstream parentsFile;
-    parentsFile.open(RESULTS_PATH + simulationDateAndTime + "/parents.txt", ios::app);
+    boost::filesystem::path filePath = RESULTS_PATH + simulationDateAndTime + "/parents.txt";
+    if(!boost::filesystem::exists(filePath)){
+        parentsFile.open(filePath.string(), ios::app);
+        parentsFile << "#time id size fitness offspring state" << std::endl;
+    }else{
+        parentsFile.open(filePath.string(), ios::app);
+    }
     for (int i = 0; i < organismsList.size(); i++)
     {
         Organism org = organismsList[i];
@@ -187,6 +210,32 @@ void EvolverController::storeParentsOnFile(double currentTime)
             parentsFile << currentTime << " " << org.getId() << " " << org.getSize() << " " << org.getFitness() << " " << org.getOffspring() << " " << org.getState() << std::endl;
         }
     }
+    parentsFile.close();
+}
+
+void EvolverController::storePopulationSizesOnFile(double currentTime)
+{
+    ofstream parentsFile;
+    boost::filesystem::path filePath = RESULTS_PATH + simulationDateAndTime + "/populations.txt";
+    if(!boost::filesystem::exists(filePath)){
+        parentsFile.open(filePath.string(), ios::app);
+        parentsFile << "#time infants adults total" << std::endl;
+    }else{
+        parentsFile.open(filePath.string(), ios::app);
+    }
+    int infants = 0;
+    int adults = 0;
+    for (int i = 0; i < organismsList.size(); i++)
+    {
+        Organism org = organismsList[i];
+        if (org.getState() == Organism::INFANT){
+            infants++;
+        }else if (org.getState() == Organism::ADULT)
+        {
+            adults++;
+        }
+    }
+    parentsFile << currentTime << " " << infants << " " << adults << " " << (infants+adults) << std::endl;
     parentsFile.close();
 }
 
@@ -223,6 +272,207 @@ std::string EvolverController::getOrganismsListAsString()
     return text;
 }
 
+////////////////////////////////////////////////////////////////
+////////////////////// MESSAGE FUNCTIONS ////?//////////////////
+////////////////////////////////////////////////////////////////
+
+void EvolverController::deathMessage(std::string message, double currentTime) {
+    id_t organimsID = std::atoi(MessagesManager::get(message, "ID").c_str());
+    int index = searchForOrganism(organimsID);
+    
+    if (index >= 0)
+    {
+        if (organismsList[index].getState() != Organism::DEAD)
+        {
+            organismsList[index].setState(Organism::DEAD);
+            
+            std::cout << "organism_" << organimsID << " died: REMOVED FROM LIST" << std::endl;
+            
+            std::string log = std::to_string(getTime()) + " DEATH " + std::to_string(organimsID) + " organismsListSize " + std::to_string(organismsList.size());
+            storeEventOnFile(log);
+        }
+    }
+    else
+    {
+        std::string fields = "ID: " + std::to_string(organimsID) + "\n";
+        std::string event = "DEATH_ANNOUNCEMENT_MESSAGE";
+        logListProblem(event, message, fields);
+    }
+}
+
+void EvolverController::birthMessage(std::string message, double currentTime) {
+    id_t parent1 = std::atoi(MessagesManager::get(message, "PARENT1").c_str());
+    id_t parent2 = std::atoi(MessagesManager::get(message, "PARENT2").c_str());
+    id_t organismId = std::atoi(MessagesManager::get(message, "ORGANISM_ID").c_str());
+    unsigned int size = std::atoi(MessagesManager::get(message, "SIZE").c_str());
+    std::string genome = MessagesManager::get(message, "GENOME");
+    std::string mind = MessagesManager::get(message, "MIND");
+    
+    if(parent1 > 0){
+        int index = searchForOrganism(parent1);
+        if (index >= 0)
+        {
+            organismsList[index].setOffspring(organismsList[index].getOffspring()+1);
+        }
+        else
+        {
+            std::string event = "ORGANISM_BUILT_MESSAGE (parent1)";
+            std::string fields = "PARENT1: " + std::to_string(parent1) + "\n" +
+            "PARENT2: " + std::to_string(parent2) + "\n" +
+            "ORGANISM_ID: " + std::to_string(organismId) + "\n" +
+            "SIZE: " + std::to_string(size) + "\n" +
+            "GENOME: " + genome + "\n" +
+            "MIND: " + mind + "\n";
+            logListProblem(event, message, fields);
+        }
+    }
+    
+    if(parent2 > 0){
+        int index = searchForOrganism(parent2);
+        if (index >= 0)
+        {
+            organismsList[index].setOffspring(organismsList[index].getOffspring()+1);
+        }
+        else
+        {
+            std::string event = "ORGANISM_BUILT_MESSAGE (parent2)";
+            std::string fields = "PARENT1: " + std::to_string(parent1) + "\n" +
+            "PARENT2: " + std::to_string(parent2) + "\n" +
+            "ORGANISM_ID: " + std::to_string(organismId) + "\n" +
+            "SIZE: " + std::to_string(size) + "\n" +
+            "GENOME: " + genome + "\n" +
+            "MIND: " + mind + "\n";
+            logListProblem(event, message, fields);
+        }
+        
+    }
+    
+    std::vector<id_t> parents;
+    parents.push_back(parent1);
+    parents.push_back(parent2);
+    
+    Organism newOrganism = Organism(genome, mind, organismId, 0, size, 0, parents, Organism::INFANT);
+    int idx = searchForOrganism(organismId);
+    if (idx >= 0)
+    {
+        organismsList.erase(organismsList.begin()+idx);
+    }
+    organismsList.push_back(newOrganism);
+    
+    std::string log = std::to_string(getTime()) + " PROCREATE " + std::to_string(parent1) + " and "  + std::to_string(parent2) + " succesfully had a child";
+    storeEventOnFile(log);
+}
+
+void EvolverController::adultMessage(std::string message, double currentTime) {
+    id_t organismId = atoi(MessagesManager::get(message, "ID").c_str());
+    int idx = searchForOrganism(organismId);
+    if (idx >= 0)
+    {
+        organismsList[searchForOrganism(organismId)].setState(Organism::ADULT);
+    }
+    else
+    {
+        std::string event = "ADULT_ANNOUNCEMENT";
+        std::string fields = "ID: " + std::to_string(organismId) + "\n";
+        logListProblem(event, message, fields);
+    }
+}
+
+void EvolverController::fitnessUpdateMessage(std::string message, double currentTime) {
+    id_t organismId = atoi(MessagesManager::get(message, "ID").c_str());
+    double fitness = atof(MessagesManager::get(message, "FITNESS").c_str());
+    int idx = searchForOrganism(organismId);
+    if (idx >= 0)
+    {
+        organismsList[searchForOrganism(organismId)].setFitness(fitness);
+    }
+    else
+    {
+        std::string event = "FITNESS_UPDATE";
+        std::string fields = "ID: " + std::to_string(organismId) + "\n" + "FITNESS: " + std::to_string(fitness) + "\n";
+        logListProblem(event, message, fields);
+    }
+}
+
+void EvolverController::coupleMessage(std::string message,double currentTime) {
+    try {
+        // read message with couple
+        id_t id1, id2;
+        double fitness1, fitness2;
+        std::string genome1, genome2;
+        std::string mind1, mind2;
+        readCoupleMessage(message, & id1, & fitness1, & genome1, & mind1, & id2, & fitness2, & genome2, & mind2);
+        
+        // recombine genomes
+        std::vector<CppnGenome> parentsGenomes = std::vector<CppnGenome>();
+        std::stringstream genomeAsStream1(genome1);
+        std::stringstream genomeAsStream2(genome2);
+        parentsGenomes.push_back(CppnGenome(genomeAsStream1));
+        parentsGenomes.push_back(CppnGenome(genomeAsStream2));
+        
+        bool empty = true;
+        for (int i = 0; i < 100 && empty; i ++)
+        {
+            CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
+            empty = checkEmptyPlan(newGenome);
+            
+            if(!empty) {
+                // recombine minds
+                std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
+                std::stringstream mindAsStream1(mind1);
+                std::stringstream mindAsStream2(mind2);
+                parentMindGenomes.push_back(mindGenomeManager->getGenomeFromStream(mindAsStream1));
+                parentMindGenomes.push_back(mindGenomeManager->getGenomeFromStream(mindAsStream2));
+                boost::shared_ptr<MindGenome> newMind = mindGenomeManager->createGenome(parentMindGenomes);
+                
+                std::cout << "NEW GENOME CREATED FROM organism_" << id1 << " and organism_" << id2 << std::endl;
+                
+                // store event into file
+                std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(id1) + " and " + std::to_string(id2);
+                storeEventOnFile(log);
+                
+                // send new genome to birth clinic
+                sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), id1, id2, fitness1, fitness2);
+                
+                // stop initialization
+                initialization = false;
+            }
+        }
+    }catch(LocatedException &e){
+        std::cout << "Mating failed, genomeManager threw a located exception: " << e.what();
+    }catch(std::exception &e){
+        std::cout << "Mating failed, genomeManager threw a normal exception: " << e.what();
+    }
+}
+
+void EvolverController::genomeSpreadMessage(std::string message, double currentTime) {
+    id_t organismId;
+    double fitness;
+    std::string genomeStr;
+    std::string mindStr;
+    readFitnessMessage(& organismId, & fitness, &genomeStr, &mindStr, message);
+    
+    int idx = searchForOrganism(organismId);
+    if (idx >= 0)
+    {
+        // update fitness and state
+        organismsList[idx].setFitness(fitness);
+        organismsList[idx].setState(Organism::ADULT);   // redundant
+        organismsList[idx].setMind(mindStr);            // useful only for the first message from organisms not created from parents
+        
+        std::string log = std::to_string(getTime()) + " MESSAGE_FROM " + std::to_string(organismId)  + " organismsListSize " + std::to_string(organismsList.size());
+        storeEventOnFile(log);
+    }
+    else
+    {
+        std::string event = "GENOME_SPREAD_MESSAGE";
+        std::string fields = "ID: " + std::to_string(organismId) + "\n" +
+        "FITNESS: " + std::to_string(fitness) + "\n" +
+        "GENOME: " + genomeStr + "\n" +
+        "MIND: " + mindStr + "\n";
+        logListProblem(event, message, fields);
+    }
+}
 
 ////////////////////////////////////////////////////////////////
 //////////////////////// MAIN FUNCTIONS ////////////////////////
@@ -230,7 +480,7 @@ std::string EvolverController::getOrganismsListAsString()
 
 
 EvolverController::EvolverController() : Supervisor()
-{   
+{
     srand(static_cast<unsigned int>(time(NULL)));
     
     // setup shape encoding
@@ -333,15 +583,14 @@ void EvolverController::run()
     
     // MAIN CYCLE
     
-    bool initialization = true;
-    int initPopulationWaitingTime = getRandomWait();
-    double lastGeneratedTime = 0;
-    
-    double currentTime = 0;
-    double lastMating = 0;      // FOR CENTRALIZED REPRODUCTION BY THE EVOLVER
-    double lastDeath = 0;       // FOR CENTRALIZED DEATH BY THE EVOLVER
-    double lastEvolutionEndCheck = 0;
-    double lastOffspringLoggingTime = 30;
+    initialization = true;
+    initPopulationWaitingTime = getRandomWait();
+    lastGeneratedTime = 0;
+    currentTime = 0;
+    lastMating = 0;      // FOR CENTRALIZED REPRODUCTION BY THE EVOLVER
+    lastDeath = 0;       // FOR CENTRALIZED DEATH BY THE EVOLVER
+    lastEvolutionEndCheck = 0;
+    lastOffspringLoggingTime = 30;
     
     while (step(TIME_STEP) != -1)
     {
@@ -353,20 +602,7 @@ void EvolverController::run()
          ******* CHECK END EVOLUTION *******
          ***********************************/
         
-        if (currentTime - lastEvolutionEndCheck > CHECK_EVOLUTION_END_INTERVAL)
-        {
-            if (checkEvolutionEnd())
-            {
-                // set all prevoius organisms to DEAD state (should not be necessary though)
-                for (int i = 0; i < organismsList.size(); i++)
-                {
-                    organismsList[i].setState(Organism::DEAD);
-                }
-                initialization = true;
-                initPopulationWaitingTime = 0;
-            }
-            lastEvolutionEndCheck = getTime();
-        }
+        checkEndEvolution(currentTime);
         
         
         /*************************************
@@ -382,268 +618,74 @@ void EvolverController::run()
         }
         
         
-        /*********************************************************************************************************
-         ******************************************** MANAGE MESSAGES ********************************************
-         *********************************************************************************************************/
-        
+        /***************************************************************
+         ************************** MANAGE MESSAGES ********************
+         ***************************************************************/
         if(receiver->getQueueLength() > 0)
         {
             std::string message = (char*)receiver->getData();
             
-            
-            /**************************************
-             ****** UPDATE BECAUSE OF DEATH  ******
-             **************************************/
-            
             if (message.substr(0,28).compare("[DEATH_ANNOUNCEMENT_MESSAGE]") == 0)
             {
-                id_t organimsID = std::atoi(MessagesManager::get(message, "ID").c_str());
-                int index = searchForOrganism(organimsID);
-                
-                if (index >= 0)
-                {
-                    if (organismsList[index].getState() != Organism::DEAD)
-                    {
-                        organismsList[index].setState(Organism::DEAD);
-                        
-                        std::cout << "organism_" << organimsID << " died: REMOVED FROM LIST" << std::endl;
-                        
-                        std::string log = std::to_string(getTime()) + " DEATH " + std::to_string(organimsID) + " organismsListSize " + std::to_string(organismsList.size());
-                        storeEventOnFile(log);
-                    }
-                }
-                else
-                {
-                    std::string fields = "ID: " + std::to_string(organimsID) + "\n";
-                    std::string event = "DEATH_ANNOUNCEMENT_MESSAGE";
-                    logListProblem(event, message, fields);
-                }
+                deathMessage(message,currentTime);
             }
-            
-            
-            /*************************************
-             ****** UPDATE BECAUSE OF BIRTH ******
-             *************************************/
             
             if (message.substr(0,24).compare("[ORGANISM_BUILT_MESSAGE]") == 0)
             {
-                id_t parent1 = std::atoi(MessagesManager::get(message, "PARENT1").c_str());
-                id_t parent2 = std::atoi(MessagesManager::get(message, "PARENT2").c_str());
-                id_t organismId = std::atoi(MessagesManager::get(message, "ORGANISM_ID").c_str());
-                unsigned int size = std::atoi(MessagesManager::get(message, "SIZE").c_str());
-                std::string genome = MessagesManager::get(message, "GENOME");
-                std::string mind = MessagesManager::get(message, "MIND");
-                
-                if(parent1 > 0){
-                    int index = searchForOrganism(parent1);
-                    if (index >= 0)
-                    {
-                        organismsList[index].setOffspring(organismsList[index].getOffspring()+1);
-                    }
-                    else
-                    {
-                        std::string event = "ORGANISM_BUILT_MESSAGE (parent1)";
-                        std::string fields = "PARENT1: " + std::to_string(parent1) + "\n" +
-                                            "PARENT2: " + std::to_string(parent2) + "\n" +
-                                            "ORGANISM_ID: " + std::to_string(organismId) + "\n" +
-                                            "SIZE: " + std::to_string(size) + "\n" +
-                                            "GENOME: " + genome + "\n" +
-                                            "MIND: " + mind + "\n";
-                        logListProblem(event, message, fields);
-                    }
-                }
-                
-                if(parent2 > 0){
-                    int index = searchForOrganism(parent2);
-                    if (index >= 0)
-                    {
-                        organismsList[index].setOffspring(organismsList[index].getOffspring()+1);
-                    }
-                    else
-                    {
-                        std::string event = "ORGANISM_BUILT_MESSAGE (parent2)";
-                        std::string fields = "PARENT1: " + std::to_string(parent1) + "\n" +
-                                            "PARENT2: " + std::to_string(parent2) + "\n" +
-                                            "ORGANISM_ID: " + std::to_string(organismId) + "\n" +
-                                            "SIZE: " + std::to_string(size) + "\n" +
-                                            "GENOME: " + genome + "\n" +
-                                            "MIND: " + mind + "\n";
-                        logListProblem(event, message, fields);
-                    }
-                    
-                }
-                
-                std::vector<id_t> parents;
-                parents.push_back(parent1);
-                parents.push_back(parent2);
-                
-                Organism newOrganism = Organism(genome, mind, organismId, 0, size, 0, parents, Organism::INFANT);
-                int idx = searchForOrganism(organismId);
-                if (idx >= 0)
-                {
-                    organismsList.erase(organismsList.begin()+idx);
-                }
-                organismsList.push_back(newOrganism);
-                
-                std::string log = std::to_string(getTime()) + " PROCREATE " + std::to_string(parent1) + " and "  + std::to_string(parent2) + " succesfully had a child";
-                storeEventOnFile(log);
+                birthMessage(message,currentTime);
             }
-            
             
             /*************************************
              ****** UPDATE BECAUSE OF ADULT ******
              *************************************/
-            
             if (message.substr(0,20).compare("[ADULT_ANNOUNCEMENT]") == 0)
             {
-                id_t organismId = atoi(MessagesManager::get(message, "ID").c_str());
-                int idx = searchForOrganism(organismId);
-                if (idx >= 0)
-                {
-                    organismsList[searchForOrganism(organismId)].setState(Organism::ADULT);
-                }
-                else
-                {
-                    std::string event = "ADULT_ANNOUNCEMENT";
-                    std::string fields = "ID: " + std::to_string(organismId) + "\n";
-                    logListProblem(event, message, fields);
-                }
+                adultMessage(message,currentTime);
             }
-            
             
             /******************************
              ******* UPDATE FITNESS *******
              ******************************/
-            
             // should be useful only for distributed
             if (message.substr(0,16).compare("[FITNESS_UPDATE]") == 0)
             {
-                id_t organismId = atoi(MessagesManager::get(message, "ID").c_str());
-                double fitness = atof(MessagesManager::get(message, "FITNESS").c_str());
-                int idx = searchForOrganism(organismId);
-                if (idx >= 0)
-                {
-                    organismsList[searchForOrganism(organismId)].setFitness(fitness);
-                }
-                else
-                {
-                    std::string event = "FITNESS_UPDATE";
-                    std::string fields = "ID: " + std::to_string(organismId) + "\n" + "FITNESS: " + std::to_string(fitness) + "\n";
-                    logListProblem(event, message, fields);
-                }
+                fitnessUpdateMessage(message,currentTime);
             }
-            
             
             /**************************************************************
              ******* CREATE NEW GENOME AFTER SELECTION BY ORGANISMS *******
              **************************************************************/
-            
             if (matingType == MATING_SELECTION_BY_ORGANISMS)
             {
                 
                 if (message.substr(0,16).compare("[COUPLE_MESSAGE]") == 0)
                 {
-                    try {
-                        // read message with couple
-                        id_t id1, id2;
-                        double fitness1, fitness2;
-                        std::string genome1, genome2;
-                        std::string mind1, mind2;
-                        readCoupleMessage(message, & id1, & fitness1, & genome1, & mind1, & id2, & fitness2, & genome2, & mind2);
-                        
-                        // recombine genomes
-                        std::vector<CppnGenome> parentsGenomes = std::vector<CppnGenome>();
-                        std::stringstream genomeAsStream1(genome1);
-                        std::stringstream genomeAsStream2(genome2);
-                        parentsGenomes.push_back(CppnGenome(genomeAsStream1));
-                        parentsGenomes.push_back(CppnGenome(genomeAsStream2));
-                        
-                        bool empty = true;
-                        for (int i = 0; i < 100 && empty; i ++)
-                        {
-                            CppnGenome newGenome = genomeManager->createGenome(parentsGenomes);
-                            empty = checkEmptyPlan(newGenome);
-                        
-                            if(!empty) {
-                                // recombine minds
-                                std::vector<boost::shared_ptr<MindGenome> > parentMindGenomes;
-                                std::stringstream mindAsStream1(mind1);
-                                std::stringstream mindAsStream2(mind2);
-                                parentMindGenomes.push_back(mindGenomeManager->getGenomeFromStream(mindAsStream1));
-                                parentMindGenomes.push_back(mindGenomeManager->getGenomeFromStream(mindAsStream2));
-                                boost::shared_ptr<MindGenome> newMind = mindGenomeManager->createGenome(parentMindGenomes);
-                                
-                                std::cout << "NEW GENOME CREATED FROM organism_" << id1 << " and organism_" << id2 << std::endl;
-                                
-                                // store event into file
-                                std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(id1) + " and " + std::to_string(id2);
-                                storeEventOnFile(log);
-                                
-                                // send new genome to birth clinic
-                                sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), id1, id2, fitness1, fitness2);
-                                
-                                // stop initialization
-                                initialization = false;
-                            }
-                        }
-                    }catch(LocatedException &e){
-                        std::cout << "Mating failed, genomeManager threw a located exception: " << e.what();
-                    }catch(std::exception &e){
-                        std::cout << "Mating failed, genomeManager threw a normal exception: " << e.what();
-                    }
+                    coupleMessage(message,currentTime);
                 }
             }
             
             /*************************************************
              ******* GET GENOMES FOR MATING BY EVOLVER *******
              *************************************************/
-            
             else if (matingType == MATING_SELECTION_BY_EVOLVER)
             {
             
                 if (message.substr(0,23).compare("[GENOME_SPREAD_MESSAGE]") == 0)
                 {
-                    id_t organismId;
-                    double fitness;
-                    std::string genomeStr;
-                    std::string mindStr;
-                    readFitnessMessage(& organismId, & fitness, &genomeStr, &mindStr, message);
-                 
-                    int idx = searchForOrganism(organismId);
-                    if (idx >= 0)
-                    {
-                        // update fitness and state
-                        organismsList[idx].setFitness(fitness);
-                        organismsList[idx].setState(Organism::ADULT);   // redundant
-                        organismsList[idx].setMind(mindStr);            // useful only for the first message from organisms not created from parents
-                        
-                        std::string log = std::to_string(getTime()) + " MESSAGE_FROM " + std::to_string(organismId)  + " organismsListSize " + std::to_string(organismsList.size());
-                        storeEventOnFile(log);
-                    }
-                    else
-                    {
-                        std::string event = "GENOME_SPREAD_MESSAGE";
-                        std::string fields = "ID: " + std::to_string(organismId) + "\n" +
-                                            "FITNESS: " + std::to_string(fitness) + "\n" +
-                                            "GENOME: " + genomeStr + "\n" +
-                                            "MIND: " + mindStr + "\n";
-                        logListProblem(event, message, fields);
-                    }
+                    genomeSpreadMessage(message,currentTime);
                 }
             }
             
             receiver->nextPacket();
         }
         
-        
-        /*********************************************************************************************************
-         ****************************************** INTERVAL OPERATIONS ******************************************
-         *********************************************************************************************************/
+        /***************************************************************
+         ********************* INTERVAL OPERATIONS *********************
+         ***************************************************************/
         
         /************************************************************
          ******* CREATE NEW GENOME USING SELECTION BY EVOLVER *******
          ************************************************************/
-        
         if (matingType == MATING_SELECTION_BY_EVOLVER)
         {
         
@@ -751,22 +793,18 @@ void EvolverController::run()
             }
         }
         
-        
         /***********************************
          ********** LOG OFFSPRING **********
          ***********************************/
-        
         if(currentTime - lastOffspringLoggingTime > MATING_TIME)
         {
             storeParentsOnFile(currentTime);
             lastOffspringLoggingTime = getTime();
         }
         
-        
         /******************************************
          ******* DEATH BY EVOLVER SELECTION *******
          ******************************************/
-        
         if (deathType == DEATH_SELECTION_BY_EVOLVER)
         {
             if(currentTime - lastDeath > DYING_TIME)

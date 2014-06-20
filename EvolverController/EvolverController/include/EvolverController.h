@@ -33,8 +33,6 @@ private:
     int DYING_TIME = ParametersReader::get<int>("DYING_TIME");
     int CHECK_EVOLUTION_END_INTERVAL = ParametersReader::get<int>("CHECK_EVOLUTION_END_INTERVAL");
     
-    int TIME_STEP = ParametersReader::get<int>("TIME_STEP");
-    
     int WAITING_INTERVAL_GENOMES_INITIALIZATION = ParametersReader::get<int>("WAITING_INTERVAL_GENOMES_INITIALIZATION");
     int NOISE_GENOMES_INITIALIZATION = ParametersReader::get<int>("NOISE_GENOMES_INITIALIZATION");
     

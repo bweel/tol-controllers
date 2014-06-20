@@ -10,7 +10,14 @@
 
 std::vector<id_t> BestTwoParentSelection::selectParents(std::vector<Organism> candidates) {
     
-    std::vector<id_t> forMating = std::vector<id_t>();
+    std::vector<id_t> parents = std::vector<id_t>();
+    
+    if(candidates.size() == 0){
+        return parents;
+    }else if (candidates.size() == 1) {
+        parents.push_back(candidates[0].getId());
+        return parents;
+    }
     
     // first
     int bestPos = -1;
@@ -25,31 +32,36 @@ std::vector<id_t> BestTwoParentSelection::selectParents(std::vector<Organism> ca
     }
     if(bestPos == -1)
     {
-        return forMating;
+        return parents;
     }
-    forMating.push_back(candidates[bestPos].getId());
+    parents.push_back(candidates[bestPos].getId());
     
-    Organism backupBest = candidates[bestPos];
-    candidates.push_back(backupBest);
+    
+    candidates.erase(candidates.begin() + bestPos);
+    
+    if(candidates.size() == 0){
+        return parents;
+    }else if (candidates.size() == 1) {
+        parents.push_back(candidates[0].getId());
+        return parents;
+    }
 
     // second
     bestPos = -1;
     bestFitness = -1;
     for(int i = 0; i < candidates.size(); i++)
     {
-        if (candidates[i].getId() != backupBest.getId() &&
-            candidates[i].getFitness() > bestFitness)
+        if (candidates[i].getFitness() > bestFitness)
         {
             bestFitness = candidates[i].getFitness();
             bestPos = i;
         }
     }
-    
     if(bestPos == -1)
     {
-        return forMating;
+        return parents;
     }
+    parents.push_back(candidates[bestPos].getId());
     
-    forMating.push_back(candidates[bestPos].getId());
-    return forMating;
+    return parents;
 }

@@ -44,6 +44,7 @@ _position_end(transforms::Vector_3::ZERO),
 numMotors(0),
 motorRange(0),
 _algorithm(0),
+TIME_STEP(getBasicTimeStep()),
 _gps(isRoot() ? _init_gps(TIME_STEP) : 0),
 _motors(_m_type ? _init_motors(TIME_STEP) : 0)
 {
@@ -120,6 +121,8 @@ _motors(_m_type ? _init_motors(TIME_STEP) : 0)
         genomeReceiver = getReceiver(ROOMBOT_GENOME_RECEIVER_NAME);
         genomeEmitter = getEmitter(ROOMBOT_GENOME_EMITTER_NAME);
         
+        genomeReceiver->disable(); // always disabled for non-root modules, will become enabled for the root when organism becomes fertile
+        
         // lock connectors
         boost::property_tree::ptree connectrsNode = _parameters->get_child("Robot." + getName() + ".Connectors");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, connectrsNode)
@@ -135,8 +138,6 @@ _motors(_m_type ? _init_motors(TIME_STEP) : 0)
             // set non-root module's emitter and receiver using the intex of the root
             _emitter = _init_emitter(static_cast<int> (organismId));
             _receiver = _init_receiver(TIME_STEP, static_cast<int> (EVOLVER_CHANNEL-1 - organismId));
-            
-            genomeReceiver->disable();
             
             return;
         }
@@ -160,12 +161,6 @@ _motors(_m_type ? _init_motors(TIME_STEP) : 0)
                 genomeEmitter->setChannel(GENOME_EXCHANGE_CHANNEL);
             }
             genomeReceiver->setChannel(GENOME_EXCHANGE_CHANNEL);    // USED ONLY FOR DISTRIBUTED REPRODUCTION
-            
-            genomeReceiver->enable(TIME_STEP);
-            while (genomeReceiver->getQueueLength() > 0)
-            {
-                genomeReceiver->nextPacket();
-            }
             
             // set variables for writing on files
             utils::Random rng;
@@ -759,6 +754,7 @@ void RoombotController::storeRebuild(std::string message)
     rebuildFile.close();
 }
 
+
 void RoombotController::storeProblem(std::string message, std::string phase)
 {
     ofstream problemFile;
@@ -818,18 +814,22 @@ void RoombotController::updateOrganismsToMateWithList(id_t mateId, double mateFi
             return;
         }
     }
-    Organism newMate = Organism(mateGenome, mateMind, mateId, mateFitness, -1, -1, std::vector<id_t>(), Organism::ADULT);
+    Organism newMate = Organism(mateGenome, mateMind, mateId, mateFitness, 0, 0, std::vector<id_t>(), Organism::ADULT);
     organismsToMateWith.push_back(newMate);
 }
 
 
 id_t RoombotController::selectMate()
 {
+    std::cout << "SELECT MATE - start" << std::endl;
     std::vector<id_t> selected = parentSelectionMechanism->selectParents(organismsToMateWith);
+    std::cout << "SELECT MATE - selected" << std::endl;
     if (selected.size() > 0)
     {
+        std::cout << "SELECT MATE - return first" << std::endl;
         return selected[0];
     }
+    std::cout << "SELECT MATE - return 0" << std::endl;
     return 0;
 }
 
@@ -906,7 +906,7 @@ bool RoombotController::checkLocks()
             return connectorsOK;
         }
         
-        if(_receiver->getQueueLength() > 0)
+        while (_receiver->getQueueLength() > 0)
         {
             std::string message = (char*)_receiver->getData();
             
@@ -961,7 +961,7 @@ bool RoombotController::checkFallenInside()
                 return positionOK;
             }
             
-            if(_receiver->getQueueLength() > 0)
+            while(_receiver->getQueueLength() > 0)
             {
                 std::string message = (char*)_receiver->getData();
                 
@@ -1232,6 +1232,12 @@ void RoombotController::matureLife()
                     {
                         fertile = true;
                         
+                        genomeReceiver->enable(TIME_STEP);
+                        while (genomeReceiver->getQueueLength() > 0)
+                        {
+                            genomeReceiver->nextPacket();
+                        }
+                        
                         storeFertilityOnFile();
                         std::cout << organismId << " became fertile" << std::endl;
                     }
@@ -1245,7 +1251,7 @@ void RoombotController::matureLife()
             
             if (deathType == DEATH_SELECTION_BY_EVOLVER)
             {
-                if(deathReceiver->getQueueLength() > 0)
+                while(deathReceiver->getQueueLength() > 0)
                 {
                     std::string message = (char*)deathReceiver->getData();
                     deathReceiver->nextPacket();
@@ -1257,9 +1263,9 @@ void RoombotController::matureLife()
             }
             
             
-            /********************************************
-             ***** CHECK DEATH BY EVOLVER SELECTION *****
-             ********************************************/
+            /***************************************
+             ***** CHECK DEATH BY TIME TO LIVE *****
+             ***************************************/
             
             if (deathType == DEATH_SELECTION_BY_TIME_TO_LIVE)
             {
@@ -1377,7 +1383,7 @@ void RoombotController::matureLife()
                     
                     // receiving
                     
-                    if(genomeReceiver->getQueueLength() > 0)
+                    while (genomeReceiver->getQueueLength() > 0)
                     {
                         std::string message = (char*)genomeReceiver->getData();
                         
@@ -1403,26 +1409,42 @@ void RoombotController::matureLife()
                         {
                             id_t mateId = selectMate();
                             int mateIndex = searchForOrganism(mateId);
-                            assert(mateIndex >= 0);
                             
-                            // send couple of genomes to evolver
-                            int backup_channel = _emitter->getChannel();
-                            _emitter->setChannel(EVOLVER_CHANNEL);
-                            
-                            std::string message = "[COUPLE_MESSAGE]";
-                            message = MessagesManager::add(message, "ID1", std::to_string(organismId));
-                            message = MessagesManager::add(message, "FITNESS1", std::to_string(fitness.first));
-                            message = MessagesManager::add(message, "GENOME1", genome);
-                            message = MessagesManager::add(message, "MIND1", mindGenome);
-                            message = MessagesManager::add(message, "ID2", std::to_string(mateId));
-                            message = MessagesManager::add(message, "FITNESS2", std::to_string(organismsToMateWith[mateIndex].getFitness()));
-                            message = MessagesManager::add(message, "GENOME2", organismsToMateWith[mateIndex].getGenome());
-                            message = MessagesManager::add(message, "MIND2", organismsToMateWith[mateIndex].getMind());
-                            
-                            _emitter->send(message.c_str(), (int)message.length()+1);
-                            _emitter->setChannel(backup_channel);
-                            
-                            std::cout << organismId << " chose to mate with " << mateId << std::endl;
+                            if (mateIndex >= 0)
+                            {
+                                // send couple of genomes to evolver
+                                int backup_channel = _emitter->getChannel();
+                                _emitter->setChannel(EVOLVER_CHANNEL);
+                                
+                                std::string message = "[COUPLE_MESSAGE]";
+                                message = MessagesManager::add(message, "ID1", std::to_string(organismId));
+                                message = MessagesManager::add(message, "FITNESS1", std::to_string(fitness.first));
+                                message = MessagesManager::add(message, "GENOME1", genome);
+                                message = MessagesManager::add(message, "MIND1", mindGenome);
+                                message = MessagesManager::add(message, "ID2", std::to_string(mateId));
+                                message = MessagesManager::add(message, "FITNESS2", std::to_string(organismsToMateWith[mateIndex].getFitness()));
+                                message = MessagesManager::add(message, "GENOME2", organismsToMateWith[mateIndex].getGenome());
+                                message = MessagesManager::add(message, "MIND2", organismsToMateWith[mateIndex].getMind());
+                                
+                                _emitter->send(message.c_str(), (int)message.length()+1);
+                                _emitter->setChannel(backup_channel);
+                                
+                                std::cout << organismId << " chose to mate with " << mateId << std::endl;
+                            }
+                            else
+                            {
+                                ofstream file;
+                                file.open(RESULTS_PATH + simulationDateAndTime + "/roombot_list_problems.txt", ios::app);
+                                file << "TIME: " << getTime() << std::endl;
+                                file << "MATE: " << mateId << std::endl;
+                                file << "LIST:\n" << std::endl;
+                                for (int i = 0; i < organismsToMateWith.size(); i++)
+                                {
+                                    file << " " << organismsToMateWith[i].getId();
+                                }
+                                file << std::endl;
+                                file.close();
+                            }
                         }
                         
                         organismsToMateWith = std::vector<Organism>();
@@ -1457,7 +1479,7 @@ void RoombotController::matureLife()
             
             if (deathType == DEATH_SELECTION_BY_EVOLVER)
             {
-                if(deathReceiver->getQueueLength() > 0)
+                while (deathReceiver->getQueueLength() > 0)
                 {
                     std::string message = (char*)deathReceiver->getData();
                     deathReceiver->nextPacket();
@@ -1500,6 +1522,11 @@ void RoombotController::death()
 {
     try
     {
+        if(isRoot())
+        {
+            genomeReceiver->disable();
+        }
+        
         for(int i = 0; i < connectors.size(); i++)
         {
             connectors[i]->unlock();

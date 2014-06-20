@@ -204,4 +204,11 @@ enum DeathType
 #define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 
 
+
+/***********************/
+/***** Environment *****/
+/***********************/
+
+#define CLINIC_RADIUS 2
+
 #endif

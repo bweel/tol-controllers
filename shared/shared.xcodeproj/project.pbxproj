@@ -1,0 +1,540 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		617B36F519263624001D459C /* MatrixGenome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B36F319263624001D459C /* MatrixGenome.cpp */; };
+		617B36FF19263CA7001D459C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B36FE19263CA7001D459C /* main.cpp */; };
+		617B370619263D3A001D459C /* gtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 617B370519263D3A001D459C /* gtest.framework */; };
+		617B3713192646CC001D459C /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B3712192646CC001D459C /* Random.cpp */; };
+		617B3715192646D3001D459C /* Random.h in Headers */ = {isa = PBXBuildFile; fileRef = 617B3714192646D3001D459C /* Random.h */; };
+		617B37201929FFF1001D459C /* MatrixGenomeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 617B371F1929FFF1001D459C /* MatrixGenomeManager.h */; };
+		617B37221929FFF8001D459C /* MatrixGenomeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B37211929FFF8001D459C /* MatrixGenomeManager.cpp */; };
+		617B3725192A3298001D459C /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBC419224330000E6D71 /* libshared.a */; };
+		617B3727192A32CC001D459C /* MindGenome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B3726192A32CC001D459C /* MindGenome.cpp */; };
+		618F2E221934C6D6001500A0 /* ParametersReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618F2E211934C6D6001500A0 /* ParametersReader.cpp */; };
+		61C68B83192A4A4F00AD6D19 /* Organism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C68B82192A4A4F00AD6D19 /* Organism.cpp */; };
+		61C68B85192A4ABF00AD6D19 /* Module.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C68B84192A4ABF00AD6D19 /* Module.h */; };
+		61C68B87192A4AC600AD6D19 /* Module.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61C68B86192A4AC600AD6D19 /* Module.cpp */; };
+		61C68B88192A4ADC00AD6D19 /* Organism.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C68B81192A4A4700AD6D19 /* Organism.h */; };
+		61C68B89192A4ADC00AD6D19 /* MatrixGenome.h in Headers */ = {isa = PBXBuildFile; fileRef = 617B36F2192633CC001D459C /* MatrixGenome.h */; };
+		61C68B8A192A4ADC00AD6D19 /* MindGenome.h in Headers */ = {isa = PBXBuildFile; fileRef = 617B371D1929F5DB001D459C /* MindGenome.h */; };
+		61C68B8B192A4ADC00AD6D19 /* MindGenomeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 617B371E1929FD25001D459C /* MindGenomeManager.h */; };
+		61C68B8D192A4B1400AD6D19 /* BuildPlan.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C68B8C192A4B1400AD6D19 /* BuildPlan.h */; };
+		61C68B8F192A4B2500AD6D19 /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C68B8E192A4B2500AD6D19 /* Bitmap.h */; };
+		61EBFBD2192243B4000E6D71 /* CppnGenome.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EBFBCB192243B4000E6D71 /* CppnGenome.h */; };
+		61EBFBD3192243B4000E6D71 /* Defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EBFBCC192243B4000E6D71 /* Defines.h */; };
+		61EBFBD4192243B4000E6D71 /* Position.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EBFBCD192243B4000E6D71 /* Position.h */; };
+		61EBFBD5192243B4000E6D71 /* CppnGenome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61EBFBCF192243B4000E6D71 /* CppnGenome.cpp */; };
+		61EBFBD6192243B4000E6D71 /* Position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61EBFBD0192243B4000E6D71 /* Position.cpp */; };
+		A82391991940C29A00F3267C /* Builder.h in Headers */ = {isa = PBXBuildFile; fileRef = A82391981940C29A00F3267C /* Builder.h */; };
+		A823919B1940C2A500F3267C /* Builder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A823919A1940C2A500F3267C /* Builder.cpp */; };
+		A823919E1940C4CE00F3267C /* RelativePosition.h in Headers */ = {isa = PBXBuildFile; fileRef = A823919C1940C4CE00F3267C /* RelativePosition.h */; };
+		A823919F1940C4CE00F3267C /* RoombotBuildPlan.h in Headers */ = {isa = PBXBuildFile; fileRef = A823919D1940C4CE00F3267C /* RoombotBuildPlan.h */; };
+		A82391A21940C4DA00F3267C /* RelativePosition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82391A01940C4DA00F3267C /* RelativePosition.cpp */; };
+		A82391A31940C4DA00F3267C /* RoombotBuildPlan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82391A11940C4DA00F3267C /* RoombotBuildPlan.cpp */; };
+		A82391A51940C52F00F3267C /* ActivationValueMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = A82391A41940C52F00F3267C /* ActivationValueMatrix.h */; };
+		A82391A81940C53F00F3267C /* ActivationValueMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82391A61940C53F00F3267C /* ActivationValueMatrix.cpp */; };
+		A82391A91940C53F00F3267C /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82391A71940C53F00F3267C /* Bitmap.cpp */; };
+		A84062A9193CD14100964153 /* RandomSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = A84062A8193CD14100964153 /* RandomSelection.h */; };
+		A84062AB193CD15700964153 /* RandomSelection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84062AA193CD15700964153 /* RandomSelection.cpp */; };
+		A84062AF193CD1A600964153 /* BestTwoParentSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = A84062AC193CD1A600964153 /* BestTwoParentSelection.h */; };
+		A84062B0193CD1A600964153 /* BinaryTournamentParentSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = A84062AD193CD1A600964153 /* BinaryTournamentParentSelection.h */; };
+		A84062B1193CD1A600964153 /* ParentSelectionMechanism.h in Headers */ = {isa = PBXBuildFile; fileRef = A84062AE193CD1A600964153 /* ParentSelectionMechanism.h */; };
+		A84062B4193CD1B700964153 /* BinaryTournamentParentSelection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84062B2193CD1B700964153 /* BinaryTournamentParentSelection.cpp */; };
+		A84062B5193CD1B700964153 /* BestTwoParentSelection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84062B3193CD1B700964153 /* BestTwoParentSelection.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		617B36FA19263CA7001D459C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		617B36F2192633CC001D459C /* MatrixGenome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatrixGenome.h; sourceTree = "<group>"; };
+		617B36F319263624001D459C /* MatrixGenome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MatrixGenome.cpp; sourceTree = "<group>"; };
+		617B36FC19263CA7001D459C /* UnitTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UnitTests; sourceTree = BUILT_PRODUCTS_DIR; };
+		617B36FE19263CA7001D459C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		617B370019263CA7001D459C /* UnitTests.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = UnitTests.1; sourceTree = "<group>"; };
+		617B370519263D3A001D459C /* gtest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = gtest.framework; path = ../../../../../../../../../Library/Frameworks/gtest.framework; sourceTree = "<group>"; };
+		617B3712192646CC001D459C /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
+		617B3714192646D3001D459C /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Random.h; sourceTree = "<group>"; };
+		617B371D1929F5DB001D459C /* MindGenome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MindGenome.h; sourceTree = "<group>"; };
+		617B371E1929FD25001D459C /* MindGenomeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MindGenomeManager.h; sourceTree = "<group>"; };
+		617B371F1929FFF1001D459C /* MatrixGenomeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatrixGenomeManager.h; sourceTree = "<group>"; };
+		617B37211929FFF8001D459C /* MatrixGenomeManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MatrixGenomeManager.cpp; sourceTree = "<group>"; };
+		617B3726192A32CC001D459C /* MindGenome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MindGenome.cpp; sourceTree = "<group>"; };
+		618F2E211934C6D6001500A0 /* ParametersReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParametersReader.cpp; sourceTree = "<group>"; };
+		61C68B81192A4A4700AD6D19 /* Organism.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Organism.h; sourceTree = "<group>"; };
+		61C68B82192A4A4F00AD6D19 /* Organism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Organism.cpp; sourceTree = "<group>"; };
+		61C68B84192A4ABF00AD6D19 /* Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Module.h; sourceTree = "<group>"; };
+		61C68B86192A4AC600AD6D19 /* Module.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Module.cpp; sourceTree = "<group>"; };
+		61C68B8C192A4B1400AD6D19 /* BuildPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildPlan.h; sourceTree = "<group>"; };
+		61C68B8E192A4B2500AD6D19 /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bitmap.h; sourceTree = "<group>"; };
+		61EBFBC419224330000E6D71 /* libshared.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libshared.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		61EBFBCB192243B4000E6D71 /* CppnGenome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CppnGenome.h; sourceTree = "<group>"; };
+		61EBFBCC192243B4000E6D71 /* Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
+		61EBFBCD192243B4000E6D71 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Position.h; sourceTree = "<group>"; };
+		61EBFBCF192243B4000E6D71 /* CppnGenome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CppnGenome.cpp; sourceTree = "<group>"; };
+		61EBFBD0192243B4000E6D71 /* Position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Position.cpp; sourceTree = "<group>"; };
+		A82391981940C29A00F3267C /* Builder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Builder.h; sourceTree = "<group>"; };
+		A823919A1940C2A500F3267C /* Builder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Builder.cpp; sourceTree = "<group>"; };
+		A823919C1940C4CE00F3267C /* RelativePosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelativePosition.h; sourceTree = "<group>"; };
+		A823919D1940C4CE00F3267C /* RoombotBuildPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoombotBuildPlan.h; sourceTree = "<group>"; };
+		A82391A01940C4DA00F3267C /* RelativePosition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RelativePosition.cpp; sourceTree = "<group>"; };
+		A82391A11940C4DA00F3267C /* RoombotBuildPlan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoombotBuildPlan.cpp; sourceTree = "<group>"; };
+		A82391A41940C52F00F3267C /* ActivationValueMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivationValueMatrix.h; sourceTree = "<group>"; };
+		A82391A61940C53F00F3267C /* ActivationValueMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActivationValueMatrix.cpp; sourceTree = "<group>"; };
+		A82391A71940C53F00F3267C /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
+		A84062A8193CD14100964153 /* RandomSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomSelection.h; sourceTree = "<group>"; };
+		A84062AA193CD15700964153 /* RandomSelection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RandomSelection.cpp; sourceTree = "<group>"; };
+		A84062AC193CD1A600964153 /* BestTwoParentSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BestTwoParentSelection.h; sourceTree = "<group>"; };
+		A84062AD193CD1A600964153 /* BinaryTournamentParentSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryTournamentParentSelection.h; sourceTree = "<group>"; };
+		A84062AE193CD1A600964153 /* ParentSelectionMechanism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentSelectionMechanism.h; sourceTree = "<group>"; };
+		A84062B2193CD1B700964153 /* BinaryTournamentParentSelection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryTournamentParentSelection.cpp; sourceTree = "<group>"; };
+		A84062B3193CD1B700964153 /* BestTwoParentSelection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BestTwoParentSelection.cpp; sourceTree = "<group>"; };
+		A8634376193DF3DC0014C737 /* libboost_random-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_random-mt.a"; path = "../lib/libboost_random-mt.a"; sourceTree = "<group>"; };
+		A8CCFCBD192BA67F00D34ED4 /* ParametersReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParametersReader.h; sourceTree = "<group>"; };
+		A8E16AE9192F494600A5F17B /* MessagesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessagesManager.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		617B36F919263CA7001D459C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				617B3725192A3298001D459C /* libshared.a in Frameworks */,
+				617B370619263D3A001D459C /* gtest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		61EBFBC119224330000E6D71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		617B36F7192639D3001D459C /* test */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = test;
+			sourceTree = "<group>";
+		};
+		617B36FD19263CA7001D459C /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				617B370519263D3A001D459C /* gtest.framework */,
+				617B36FE19263CA7001D459C /* main.cpp */,
+				617B370019263CA7001D459C /* UnitTests.1 */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		617B3716192647A6001D459C /* Libaries */ = {
+			isa = PBXGroup;
+			children = (
+				A8634376193DF3DC0014C737 /* libboost_random-mt.a */,
+			);
+			name = Libaries;
+			sourceTree = "<group>";
+		};
+		61EBFBBB19224330000E6D71 = {
+			isa = PBXGroup;
+			children = (
+				617B3716192647A6001D459C /* Libaries */,
+				617B36F7192639D3001D459C /* test */,
+				61EBFBCE192243B4000E6D71 /* include */,
+				61EBFBD1192243B4000E6D71 /* source */,
+				617B36FD19263CA7001D459C /* UnitTests */,
+				61EBFBC519224330000E6D71 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		61EBFBC519224330000E6D71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				61EBFBC419224330000E6D71 /* libshared.a */,
+				617B36FC19263CA7001D459C /* UnitTests */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		61EBFBCE192243B4000E6D71 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				A82391A41940C52F00F3267C /* ActivationValueMatrix.h */,
+				A823919C1940C4CE00F3267C /* RelativePosition.h */,
+				A823919D1940C4CE00F3267C /* RoombotBuildPlan.h */,
+				A82391981940C29A00F3267C /* Builder.h */,
+				A84062A8193CD14100964153 /* RandomSelection.h */,
+				A84062AC193CD1A600964153 /* BestTwoParentSelection.h */,
+				A84062AD193CD1A600964153 /* BinaryTournamentParentSelection.h */,
+				A84062AE193CD1A600964153 /* ParentSelectionMechanism.h */,
+				61C68B8E192A4B2500AD6D19 /* Bitmap.h */,
+				61C68B8C192A4B1400AD6D19 /* BuildPlan.h */,
+				61C68B84192A4ABF00AD6D19 /* Module.h */,
+				61C68B81192A4A4700AD6D19 /* Organism.h */,
+				617B371F1929FFF1001D459C /* MatrixGenomeManager.h */,
+				617B3714192646D3001D459C /* Random.h */,
+				61EBFBCC192243B4000E6D71 /* Defines.h */,
+				61EBFBCB192243B4000E6D71 /* CppnGenome.h */,
+				61EBFBCD192243B4000E6D71 /* Position.h */,
+				A8CCFCBD192BA67F00D34ED4 /* ParametersReader.h */,
+				617B36F2192633CC001D459C /* MatrixGenome.h */,
+				617B371D1929F5DB001D459C /* MindGenome.h */,
+				617B371E1929FD25001D459C /* MindGenomeManager.h */,
+				A8E16AE9192F494600A5F17B /* MessagesManager.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		61EBFBD1192243B4000E6D71 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				A82391A61940C53F00F3267C /* ActivationValueMatrix.cpp */,
+				A82391A71940C53F00F3267C /* Bitmap.cpp */,
+				A82391A01940C4DA00F3267C /* RelativePosition.cpp */,
+				A82391A11940C4DA00F3267C /* RoombotBuildPlan.cpp */,
+				A823919A1940C2A500F3267C /* Builder.cpp */,
+				A84062B2193CD1B700964153 /* BinaryTournamentParentSelection.cpp */,
+				A84062B3193CD1B700964153 /* BestTwoParentSelection.cpp */,
+				A84062AA193CD15700964153 /* RandomSelection.cpp */,
+				61C68B86192A4AC600AD6D19 /* Module.cpp */,
+				61C68B82192A4A4F00AD6D19 /* Organism.cpp */,
+				617B37211929FFF8001D459C /* MatrixGenomeManager.cpp */,
+				617B3712192646CC001D459C /* Random.cpp */,
+				61EBFBCF192243B4000E6D71 /* CppnGenome.cpp */,
+				61EBFBD0192243B4000E6D71 /* Position.cpp */,
+				617B36F319263624001D459C /* MatrixGenome.cpp */,
+				617B3726192A32CC001D459C /* MindGenome.cpp */,
+				618F2E211934C6D6001500A0 /* ParametersReader.cpp */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		61EBFBC219224330000E6D71 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61C68B88192A4ADC00AD6D19 /* Organism.h in Headers */,
+				A823919E1940C4CE00F3267C /* RelativePosition.h in Headers */,
+				61C68B89192A4ADC00AD6D19 /* MatrixGenome.h in Headers */,
+				A84062AF193CD1A600964153 /* BestTwoParentSelection.h in Headers */,
+				61C68B8A192A4ADC00AD6D19 /* MindGenome.h in Headers */,
+				A82391A51940C52F00F3267C /* ActivationValueMatrix.h in Headers */,
+				61C68B8B192A4ADC00AD6D19 /* MindGenomeManager.h in Headers */,
+				A823919F1940C4CE00F3267C /* RoombotBuildPlan.h in Headers */,
+				A84062B1193CD1A600964153 /* ParentSelectionMechanism.h in Headers */,
+				61EBFBD2192243B4000E6D71 /* CppnGenome.h in Headers */,
+				61C68B8D192A4B1400AD6D19 /* BuildPlan.h in Headers */,
+				61EBFBD3192243B4000E6D71 /* Defines.h in Headers */,
+				61C68B8F192A4B2500AD6D19 /* Bitmap.h in Headers */,
+				61C68B85192A4ABF00AD6D19 /* Module.h in Headers */,
+				61EBFBD4192243B4000E6D71 /* Position.h in Headers */,
+				617B3715192646D3001D459C /* Random.h in Headers */,
+				617B37201929FFF1001D459C /* MatrixGenomeManager.h in Headers */,
+				A84062B0193CD1A600964153 /* BinaryTournamentParentSelection.h in Headers */,
+				A84062A9193CD14100964153 /* RandomSelection.h in Headers */,
+				A82391991940C29A00F3267C /* Builder.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		617B36FB19263CA7001D459C /* UnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 617B370219263CA7001D459C /* Build configuration list for PBXNativeTarget "UnitTests" */;
+			buildPhases = (
+				617B36F819263CA7001D459C /* Sources */,
+				617B36F919263CA7001D459C /* Frameworks */,
+				617B36FA19263CA7001D459C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UnitTests;
+			productName = UnitTests;
+			productReference = 617B36FC19263CA7001D459C /* UnitTests */;
+			productType = "com.apple.product-type.tool";
+		};
+		61EBFBC319224330000E6D71 /* shared */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 61EBFBC819224330000E6D71 /* Build configuration list for PBXNativeTarget "shared" */;
+			buildPhases = (
+				61EBFBC019224330000E6D71 /* Sources */,
+				61EBFBC119224330000E6D71 /* Frameworks */,
+				61EBFBC219224330000E6D71 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = shared;
+			productName = shared;
+			productReference = 61EBFBC419224330000E6D71 /* libshared.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		61EBFBBC19224330000E6D71 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Berend Weel";
+			};
+			buildConfigurationList = 61EBFBBF19224330000E6D71 /* Build configuration list for PBXProject "shared" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 61EBFBBB19224330000E6D71;
+			productRefGroup = 61EBFBC519224330000E6D71 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				61EBFBC319224330000E6D71 /* shared */,
+				617B36FB19263CA7001D459C /* UnitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		617B36F819263CA7001D459C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				617B36FF19263CA7001D459C /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		61EBFBC019224330000E6D71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				617B3713192646CC001D459C /* Random.cpp in Sources */,
+				61C68B87192A4AC600AD6D19 /* Module.cpp in Sources */,
+				A82391A31940C4DA00F3267C /* RoombotBuildPlan.cpp in Sources */,
+				617B36F519263624001D459C /* MatrixGenome.cpp in Sources */,
+				A84062AB193CD15700964153 /* RandomSelection.cpp in Sources */,
+				618F2E221934C6D6001500A0 /* ParametersReader.cpp in Sources */,
+				A823919B1940C2A500F3267C /* Builder.cpp in Sources */,
+				61C68B83192A4A4F00AD6D19 /* Organism.cpp in Sources */,
+				617B37221929FFF8001D459C /* MatrixGenomeManager.cpp in Sources */,
+				61EBFBD6192243B4000E6D71 /* Position.cpp in Sources */,
+				617B3727192A32CC001D459C /* MindGenome.cpp in Sources */,
+				61EBFBD5192243B4000E6D71 /* CppnGenome.cpp in Sources */,
+				A82391A91940C53F00F3267C /* Bitmap.cpp in Sources */,
+				A84062B4193CD1B700964153 /* BinaryTournamentParentSelection.cpp in Sources */,
+				A82391A21940C4DA00F3267C /* RelativePosition.cpp in Sources */,
+				A82391A81940C53F00F3267C /* ActivationValueMatrix.cpp in Sources */,
+				A84062B5193CD1B700964153 /* BestTwoParentSelection.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		617B370319263CA7001D459C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		617B370419263CA7001D459C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		61EBFBC619224330000E6D71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../lib/NEAT/,
+					../lib/TinyXMLPlus/,
+					../lib/JGTL/,
+					/opt/local/include/,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		61EBFBC719224330000E6D71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../lib/NEAT/,
+					../lib/TinyXMLPlus/,
+					../lib/JGTL/,
+					/opt/local/include/,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		61EBFBC919224330000E6D71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/emanuele/Documents/projects/tol-controllers/lib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		61EBFBCA19224330000E6D71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/emanuele/Documents/projects/tol-controllers/lib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		617B370219263CA7001D459C /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				617B370319263CA7001D459C /* Debug */,
+				617B370419263CA7001D459C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		61EBFBBF19224330000E6D71 /* Build configuration list for PBXProject "shared" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61EBFBC619224330000E6D71 /* Debug */,
+				61EBFBC719224330000E6D71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		61EBFBC819224330000E6D71 /* Build configuration list for PBXNativeTarget "shared" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61EBFBC919224330000E6D71 /* Debug */,
+				61EBFBCA19224330000E6D71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 61EBFBBC19224330000E6D71 /* Project object */;
+}

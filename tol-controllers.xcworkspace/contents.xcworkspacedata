@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:EnvironmentModifierController/EnvironmentModifierController.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:BirthClinicController/BirthClinicController.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:EvolverController/EvolverController.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:RoombotController/RoombotController.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ScreenshotController/ScreenshotController.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:shared/shared.xcodeproj">
+   </FileRef>
+   <Group
+      location = "group:lib"
+      name = "lib">
+      <Group
+         location = "group:JGTL"
+         name = "JGTL">
+         <FileRef
+            location = "group:JGTL_Index3.h">
+         </FileRef>
+         <FileRef
+            location = "group:JGTL_LocatedException.h">
+         </FileRef>
+         <FileRef
+            location = "group:JGTL_MapInterface.h">
+         </FileRef>
+         <FileRef
+            location = "group:JGTL_StackMap.h">
+         </FileRef>
+         <FileRef
+            location = "group:JGTL_StringConverter.h">
+         </FileRef>
+         <FileRef
+            location = "group:JGTL_Vector2.h">
+         </FileRef>
+         <FileRef
+            location = "group:JGTL_Vector3.h">
+         </FileRef>
+         <FileRef
+            location = "group:JGTL_Vector4.h">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:NEAT"
+         name = "NEAT">
+         <FileRef
+            location = "group:NEAT.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_CoEvoExperiment.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_CoEvoGeneticGeneration.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_Defines.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_FastBiasNetwork.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_FastLayeredNetwork.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_FastNetwork.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_FractalNetwork.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_GPUANN.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_GeneticGene.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_GeneticGeneration.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_GeneticIndividual.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_GeneticLinkGene.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_GeneticNodeGene.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_GeneticPopulation.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_GeneticSpecies.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_Globals.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_LayeredSubstrate.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_ModularNetwork.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_Network.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_NetworkIndexedLink.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_NetworkLink.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_NetworkNode.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_Random.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_STL.h">
+         </FileRef>
+         <FileRef
+            location = "group:NEAT_VectorNetwork.h">
+         </FileRef>
+         <FileRef
+            location = "group:StringConverter.h">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:TinyXMLPlus"
+         name = "TinyXMLPlus">
+         <FileRef
+            location = "group:tinystr.h">
+         </FileRef>
+         <FileRef
+            location = "group:tinyxmlplus.h">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:libNEATLib.a">
+      </FileRef>
+      <FileRef
+         location = "group:libboard.a">
+      </FileRef>
+      <FileRef
+         location = "group:libtinyxmlpluslib.a">
+      </FileRef>
+      <FileRef
+         location = "group:libboost_filesystem-mt.a">
+      </FileRef>
+      <FileRef
+         location = "group:libboost_random-mt.a">
+      </FileRef>
+      <FileRef
+         location = "group:libboost_system-mt.a">
+      </FileRef>
+      <FileRef
+         location = "group:libgsl.a">
+      </FileRef>
+      <FileRef
+         location = "group:libz.a">
+      </FileRef>
+   </Group>
+</Workspace>

@@ -10,6 +10,9 @@
 #include "TimingController.h"
 
 void TimingController::run() {
+
+    double TIME_STEP = getBasicTimeStep();
+    
     double startTime = getTime();
     
     std::cout << BOLDBLUE << "Starting Timing Supervisor, running experiment untill " << experimentLength << " seconds have passed, reverting when done" << RESET << std::endl;

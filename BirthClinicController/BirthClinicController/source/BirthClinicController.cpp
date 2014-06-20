@@ -12,6 +12,30 @@ id_t BirthClinicController::getNextOrganismId()
 }
 
 
+bool BirthClinicController::isClinicFree()
+{
+    std::map<id_t, Module*>::iterator it;
+    
+    for ( it=moduleMap.begin() ; it != moduleMap.end(); it++ )
+    {
+        Module * module = it->second;
+        
+        if (module->getInReserve() == false)
+        {
+            double x = it->second->getPosition().getX();
+            double z = it->second->getPosition().getZ();
+            double distanceFromCenter = sqrt((x*x) + (z*z));
+        
+            if(distanceFromCenter < CLINIC_RADIUS)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+
 int BirthClinicController::countInRadius(Position position, double radius)
 {
     std::map<id_t, Module*>::iterator it;
@@ -225,7 +249,8 @@ int BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGeno
         if (availableModules.size() >= buildPlan->size())
         {
             // create an organism object and add the modules
-            if (countInRadius(position, CLINIC_SAFE_DISTANCE) == 0)
+            //if (countInRadius(position, CLINIC_SAFE_DISTANCE) == 0)
+            if (isClinicFree())
             {
                 rotate();
                 
@@ -322,6 +347,8 @@ BirthClinicController::~BirthClinicController()
 
 void BirthClinicController::run()
 {
+    double TIME_STEP = getBasicTimeStep();
+    
     receiver->enable(TIME_STEP);
     while (receiver->getQueueLength() > 0)
     {
@@ -343,14 +370,7 @@ void BirthClinicController::run()
             if (message.substr(0,24).compare("[ENVIRONMENT_OK_MESSAGE]") == 0)
             {
                 environmentOk = true;
-                
                 simulationDateAndTime = MessagesManager::get(message, "SDAT");
-                
-                boost::filesystem::path path(RESULTS_PATH + simulationDateAndTime);
-                if (boost::filesystem::exists(path) && boost::filesystem::is_directory(path)) {
-                    throw std::runtime_error("Directory Already Existing");
-                }
-                boost::filesystem::create_directories(path);
             }
             receiver->nextPacket();
         }
@@ -364,13 +384,16 @@ void BirthClinicController::run()
     connectModulesToObjects();
     
     
+    
     while (step(TIME_STEP) != -1)
     {
+        int buildTry = 0;
+        
         /*******************************
          ******* MANAGE MESSAGES *******
          *******************************/
         
-        if (receiver->getQueueLength() > 0)
+        while (receiver->getQueueLength() > 0)
         {
             std::string message = (char*)receiver->getData();
             
@@ -391,7 +414,7 @@ void BirthClinicController::run()
              ******* REBUILD ORGANISM *******
              ********************************/
             
-            if (message.substr(0,17).compare("[REBUILD_MESSAGE]") == 0)
+            else if (message.substr(0,17).compare("[REBUILD_MESSAGE]") == 0)
             {
                 id_t organismId;
                 std::string genomeStr;
@@ -412,7 +435,17 @@ void BirthClinicController::run()
                 
                 if (buildResponse != -2)
                 {
+                    buildTry = 0;
                     receiver->nextPacket();
+                }
+                else
+                {
+                    std::cout << buildTry << std::endl;
+                    if (step(TIME_STEP) == -1)
+                    {
+                        return;
+                    }
+                    buildTry++;
                 }
             }
             
@@ -421,7 +454,7 @@ void BirthClinicController::run()
              ******* BUILD NEW ORGANISM *******
              **********************************/
             
-            if (message.substr(0,26).compare("[GENOME_TO_CLINIC_MESSAGE]") == 0)
+            else if (message.substr(0,26).compare("[GENOME_TO_CLINIC_MESSAGE]") == 0)
             {
                 std::string genomeStr;
                 std::string mindStr;
@@ -441,18 +474,29 @@ void BirthClinicController::run()
                     
                     sendOrganismBuiltMessage(parent1, parent2, nextOrganismId-1, buildResponse, genomeStr, mindStr);
                     
+                    buildTry = 0;
                     receiver->nextPacket();
                 }
                 if (buildResponse == -3)
                 {
                     // There are not enough modules, or the buildplan is too small
                     // Skip to the next shape
+                    buildTry = 0;
                     receiver->nextPacket();
                 }
                 if (buildResponse == -2)
                 {
+                    std::cout << buildTry << std::endl;
+                    if (step(TIME_STEP) == -1)
+                    {
+                        return;
+                    }
+                    buildTry++;
                     // Clinic is still busy. Keep packets and wait a while.
                 }
+            }
+            else {
+                receiver->nextPacket();
             }
         }
     }

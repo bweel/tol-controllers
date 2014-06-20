@@ -101,10 +101,9 @@ private:
     std::string DEATH_SELECTION = ParametersReader::get<std::string>("DEATH_SELECTION");
     
     bool checkInsideCylinder = ParametersReader::get<bool>("CHECK_INSIDE_CYLINDER");
-    
-    int TIME_STEP = ParametersReader::get<int>("TIME_STEP");
-    
     std::string simulationDateAndTime;
+    
+    double TIME_STEP;
     
     bool fertile;
     

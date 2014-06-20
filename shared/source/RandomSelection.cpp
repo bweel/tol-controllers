@@ -22,12 +22,13 @@ std::vector<id_t> RandomSelection::selectParents(std::vector<Organism> candidate
     
     // Select parent 1
     
-    int candidate1 = candidates[rand() % candidates.size()].getId();
-    parents.push_back(candidate1);
+    int idx = rand() % candidates.size();
+    int parent1 = candidates[idx].getId();
+    parents.push_back(parent1);
     
     // Remove the chosen parent from the candidates
     
-    candidates.erase(candidates.begin() + candidate1);
+    candidates.erase(candidates.begin() + idx);
     
     if(candidates.size() == 0){
         return parents;
@@ -37,9 +38,10 @@ std::vector<id_t> RandomSelection::selectParents(std::vector<Organism> candidate
     }
     
     // Select parent 2
-   
-    int candidate2 = candidates[rand() % candidates.size()].getId();
-    parents.push_back(candidate2);
+    
+    idx = rand() % candidates.size();
+    int parent2 = candidates[idx].getId();
+    parents.push_back(parent2);
     
     return parents;
 }

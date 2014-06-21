@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "618F2E141934C5CA001500A0"
-               BuildableName = "TimingController"
-               BlueprintName = "TimingController"
-               ReferencedContainer = "container:ScreenshotController.xcodeproj">
+               BlueprintIdentifier = "A89A4AF41955B67E008D7E2E"
+               BuildableName = "EnvironmentModifierController"
+               BlueprintName = "DeathController"
+               ReferencedContainer = "container:Environment.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "618F2E141934C5CA001500A0"
-            BuildableName = "TimingController"
-            BlueprintName = "TimingController"
-            ReferencedContainer = "container:ScreenshotController.xcodeproj">
+            BlueprintIdentifier = "A89A4AF41955B67E008D7E2E"
+            BuildableName = "EnvironmentModifierController"
+            BlueprintName = "DeathController"
+            ReferencedContainer = "container:Environment.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -51,10 +51,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "618F2E141934C5CA001500A0"
-            BuildableName = "TimingController"
-            BlueprintName = "TimingController"
-            ReferencedContainer = "container:ScreenshotController.xcodeproj">
+            BlueprintIdentifier = "A89A4AF41955B67E008D7E2E"
+            BuildableName = "EnvironmentModifierController"
+            BlueprintName = "DeathController"
+            ReferencedContainer = "container:Environment.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -69,10 +69,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "618F2E141934C5CA001500A0"
-            BuildableName = "TimingController"
-            BlueprintName = "TimingController"
-            ReferencedContainer = "container:ScreenshotController.xcodeproj">
+            BlueprintIdentifier = "A89A4AF41955B67E008D7E2E"
+            BuildableName = "EnvironmentModifierController"
+            BlueprintName = "DeathController"
+            ReferencedContainer = "container:Environment.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -106,6 +106,7 @@ private:
     double TIME_STEP;
     
     bool fertile;
+    bool adult;
     
     MatingType matingType;
     DeathType deathType;
@@ -137,8 +138,8 @@ private:
     std::size_t _ev_step;                       // current evaluation step
     std::size_t _ev_steps_recovery;             // time steps without fitness
     std::size_t _ev_steps_total_infancy;        // time steps to wait before evaluation during infancy
-    unsigned int evaluationDuration;            // total time of infancy
-    unsigned int matureTimeToLive;              // total time to live mature life
+    unsigned int infancyDuration;            // total time of infancy
+    unsigned int timeToLive;              // total time to live
     unsigned int totalEvaluations;              // total number of evaluations
     unsigned int generation;                    // current generation
     double _ev_angular_velocity;                // speed of the motors
@@ -248,11 +249,7 @@ private:
     
     bool checkFallenInside();
     
-    // initial learning
-    void infancy();
-    
-    // behavior after learning and reproduction
-    void matureLife();
+    void life();
     
     // deactivate
     void death();

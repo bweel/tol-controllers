@@ -190,7 +190,7 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Berend Weel";
 			};
-			buildConfigurationList = 61854A4E19235CD900D24E32 /* Build configuration list for PBXProject "ScreenshotController" */;
+			buildConfigurationList = 61854A4E19235CD900D24E32 /* Build configuration list for PBXProject "External" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -385,7 +385,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		61854A4E19235CD900D24E32 /* Build configuration list for PBXProject "ScreenshotController" */ = {
+		61854A4E19235CD900D24E32 /* Build configuration list for PBXProject "External" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				61854A5A19235CD900D24E32 /* Debug */,

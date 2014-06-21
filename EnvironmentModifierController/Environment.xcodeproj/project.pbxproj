@@ -67,7 +67,7 @@
 		61AD16221897F88A003D24DE = {
 			isa = PBXGroup;
 			children = (
-				61AD162D1897F88A003D24DE /* EvolverControllerController */,
+				61AD162D1897F88A003D24DE /* EnvironmentModifierController */,
 				61AD163D1897F8C7003D24DE /* Libraries */,
 				61AD162C1897F88A003D24DE /* Products */,
 			);
@@ -81,13 +81,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		61AD162D1897F88A003D24DE /* EvolverControllerController */ = {
+		61AD162D1897F88A003D24DE /* EnvironmentModifierController */ = {
 			isa = PBXGroup;
 			children = (
 				A84E611818FE734C007E227E /* include */,
 				A84E611918FE7357007E227E /* source */,
 			);
-			name = EvolverControllerController;
+			name = EnvironmentModifierController;
 			path = ToLSupervisor;
 			sourceTree = "<group>";
 		};
@@ -152,7 +152,7 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Berend Weel";
 			};
-			buildConfigurationList = 61AD16261897F88A003D24DE /* Build configuration list for PBXProject "EnvironmentModifierController" */;
+			buildConfigurationList = 61AD16261897F88A003D24DE /* Build configuration list for PBXProject "Environment" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -303,7 +303,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		61AD16261897F88A003D24DE /* Build configuration list for PBXProject "EnvironmentModifierController" */ = {
+		61AD16261897F88A003D24DE /* Build configuration list for PBXProject "Environment" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				61AD16321897F88A003D24DE /* Debug */,

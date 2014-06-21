@@ -77,7 +77,7 @@
 		61AD16221897F88A003D24DE = {
 			isa = PBXGroup;
 			children = (
-				61AD162D1897F88A003D24DE /* EvolverControllerController */,
+				61AD162D1897F88A003D24DE /* EvolverController */,
 				61AD163D1897F8C7003D24DE /* Libraries */,
 				61AD162C1897F88A003D24DE /* Products */,
 			);
@@ -91,13 +91,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		61AD162D1897F88A003D24DE /* EvolverControllerController */ = {
+		61AD162D1897F88A003D24DE /* EvolverController */ = {
 			isa = PBXGroup;
 			children = (
 				A84E611818FE734C007E227E /* include */,
 				A84E611918FE7357007E227E /* source */,
 			);
-			name = EvolverControllerController;
+			name = EvolverController;
 			path = ToLSupervisor;
 			sourceTree = "<group>";
 		};

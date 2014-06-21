@@ -46,8 +46,8 @@ void EnvironmentModifierController::putModuleToReserve(std::string moduleName)
                 Field * controller = root->getField("controller");
                 controller->setSFString("void");
                 
-                Field * controllerArgs = root->getField("controllerArgs");
-                controllerArgs->setSFString("");
+                //Field * controllerArgs = root->getField("controllerArgs");
+                //controllerArgs->setSFString("");
                 
                 Field * CB1XLocked = root->getField("CB1XLocked");
                 Field * CB1YLocked = root->getField("CB1YLocked");

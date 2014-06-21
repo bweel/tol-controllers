@@ -177,7 +177,7 @@ enum DeathType
 #define MODULE_DEF_BASE_NAME "MODULE_"
 #define MODULE_BASE_NAME "module_"
 #define ORGANISM_BASE_NAME "organism_"
-#define ROOMBOT_CONTROLLER_NAME "RoombotController"
+#define LIFE_CONTROLLER_NAME "LifeController"
 #define CONTROLLER_ARGS_PATH "../../Arguments/"
 #define RESULTS_PATH "../../Results/"
 

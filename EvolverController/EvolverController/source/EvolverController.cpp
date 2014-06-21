@@ -15,7 +15,7 @@ bool EvolverController::checkEvolutionEnd()
         if (root)
         {
             Field * controller = root->getField("controller");
-            if (controller->getSFString().compare("void") != 0)
+            if (controller->getSFString().compare("void") != 0 && controller->getSFString().compare("DeathController"))
             {
                 return false;
             }

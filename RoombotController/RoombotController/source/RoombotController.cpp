@@ -22,18 +22,19 @@ _name(_parameters->get<std::string>("Robot.Name")),
 _r_index(_parameters->get<std::size_t>("Robot.Index")),
 _r_index_root(_parameters->get<std::size_t>("Robot.Index_Root")),
 organismSize(_parameters->get<std::size_t>("Robot.Modules_#")),
-_m_index(_parameters->get<std::size_t>("Robot." + getName() + ".Index")/* - _r_index*/),
+_m_index(_parameters->get<std::size_t>("Robot." + getName() + ".Index")),
 _m_type(_parameters->get<int>("Robot." + getName() + ".Type")),
 _ev_type(_parameters->get<int>("Algorithm.Type")),
 totalEvaluations(_parameters->get<unsigned int>("Algorithm.Evaluations")),
-evaluationDuration (_parameters->get<unsigned int>("Algorithm.Infancy_Duration")),
-matureTimeToLive (_parameters->get<unsigned int>("Algorithm.Mature_Time_To_Live")),
+infancyDuration(_parameters->get<unsigned int>("Algorithm.Infancy_Duration")),
+timeToLive(_parameters->get<unsigned int>("Algorithm.Time_To_Live")),
 _ev_angular_velocity(_parameters->get<double>("Algorithm.Angular_Velocity")),
 genome(_parameters->get<std::string>("Genome")),
 mindGenome(_parameters->get<std::string>("MindGenome")),
 
 // set other attributes to initial values
 fertile(false),
+adult(false),
 _seed(0),
 _time_start(0.0),
 _time_offset(0.0),
@@ -983,15 +984,34 @@ bool RoombotController::checkFallenInside()
 }
 
 
-
-/******************************************* INFANCY *******************************************/
-
-// initial learning phase of the organism's life
-void RoombotController::infancy()
+void RoombotController::askToBeBuiltAgain()
 {
-    // ROOT MODULES' BEHAVIOR
+    _emitter->setChannel(CLINIC_CHANNEL);
     
-    if (isRoot()) {
+    std::string message = "[REBUILD_MESSAGE]";
+    message = MessagesManager::add(message, "ID", std::to_string(organismId));
+    message = MessagesManager::add(message, "GENOME", genome);
+    message = MessagesManager::add(message, "MIND", mindGenome);
+    
+    _emitter->send(message.c_str(), (int)message.length()+1);
+}
+
+
+
+/************************************************************* LIFE *************************************************************/
+
+void RoombotController::life()
+{
+    double lifeStartingTime = getTime();
+    
+    // ROOT MODULES BEHAVIOR
+    
+    if (isRoot())
+    {
+        
+        /***********************************
+         *********** PREPARATION ***********
+         ***********************************/
         
 #ifdef DEBUG_CONTROLLER
         std::cout << "[" << getTime() << "] " << getName() << ": We are root initialize things" << std::endl;
@@ -1006,27 +1026,27 @@ void RoombotController::infancy()
         fitnessLog << "#Generation Evaluation Fitness 2eDisSq Distance Speed RLFitness  (Seed: " << _seed << ")" << std::endl;
         gpsLog << "#Evaluation x y z" << std::endl;
         
-        std::pair<double, std::string> fitness(0.0, ""); // initialize fitness
         
         // initialize motors' angles (notice that root modules are 1 timestep further than the others)
         doubledvector anglesIn = doubledvector(organismSize,std::vector<double>(numMotors,0.0));     // input angles
         doubledvector anglesOut = doubledvector(organismSize,std::vector<double>(numMotors,0.0));    // output angles
         dvector anglesTMinusOne = dvector(numMotors,0.0);   // angles for root at time t-1
         dvector anglesTPlusOne = dvector(numMotors,0.0);    // angles for root at time t+1
-        
-        // initialize motors position
         for(size_t i=0;i<numMotors;i++)
         {
             _set_motor_position(i,0.0);
         }
         
-        double singleEvaluationTime = evaluationDuration / totalEvaluations;
+        
+        // set infancy parameters
+        double singleEvaluationTime = infancyDuration / totalEvaluations;
         double timeStep = TIME_STEP / 1000.0;
         int totalEvaluationSteps = singleEvaluationTime / timeStep;
-        _ev_steps_recovery = 0;// totalEvaluationSteps / 10;
+        _ev_steps_recovery = 0;
         _ev_steps_total_infancy = totalEvaluationSteps - _ev_steps_recovery;
         
         
+        // set mind
         boost::ptr_vector<MindGenome> genomes;
         MatrixGenomeManager manager;
         if(mindGenome.length() == 0){
@@ -1035,8 +1055,8 @@ void RoombotController::infancy()
         }else{
             genomes = manager.readStringToArray(mindGenome);
         }
-        
         _algorithm->setInitialMinds(genomes,numMotors,organismSize);
+        
         
         // two first steps (one more than non-root modules)
         if (step(TIME_STEP) == -1)
@@ -1044,183 +1064,80 @@ void RoombotController::infancy()
         if (step(TIME_STEP) == -1)
             return;
         
-        // main cycle for root
         
+        // set variables for cycle
         bool flag = false;
         _time_offset = getTime();   // remember offset for time calculations
         double tMinusOne,tPlusOne;  // times T-1 and T+1
-        
-        
-        double startingTime = getTime();
-        
-        while (step(TIME_STEP) != -1 && (getTime() - startingTime < evaluationDuration))
-        {
-            anglesIn = receiveAngles();     // read current angles
-            
-#ifdef DEBUG_TIMING
-            std::cout << "[" << getTime() << "] " << getName() << " using root angles of timestep: " << tMinusOne << std::endl;
-#endif
-            // modify root angles with the ones at time T-1
-            for(size_t i=0;i<numMotors;i++)
-            {
-                anglesIn[_m_index][i] = anglesTMinusOne[i];     // notice that _m_index is for sure the root here
-                anglesTMinusOne[i] = _get_motor_position(i);    // update anglesTMinusOne for the next iteration
-                tMinusOne = getTime();                          // update tMinusOne for the next iteration
-            }
-            
-            anglesOut = _compute_angles(anglesIn);  // compute new angles
-            
-            sendAngles(anglesOut);                  // send them usign the emitter
-            
-#ifdef DEBUG_TIMING
-            std::cout << "[" << getTime() << "] " << getName() << " setting root angles of time: " << tPlusOne << std::endl;
-#endif
-            // update real motors position
-            for(size_t i=0;i<numMotors;i++)
-            {
-                _set_motor_position(i,anglesTPlusOne[i]);   // root is one timestep further
-                anglesTPlusOne[i] = anglesOut[_m_index][i]; // update anglesTPlusOne for the next iteration
-                tPlusOne = getTime();                       // update tPlusOne for the next iteration
-            }
-            
-            // if it is not time for evaluation yet
-            if (_ev_step < _ev_steps_total_infancy)
-            {
-                _ev_step += 1;  // increase current
-                
-                // if the recovery time ends
-                if ((_ev_step - 1) == _ev_steps_recovery) {
-                    _time_start = getTime();        // save initial time
-                    _position_start = _get_gps();   // save initial position
-                }
-                
-                // GPS logging
-                if(_ev_step % GPS_LOG_PERIOD == 0){
-                    logGPS();
-                }
-            }
-            
-            // if it is time for evaluation
-            else
-            {
-                //                std::cout << "Organism " << organismId << " evaluation " << _algorithm->getGeneration() << ":  ";
-                
-                _time_end = getTime();      // get final time
-                _position_end = _get_gps(); // get final position
-                
-                fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));   // compute fitness
-                _algorithm->setEvaluationFitness(fitness.first);
-                _algorithm->setEvaluationFitnessAlt(fitness.second);
-                
-                fitnessLog << _algorithm->getGeneration() << " " << _algorithm->getEvaluation() << " " << getRealFitness(fitness.first) << " " << fitness.second << std::endl;
-                
-                if ((!flag) && (!_algorithm->nextEvaluation())) {
-                    flag = true;
-                    _algorithm->save();
-                }
-                
-                _ev_step = 0;
-            }
-        }
-        _algorithm->save();
-    }
-    
-    // NON-ROOT MODULES BEHAVIOR
-    
-    else {
-        
-        // intialize angles
-        dvector anglesIn(numMotors,0.0);    // input angles
-        dvector anglesOut(numMotors,0.0);   // output angles
-        
-        // initialize motors
-        for(size_t i=0;i<numMotors;i++){
-            _set_motor_position(i,0.0);
-        }
-        
-        // one first step
-        if (step(TIME_STEP) == -1)
-            return;
-        
-        // main cycle for non-root
-        
-        double startingTime = getTime();
-        
-        while (step(TIME_STEP) != -1 && (getTime() - startingTime < evaluationDuration))
-        {
-            // read angles for each motor
-            for(size_t i=0;i<numMotors;i++){
-                anglesOut[i] = _get_motor_position(i);
-            }
-            
-            sendAngles(_m_index,anglesOut);         // send angles using emitter
-            anglesIn = receiveAngles(_m_index);     // read angles using reveiver
-#ifdef DEBUG_CONTROLLER
-            std::cout << "[" << getTime() << "] " << getName() << " Received vector with: " << anglesIn.size() << " elements:" << std::endl;
-            for(int j=0;j<MOTOR_SIZE;j++){
-                std::cout << anglesIn[j] << ", ";
-            }
-            std::cout << std::endl;
-#endif
-            // update real motors position
-            for(size_t i=0;i<numMotors;i++){
-                _set_motor_position(i,anglesIn[i]);
-            }
-        }
-    }
-}
-
-
-
-/***************************************** MATURE LIFE *****************************************/
-
-void RoombotController::matureLife()
-{
-    double startingTimeMatureLife = getTime();
-    
-    // ROOT MODULES BEHAVIOR
-    
-    if (isRoot())
-    {
-        std::pair<double, std::string> fitness = std::pair<double, std::string>();
-        fitness.first = 0;
-        fitness.second = "";
+        std::pair<double, std::string> fitness(0.0, "");
         double lastFitnessSent = 0;
         double lastFitnessUpdate = 0;
         double lastMating = 0;
         double lastEvolverUpdate = 0;
-        
-        doubledvector anglesIn;
-        doubledvector anglesOut;
-        dvector anglesTMinusOne;
-        dvector anglesTPlusOne;
-        
-        anglesIn = doubledvector(organismSize,std::vector<double>(numMotors,0.0));
-        anglesOut = doubledvector(organismSize,std::vector<double>(numMotors,0.0));
-        
-        anglesTMinusOne = dvector(numMotors,0.0);
-        anglesTPlusOne = dvector(numMotors,0.0);
-        
-        for(size_t i=0;i<numMotors;i++)
-        {
-            _set_motor_position(i,0.0);
-        }
-        
-        _time_offset = getTime();
-        double tMinusOne,tPlusOne;
-        
-        //_ev_step = 0; // reset evaluation step
-        
         _time_start = getTime();        // save initial time
         _position_start = _get_gps();
+        
+        
+        /************************************
+         ************ LIFE CYCLE ************
+         ************************************/
         
         while (step(TIME_STEP) != -1)
         {
             double now = getTime();
             
-            /***************************************************************
-             ****** CHECK FERTILITY FOR MATING SELECTION BY ORGANISMS ******
-             ***************************************************************/
+            
+            /********************************************
+             ***** CHECK DEATH BY EVOLVER SELECTION *****
+             ********************************************/
+            
+            if (deathType == DEATH_SELECTION_BY_EVOLVER)
+            {
+                while(deathReceiver->getQueueLength() > 0)
+                {
+                    std::string message = (char*)deathReceiver->getData();
+                    deathReceiver->nextPacket();
+                    if (message.compare(std::to_string(organismId)) == 0 )
+                    {
+                        return; // end mature life (so die)
+                    }
+                }
+            }
+            
+            
+            /***************************************
+             ***** CHECK DEATH BY TIME TO LIVE *****
+             ***************************************/
+            
+            if (deathType == DEATH_SELECTION_BY_TIME_TO_LIVE)
+            {
+                if (now - lifeStartingTime > timeToLive)
+                {
+                    return; // end mature life (so die)
+                }
+            }
+            
+            
+            /***************************************
+             ************* CHECK ADULT *************
+             ***************************************/
+            
+            if (!adult)
+            {
+                if (now - lifeStartingTime > infancyDuration)
+                {
+                    adult = true;
+                    if (isRoot())
+                    {
+                        sendAdultAnnouncement();
+                    }
+                }
+            }
+            
+            
+            /***************************************************************************
+             ****** CHECK FERTILITY REQUIREMENT FOR MATING SELECTION BY ORGANISMS ******
+             ***************************************************************************/
             
             if (matingType == MATING_SELECTION_BY_ORGANISMS)
             {
@@ -1248,52 +1165,24 @@ void RoombotController::matureLife()
             }
             
             
-            /********************************************
-             ***** CHECK DEATH BY EVOLVER SELECTION *****
-             ********************************************/
-            
-            if (deathType == DEATH_SELECTION_BY_EVOLVER)
-            {
-                while(deathReceiver->getQueueLength() > 0)
-                {
-                    std::string message = (char*)deathReceiver->getData();
-                    deathReceiver->nextPacket();
-                    if (message.compare(std::to_string(organismId)) == 0 )
-                    {
-                        return; // end mature life (so die)
-                    }
-                }
-            }
-            
-            
-            /***************************************
-             ***** CHECK DEATH BY TIME TO LIVE *****
-             ***************************************/
-            
-            if (deathType == DEATH_SELECTION_BY_TIME_TO_LIVE)
-            {
-                if (now - startingTimeMatureLife > matureTimeToLive)
-                {
-                    return; // end mature life (so die)
-                }
-            }
-            
-            
             /**************************
              ***** UPDATE FITNESS *****
              **************************/
             
-            if (now - lastFitnessUpdate > UPDATE_FITNESS_INTERVAL)
+            if (adult)
             {
-                // compute fitness
-                _time_end = getTime();
-                _position_end = _get_gps();
-                fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));
-                
-                // reset time, position and lastFitnessSent for next fitness evaluation
-                _time_start = getTime();
-                _position_start = _get_gps();
-                lastFitnessUpdate = getTime();
+                if (now - lastFitnessUpdate > UPDATE_FITNESS_INTERVAL)
+                {
+                    // compute fitness
+                    _time_end = getTime();
+                    _position_end = _get_gps();
+                    fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));
+                    
+                    // reset time, position and lastFitnessSent for next fitness evaluation
+                    _time_start = getTime();
+                    _position_start = _get_gps();
+                    lastFitnessUpdate = getTime();
+                }
             }
             
             
@@ -1303,36 +1192,14 @@ void RoombotController::matureLife()
             
             if (matingType == MATING_SELECTION_BY_ORGANISMS)
             {
-                if (now - lastEvolverUpdate > UPDATE_FITNESS_IN_EVOLVER)
+                if (adult)
                 {
-                    sendFitnessUpdateToEvolver(fitness.first);
-                    lastEvolverUpdate = getTime();
+                    if (now - lastEvolverUpdate > UPDATE_FITNESS_IN_EVOLVER)
+                    {
+                        sendFitnessUpdateToEvolver(fitness.first);
+                        lastEvolverUpdate = getTime();
+                    }
                 }
-            }
-            
-            
-            /*******************
-             *** STEP MOTORS ***
-             *******************/
-            
-            anglesIn = receiveAngles();
-            
-            for(size_t i=0;i<numMotors;i++)
-            {
-                anglesIn[_m_index][i] = anglesTMinusOne[i];
-                anglesTMinusOne[i] = _get_motor_position(i);
-                tMinusOne = getTime();
-            }
-            
-            anglesOut = _compute_angles(anglesIn);
-            
-            sendAngles(anglesOut);
-            
-            for(size_t i=0;i<numMotors;i++)
-            {
-                _set_motor_position(i,anglesTPlusOne[i]);
-                anglesTPlusOne[i] = anglesOut[_m_index][i];
-                tPlusOne = getTime();
             }
             
             
@@ -1342,20 +1209,23 @@ void RoombotController::matureLife()
             
             if (matingType == MATING_SELECTION_BY_EVOLVER)
             {
-                if (now - lastFitnessSent > SEND_FITNESS_TO_EVOLVER_INTERVAL)
+                if (adult)
                 {
-                    // send genome and fitness to evolver
-                    string message = "[GENOME_SPREAD_MESSAGE]";
-                    message = MessagesManager::add(message, "ID", std::to_string(organismId));
-                    message = MessagesManager::add(message, "FITNESS", std::to_string(fitness.first));
-                    message = MessagesManager::add(message, "GENOME", genome);
-                    message = MessagesManager::add(message, "MIND", mindGenome);
-                    genomeEmitter->send(message.c_str(), (int)message.length()+1);
-                    
-                    // store in file
-                    storeMatureLifeFitnessIntoFile(fitness.first);
-                    
-                    lastFitnessSent = getTime();
+                    if (now - lastFitnessSent > SEND_FITNESS_TO_EVOLVER_INTERVAL)
+                    {
+                        // send genome and fitness to evolver
+                        string message = "[GENOME_SPREAD_MESSAGE]";
+                        message = MessagesManager::add(message, "ID", std::to_string(organismId));
+                        message = MessagesManager::add(message, "FITNESS", std::to_string(fitness.first));
+                        message = MessagesManager::add(message, "GENOME", genome);
+                        message = MessagesManager::add(message, "MIND", mindGenome);
+                        genomeEmitter->send(message.c_str(), (int)message.length()+1);
+                        
+                        // store in file
+                        storeMatureLifeFitnessIntoFile(fitness.first);
+                        
+                        lastFitnessSent = getTime();
+                    }
                 }
             }
             
@@ -1366,7 +1236,7 @@ void RoombotController::matureLife()
             
             if (matingType == MATING_SELECTION_BY_ORGANISMS)
             {
-                if (fertile)
+                if (adult && fertile)
                 {
                     // sending
                     
@@ -1457,28 +1327,114 @@ void RoombotController::matureLife()
                 }
             }
             
-        }
+            
+            /*******************
+             *** STEP MOTORS ***
+             *******************/
+            
+            anglesIn = receiveAngles();     // read current angles
+            
+#ifdef DEBUG_TIMING
+            std::cout << "[" << getTime() << "] " << getName() << " using root angles of timestep: " << tMinusOne << std::endl;
+#endif
+            // modify root angles with the ones at time T-1
+            for(size_t i=0;i<numMotors;i++)
+            {
+                anglesIn[_m_index][i] = anglesTMinusOne[i];     // notice that _m_index is for sure the root here
+                anglesTMinusOne[i] = _get_motor_position(i);    // update anglesTMinusOne for the next iteration
+                tMinusOne = getTime();                          // update tMinusOne for the next iteration
+            }
+            
+            anglesOut = _compute_angles(anglesIn);  // compute new angles
+            
+            sendAngles(anglesOut);                  // send them usign the emitter
+            
+#ifdef DEBUG_TIMING
+            std::cout << "[" << getTime() << "] " << getName() << " setting root angles of time: " << tPlusOne << std::endl;
+#endif
+            // update real motors position
+            for(size_t i=0;i<numMotors;i++)
+            {
+                _set_motor_position(i,anglesTPlusOne[i]);   // root is one timestep further
+                anglesTPlusOne[i] = anglesOut[_m_index][i]; // update anglesTPlusOne for the next iteration
+                tPlusOne = getTime();                       // update tPlusOne for the next iteration
+            }
+            
+            // if it is not time for evaluation yet
+            if (_ev_step < _ev_steps_total_infancy)
+            {
+                _ev_step += 1;  // increase current
+                
+                // if the recovery time ends
+                if ((_ev_step - 1) == _ev_steps_recovery) {
+                    _time_start = getTime();        // save initial time
+                    _position_start = _get_gps();   // save initial position
+                }
+                
+                // GPS logging
+                if(_ev_step % GPS_LOG_PERIOD == 0){
+                    logGPS();
+                }
+            }
+            
+            // if it is time for evaluation
+            else
+            {
+                _time_end = getTime();      // get final time
+                _position_end = _get_gps(); // get final position
+                
+                fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));   // compute fitness
+                _algorithm->setEvaluationFitness(fitness.first);
+                _algorithm->setEvaluationFitnessAlt(fitness.second);
+                
+                fitnessLog << _algorithm->getGeneration() << " " << _algorithm->getEvaluation() << " " << getRealFitness(fitness.first) << " " << fitness.second << std::endl;
+                
+                if ((!flag) && (!_algorithm->nextEvaluation())) {
+                    flag = true;
+                    _algorithm->save();
+                }
+                
+                _ev_step = 0;
+            }
+            
+        } // while
+        
+        _algorithm->save();
     }
+    
+    
+    
     
     // NON-ROOT MODULES BEHAVIOR
     
     else
     {
-        /*if (step(_time_step) == -1)
-         {
-         return;
-         }*/
+        /***********************************
+         *********** PREPARATION ***********
+         ***********************************/
         
-        dvector anglesIn(numMotors,0.0);
-        dvector anglesOut(numMotors,0.0);
-        
-        for(size_t i=0;i<numMotors;i++)
-        {
+        // intialize motors
+        dvector anglesIn(numMotors,0.0);    // input angles
+        dvector anglesOut(numMotors,0.0);   // output angles
+        for(size_t i=0;i<numMotors;i++){
             _set_motor_position(i,0.0);
         }
         
+        // one first step
+        if (step(TIME_STEP) == -1)
+            return;
+        
+        
+        /************************************
+         ************ LIFE CYCLE ************
+         ************************************/
+        
         while (step(TIME_STEP) != -1)
         {
+            
+            /********************************************
+             ***** CHECK DEATH BY EVOLVER SELECTION *****
+             ********************************************/
             
             if (deathType == DEATH_SELECTION_BY_EVOLVER)
             {
@@ -1493,31 +1449,48 @@ void RoombotController::matureLife()
                 }
             }
             
+            
+            /***************************************
+             ***** CHECK DEATH BY TIME TO LIVE *****
+             ***************************************/
+            
             else if (deathType == DEATH_SELECTION_BY_TIME_TO_LIVE)
             {
-                if (getTime() - startingTimeMatureLife > matureTimeToLive)
+                if (getTime() - lifeStartingTime > timeToLive)
                 {
                     return; // and die
                 }
             }
             
             
-            for(size_t i=0;i<numMotors;i++)
-            {
+            /*******************
+             *** STEP MOTORS ***
+             *******************/
+            
+            // read angles for each motor
+            for(size_t i=0;i<numMotors;i++){
                 anglesOut[i] = _get_motor_position(i);
             }
             
-            sendAngles(_m_index,anglesOut);
-            anglesIn = receiveAngles(_m_index);
-            
-            for(size_t i=0;i<numMotors;i++)
-            {
+            sendAngles(_m_index,anglesOut);         // send angles using emitter
+            anglesIn = receiveAngles(_m_index);     // read angles using reveiver
+#ifdef DEBUG_CONTROLLER
+            std::cout << "[" << getTime() << "] " << getName() << " Received vector with: " << anglesIn.size() << " elements:" << std::endl;
+            for(int j=0;j<MOTOR_SIZE;j++){
+                std::cout << anglesIn[j] << ", ";
+            }
+            std::cout << std::endl;
+#endif
+            // update real motors position
+            for(size_t i=0;i<numMotors;i++){
                 _set_motor_position(i,anglesIn[i]);
             }
         }
     }
     
 }
+
+
 
 /********************************************* DEATH *********************************************/
 
@@ -1595,19 +1568,6 @@ void RoombotController::death()
 }
 
 
-void RoombotController::askToBeBuiltAgain()
-{
-    _emitter->setChannel(CLINIC_CHANNEL);
-    
-    std::string message = "[REBUILD_MESSAGE]";
-    message = MessagesManager::add(message, "ID", std::to_string(organismId));
-    message = MessagesManager::add(message, "GENOME", genome);
-    message = MessagesManager::add(message, "MIND", mindGenome);
-    
-    _emitter->send(message.c_str(), (int)message.length()+1);
-}
-
-
 /********************************************* RUN *********************************************/
 
 void RoombotController::run()
@@ -1672,22 +1632,11 @@ void RoombotController::run()
             return;
         }
         
-        std::cout << getName() << " STARTS INFANCY" << std::endl;
+        std::cout << getName() << " STARTS LIFE" << std::endl;
         
-        phase = "INFANCY";
+        phase = "LIFE";
         
-        infancy();
-        
-        std::cout << getName() << " STARTS MATURE LIFE" << std::endl;
-        
-        phase = "MATURE LIFE";
-        
-        if (isRoot())
-        {
-            sendAdultAnnouncement();
-        }
-        
-        matureLife();
+        life();
     }
     catch (int err) {
         std::string message = "error number" + std::to_string(err);

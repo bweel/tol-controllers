@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "61892BEC1888175900E9EDCD"
-               BuildableName = "RoombotController"
-               BlueprintName = "LifeController"
-               ReferencedContainer = "container:RoombotController.xcodeproj">
+               BlueprintIdentifier = "61AD162A1897F88A003D24DE"
+               BuildableName = "EnvironmentModifierController"
+               BlueprintName = "EnvironmentModifierController"
+               ReferencedContainer = "container:Environment.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "61892BEC1888175900E9EDCD"
-            BuildableName = "RoombotController"
-            BlueprintName = "LifeController"
-            ReferencedContainer = "container:RoombotController.xcodeproj">
+            BlueprintIdentifier = "61AD162A1897F88A003D24DE"
+            BuildableName = "EnvironmentModifierController"
+            BlueprintName = "EnvironmentModifierController"
+            ReferencedContainer = "container:Environment.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -51,10 +51,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "61892BEC1888175900E9EDCD"
-            BuildableName = "RoombotController"
-            BlueprintName = "LifeController"
-            ReferencedContainer = "container:RoombotController.xcodeproj">
+            BlueprintIdentifier = "61AD162A1897F88A003D24DE"
+            BuildableName = "EnvironmentModifierController"
+            BlueprintName = "EnvironmentModifierController"
+            ReferencedContainer = "container:Environment.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -69,10 +69,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "61892BEC1888175900E9EDCD"
-            BuildableName = "RoombotController"
-            BlueprintName = "LifeController"
-            ReferencedContainer = "container:RoombotController.xcodeproj">
+            BlueprintIdentifier = "61AD162A1897F88A003D24DE"
+            BuildableName = "EnvironmentModifierController"
+            BlueprintName = "EnvironmentModifierController"
+            ReferencedContainer = "container:Environment.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

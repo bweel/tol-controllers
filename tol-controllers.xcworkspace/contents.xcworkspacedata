@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:EnvironmentModifierController/EnvironmentModifierController.xcodeproj">
+      location = "group:EnvironmentModifierController/Environment.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:BirthClinicController/BirthClinicController.xcodeproj">
@@ -14,7 +14,7 @@
       location = "group:RoombotController/RoombotController.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ScreenshotController/ScreenshotController.xcodeproj">
+      location = "group:ScreenshotController/External.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:shared/shared.xcodeproj">

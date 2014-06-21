@@ -17,7 +17,7 @@
                BlueprintIdentifier = "61854A5219235CD900D24E32"
                BuildableName = "ScreenshotController"
                BlueprintName = "ScreenshotController"
-               ReferencedContainer = "container:ScreenshotController.xcodeproj">
+               ReferencedContainer = "container:External.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "61854A5219235CD900D24E32"
             BuildableName = "ScreenshotController"
             BlueprintName = "ScreenshotController"
-            ReferencedContainer = "container:ScreenshotController.xcodeproj">
+            ReferencedContainer = "container:External.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -54,7 +54,7 @@
             BlueprintIdentifier = "61854A5219235CD900D24E32"
             BuildableName = "ScreenshotController"
             BlueprintName = "ScreenshotController"
-            ReferencedContainer = "container:ScreenshotController.xcodeproj">
+            ReferencedContainer = "container:External.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -72,7 +72,7 @@
             BlueprintIdentifier = "61854A5219235CD900D24E32"
             BuildableName = "ScreenshotController"
             BlueprintName = "ScreenshotController"
-            ReferencedContainer = "container:ScreenshotController.xcodeproj">
+            ReferencedContainer = "container:External.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

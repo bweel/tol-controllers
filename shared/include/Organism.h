@@ -29,7 +29,7 @@ protected:
     
     int INFANCY_DURATION = ParametersReader::get<int>("INFANCY_DURATION");
     int ROOMBOT_WAITING_TIME = ParametersReader::get<int>("ROOMBOT_WAITING_TIME");
-    int MATURE_TIME_TO_LIVE = ParametersReader::get<int>("MATURE_TIME_TO_LIVE");
+    int TIME_TO_LIVE = ParametersReader::get<int>("TIME_TO_LIVE");
 	
     id_t id;                            //Unique id for this instance of organism.
     State state;

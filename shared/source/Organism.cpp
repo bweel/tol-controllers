@@ -207,7 +207,7 @@ void BuildableOrganism::writeControllerArgsFile(std::string simulationDateAndTim
     child.put("Save", "");
     child.put("Infancy_Duration",INFANCY_DURATION);
     child.put("Waiting_Time", ROOMBOT_WAITING_TIME);
-    child.put("Mature_Time_To_Live", MATURE_TIME_TO_LIVE);
+    child.put("Time_To_Live", TIME_TO_LIVE);
     child.put("Evaluations", "200");
     child.put("Angular_Velocity", "2.6");
     pt.put_child("Algorithm", child);
@@ -286,8 +286,8 @@ void BuildableOrganism::activate(std::string simulationDateAndTime)
             std::cout << robots[i]->getDef() << " -> controllerArgs has been updated" << std::endl;
             
             // update controller in Webots
-            robots[i]->setController(ROOMBOT_CONTROLLER_NAME);
-            std::cout << robots[i]->getDef() << " -> " << ROOMBOT_CONTROLLER_NAME << " has been set" << std::endl;
+            robots[i]->setController(LIFE_CONTROLLER_NAME);
+            std::cout << robots[i]->getDef() << " -> " << LIFE_CONTROLLER_NAME << " has been set" << std::endl;
         }
     }
 }

@@ -14,6 +14,11 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
+		<key>RoombotController copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
 		<key>RoombotController.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -43,6 +48,11 @@
 			<true/>
 		</dict>
 		<key>61892BEC1888175900E9EDCD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A89A4B1B1955BD7F008D7E2E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

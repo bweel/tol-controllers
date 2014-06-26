@@ -115,6 +115,8 @@ private:
     
     void adultMessage(std::string message, double currentTime);
     
+    void fertileMessage(std::string message, double currentTime);
+    
     void fitnessUpdateMessage(std::string message, double currentTime);
     
     void coupleMessage(std::string message,double currentTime);

@@ -177,8 +177,15 @@ _motors(_m_type ? _init_motors(TIME_STEP) : 0)
             
             logDirectory = _parameters->get<std::string>("Algorithm.LogDir","");
             
-            // set attributes for specific algorithm
+            // set infancy parameters
+            double singleEvaluationTime = infancyDuration / totalEvaluations;
+            double timeStep = TIME_STEP / 1000.0;
+            int totalEvaluationSteps = singleEvaluationTime / timeStep;
+            _ev_steps_recovery = 0;
+            _ev_steps_total_infancy = totalEvaluationSteps - _ev_steps_recovery;
+            totalEvaluations = timeToLive / singleEvaluationTime;
             
+            // set attributes for specific algorithm
             bool flag = true;   // needed for the generetion of an unused seed
             
             switch (_ev_type)
@@ -767,6 +774,20 @@ void RoombotController::storeProblem(std::string message, std::string phase)
 }
 
 
+void RoombotController::logNumberOfReceivedGenomes()
+{
+    ofstream file;
+    file.open(RESULTS_PATH + simulationDateAndTime + "/organism_" + std::to_string(organismId) + "/received_genomes.txt", ios::app);
+    file << getTime() << " " << organismsToMateWith.size() << " ";
+    for (int i = 0; i < organismsToMateWith.size(); i++)
+    {
+        file << organismsToMateWith[i].getName() << " ";
+    }
+    file << std::endl;
+    file.close();
+}
+
+
 bool RoombotController::allConnectorsOK()
 {
     for (int i = 0; i < connectors.size(); i++)
@@ -817,7 +838,7 @@ void RoombotController::updateOrganismsToMateWithList(id_t mateId, double mateFi
             return;
         }
     }
-    Organism newMate = Organism(mateGenome, mateMind, mateId, mateFitness, 0, 0, std::vector<id_t>(), Organism::ADULT);
+    Organism newMate = Organism(mateGenome, mateMind, mateId, mateFitness, 0, 0, std::vector<id_t>(), Organism::ADULT, true);
     organismsToMateWith.push_back(newMate);
 }
 
@@ -859,6 +880,18 @@ void RoombotController::sendAdultAnnouncement()
     _emitter->send(message.c_str(), (int)message.length()+1);
     _emitter->setChannel(backupChannel);
 }
+
+
+void RoombotController::sendFertileAnnouncement()
+{
+    int backupChannel = _emitter->getChannel();
+    _emitter->setChannel(EVOLVER_CHANNEL);
+    std::string message = "[FERTILE_ANNOUNCEMENT]";
+    message = MessagesManager::add(message, "ID", std::to_string(organismId));
+    _emitter->send(message.c_str(), (int)message.length()+1);
+    _emitter->setChannel(backupChannel);
+}
+
 
 void RoombotController::sendFitnessUpdateToEvolver(double fitness)
 {
@@ -1038,14 +1071,6 @@ void RoombotController::life()
         }
         
         
-        // set infancy parameters
-        double singleEvaluationTime = infancyDuration / totalEvaluations;
-        double timeStep = TIME_STEP / 1000.0;
-        int totalEvaluationSteps = singleEvaluationTime / timeStep;
-        _ev_steps_recovery = 0;
-        _ev_steps_total_infancy = totalEvaluationSteps - _ev_steps_recovery;
-        
-        
         // set mind
         boost::ptr_vector<MindGenome> genomes;
         MatrixGenomeManager manager;
@@ -1151,6 +1176,10 @@ void RoombotController::life()
                     if (distanceFromCenter > FERTILITY_DISTANCE)
                     {
                         fertile = true;
+                        if (isRoot())
+                        {
+                            sendFertileAnnouncement();
+                        }
                         
                         genomeReceiver->enable(TIME_STEP);
                         while (genomeReceiver->getQueueLength() > 0)
@@ -1278,6 +1307,8 @@ void RoombotController::life()
                     
                     if (now - lastMating > INDIVIDUAL_MATING_TIME)
                     {
+                        logNumberOfReceivedGenomes();
+                        
                         if (organismsToMateWith.size() > 0)
                         {
                             id_t mateId = selectMate();

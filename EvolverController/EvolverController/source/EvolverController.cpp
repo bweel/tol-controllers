@@ -208,7 +208,7 @@ void EvolverController::storeParentsOnFile(double currentTime)
         Organism org = organismsList[i];
         if (org.getState() == Organism::ADULT)
         {
-            parentsFile << currentTime << " " << org.getId() << " " << org.getSize() << " " << org.getFitness() << " " << org.getOffspring() << " " << org.getState() << std::endl;
+            parentsFile << currentTime << " " << org.getId() << " " << org.getSize() << " " << org.getFitness() << " " << org.getOffspring() << " " << org.getState() << " " << org.getFertile() << std::endl;
         }
     }
     parentsFile.close();
@@ -352,7 +352,7 @@ void EvolverController::birthMessage(std::string message, double currentTime) {
     parents.push_back(parent1);
     parents.push_back(parent2);
     
-    Organism newOrganism = Organism(genome, mind, organismId, 0, size, 0, parents, Organism::INFANT);
+    Organism newOrganism = Organism(genome, mind, organismId, 0, size, 0, parents, Organism::INFANT, false);
     int idx = searchForOrganism(organismId);
     if (idx >= 0)
     {
@@ -394,6 +394,21 @@ void EvolverController::adultMessage(std::string message, double currentTime) {
     else
     {
         std::string event = " ADULT_ANNOUNCEMENT";
+        std::string fields = " ID: " + std::to_string(organismId) + "\n";
+        logListProblem(event, message, fields);
+    }
+}
+
+void EvolverController::fertileMessage(std::string message, double currentTime) {
+    id_t organismId = atoi(MessagesManager::get(message, "ID").c_str());
+    int idx = searchForOrganism(organismId);
+    if (idx >= 0)
+    {
+        organismsList[searchForOrganism(organismId)].setFertile(true);
+    }
+    else
+    {
+        std::string event = " FERTILE_ANNOUNCEMENT";
         std::string fields = " ID: " + std::to_string(organismId) + "\n";
         logListProblem(event, message, fields);
     }
@@ -670,6 +685,14 @@ void EvolverController::run()
             else if (message.substr(0,20).compare("[ADULT_ANNOUNCEMENT]") == 0)
             {
                 adultMessage(message,currentTime);
+            }
+            
+            /*************************************
+             ***** UPDATE BECAUSE OF FERTILE *****
+             *************************************/
+            else if (message.substr(0,20).compare("[FERTILE_ANNOUNCEMENT]") == 0)
+            {
+                fertileMessage(message,currentTime);
             }
             
             /******************************

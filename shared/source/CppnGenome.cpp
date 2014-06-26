@@ -125,7 +125,6 @@ void CppnGenome::mutateSize()
         std::default_random_engine generator;
         std::normal_distribution<double> distribution(0,SIZE_MUTATION_STRENGTH);
         double randomMutation = distribution(generator);
-        size = size + randomMutation;
-    	//size = size + RANDOM.getNormalDouble()*SIZE_MUTATION_STRENGTH + 0.5; *****TODO****
+        size = size + randomMutation + 0.5;
     }
 }

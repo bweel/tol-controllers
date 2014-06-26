@@ -30,9 +30,11 @@ protected:
     int INFANCY_DURATION = ParametersReader::get<int>("INFANCY_DURATION");
     int ROOMBOT_WAITING_TIME = ParametersReader::get<int>("ROOMBOT_WAITING_TIME");
     int TIME_TO_LIVE = ParametersReader::get<int>("TIME_TO_LIVE");
+    int EVALUATIONS = ParametersReader::get<int>("EVALUATIONS");
 	
     id_t id;                            //Unique id for this instance of organism.
     State state;
+    bool fertile;
     // Used by the evolver
     double fitness;
     unsigned int size;
@@ -45,7 +47,7 @@ public:
 
     Organism(const Organism& other);
     
-    Organism(std::string genome, std::string mindGenome, id_t organismID, double fitness, unsigned int size, unsigned int offspring, std::vector<id_t> parents, State state);
+    Organism(std::string genome, std::string mindGenome, id_t organismID, double fitness, unsigned int size, unsigned int offspring, std::vector<id_t> parents, State state, bool fertile);
     
 	/**
 	 * Destructs the organism.
@@ -88,6 +90,10 @@ public:
     void setState(State state);
     
     State getState();
+    
+    void setFertile(bool fertile);
+    
+    bool getFertile();
     
     void setSize(unsigned int size);
     

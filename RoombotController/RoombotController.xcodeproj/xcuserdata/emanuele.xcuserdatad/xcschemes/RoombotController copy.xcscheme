@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A89A4B1B1955BD7F008D7E2E"
-               BuildableName = "RoombotController copy"
+               BuildableName = "DeathController"
                BlueprintName = "DeathController"
                ReferencedContainer = "container:RoombotController.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A89A4B1B1955BD7F008D7E2E"
-            BuildableName = "RoombotController copy"
+            BuildableName = "DeathController"
             BlueprintName = "DeathController"
             ReferencedContainer = "container:RoombotController.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A89A4B1B1955BD7F008D7E2E"
-            BuildableName = "RoombotController copy"
+            BuildableName = "DeathController"
             BlueprintName = "DeathController"
             ReferencedContainer = "container:RoombotController.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A89A4B1B1955BD7F008D7E2E"
-            BuildableName = "RoombotController copy"
+            BuildableName = "DeathController"
             BlueprintName = "DeathController"
             ReferencedContainer = "container:RoombotController.xcodeproj">
          </BuildableReference>

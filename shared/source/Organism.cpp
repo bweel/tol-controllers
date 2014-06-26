@@ -13,6 +13,7 @@ Organism::Organism(const Organism &other) {
     offspring = other.offspring;
     size = other.size;
     state = other.state;
+    fertile = other.fertile;
 }
 
 /**
@@ -26,13 +27,13 @@ Organism::Organism(const Organism &other) {
  * with the build plan to determine where the organism will be build.
  */
 BuildableOrganism::BuildableOrganism(std::string genome, std::string mindGenome, id_t id, std::auto_ptr<BuildPlan> plan, Position organismCentre) :
-Organism(genome,mindGenome,id,-1,0,0,std::vector<id_t>(),INFANT),
+Organism(genome,mindGenome,id,-1,0,0,std::vector<id_t>(),INFANT, false),
 robots(), organismCentre(organismCentre), buildPlan(plan)
 {
 }
 
-Organism::Organism(std::string genome, std::string mindGenome, id_t organismID, double fitness, unsigned int size, unsigned int offspring, std::vector<id_t> parents, State state) :
-    fitness(fitness), id(organismID), genome(genome), mindGenome(mindGenome), size(size), offspring(offspring), parents(parents), state(state)
+Organism::Organism(std::string genome, std::string mindGenome, id_t organismID, double fitness, unsigned int size, unsigned int offspring, std::vector<id_t> parents, State state, bool fertile) :
+    fitness(fitness), id(organismID), genome(genome), mindGenome(mindGenome), size(size), offspring(offspring), parents(parents), state(state), fertile(fertile)
 {
 }
 
@@ -93,6 +94,14 @@ void Organism::setState(State s) {
 
 Organism::State Organism::getState() {
     return state;
+}
+
+void Organism::setFertile(bool f) {
+    fertile = f;
+}
+
+bool Organism::getFertile() {
+    return fertile;
 }
 
 void Organism::setSize(unsigned int s) {
@@ -208,7 +217,7 @@ void BuildableOrganism::writeControllerArgsFile(std::string simulationDateAndTim
     child.put("Infancy_Duration",INFANCY_DURATION);
     child.put("Waiting_Time", ROOMBOT_WAITING_TIME);
     child.put("Time_To_Live", TIME_TO_LIVE);
-    child.put("Evaluations", "200");
+    child.put("Evaluations", EVALUATIONS);
     child.put("Angular_Velocity", "2.6");
     pt.put_child("Algorithm", child);
 //    // Shape              Not used

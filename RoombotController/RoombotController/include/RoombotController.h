@@ -235,6 +235,8 @@ private:
     
     void storeFertilityOnFile();
     
+    void logNumberOfReceivedGenomes();
+    
     void storeProblem(std::string message, std::string phase);
     
     double getRealFitness(double fitness);
@@ -265,6 +267,8 @@ private:
     int searchForOrganism(id_t organismId);
     
     void sendAdultAnnouncement();
+    
+    void sendFertileAnnouncement();
     
     void sendFitnessUpdateToEvolver(double fitness);
 };

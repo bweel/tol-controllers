@@ -74,11 +74,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "780"
-            endingLineNumber = "780">
+            startingLineNumber = "789"
+            endingLineNumber = "789"
+            landmarkName = "RoombotController::allConnectorsOK()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -88,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "753"
-            endingLineNumber = "753"
+            startingLineNumber = "762"
+            endingLineNumber = "762"
             landmarkName = "RoombotController::storeRebuild(std::string message)"
             landmarkType = "5">
          </BreakpointContent>
@@ -104,13 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "734"
-            endingLineNumber = "734"
-            landmarkName = "RoombotController::storeMatureLifeFitnessIntoFile(double fitness)"
-            landmarkType = "5">
+            startingLineNumber = "743"
+            endingLineNumber = "743">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -120,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "782"
-            endingLineNumber = "782">
+            startingLineNumber = "791"
+            endingLineNumber = "791">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -134,13 +134,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "801"
-            endingLineNumber = "801"
-            landmarkName = "RoombotController::readMateMessage(std::string message, id_t * mateId, double * mateFitness, std::string * mateGenome, std::string * mateMind)"
-            landmarkType = "5">
+            startingLineNumber = "810"
+            endingLineNumber = "810">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -150,11 +148,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "802"
-            endingLineNumber = "802"
+            startingLineNumber = "811"
+            endingLineNumber = "811"
             landmarkName = "RoombotController::readMateMessage(std::string message, id_t * mateId, double * mateFitness, std::string * mateGenome, std::string * mateMind)"
             landmarkType = "5">
          </BreakpointContent>
@@ -436,11 +434,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "713"
-            endingLineNumber = "713"
+            startingLineNumber = "722"
+            endingLineNumber = "722"
             landmarkName = "RoombotController::initialiseModuleMapping(std::size_t offset, std::size_t size, const std::string &amp; name, const boost::property_tree::ptree &amp; root)"
             landmarkType = "5">
          </BreakpointContent>
@@ -468,11 +466,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "712"
-            endingLineNumber = "712"
+            startingLineNumber = "721"
+            endingLineNumber = "721"
             landmarkName = "RoombotController::initialiseModuleMapping(std::size_t offset, std::size_t size, const std::string &amp; name, const boost::property_tree::ptree &amp; root)"
             landmarkType = "5">
          </BreakpointContent>
@@ -484,11 +482,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "928"
-            endingLineNumber = "928"
+            startingLineNumber = "937"
+            endingLineNumber = "937"
             landmarkName = "RoombotController::checkLocks()"
             landmarkType = "5">
          </BreakpointContent>
@@ -500,11 +498,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "923"
-            endingLineNumber = "923"
+            startingLineNumber = "932"
+            endingLineNumber = "932"
             landmarkName = "RoombotController::checkLocks()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1178,11 +1176,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "857"
-            endingLineNumber = "857"
+            startingLineNumber = "866"
+            endingLineNumber = "866"
             landmarkName = "RoombotController::sendAdultAnnouncement()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1194,11 +1192,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "873"
-            endingLineNumber = "873">
+            startingLineNumber = "882"
+            endingLineNumber = "882">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1208,12 +1206,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1442"
-            endingLineNumber = "1442"
-            landmarkName = "RoombotController::matureLife()"
+            startingLineNumber = "1443"
+            endingLineNumber = "1443"
+            landmarkName = "RoombotController::life()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1224,12 +1222,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1444"
-            endingLineNumber = "1444"
-            landmarkName = "RoombotController::matureLife()"
+            startingLineNumber = "1445"
+            endingLineNumber = "1445"
+            landmarkName = "RoombotController::life()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1288,12 +1286,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1029"
-            endingLineNumber = "1029"
-            landmarkName = "RoombotController::infancy()"
+            startingLineNumber = "1038"
+            endingLineNumber = "1038"
+            landmarkName = "RoombotController::life()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1304,12 +1302,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1035"
-            endingLineNumber = "1035"
-            landmarkName = "RoombotController::infancy()"
+            startingLineNumber = "1044"
+            endingLineNumber = "1044"
+            landmarkName = "RoombotController::life()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1320,12 +1318,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1021"
-            endingLineNumber = "1021"
-            landmarkName = "RoombotController::infancy()"
+            startingLineNumber = "1030"
+            endingLineNumber = "1030"
+            landmarkName = "RoombotController::life()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1336,12 +1334,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1022"
-            endingLineNumber = "1022"
-            landmarkName = "RoombotController::infancy()"
+            startingLineNumber = "1031"
+            endingLineNumber = "1031"
+            landmarkName = "RoombotController::life()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1352,27 +1350,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624276.129685"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1587"
-            endingLineNumber = "1587"
-            landmarkName = "RoombotController::death()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624392.328136"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1633"
-            endingLineNumber = "1633"
+            startingLineNumber = "1588"
+            endingLineNumber = "1588"
             landmarkName = "RoombotController::run()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1384,27 +1366,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624602.280453"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1607"
-            endingLineNumber = "1607"
-            landmarkName = "RoombotController::askToBeBuiltAgain()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624605.478106"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1621"
-            endingLineNumber = "1621"
+            startingLineNumber = "1634"
+            endingLineNumber = "1634"
             landmarkName = "RoombotController::run()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1416,11 +1382,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424624613.796064"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1626"
-            endingLineNumber = "1626"
+            startingLineNumber = "1608"
+            endingLineNumber = "1608"
             landmarkName = "RoombotController::run()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1432,12 +1398,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424625055.754202"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1215"
-            endingLineNumber = "1215"
-            landmarkName = "RoombotController::matureLife()"
+            startingLineNumber = "1622"
+            endingLineNumber = "1622"
+            landmarkName = "RoombotController::run()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1448,12 +1414,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "424625080.526818"
+            timestampString = "425459599.463435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1054"
-            endingLineNumber = "1054"
-            landmarkName = "RoombotController::infancy()"
+            startingLineNumber = "1627"
+            endingLineNumber = "1627"
+            landmarkName = "RoombotController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
+            timestampString = "425459599.463435"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1216"
+            endingLineNumber = "1216"
+            landmarkName = "RoombotController::life()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
+            timestampString = "425459599.463435"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1055"
+            endingLineNumber = "1055"
+            landmarkName = "RoombotController::life()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>DeathController.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 		<key>EVAlgorithms.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -43,6 +48,11 @@
 			<true/>
 		</dict>
 		<key>61892BEC1888175900E9EDCD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A89A4B1B1955BD7F008D7E2E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

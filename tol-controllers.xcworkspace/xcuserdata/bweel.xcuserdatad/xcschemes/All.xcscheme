@@ -71,8 +71,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "61892BEC1888175900E9EDCD"
-               BuildableName = "RoombotController"
-               BlueprintName = "RoombotController"
+               BuildableName = "LifeController"
+               BlueprintName = "LifeController"
                ReferencedContainer = "container:RoombotController/RoombotController.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

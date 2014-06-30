@@ -12,7 +12,7 @@
 
 class CppnGenome {
 	
-    int size; //The size of the grid that should be used when translating this genome
+    double size; //The size of the grid that should be used when translating this genome
     boost::shared_ptr<NEAT::GeneticIndividual> cppn; //Pointer to a Cppn
     
     
@@ -97,7 +97,7 @@ class CppnGenome {
      *
      * @return Returns the size of the Activation Value Matrix.
      */
-    int getSize() const;
+    double getSize() const;
     
     
     private:

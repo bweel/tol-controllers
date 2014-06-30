@@ -175,7 +175,7 @@ void BuildableOrganism::build()
     for(size_t i = 0; i < buildPlan->size(); i++){
         if (robots[i] != 0)
         {
-            // set moduele position
+            // set module position
             Position position = buildPlan->getPosition(organismCentre, i);
             robots[i]->setPosition(position);
             

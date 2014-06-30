@@ -22,8 +22,9 @@ CppnGenome Builder::getGenomeFromStream(std::istream& stream)
 
 std::auto_ptr<BuildPlan> Builder::translateGenome(CppnGenome genome) const
 {
-    ActivationValueMatrix matrix = ActivationValueMatrix(genome.getCppn(), genome.getSize(), genome.getSize());
-    RoombotBuildPlan* buildPlan = new RoombotBuildPlan(genome.getSize());
+    size_t gridSize = (size_t)(genome.getSize() + 0.5);
+    ActivationValueMatrix matrix = ActivationValueMatrix(genome.getCppn(), gridSize, gridSize);
+    RoombotBuildPlan* buildPlan = new RoombotBuildPlan(gridSize);
     
     Coordinate max;
     Coordinate maxNeighbour;

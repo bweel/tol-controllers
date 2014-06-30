@@ -101,7 +101,7 @@ void CppnGenome::crossoverAndMutate(const CppnGenome& genome)
     //The random between 0 and 1 ensures that a crossover of, for example,
     //5 and 6 will result in 5 only 50% of the time, and 6 the other 50%.
     //Not using it would give a bias to the smaller parent.
-    size = (size + genome.getSize() + RANDOM.getRandomDouble())/2;
+    size = (size + genome.getSize() + RANDOM.getRandomDouble()) / 2.0;
     mutateSize();
 }
 
@@ -112,7 +112,7 @@ boost::shared_ptr<NEAT::GeneticIndividual> CppnGenome::getCppn() const
 }
 
 
-int CppnGenome::getSize() const
+double CppnGenome::getSize() const
 {
     return size;
 }
@@ -125,6 +125,6 @@ void CppnGenome::mutateSize()
         std::default_random_engine generator;
         std::normal_distribution<double> distribution(0,SIZE_MUTATION_STRENGTH);
         double randomMutation = distribution(generator);
-        size = size + randomMutation + 0.5;
+        size = size + randomMutation;
     }
 }

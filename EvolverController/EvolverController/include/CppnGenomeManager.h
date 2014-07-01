@@ -68,7 +68,6 @@ public:
 private:
     
     int CPPN_GRID_STARTING_SIZE = ParametersReader::get<int>("CPPN_GRID_STARTING_SIZE");
-
 };
 
 

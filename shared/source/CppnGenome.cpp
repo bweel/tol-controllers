@@ -122,9 +122,15 @@ void CppnGenome::mutateSize()
 {
     if (RANDOM.getRandomDouble() < SIZE_MUTATION_RATE)
     {
-        std::default_random_engine generator;
-        std::normal_distribution<double> distribution(0,SIZE_MUTATION_STRENGTH);
-        double randomMutation = distribution(generator);
+//        std::default_random_engine generator;
+//        std::normal_distribution<double> distribution(0,SIZE_MUTATION_STRENGTH);
+//        std::binomial_distribution<int> distribution(2,0.5);
+//        double randomMutation = distribution(generator);
+        
+        int randomMutation = RANDOM.getRandomWithinRange(-1, 1);
         size = size + randomMutation;
+        if(size < CPPN_GRID_MINIMUM_SIZE) {
+            size = CPPN_GRID_MINIMUM_SIZE;
+        }
     }
 }

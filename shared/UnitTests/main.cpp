@@ -8,6 +8,9 @@
 
 #include <iostream>
 #include <boost/ptr_container/ptr_vector.hpp>
+#include <random>
+#include <map>
+#include "NEAT.h"
 #include "gtest/gtest.h"
 #include "MatrixGenome.h"
 #include "MatrixGenomeManager.h"
@@ -89,6 +92,21 @@ TEST(MatrixGenomeManager, ReadString) {
     boost::ptr_vector<MindGenome> genomes = manager.readStringToArray(genome);
     
     ASSERT_EQ(genomes.size(),2);
+}
+
+TEST(RandomGeneration, BinomialDistribution) {
+    NEAT::Globals::init();
+    NEAT::Random random = NEAT::Globals::getSingleton()->getRandom();
+    std::map<int, int> hist;
+    for (int n = 0; n < 1000000; ++n) {
+        ++hist[random.getRandomWithinRange(-1, 1)];
+    }
+    for (auto p : hist) {
+        std::cout << setw(3) << p.first << ' '
+        << std::string(p.second/10000, '*') << " (" << p.second << ")" << '\n';
+    }
+    
+//    ASSERT_EQ(genomes.size(),2);
 }
 
 int main(int argc, const char * argv[])

@@ -74,6 +74,8 @@ class BirthClinicController : public Supervisor
     
     void storeMindGenomeOnFile(id_t organismId, std::string mindGenomeStr);
     
+    void logModuleCount(std::string message, int modules);
+    
     void rotate();
     
     void sendOrganismBuiltMessage(id_t parent1, id_t parent2, id_t organism, unsigned int size, std::string genome, std::string mind);

@@ -773,6 +773,21 @@ void RoombotController::storeProblem(std::string message, std::string phase)
     problemFile.close();
 }
 
+void RoombotController::storeMatingLocation(std::string partner, std::string location)
+{
+    ofstream matingLocationFile;
+    matingLocationFile.open(RESULTS_PATH + simulationDateAndTime + "/mating-locations.txt", ios::app);
+    matingLocationFile << getTime() << " " << getName() << " mated with " << partner << " at " << location << std::endl;
+    matingLocationFile.close();
+}
+
+void RoombotController::storeReproductionLocation(std::string partner, std::string location)
+{
+    ofstream reproductionLocationFile;
+    reproductionLocationFile.open(RESULTS_PATH + simulationDateAndTime + "/reproduction-locations.txt", ios::app);
+    reproductionLocationFile << getTime() << " " << getName() << " chose as partner: " << partner << " at " << location << std::endl;
+    reproductionLocationFile.close();
+}
 
 void RoombotController::logNumberOfReceivedGenomes()
 {
@@ -840,6 +855,9 @@ void RoombotController::updateOrganismsToMateWithList(id_t mateId, double mateFi
     }
     Organism newMate = Organism(mateGenome, mateMind, mateId, mateFitness, 0, 0, std::vector<id_t>(), Organism::ADULT, true);
     organismsToMateWith.push_back(newMate);
+    
+    const double * values = _gps->getValues();
+    storeMatingLocation(to_string(mateId), to_string(values[0])+" "+to_string(values[2]));
 }
 
 
@@ -1334,6 +1352,8 @@ void RoombotController::life()
                                 _emitter->setChannel(backup_channel);
                                 
                                 std::cout << organismId << " chose to mate with " << mateId << std::endl;
+                                const double * values = _gps->getValues();
+                                storeReproductionLocation(to_string(mateId), to_string(values[0])+" "+to_string(values[2]));
                             }
                             else
                             {

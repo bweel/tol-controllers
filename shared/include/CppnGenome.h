@@ -104,6 +104,7 @@ class CppnGenome {
     
     double SIZE_MUTATION_RATE = ParametersReader::get<double>("SIZE_MUTATION_RATE");
     double SIZE_MUTATION_STRENGTH = ParametersReader::get<double>("SIZE_MUTATION_STRENGTH");
+    int CPPN_GRID_MINIMUM_SIZE = ParametersReader::get<int>("CPPN_GRID_MINIMUM_SIZE");
     
     /**
      * Mutates the size gene of this genome.

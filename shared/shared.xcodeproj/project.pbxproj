@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6163A5EF1962BD0E00A9AA81 /* libboost_random-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6163A5EE1962BD0E00A9AA81 /* libboost_random-mt.dylib */; };
+		6163A5F11962BE5D00A9AA81 /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6163A5F01962BE5D00A9AA81 /* libNEATLib.a */; };
+		6163A5F41962BE7200A9AA81 /* libboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6163A5F21962BE7200A9AA81 /* libboard.a */; };
+		6163A5F51962BE7200A9AA81 /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6163A5F31962BE7200A9AA81 /* libtinyxmlpluslib.a */; };
+		6163A5F91962BE8B00A9AA81 /* libboost_filesystem-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6163A5F61962BE8B00A9AA81 /* libboost_filesystem-mt.a */; };
+		6163A5FA1962BE8B00A9AA81 /* libboost_system-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6163A5F71962BE8B00A9AA81 /* libboost_system-mt.a */; };
+		6163A5FB1962BE8B00A9AA81 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6163A5F81962BE8B00A9AA81 /* libz.a */; };
 		617B36F519263624001D459C /* MatrixGenome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B36F319263624001D459C /* MatrixGenome.cpp */; };
 		617B36FF19263CA7001D459C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B36FE19263CA7001D459C /* main.cpp */; };
 		617B370619263D3A001D459C /* gtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 617B370519263D3A001D459C /* gtest.framework */; };
@@ -62,6 +69,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6163A5EE1962BD0E00A9AA81 /* libboost_random-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_random-mt.dylib"; path = "../../../../../../../../opt/local/lib/libboost_random-mt.dylib"; sourceTree = "<group>"; };
+		6163A5F01962BE5D00A9AA81 /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = ../lib/libNEATLib.a; sourceTree = "<group>"; };
+		6163A5F21962BE7200A9AA81 /* libboard.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboard.a; path = ../lib/libboard.a; sourceTree = "<group>"; };
+		6163A5F31962BE7200A9AA81 /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = ../lib/libtinyxmlpluslib.a; sourceTree = "<group>"; };
+		6163A5F61962BE8B00A9AA81 /* libboost_filesystem-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_filesystem-mt.a"; path = "../lib/libboost_filesystem-mt.a"; sourceTree = "<group>"; };
+		6163A5F71962BE8B00A9AA81 /* libboost_system-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_system-mt.a"; path = "../lib/libboost_system-mt.a"; sourceTree = "<group>"; };
+		6163A5F81962BE8B00A9AA81 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../lib/libz.a; sourceTree = "<group>"; };
 		617B36F2192633CC001D459C /* MatrixGenome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatrixGenome.h; sourceTree = "<group>"; };
 		617B36F319263624001D459C /* MatrixGenome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MatrixGenome.cpp; sourceTree = "<group>"; };
 		617B36FC19263CA7001D459C /* UnitTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UnitTests; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +128,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6163A5F91962BE8B00A9AA81 /* libboost_filesystem-mt.a in Frameworks */,
+				6163A5FA1962BE8B00A9AA81 /* libboost_system-mt.a in Frameworks */,
+				6163A5FB1962BE8B00A9AA81 /* libz.a in Frameworks */,
+				6163A5F41962BE7200A9AA81 /* libboard.a in Frameworks */,
+				6163A5F51962BE7200A9AA81 /* libtinyxmlpluslib.a in Frameworks */,
+				6163A5F11962BE5D00A9AA81 /* libNEATLib.a in Frameworks */,
+				6163A5EF1962BD0E00A9AA81 /* libboost_random-mt.dylib in Frameworks */,
 				617B3725192A3298001D459C /* libshared.a in Frameworks */,
 				617B370619263D3A001D459C /* gtest.framework in Frameworks */,
 			);
@@ -157,6 +178,13 @@
 		61EBFBBB19224330000E6D71 = {
 			isa = PBXGroup;
 			children = (
+				6163A5F61962BE8B00A9AA81 /* libboost_filesystem-mt.a */,
+				6163A5F71962BE8B00A9AA81 /* libboost_system-mt.a */,
+				6163A5F81962BE8B00A9AA81 /* libz.a */,
+				6163A5F21962BE7200A9AA81 /* libboard.a */,
+				6163A5F31962BE7200A9AA81 /* libtinyxmlpluslib.a */,
+				6163A5F01962BE5D00A9AA81 /* libNEATLib.a */,
+				6163A5EE1962BD0E00A9AA81 /* libboost_random-mt.dylib */,
 				617B3716192647A6001D459C /* Libaries */,
 				617B36F7192639D3001D459C /* test */,
 				61EBFBCE192243B4000E6D71 /* include */,
@@ -373,6 +401,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/local/lib,
+					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -389,6 +418,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/local/lib,
+					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -239,6 +239,10 @@ private:
     
     void storeProblem(std::string message, std::string phase);
     
+    void storeMatingLocation(std::string partner, std::string location);
+    
+    void storeReproductionLocation(std::string partner, std::string location);
+    
     double getRealFitness(double fitness);
     
     void logGPS();

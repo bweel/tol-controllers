@@ -114,9 +114,9 @@ void BirthClinicController::addModuleToReserve(std::string moduleDef)
         if (!alreadyAvailable)
         {
             availableModules.push(idx);
+            std::cout << "module " << idx << " added to available" << std::endl;
+            logModuleCount("Module Added",availableModules.size());
         }
-        
-        std::cout << "module " << idx << " added to available" << std::endl;
     }
     else
     {
@@ -287,6 +287,9 @@ int BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGeno
                 organism->build();
                 organism->writeControllerArgsFile(simulationDateAndTime);
                 organism->activate(simulationDateAndTime);
+                
+                logModuleCount("Organism built",availableModules.size());
+                
                 return buildPlanSize;
             }
             else
@@ -298,6 +301,7 @@ int BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGeno
         else
         {
             std::cout << "ORGANISM NOT CREATED: not enough nodules available" << std::endl;
+            logModuleCount("Organism Aborted",availableModules.size());
             return -3;
         }
     }
@@ -306,6 +310,14 @@ int BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGeno
         std::cout << "ORGANISM NOT CREATED: the build plan was empty or made of only one module" << std::endl;
         return -3;
     }
+}
+
+void BirthClinicController::logModuleCount(std::string message, int modules)
+{
+    ofstream file;
+    file.open(RESULTS_PATH + simulationDateAndTime + "/birth-clinic.txt", ios::app);
+    file << getTime() << " " << message << ": " << modules << " available modules left." << std::endl;
+    file.close();
 }
 
 

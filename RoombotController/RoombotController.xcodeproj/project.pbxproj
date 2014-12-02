@@ -7,16 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		61278C1918966833007D50F4 /* MyMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C1418966833007D50F4 /* MyMath.h */; };
-		61278C1B18966833007D50F4 /* MyMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61278C1718966833007D50F4 /* MyMath.cpp */; };
-		61278C3018966A78007D50F4 /* EVAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C2818966A78007D50F4 /* EVAlgorithm.h */; };
+		6106C8D71A1B85E200DBFCAE /* LifeController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61892BED1888175900E9EDCD /* LifeController */; };
+		61278C3018966A78007D50F4 /* LearningAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C2818966A78007D50F4 /* LearningAlgorithm.h */; };
 		61278C3118966A78007D50F4 /* HyperNEAT.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C2918966A78007D50F4 /* HyperNEAT.h */; };
 		61278C3218966A78007D50F4 /* RL_PoWER.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C2A18966A78007D50F4 /* RL_PoWER.h */; };
-		61278C3318966A78007D50F4 /* EVAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61278C2C18966A78007D50F4 /* EVAlgorithm.cpp */; };
+		61278C3318966A78007D50F4 /* LearningAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61278C2C18966A78007D50F4 /* LearningAlgorithm.cpp */; };
 		61278C3418966A78007D50F4 /* HyperNEAT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61278C2D18966A78007D50F4 /* HyperNEAT.cpp */; settings = {COMPILER_FLAGS = "-Wshorten-64-to-32"; }; };
 		61278C3518966A78007D50F4 /* RL_PoWER.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61278C2E18966A78007D50F4 /* RL_PoWER.cpp */; };
-		61278C4618966B02007D50F4 /* IExportable.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C4418966B02007D50F4 /* IExportable.h */; };
-		61278C4718966B02007D50F4 /* ILinkable.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C4518966B02007D50F4 /* ILinkable.h */; };
 		61278C6518967563007D50F4 /* Globals.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C5818967563007D50F4 /* Globals.h */; };
 		61278C6618967563007D50F4 /* Interval.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C5918967563007D50F4 /* Interval.h */; };
 		61278C6718967563007D50F4 /* Policy.h in Headers */ = {isa = PBXBuildFile; fileRef = 61278C5A18967563007D50F4 /* Policy.h */; };
@@ -29,35 +26,46 @@
 		61278C6E18967563007D50F4 /* Spline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61278C6218967563007D50F4 /* Spline.cpp */; };
 		61278C6F18967563007D50F4 /* Trial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61278C6318967563007D50F4 /* Trial.cpp */; };
 		61278C7018967563007D50F4 /* Values.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61278C6418967563007D50F4 /* Values.cpp */; };
-		61278C87189694EC007D50F4 /* libUtilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C0C189667FF007D50F4 /* libUtilities.a */; };
 		61278C88189694FC007D50F4 /* libEVAlgorithms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C2118966A5A007D50F4 /* libEVAlgorithms.a */; };
 		61278C89189694FC007D50F4 /* libRLPower.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C521896755A007D50F4 /* libRLPower.a */; };
-		61710598192B7A3A007BF3DB /* Vector_3.h in Headers */ = {isa = PBXBuildFile; fileRef = 61710597192B7A3A007BF3DB /* Vector_3.h */; };
-		6171059A192B7A44007BF3DB /* Vector_3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61710599192B7A43007BF3DB /* Vector_3.cpp */; };
-		61746C0F19239893002D8509 /* LifeController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61892BED1888175900E9EDCD /* LifeController */; };
+		613482901A1E1ACD000C04E9 /* DeathController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6134828D1A1E1ACD000C04E9 /* DeathController.cpp */; };
+		613482911A1E1ACD000C04E9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6134828F1A1E1ACD000C04E9 /* main.cpp */; };
+		613482951A1E1ADE000C04E9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613482921A1E1ADE000C04E9 /* main.cpp */; };
+		613482961A1E1ADE000C04E9 /* RoombotController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613482931A1E1ADE000C04E9 /* RoombotController.cpp */; };
+		6134829B1A1F3DBE000C04E9 /* MovementController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 613482991A1F3DBE000C04E9 /* MovementController.cpp */; };
+		6134829F1A1F7C3C000C04E9 /* LearningController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6134829D1A1F7C3C000C04E9 /* LearningController.cpp */; };
+		614D8C2319EBE868007999CE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 614D8C2219EBE868007999CE /* main.cpp */; };
+		614D8C2919EBE876007999CE /* CameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 614D8C2719EBE876007999CE /* CameraController.cpp */; };
+		614D8C2C19EBEA3D007999CE /* CameraController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 614D8C2019EBE868007999CE /* CameraController */; };
+		614D8C2D19EBEAA6007999CE /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61892C8818881AD800E9EDCD /* libController.dylib */; };
+		614D8C2E19EBEAA6007999CE /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61892C8918881AD800E9EDCD /* libCppController.dylib */; };
 		61892C8A18881AD800E9EDCD /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61892C8818881AD800E9EDCD /* libController.dylib */; };
 		61892C8B18881AD800E9EDCD /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61892C8918881AD800E9EDCD /* libCppController.dylib */; };
 		61B4068C18A8E78900154961 /* SplineNeat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61B4068B18A8E78900154961 /* SplineNeat.cpp */; };
+		61D028031A2769FB001B3DE7 /* FitnessMeasure.h in Headers */ = {isa = PBXBuildFile; fileRef = 61D028021A2769FB001B3DE7 /* FitnessMeasure.h */; };
+		61D028051A276A14001B3DE7 /* RLPowerFitness.h in Headers */ = {isa = PBXBuildFile; fileRef = 61D028041A276A14001B3DE7 /* RLPowerFitness.h */; };
+		61D028071A276A81001B3DE7 /* FitnessMeasure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61D028061A276A81001B3DE7 /* FitnessMeasure.cpp */; };
+		61D0280A1A277C64001B3DE7 /* HyperNEATFitness.h in Headers */ = {isa = PBXBuildFile; fileRef = 61D028081A277C64001B3DE7 /* HyperNEATFitness.h */; };
+		61D0280B1A277C64001B3DE7 /* SplineNEATFitness.h in Headers */ = {isa = PBXBuildFile; fileRef = 61D028091A277C64001B3DE7 /* SplineNEATFitness.h */; };
+		61D028231A289075001B3DE7 /* MatingStrategy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61D0281F1A289075001B3DE7 /* MatingStrategy.cpp */; };
+		61D028241A289075001B3DE7 /* ProximityMating.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61D028211A289075001B3DE7 /* ProximityMating.cpp */; };
 		61EBFBFD19224C66000E6D71 /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBFB19224C66000E6D71 /* libNEATLib.a */; };
 		61EBFBFE19224C66000E6D71 /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBFC19224C66000E6D71 /* libtinyxmlpluslib.a */; };
 		61EBFC0019224CD1000E6D71 /* libboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBFF19224CD1000E6D71 /* libboard.a */; };
-		A84E613618FE8734007E227E /* RoombotController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84E613418FE8734007E227E /* RoombotController.cpp */; };
-		A84E613918FE8754007E227E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84E613718FE8754007E227E /* main.cpp */; };
+		61EC02931964333000658978 /* liblog4cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EC02921964333000658978 /* liblog4cpp.a */; };
+		61EC0297196434A500658978 /* PoWER.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61EC0295196434A500658978 /* PoWER.cpp */; };
+		61EC0298196434A500658978 /* PoWER.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EC0296196434A500658978 /* PoWER.h */; };
 		A863436D193DF3550014C737 /* libboost_filesystem-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8634368193DF3550014C737 /* libboost_filesystem-mt.a */; };
 		A863436E193DF3550014C737 /* libboost_random-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8634369193DF3550014C737 /* libboost_random-mt.a */; };
 		A863436F193DF3550014C737 /* libboost_system-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A863436A193DF3550014C737 /* libboost_system-mt.a */; };
 		A8634370193DF3550014C737 /* libgsl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A863436B193DF3550014C737 /* libgsl.a */; };
 		A8634371193DF3550014C737 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A863436C193DF3550014C737 /* libz.a */; };
 		A8634394193DFDF90014C737 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8634393193DFDF90014C737 /* libshared.a */; };
-		A89A4B241955BD7F008D7E2E /* RoombotController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84E613418FE8734007E227E /* RoombotController.cpp */; };
-		A89A4B251955BD7F008D7E2E /* DeathController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A89A4B181955BC17008D7E2E /* DeathController.cpp */; };
-		A89A4B261955BD7F008D7E2E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A89A4B151955BBD2008D7E2E /* main.cpp */; };
 		A89A4B281955BD7F008D7E2E /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8634393193DFDF90014C737 /* libshared.a */; };
 		A89A4B2C1955BD7F008D7E2E /* libgsl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A863436B193DF3550014C737 /* libgsl.a */; };
 		A89A4B2D1955BD7F008D7E2E /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A863436C193DF3550014C737 /* libz.a */; };
 		A89A4B2E1955BD7F008D7E2E /* libEVAlgorithms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C2118966A5A007D50F4 /* libEVAlgorithms.a */; };
 		A89A4B2F1955BD7F008D7E2E /* libRLPower.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C521896755A007D50F4 /* libRLPower.a */; };
-		A89A4B301955BD7F008D7E2E /* libUtilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61278C0C189667FF007D50F4 /* libUtilities.a */; };
 		A89A4B311955BD7F008D7E2E /* libboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBFF19224CD1000E6D71 /* libboard.a */; };
 		A89A4B321955BD7F008D7E2E /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBFC19224C66000E6D71 /* libtinyxmlpluslib.a */; };
 		A89A4B331955BD7F008D7E2E /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBFB19224C66000E6D71 /* libNEATLib.a */; };
@@ -70,13 +78,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		61278C1018966812007D50F4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 61892BE51888175900E9EDCD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 61278C0B189667FF007D50F4;
-			remoteInfo = Utilities;
-		};
 		61278C3618966A87007D50F4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 61892BE51888175900E9EDCD /* Project object */;
@@ -101,13 +102,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		614D8C1E19EBE868007999CE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "~/Documents/projects/tol-project/controllers/CameraController";
+			dstSubfolderSpec = 0;
+			files = (
+				614D8C2C19EBEA3D007999CE /* CameraController in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		61892BEB1888175900E9EDCD /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = "~/Documents/projects/tol-project/controllers/LifeController";
 			dstSubfolderSpec = 0;
 			files = (
-				61746C0F19239893002D8509 /* LifeController in CopyFiles */,
+				6106C8D71A1B85E200DBFCAE /* LifeController in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,14 +135,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		61278C0C189667FF007D50F4 /* libUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		61278C1418966833007D50F4 /* MyMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMath.h; sourceTree = "<group>"; };
-		61278C1718966833007D50F4 /* MyMath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MyMath.cpp; sourceTree = "<group>"; };
 		61278C2118966A5A007D50F4 /* libEVAlgorithms.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEVAlgorithms.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		61278C2818966A78007D50F4 /* EVAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EVAlgorithm.h; sourceTree = "<group>"; };
+		61278C2818966A78007D50F4 /* LearningAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearningAlgorithm.h; sourceTree = "<group>"; };
 		61278C2918966A78007D50F4 /* HyperNEAT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HyperNEAT.h; sourceTree = "<group>"; };
 		61278C2A18966A78007D50F4 /* RL_PoWER.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RL_PoWER.h; sourceTree = "<group>"; };
-		61278C2C18966A78007D50F4 /* EVAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EVAlgorithm.cpp; sourceTree = "<group>"; };
+		61278C2C18966A78007D50F4 /* LearningAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LearningAlgorithm.cpp; sourceTree = "<group>"; };
 		61278C2D18966A78007D50F4 /* HyperNEAT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HyperNEAT.cpp; sourceTree = "<group>"; };
 		61278C2E18966A78007D50F4 /* RL_PoWER.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RL_PoWER.cpp; sourceTree = "<group>"; };
 		61278C4418966B02007D50F4 /* IExportable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IExportable.h; sourceTree = "<group>"; };
@@ -149,39 +157,53 @@
 		61278C6218967563007D50F4 /* Spline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Spline.cpp; sourceTree = "<group>"; };
 		61278C6318967563007D50F4 /* Trial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Trial.cpp; sourceTree = "<group>"; };
 		61278C6418967563007D50F4 /* Values.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Values.cpp; sourceTree = "<group>"; };
-		61710597192B7A3A007BF3DB /* Vector_3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector_3.h; sourceTree = "<group>"; };
-		61710599192B7A43007BF3DB /* Vector_3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector_3.cpp; sourceTree = "<group>"; };
+		6134828D1A1E1ACD000C04E9 /* DeathController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DeathController.cpp; path = DeathController/DeathController.cpp; sourceTree = "<group>"; };
+		6134828E1A1E1ACD000C04E9 /* DeathController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeathController.h; path = DeathController/DeathController.h; sourceTree = "<group>"; };
+		6134828F1A1E1ACD000C04E9 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = DeathController/main.cpp; sourceTree = "<group>"; };
+		613482921A1E1ADE000C04E9 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = RoombotController/main.cpp; sourceTree = SOURCE_ROOT; };
+		613482931A1E1ADE000C04E9 /* RoombotController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RoombotController.cpp; path = RoombotController/RoombotController.cpp; sourceTree = SOURCE_ROOT; };
+		613482941A1E1ADE000C04E9 /* RoombotController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoombotController.h; path = RoombotController/RoombotController.h; sourceTree = SOURCE_ROOT; };
+		613482981A1E4756000C04E9 /* WorldModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WorldModel.h; path = Common/WorldModel.h; sourceTree = "<group>"; };
+		613482991A1F3DBE000C04E9 /* MovementController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MovementController.cpp; path = RoombotController/MovementController.cpp; sourceTree = SOURCE_ROOT; };
+		6134829A1A1F3DBE000C04E9 /* MovementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MovementController.h; path = RoombotController/MovementController.h; sourceTree = SOURCE_ROOT; };
+		6134829C1A1F519A000C04E9 /* MessageHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MessageHandler.h; path = Common/MessageHandler.h; sourceTree = "<group>"; };
+		6134829D1A1F7C3C000C04E9 /* LearningController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LearningController.cpp; path = RoombotController/LearningController.cpp; sourceTree = SOURCE_ROOT; };
+		6134829E1A1F7C3C000C04E9 /* LearningController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LearningController.h; path = RoombotController/LearningController.h; sourceTree = SOURCE_ROOT; };
+		614D8C2019EBE868007999CE /* CameraController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CameraController; sourceTree = BUILT_PRODUCTS_DIR; };
+		614D8C2219EBE868007999CE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		614D8C2719EBE876007999CE /* CameraController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CameraController.cpp; path = CameraController/CameraController.cpp; sourceTree = "<group>"; };
+		614D8C2819EBE876007999CE /* CameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraController.h; path = CameraController/CameraController.h; sourceTree = "<group>"; };
+		614D8C2A19EBE897007999CE /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = CameraController/main.cpp; sourceTree = "<group>"; };
 		61892BED1888175900E9EDCD /* LifeController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LifeController; sourceTree = BUILT_PRODUCTS_DIR; };
 		61892C8818881AD800E9EDCD /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = ../../../../../../../../Applications/Webots/lib/libController.dylib; sourceTree = "<group>"; };
 		61892C8918881AD800E9EDCD /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
 		61B4068A18A8E65700154961 /* SplineNeat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplineNeat.h; sourceTree = "<group>"; };
 		61B4068B18A8E78900154961 /* SplineNeat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SplineNeat.cpp; sourceTree = "<group>"; };
+		61D028021A2769FB001B3DE7 /* FitnessMeasure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FitnessMeasure.h; path = EVAlgorithms/FitnessMeasures/FitnessMeasure.h; sourceTree = SOURCE_ROOT; };
+		61D028041A276A14001B3DE7 /* RLPowerFitness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RLPowerFitness.h; path = EVAlgorithms/FitnessMeasures/RLPowerFitness.h; sourceTree = SOURCE_ROOT; };
+		61D028061A276A81001B3DE7 /* FitnessMeasure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FitnessMeasure.cpp; path = EVAlgorithms/FitnessMeasures/FitnessMeasure.cpp; sourceTree = SOURCE_ROOT; };
+		61D028081A277C64001B3DE7 /* HyperNEATFitness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HyperNEATFitness.h; path = EVAlgorithms/FitnessMeasures/HyperNEATFitness.h; sourceTree = SOURCE_ROOT; };
+		61D028091A277C64001B3DE7 /* SplineNEATFitness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplineNEATFitness.h; path = EVAlgorithms/FitnessMeasures/SplineNEATFitness.h; sourceTree = SOURCE_ROOT; };
+		61D0281F1A289075001B3DE7 /* MatingStrategy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MatingStrategy.cpp; path = RoombotController/MatingStrategies/MatingStrategy.cpp; sourceTree = SOURCE_ROOT; };
+		61D028201A289075001B3DE7 /* MatingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatingStrategy.h; path = RoombotController/MatingStrategies/MatingStrategy.h; sourceTree = SOURCE_ROOT; };
+		61D028211A289075001B3DE7 /* ProximityMating.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProximityMating.cpp; path = RoombotController/MatingStrategies/ProximityMating.cpp; sourceTree = SOURCE_ROOT; };
+		61D028221A289075001B3DE7 /* ProximityMating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProximityMating.h; path = RoombotController/MatingStrategies/ProximityMating.h; sourceTree = SOURCE_ROOT; };
 		61EBFBFB19224C66000E6D71 /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = ../lib/libNEATLib.a; sourceTree = "<group>"; };
 		61EBFBFC19224C66000E6D71 /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = ../lib/libtinyxmlpluslib.a; sourceTree = "<group>"; };
 		61EBFBFF19224CD1000E6D71 /* libboard.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboard.a; path = ../lib/libboard.a; sourceTree = "<group>"; };
-		A84E613318FE8702007E227E /* RoombotController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RoombotController.h; path = RoombotController/include/RoombotController.h; sourceTree = SOURCE_ROOT; };
-		A84E613418FE8734007E227E /* RoombotController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RoombotController.cpp; path = RoombotController/source/RoombotController.cpp; sourceTree = SOURCE_ROOT; };
-		A84E613718FE8754007E227E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = RoombotController/source/main.cpp; sourceTree = SOURCE_ROOT; };
+		61EC02921964333000658978 /* liblog4cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblog4cpp.a; path = ../../../../../../../../../opt/local/lib/liblog4cpp.a; sourceTree = "<group>"; };
+		61EC0295196434A500658978 /* PoWER.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PoWER.cpp; sourceTree = "<group>"; };
+		61EC0296196434A500658978 /* PoWER.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoWER.h; sourceTree = "<group>"; };
 		A8634368193DF3550014C737 /* libboost_filesystem-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_filesystem-mt.a"; path = "../lib/libboost_filesystem-mt.a"; sourceTree = "<group>"; };
 		A8634369193DF3550014C737 /* libboost_random-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_random-mt.a"; path = "../lib/libboost_random-mt.a"; sourceTree = "<group>"; };
 		A863436A193DF3550014C737 /* libboost_system-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_system-mt.a"; path = "../lib/libboost_system-mt.a"; sourceTree = "<group>"; };
 		A863436B193DF3550014C737 /* libgsl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgsl.a; path = ../lib/libgsl.a; sourceTree = "<group>"; };
 		A863436C193DF3550014C737 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../lib/libz.a; sourceTree = "<group>"; };
 		A8634393193DFDF90014C737 /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = "../../../../../Library/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug/libshared.a"; sourceTree = "<group>"; };
-		A89A4B121955BABC008D7E2E /* DeathController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DeathController.h; path = DeathController/include/DeathController.h; sourceTree = "<group>"; };
-		A89A4B151955BBD2008D7E2E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = DeathController/source/main.cpp; sourceTree = "<group>"; };
-		A89A4B181955BC17008D7E2E /* DeathController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DeathController.cpp; path = DeathController/source/DeathController.cpp; sourceTree = "<group>"; };
 		A89A4B3B1955BD7F008D7E2E /* DeathController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DeathController; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		61278C09189667FF007D50F4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		61278C1E18966A5A007D50F4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -196,19 +218,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		614D8C1D19EBE868007999CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				614D8C2D19EBEAA6007999CE /* libController.dylib in Frameworks */,
+				614D8C2E19EBEAA6007999CE /* libCppController.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		61892BEA1888175900E9EDCD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A8634394193DFDF90014C737 /* libshared.a in Frameworks */,
 				A863436D193DF3550014C737 /* libboost_filesystem-mt.a in Frameworks */,
+				61EC02931964333000658978 /* liblog4cpp.a in Frameworks */,
 				A863436E193DF3550014C737 /* libboost_random-mt.a in Frameworks */,
 				A863436F193DF3550014C737 /* libboost_system-mt.a in Frameworks */,
 				A8634370193DF3550014C737 /* libgsl.a in Frameworks */,
 				A8634371193DF3550014C737 /* libz.a in Frameworks */,
 				61278C88189694FC007D50F4 /* libEVAlgorithms.a in Frameworks */,
 				61278C89189694FC007D50F4 /* libRLPower.a in Frameworks */,
-				61278C87189694EC007D50F4 /* libUtilities.a in Frameworks */,
 				61EBFC0019224CD1000E6D71 /* libboard.a in Frameworks */,
 				61EBFBFE19224C66000E6D71 /* libtinyxmlpluslib.a in Frameworks */,
 				61EBFBFD19224C66000E6D71 /* libNEATLib.a in Frameworks */,
@@ -229,7 +260,6 @@
 				A89A4B2D1955BD7F008D7E2E /* libz.a in Frameworks */,
 				A89A4B2E1955BD7F008D7E2E /* libEVAlgorithms.a in Frameworks */,
 				A89A4B2F1955BD7F008D7E2E /* libRLPower.a in Frameworks */,
-				A89A4B301955BD7F008D7E2E /* libUtilities.a in Frameworks */,
 				A89A4B311955BD7F008D7E2E /* libboard.a in Frameworks */,
 				A89A4B321955BD7F008D7E2E /* libtinyxmlpluslib.a in Frameworks */,
 				A89A4B331955BD7F008D7E2E /* libNEATLib.a in Frameworks */,
@@ -244,8 +274,14 @@
 		61278BFD18966728007D50F4 /* RoombotController */ = {
 			isa = PBXGroup;
 			children = (
-				A84E613118FE869E007E227E /* include */,
-				A84E613218FE86A5007E227E /* source */,
+				61D0280C1A28871C001B3DE7 /* MatingStrategies */,
+				613482921A1E1ADE000C04E9 /* main.cpp */,
+				613482931A1E1ADE000C04E9 /* RoombotController.cpp */,
+				613482941A1E1ADE000C04E9 /* RoombotController.h */,
+				613482991A1F3DBE000C04E9 /* MovementController.cpp */,
+				6134829A1A1F3DBE000C04E9 /* MovementController.h */,
+				6134829D1A1F7C3C000C04E9 /* LearningController.cpp */,
+				6134829E1A1F7C3C000C04E9 /* LearningController.h */,
 			);
 			name = RoombotController;
 			path = ToLController;
@@ -255,7 +291,6 @@
 			isa = PBXGroup;
 			children = (
 				61278C1318966833007D50F4 /* include */,
-				61278C1618966833007D50F4 /* source */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -263,26 +298,17 @@
 		61278C1318966833007D50F4 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				61710597192B7A3A007BF3DB /* Vector_3.h */,
 				61278C4418966B02007D50F4 /* IExportable.h */,
 				61278C4518966B02007D50F4 /* ILinkable.h */,
-				61278C1418966833007D50F4 /* MyMath.h */,
 			);
 			path = include;
-			sourceTree = "<group>";
-		};
-		61278C1618966833007D50F4 /* source */ = {
-			isa = PBXGroup;
-			children = (
-				61710599192B7A43007BF3DB /* Vector_3.cpp */,
-				61278C1718966833007D50F4 /* MyMath.cpp */,
-			);
-			path = source;
 			sourceTree = "<group>";
 		};
 		61278C2518966A78007D50F4 /* EVAlgorithms */ = {
 			isa = PBXGroup;
 			children = (
+				61D028011A2768C6001B3DE7 /* FitnessMeasures */,
+				61EC02941964349500658978 /* PoWER */,
 				61278C2618966A78007D50F4 /* include */,
 				61278C2B18966A78007D50F4 /* source */,
 			);
@@ -292,7 +318,7 @@
 		61278C2618966A78007D50F4 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				61278C2818966A78007D50F4 /* EVAlgorithm.h */,
+				61278C2818966A78007D50F4 /* LearningAlgorithm.h */,
 				61278C2918966A78007D50F4 /* HyperNEAT.h */,
 				61278C2A18966A78007D50F4 /* RL_PoWER.h */,
 				61B4068A18A8E65700154961 /* SplineNeat.h */,
@@ -303,7 +329,7 @@
 		61278C2B18966A78007D50F4 /* source */ = {
 			isa = PBXGroup;
 			children = (
-				61278C2C18966A78007D50F4 /* EVAlgorithm.cpp */,
+				61278C2C18966A78007D50F4 /* LearningAlgorithm.cpp */,
 				61278C2D18966A78007D50F4 /* HyperNEAT.cpp */,
 				61278C2E18966A78007D50F4 /* RL_PoWER.cpp */,
 				61B4068B18A8E78900154961 /* SplineNeat.cpp */,
@@ -346,15 +372,45 @@
 			path = source;
 			sourceTree = "<group>";
 		};
+		613482971A1E472C000C04E9 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				613482981A1E4756000C04E9 /* WorldModel.h */,
+				6134829C1A1F519A000C04E9 /* MessageHandler.h */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		614D8C1B19EBE7D2007999CE /* CameraController */ = {
+			isa = PBXGroup;
+			children = (
+				614D8C2719EBE876007999CE /* CameraController.cpp */,
+				614D8C2819EBE876007999CE /* CameraController.h */,
+				614D8C2A19EBE897007999CE /* main.cpp */,
+			);
+			name = CameraController;
+			sourceTree = "<group>";
+		};
+		614D8C2119EBE868007999CE /* CameraController */ = {
+			isa = PBXGroup;
+			children = (
+				614D8C2219EBE868007999CE /* main.cpp */,
+			);
+			path = CameraController;
+			sourceTree = "<group>";
+		};
 		61892BE41888175900E9EDCD = {
 			isa = PBXGroup;
 			children = (
+				613482971A1E472C000C04E9 /* Common */,
+				614D8C1B19EBE7D2007999CE /* CameraController */,
 				61278BFD18966728007D50F4 /* RoombotController */,
 				A89A4B0F1955BA5D008D7E2E /* DeathController */,
 				61278C2518966A78007D50F4 /* EVAlgorithms */,
 				61278C5618967563007D50F4 /* RLPower */,
 				61278C1218966833007D50F4 /* Utilities */,
 				61892C8718881AB400E9EDCD /* Libraries */,
+				614D8C2119EBE868007999CE /* CameraController */,
 				61892BEE1888175900E9EDCD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -363,10 +419,10 @@
 			isa = PBXGroup;
 			children = (
 				61892BED1888175900E9EDCD /* LifeController */,
-				61278C0C189667FF007D50F4 /* libUtilities.a */,
 				61278C2118966A5A007D50F4 /* libEVAlgorithms.a */,
 				61278C521896755A007D50F4 /* libRLPower.a */,
 				A89A4B3B1955BD7F008D7E2E /* DeathController */,
+				614D8C2019EBE868007999CE /* CameraController */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -375,6 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				A8634393193DFDF90014C737 /* libshared.a */,
+				61EC02921964333000658978 /* liblog4cpp.a */,
 				A8634368193DF3550014C737 /* libboost_filesystem-mt.a */,
 				A8634369193DF3550014C737 /* libboost_random-mt.a */,
 				A863436A193DF3550014C737 /* libboost_system-mt.a */,
@@ -390,70 +447,64 @@
 			path = EvoController;
 			sourceTree = "<group>";
 		};
-		A84E613118FE869E007E227E /* include */ = {
+		61D028011A2768C6001B3DE7 /* FitnessMeasures */ = {
 			isa = PBXGroup;
 			children = (
-				A84E613318FE8702007E227E /* RoombotController.h */,
+				61D028081A277C64001B3DE7 /* HyperNEATFitness.h */,
+				61D028091A277C64001B3DE7 /* SplineNEATFitness.h */,
+				61D028041A276A14001B3DE7 /* RLPowerFitness.h */,
+				61D028021A2769FB001B3DE7 /* FitnessMeasure.h */,
+				61D028061A276A81001B3DE7 /* FitnessMeasure.cpp */,
 			);
-			name = include;
+			name = FitnessMeasures;
+			path = include;
 			sourceTree = "<group>";
 		};
-		A84E613218FE86A5007E227E /* source */ = {
+		61D0280C1A28871C001B3DE7 /* MatingStrategies */ = {
 			isa = PBXGroup;
 			children = (
-				A84E613418FE8734007E227E /* RoombotController.cpp */,
-				A84E613718FE8754007E227E /* main.cpp */,
+				61D0281F1A289075001B3DE7 /* MatingStrategy.cpp */,
+				61D028201A289075001B3DE7 /* MatingStrategy.h */,
+				61D028211A289075001B3DE7 /* ProximityMating.cpp */,
+				61D028221A289075001B3DE7 /* ProximityMating.h */,
 			);
-			name = source;
+			name = MatingStrategies;
+			sourceTree = "<group>";
+		};
+		61EC02941964349500658978 /* PoWER */ = {
+			isa = PBXGroup;
+			children = (
+				61EC0295196434A500658978 /* PoWER.cpp */,
+				61EC0296196434A500658978 /* PoWER.h */,
+			);
+			path = PoWER;
 			sourceTree = "<group>";
 		};
 		A89A4B0F1955BA5D008D7E2E /* DeathController */ = {
 			isa = PBXGroup;
 			children = (
-				A89A4B101955BA7C008D7E2E /* include */,
-				A89A4B111955BA83008D7E2E /* source */,
+				6134828D1A1E1ACD000C04E9 /* DeathController.cpp */,
+				6134828E1A1E1ACD000C04E9 /* DeathController.h */,
+				6134828F1A1E1ACD000C04E9 /* main.cpp */,
 			);
 			name = DeathController;
-			sourceTree = "<group>";
-		};
-		A89A4B101955BA7C008D7E2E /* include */ = {
-			isa = PBXGroup;
-			children = (
-				A89A4B121955BABC008D7E2E /* DeathController.h */,
-			);
-			name = include;
-			sourceTree = "<group>";
-		};
-		A89A4B111955BA83008D7E2E /* source */ = {
-			isa = PBXGroup;
-			children = (
-				A89A4B181955BC17008D7E2E /* DeathController.cpp */,
-				A89A4B151955BBD2008D7E2E /* main.cpp */,
-			);
-			name = source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		61278C0A189667FF007D50F4 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				61278C4618966B02007D50F4 /* IExportable.h in Headers */,
-				61710598192B7A3A007BF3DB /* Vector_3.h in Headers */,
-				61278C1918966833007D50F4 /* MyMath.h in Headers */,
-				61278C4718966B02007D50F4 /* ILinkable.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		61278C1F18966A5A007D50F4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61D0280B1A277C64001B3DE7 /* SplineNEATFitness.h in Headers */,
+				61D028031A2769FB001B3DE7 /* FitnessMeasure.h in Headers */,
+				61D028051A276A14001B3DE7 /* RLPowerFitness.h in Headers */,
 				61278C3118966A78007D50F4 /* HyperNEAT.h in Headers */,
 				61278C3218966A78007D50F4 /* RL_PoWER.h in Headers */,
-				61278C3018966A78007D50F4 /* EVAlgorithm.h in Headers */,
+				61EC0298196434A500658978 /* PoWER.h in Headers */,
+				61D0280A1A277C64001B3DE7 /* HyperNEATFitness.h in Headers */,
+				61278C3018966A78007D50F4 /* LearningAlgorithm.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,23 +524,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		61278C0B189667FF007D50F4 /* Utilities */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 61278C0D189667FF007D50F4 /* Build configuration list for PBXNativeTarget "Utilities" */;
-			buildPhases = (
-				61278C08189667FF007D50F4 /* Sources */,
-				61278C09189667FF007D50F4 /* Frameworks */,
-				61278C0A189667FF007D50F4 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Utilities;
-			productName = Utilities;
-			productReference = 61278C0C189667FF007D50F4 /* libUtilities.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		61278C2018966A5A007D50F4 /* EVAlgorithms */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 61278C2418966A5A007D50F4 /* Build configuration list for PBXNativeTarget "EVAlgorithms" */;
@@ -525,6 +559,23 @@
 			productReference = 61278C521896755A007D50F4 /* libRLPower.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		614D8C1F19EBE868007999CE /* CameraController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 614D8C2419EBE868007999CE /* Build configuration list for PBXNativeTarget "CameraController" */;
+			buildPhases = (
+				614D8C1C19EBE868007999CE /* Sources */,
+				614D8C1D19EBE868007999CE /* Frameworks */,
+				614D8C1E19EBE868007999CE /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CameraController;
+			productName = CameraController;
+			productReference = 614D8C2019EBE868007999CE /* CameraController */;
+			productType = "com.apple.product-type.tool";
+		};
 		61892BEC1888175900E9EDCD /* LifeController */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 61892BF61888175900E9EDCD /* Build configuration list for PBXNativeTarget "LifeController" */;
@@ -538,7 +589,6 @@
 			dependencies = (
 				61278C7718969373007D50F4 /* PBXTargetDependency */,
 				61278C3718966A87007D50F4 /* PBXTargetDependency */,
-				61278C1118966812007D50F4 /* PBXTargetDependency */,
 			);
 			name = LifeController;
 			productName = HyperNEAT;
@@ -568,8 +618,13 @@
 		61892BE51888175900E9EDCD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Berend Weel";
+				TargetAttributes = {
+					614D8C1F19EBE868007999CE = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+				};
 			};
 			buildConfigurationList = 61892BE81888175900E9EDCD /* Build configuration list for PBXProject "RoombotController" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -585,31 +640,24 @@
 			targets = (
 				61892BEC1888175900E9EDCD /* LifeController */,
 				A89A4B1B1955BD7F008D7E2E /* DeathController */,
-				61278C0B189667FF007D50F4 /* Utilities */,
 				61278C2018966A5A007D50F4 /* EVAlgorithms */,
 				61278C511896755A007D50F4 /* RLPower */,
+				614D8C1F19EBE868007999CE /* CameraController */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		61278C08189667FF007D50F4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6171059A192B7A44007BF3DB /* Vector_3.cpp in Sources */,
-				61278C1B18966833007D50F4 /* MyMath.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		61278C1D18966A5A007D50F4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61EC0297196434A500658978 /* PoWER.cpp in Sources */,
 				61278C3418966A78007D50F4 /* HyperNEAT.cpp in Sources */,
-				61278C3318966A78007D50F4 /* EVAlgorithm.cpp in Sources */,
+				61278C3318966A78007D50F4 /* LearningAlgorithm.cpp in Sources */,
 				61B4068C18A8E78900154961 /* SplineNeat.cpp in Sources */,
 				61278C3518966A78007D50F4 /* RL_PoWER.cpp in Sources */,
+				61D028071A276A81001B3DE7 /* FitnessMeasure.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,12 +674,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		614D8C1C19EBE868007999CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				614D8C2919EBE876007999CE /* CameraController.cpp in Sources */,
+				614D8C2319EBE868007999CE /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		61892BE91888175900E9EDCD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A84E613918FE8754007E227E /* main.cpp in Sources */,
-				A84E613618FE8734007E227E /* RoombotController.cpp in Sources */,
+				613482961A1E1ADE000C04E9 /* RoombotController.cpp in Sources */,
+				613482951A1E1ADE000C04E9 /* main.cpp in Sources */,
+				61D028241A289075001B3DE7 /* ProximityMating.cpp in Sources */,
+				6134829B1A1F3DBE000C04E9 /* MovementController.cpp in Sources */,
+				6134829F1A1F7C3C000C04E9 /* LearningController.cpp in Sources */,
+				61D028231A289075001B3DE7 /* MatingStrategy.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,20 +700,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A89A4B241955BD7F008D7E2E /* RoombotController.cpp in Sources */,
-				A89A4B251955BD7F008D7E2E /* DeathController.cpp in Sources */,
-				A89A4B261955BD7F008D7E2E /* main.cpp in Sources */,
+				613482911A1E1ACD000C04E9 /* main.cpp in Sources */,
+				613482901A1E1ACD000C04E9 /* DeathController.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		61278C1118966812007D50F4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 61278C0B189667FF007D50F4 /* Utilities */;
-			targetProxy = 61278C1018966812007D50F4 /* PBXContainerItemProxy */;
-		};
 		61278C3718966A87007D50F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 61278C2018966A5A007D50F4 /* EVAlgorithms */;
@@ -671,33 +726,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		61278C0E189667FF007D50F4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				EXECUTABLE_PREFIX = lib;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		61278C0F189667FF007D50F4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				EXECUTABLE_PREFIX = lib;
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		61278C2218966A5A007D50F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = "";
@@ -708,6 +740,7 @@
 		61278C2318966A5A007D50F4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = "";
@@ -718,6 +751,7 @@
 		61278C541896755A007D50F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -730,7 +764,46 @@
 		61278C551896755A007D50F4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		614D8C2519EBE868007999CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Volumes/Applications/Webots/lib,
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		614D8C2619EBE868007999CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Volumes/Applications/Webots/lib,
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -785,6 +858,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -831,6 +905,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Release;
 		};
@@ -841,6 +916,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					/opt/local/lib,
 				);
 				PRODUCT_NAME = LifeController;
 			};
@@ -853,6 +929,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					/opt/local/lib,
 				);
 				PRODUCT_NAME = LifeController;
 			};
@@ -885,15 +962,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		61278C0D189667FF007D50F4 /* Build configuration list for PBXNativeTarget "Utilities" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				61278C0E189667FF007D50F4 /* Debug */,
-				61278C0F189667FF007D50F4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		61278C2418966A5A007D50F4 /* Build configuration list for PBXNativeTarget "EVAlgorithms" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -908,6 +976,15 @@
 			buildConfigurations = (
 				61278C541896755A007D50F4 /* Debug */,
 				61278C551896755A007D50F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		614D8C2419EBE868007999CE /* Build configuration list for PBXNativeTarget "CameraController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				614D8C2519EBE868007999CE /* Debug */,
+				614D8C2619EBE868007999CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

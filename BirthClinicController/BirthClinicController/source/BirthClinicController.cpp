@@ -208,7 +208,6 @@ void BirthClinicController::sendOrganismBuiltMessage(id_t parent1, id_t parent2,
     emitter->send(orgbuilt.c_str(), (int)orgbuilt.length()+1);
 }
 
-
 ////////////////////////////////////////////
 ////////////// INITIALIZATION //////////////
 ////////////////////////////////////////////
@@ -300,7 +299,7 @@ int BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGeno
         }
         else
         {
-            std::cout << "ORGANISM NOT CREATED: not enough nodules available" << std::endl;
+            std::cout << "ORGANISM NOT CREATED: not enough modules available" << std::endl;
             logModuleCount("Organism Aborted",availableModules.size());
             return -3;
         }
@@ -308,7 +307,7 @@ int BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGeno
     else
     {
         std::cout << "ORGANISM NOT CREATED: the build plan was empty or made of only one module" << std::endl;
-        return -3;
+        return -4;
     }
 }
 
@@ -356,10 +355,85 @@ BirthClinicController::~BirthClinicController()
     
 }
 
+/********************************
+ ******* REBUILD ORGANISM *******
+ ********************************/
+bool BirthClinicController::rebuildOrganism(std::string message, int &buildTry) {
+    id_t organismId;
+    std::string genomeStr;
+    std::string mindStr;
+    readRebuildMessage(message, &organismId, &genomeStr, &mindStr);
+    
+    double time = getTime();
+    while (getTime() - time < 3)
+    {
+        if(step(TIME_STEP) == -1){
+            return false;
+        }
+    }
+    
+    std::istringstream stream(genomeStr);
+    CppnGenome genome = builder->getGenomeFromStream(stream);
+    int buildResponse = buildOrganism(genome, mindStr, organismId);
+    
+    if (buildResponse != -2)
+    {
+        buildTry = 0;
+        return true;
+    }
+    else
+    {
+        std::cout << buildTry << std::endl;
+        buildTry++;
+        step(TIME_STEP);
+        return false;
+    }
+}
+
+/**********************************
+ ******* BUILD NEW ORGANISM *******
+ **********************************/
+bool BirthClinicController::buildOrganismFromMessage(std::string message, int &buildTry) {
+    std::string genomeStr;
+    std::string mindStr;
+    id_t parent1, parent2;
+    std::string fitness1, fitness2;
+    readGenomeMessage(message, & genomeStr, & mindStr, & parent1, & parent2, & fitness1, & fitness2);
+    
+    std::istringstream stream(genomeStr);
+    CppnGenome genome = builder->getGenomeFromStream(stream);
+    int buildResponse = buildOrganism(genome, mindStr, 0);
+    
+    if (buildResponse > 0)
+    {
+        storePhilogenyOnFile(parent1, parent2, nextOrganismId-1, fitness1, fitness2);
+        storeGenomeOnFile(nextOrganismId-1, genomeStr);
+        storeMindGenomeOnFile(nextOrganismId-1, mindStr);
+        
+        sendOrganismBuiltMessage(parent1, parent2, nextOrganismId-1, buildResponse, genomeStr, mindStr);
+        
+        buildTry = 0;
+        return true;
+    } else if (buildResponse == -2) {
+        std::cout << buildTry << std::endl;
+        buildTry++;
+        // Clinic is still busy. Keep packets and wait a while.
+    } else if (buildResponse == -3) {
+        // There are not enough modules
+        // Skip to the next shape
+        buildTry++;
+    } else if (buildResponse == -4) {
+        // The build plan had only 1 or 2 modules
+        // Skip to the next shape
+        buildTry = 0;
+    }
+    return false;
+}
+
 
 void BirthClinicController::run()
 {
-    double TIME_STEP = getBasicTimeStep();
+    TIME_STEP = getBasicTimeStep();
     
     receiver->enable(TIME_STEP);
     while (receiver->getQueueLength() > 0)
@@ -395,8 +469,6 @@ void BirthClinicController::run()
     
     connectModulesToObjects();
     
-    
-    
     while (step(TIME_STEP) != -1)
     {
         int buildTry = 0;
@@ -405,110 +477,40 @@ void BirthClinicController::run()
          ******* MANAGE MESSAGES *******
          *******************************/
         
-        while (receiver->getQueueLength() > 0)
-        {
+        while (receiver->getQueueLength() > 0) {
             std::string message = (char*)receiver->getData();
+            bool goNext = true;
             
-            
-            /****************************************
-             ******* UPDATE AVAILABLE MODULES *******
-             ****************************************/
-            
-            if (message.substr(0,26).compare("[UPDATE_AVAILABLE_MESSAGE]") == 0)
-            {
+            if (message.substr(0,26).compare("[UPDATE_AVAILABLE_MESSAGE]") == 0) {
                 std::string moduleDef = MessagesManager::get(message, "DEF");
                 addModuleToReserve(moduleDef);
+            } else if (message.substr(0,17).compare("[REBUILD_MESSAGE]") == 0) {
+                goNext = rebuildOrganism(message, buildTry);
+            } else if (message.substr(0,26).compare("[GENOME_TO_CLINIC_MESSAGE]") == 0) {
+                if(BIRTH_CLINIC_USE_QUEUE){
+                    // Add to queue
+                    buildQueue.push(message);
+                    std::cout << BOLDRED << " Adding genome to queue, queue is now: " << buildQueue.size() << RESET << std::endl;
+                }else if(availableModules.size() > BIRTH_CLINIC_MINIMUM_MODULES) {
+                    goNext = buildOrganismFromMessage(message,buildTry);
+                }
+            } else {
+                // Not enough modules in store, go to next shape
+            }
+            
+            if(goNext) {
                 receiver->nextPacket();
             }
-            
-            
-            /********************************
-             ******* REBUILD ORGANISM *******
-             ********************************/
-            
-            else if (message.substr(0,17).compare("[REBUILD_MESSAGE]") == 0)
-            {
-                id_t organismId;
-                std::string genomeStr;
-                std::string mindStr;
-                readRebuildMessage(message, &organismId, &genomeStr, &mindStr);
-                
-                double time = getTime();
-                while (getTime() - time < 3)
-                {
-                    if(step(TIME_STEP) == -1){
-                        return;
-                    }
+        }
+        
+        if(BIRTH_CLINIC_USE_QUEUE){
+            if(buildQueue.size() > 0 && availableModules.size() > BIRTH_CLINIC_MINIMUM_MODULES){
+                std::string message = buildQueue.front();
+                bool success = buildOrganismFromMessage(message,buildTry);
+                if(success){
+                    buildQueue.pop();
+                    std::cout << BOLDRED << " Succesfully built organism, queue is now: " << buildQueue.size() << RESET << std::endl;
                 }
-                
-                std::istringstream stream(genomeStr);
-                CppnGenome genome = builder->getGenomeFromStream(stream);
-                int buildResponse = buildOrganism(genome, mindStr, organismId);
-                
-                if (buildResponse != -2)
-                {
-                    buildTry = 0;
-                    receiver->nextPacket();
-                }
-                else
-                {
-                    std::cout << buildTry << std::endl;
-                    if (step(TIME_STEP) == -1)
-                    {
-                        return;
-                    }
-                    buildTry++;
-                }
-            }
-            
-            
-            /**********************************
-             ******* BUILD NEW ORGANISM *******
-             **********************************/
-            
-            else if (message.substr(0,26).compare("[GENOME_TO_CLINIC_MESSAGE]") == 0)
-            {
-                std::string genomeStr;
-                std::string mindStr;
-                id_t parent1, parent2;
-                std::string fitness1, fitness2;
-                readGenomeMessage(message, & genomeStr, & mindStr, & parent1, & parent2, & fitness1, & fitness2);
-                
-                std::istringstream stream(genomeStr);
-                CppnGenome genome = builder->getGenomeFromStream(stream);
-                int buildResponse = buildOrganism(genome, mindStr, 0);
-                
-                if (buildResponse > 0)
-                {
-                    storePhilogenyOnFile(parent1, parent2, nextOrganismId-1, fitness1, fitness2);
-                    storeGenomeOnFile(nextOrganismId-1, genomeStr);
-                    storeMindGenomeOnFile(nextOrganismId-1, mindStr);
-                    
-                    sendOrganismBuiltMessage(parent1, parent2, nextOrganismId-1, buildResponse, genomeStr, mindStr);
-                    
-                    buildTry = 0;
-                    receiver->nextPacket();
-                }
-                if (buildResponse == -3)
-                {
-                    // There are not enough modules, or the buildplan is too small
-                    // Skip to the next shape
-                    buildTry = 0;
-                    receiver->nextPacket();
-                }
-                if (buildResponse == -2)
-                {
-                    std::cout << buildTry << std::endl;
-                    if (step(TIME_STEP) == -1)
-                    {
-                        return;
-                    }
-                    buildTry++;
-                    // Clinic is still busy. Keep packets and wait a while.
-                }
-            }
-            else {
-                receiver->nextPacket();
             }
         }
     }

@@ -56,6 +56,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "CameraController::run():CameraController.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "energy[i]">
+            </PersistentString>
+            <PersistentString
+               value = "torque[i]">
+            </PersistentString>
+            <PersistentString
+               value = "position[i]">
+            </PersistentString>
+            <PersistentString
+               value = "angularDisplacement[i]">
+            </PersistentString>
+            <PersistentString
+               value = "previousPosition[i]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "MatrixGenomeManager::createGenome(std::__1::vector&lt;boost::shared_ptr&lt;MindGenome&gt;, std::__1::allocator&lt;boost::shared_ptr&lt;MindGenome&gt; &gt; &gt; const&amp;):MatrixGenomeManager.cpp">
       </ContextState>
       <ContextState

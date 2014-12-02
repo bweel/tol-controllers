@@ -4,10 +4,15 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CameraController.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>12</integer>
+		</dict>
 		<key>DeathController.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>10</integer>
 		</dict>
 		<key>EVAlgorithms.xcscheme</key>
 		<dict>
@@ -43,6 +48,11 @@
 			<true/>
 		</dict>
 		<key>61278C511896755A007D50F4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>614D8C1F19EBE868007999CE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -7,7 +7,6 @@
 //
 
 #include "SplineNeat.h"
-#include "MyMath.h"
 #include "Trial.h"
 
 #define SPLINE_MINIMUM_SIZE 2
@@ -16,12 +15,12 @@
 SplineNeat::SplineNeat(unsigned int seed,
                        const std::string & parametersPath,                // Path to the parameter file for HyperNEAT
                        const std::string & logDirectory,                  // Logging Directory
-                       const std::vector<transforms::Vector_3> & indexes, // The indices of the modules int he organism
+                       const std::vector<Vector3<double> > & indexes, // The indices of the modules int he organism
                        const int numMotors,                               // The number of motors per module
                        double timeStep,                                   // The time step of the simulator
                        double angularVelocity,                            // The speed of the motor
                        unsigned int numModules)                            // The number of splines in a policy
-: EVAlgorithm::EVAlgorithm("SplineNEAT")
+: LearningAlgorithm::LearningAlgorithm("SplineNEAT")
                         , globals(parametersPath.empty() ? NEAT::Globals::init() : NEAT::Globals::init(parametersPath))
                         , directory(logDirectory)
                         , evaluationCurrentStep(0)
@@ -46,7 +45,7 @@ SplineNeat::SplineNeat(unsigned int seed,
 		throw std::domain_error("Angular Velocity Cannot Be <= 0.0");
 	}
     
-	double time = (utils::MyMath::PI_DOUBLE / angularVelocity);
+	double time = ((2 * M_PI) / angularVelocity);
 	if (time < (timeStep * 2.0)) {
 		throw std::domain_error("Time Must Be At Least == 2 * Time Steps");
 	}
@@ -154,8 +153,8 @@ void SplineNeat::initializePolicy(){
     // For each module
     for ( std::size_t i=0; i < numSplines; i++ ) {
         // set the X and Y positions on the cppn
-        int x = modulePositions[i].x();
-        int y = modulePositions[i].y();
+        int x = modulePositions[i].x;
+        int y = modulePositions[i].y;
         cppn.setValue("Bias", 0.3);
         cppn.setValue("X", x);
         cppn.setValue("Y", y);

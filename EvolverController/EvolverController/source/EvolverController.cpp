@@ -4,6 +4,7 @@
 #include "BestTwoParentSelection.h"
 #include "BinaryTournamentParentSelection.h"
 #include "RandomSelection.h"
+#include "Random.h"
 
 
 
@@ -177,6 +178,7 @@ void EvolverController::checkEndEvolution(double currentTime) {
                 organismsList[i].setState(Organism::DEAD);
             }
             initialization = true;          // restart initialization procedure
+            initialPopulationSize = 0;
             initPopulationWaitingTime = 0;  // immediately
         }
         lastEvolutionEndCheck = getTime();
@@ -257,7 +259,10 @@ void EvolverController::logListProblem(std::string event, std::string message, s
 
 int EvolverController::getRandomWait()
 {
-    int noise = (rand() % NOISE_GENOMES_INITIALIZATION) - (NOISE_GENOMES_INITIALIZATION/2);
+    int noise = 0;
+    if(NOISE_GENOMES_INITIALIZATION > 0) {
+         noise = Utils::Random::getInstance()->uniform_integer(-NOISE_GENOMES_INITIALIZATION,NOISE_GENOMES_INITIALIZATION);//(rand() % NOISE_GENOMES_INITIALIZATION) - (NOISE_GENOMES_INITIALIZATION/2);
+    }
     return WAITING_INTERVAL_GENOMES_INITIALIZATION + noise;
 }
 
@@ -623,6 +628,7 @@ void EvolverController::run()
     
     initialization = true;
     initPopulationWaitingTime = getRandomWait();
+    initialPopulationSize = 0;
     lastGeneratedTime = 0;
     currentTime = 0;
     lastMating = 0;      // FOR CENTRALIZED REPRODUCTION BY THE EVOLVER
@@ -630,6 +636,7 @@ void EvolverController::run()
     lastEvolutionEndCheck = 0;
     lastOffspringLoggingTime = 30;
     
+    std::cout << BOLDGREEN << "Initializing next individual in " << initPopulationWaitingTime << " seconds" << RESET << std::endl;
     while (step(TIME_STEP) != -1)
     {
         
@@ -652,7 +659,15 @@ void EvolverController::run()
             CppnGenome newGenome = createRandomGenome();
             sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), "", 0, 0, 0, 0);
             lastGeneratedTime = getTime();
-            initPopulationWaitingTime = getRandomWait();
+            initialPopulationSize++;
+            
+            if(initialPopulationSize >= INITIAL_POPULATION_MAX_SIZE) {
+                initialization = false;
+                std::cout << BOLDGREEN << "Finished initialising population" << RESET << std::endl;
+            }else{
+                initPopulationWaitingTime = getRandomWait();
+                std::cout << BOLDGREEN << "Initializing next individual in " << initPopulationWaitingTime << " seconds" << RESET << std::endl;
+            }
         }
         
         
@@ -785,6 +800,7 @@ void EvolverController::run()
                                 sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), forMating[0], forMating[1], fitness1, fitness2);
                                 
                                 initialization = false;
+                                std::cout << BOLDGREEN << "Finished initialising population" << RESET << std::endl;
                             }
                         }
                     }catch(LocatedException &e){

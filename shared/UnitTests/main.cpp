@@ -14,6 +14,7 @@
 #include "gtest/gtest.h"
 #include "MatrixGenome.h"
 #include "MatrixGenomeManager.h"
+#include "Logger.h"
 
 
 /*********************************************************/
@@ -104,9 +105,25 @@ TEST(RandomGeneration, BinomialDistribution) {
     for (auto p : hist) {
         std::cout << setw(3) << p.first << ' '
         << std::string(p.second/10000, '*') << " (" << p.second << ")" << '\n';
-    }
+    }   
+}
+
+TEST(Logging, RootLogger){
+    log4cpp::Category &root = Logger::getRoot();
+
+    root.error("Logging an Error");
+    root.warn("Logging a Warning");
     
-//    ASSERT_EQ(genomes.size(),2);
+    Logger::shutdown();
+}
+
+TEST(Logging, FileLogger){
+    log4cpp::Category &a1 = Logger::getInstance(std::string("sub1"));
+
+    a1.error("Logging an Error");
+    a1.warn("Logging a Warning");
+    
+    Logger::shutdown();
 }
 
 int main(int argc, const char * argv[])

@@ -12,6 +12,7 @@
 #include <webots/Supervisor.hpp>
 #include <stack>
 #include <limits>
+#include <queue>
 
 using namespace webots;
 
@@ -20,6 +21,7 @@ class BirthClinicController : public Supervisor
 
     private:
     
+    double TIME_STEP;
     std::string simulationDateAndTime;
     
     int CLINIC_CHANNEL = ParametersReader::get<int>("CLINIC_CHANNEL");
@@ -30,6 +32,8 @@ class BirthClinicController : public Supervisor
     int NUMBER_OF_MODULES = ParametersReader::get<int>("NUMBER_OF_MODULES");
     
     std::string SHAPE_ENCODING = ParametersReader::get<std::string>("SHAPE_ENCODING");
+    bool BIRTH_CLINIC_USE_QUEUE = ParametersReader::get<bool>("BIRTH_CLINIC_USE_QUEUE");
+    int BIRTH_CLINIC_MINIMUM_MODULES = ParametersReader::get<bool>("BIRTH_CLINIC_MINIMUM_MODULES");
     
     
     Node * platform;
@@ -46,7 +50,7 @@ class BirthClinicController : public Supervisor
     
     id_t nextOrganismId;
     
-    
+    std::queue<std::string> buildQueue;
     
     void connectModulesToObjects();
     
@@ -67,7 +71,7 @@ class BirthClinicController : public Supervisor
     void readRebuildMessage(std::string message, id_t * organismId, std::string * genomeStr, std::string * mindStr);
     
     void addModuleToReserve(std::string moduleDef);
-    
+       
     void storePhilogenyOnFile(id_t parent1, id_t parent2, id_t newBorn, std::string fitness1, std::string fitness2);
     
     void storeGenomeOnFile(id_t organismId, std::string genomeStr);
@@ -79,6 +83,10 @@ class BirthClinicController : public Supervisor
     void rotate();
     
     void sendOrganismBuiltMessage(id_t parent1, id_t parent2, id_t organism, unsigned int size, std::string genome, std::string mind);
+    
+    bool rebuildOrganism(std::string message, int &buildTry);
+    
+    bool buildOrganismFromMessage(std::string message, int &buildTry);
 
     public:
     

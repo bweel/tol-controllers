@@ -1,7 +1,7 @@
 #ifndef RL_POWER_H
 #define	RL_POWER_H
 
-#include "EVAlgorithm.h"
+#include "LearningAlgorithm.h"
 
 #include "Globals.h"
 #include "Trial.h"
@@ -12,7 +12,7 @@
 
 class RL_PoWER
 :
-virtual public EVAlgorithm
+virtual public LearningAlgorithm
 {
   public:
 
@@ -54,7 +54,7 @@ virtual public EVAlgorithm
     
     std::vector<std::vector<double> > initialParameters;
     
-    utils::Random *_random;
+    Utils::Random *_random;
 	POWER::Globals * _globals;
 	POWER::Trial * _trial;
 	POWER::Values _evaluation;

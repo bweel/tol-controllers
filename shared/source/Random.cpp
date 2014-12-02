@@ -1,7 +1,7 @@
 #include "Random.h"
 #include "Defines.h"
 
-namespace utils
+namespace Utils
 {
     Random* Random::instance = NULL;
 
@@ -58,7 +58,7 @@ namespace utils
 		return _integer_gen();
 	}
     
-    unsigned int Random::uniform_integer(unsigned int min, unsigned int max) {
+    int Random::uniform_integer(int min, int max) {
         boost::random::uniform_int_distribution<> dist(min, max-1);
         return dist(_engine);
     }

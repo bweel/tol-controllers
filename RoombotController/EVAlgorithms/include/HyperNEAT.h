@@ -1,9 +1,7 @@
 #ifndef HYPERNEAT_H
 #define	HYPERNEAT_H
 
-#include "EVAlgorithm.h"
-
-#include "Vector_3.h"
+#include "LearningAlgorithm.h"
 
 /* Libraries Includes*/
 #include "NEAT.h"
@@ -27,10 +25,10 @@
 
 class HyperNEAT
 :
-virtual public EVAlgorithm
+virtual public LearningAlgorithm
 {
   public:
-	HyperNEAT(unsigned int, const std::string &, const std::string &, const transforms::Vector_3 &, const std::vector<transforms::Vector_3> &, const int numMotors, std::size_t extraParameters = 0);
+	HyperNEAT(unsigned int, const std::string &, const std::string &, const Vector3<double> &, const std::vector<Vector3<double> > &, const int numMotors, std::size_t extraParameters = 0);
 	virtual ~HyperNEAT();
 
 	void setParameter(std::size_t, double);
@@ -90,7 +88,7 @@ virtual public EVAlgorithm
 	 * @param Robot size in the three dimensions
 	 * @return Sizes of the robot substrate layer
 	 */
-	JGTL::Vector2<int> initMotorLayerDimensions(const transforms::Vector_3 & organismSize, const int numMotors);
+	JGTL::Vector2<int> initMotorLayerDimensions(const Vector3<double> & organismSize, const int numMotors);
 
 	/**
 	 * Calculates the size of the substrate layer needed to address the robot
@@ -131,7 +129,7 @@ virtual public EVAlgorithm
 	 */
 	Population _init_population(std::size_t, const Genome &);
 
-	std::vector< JGTL::Vector3<int> > _init_mappings(const std::vector<transforms::Vector_3> & indexes, const JGTL::Vector2<int> & motorLayerDimensions, const int numMotors,
+	std::vector< JGTL::Vector3<int> > _init_mappings(const std::vector<Vector3<double> > & indexes, const JGTL::Vector2<int> & motorLayerDimensions, const int numMotors,
                                                      std::size_t parameterSize, const JGTL::Vector2<int> & parameterLayerDimensions);
 
 	void save_individual(const int &, const boost::shared_ptr<NEAT::GeneticIndividual> &, const std::string &);

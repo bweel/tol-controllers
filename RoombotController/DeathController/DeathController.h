@@ -5,6 +5,7 @@
 
 #include <webots/Robot.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include <vector>
 
 
 using namespace webots;
@@ -23,24 +24,12 @@ public:
     
 private:
     
-    double TIME_STEP;
+    void initialiseParameters(const std::string & path);
     
-    boost::property_tree::ptree * _parameters;
+    void initialiseMotors(double timeStep);
     
-    unsigned int numMotors;
-    double motorRange;
-    Motor ** _motors;
-    
-    
-    
-    
-    
-    boost::property_tree::ptree * _init_parameters(const std::string & path);
-        
-    void _set_motor_position(size_t index, double value);
-    
-    Motor** _init_motors(double time_step);
-    
+    std::vector<Motor*> motors;
+    boost::property_tree::ptree parameters;
 };
 
 #endif

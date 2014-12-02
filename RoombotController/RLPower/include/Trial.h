@@ -46,7 +46,7 @@ namespace POWER
 		/**
 		 * Starts a new trial
 		 */
-		Trial(utils::Random *random, std::size_t, std::size_t, std::size_t, std::size_t, std::size_t, double, double, std::vector<std::vector<double> > parameters, bool = false);
+		Trial(Utils::Random *random, std::size_t, std::size_t, std::size_t, std::size_t, std::size_t, double, double, std::vector<std::vector<double> > parameters, bool = false);
 
 		/**
 		 *
@@ -114,7 +114,7 @@ namespace POWER
 		typedef std::vector<Policy *>::iterator PIterator;
 		typedef std::vector<Policy *>::const_iterator PConstIterator;
 
-		utils::Random * _random;
+		Utils::Random * _random;
 
 		std::size_t _v_size_min;
 		std::size_t _v_size_max;

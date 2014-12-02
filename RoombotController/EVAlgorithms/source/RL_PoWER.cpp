@@ -1,6 +1,5 @@
 #include "RL_PoWER.h"
 
-#include "MyMath.h"
 #include "MatrixGenome.h"
 
 #include <boost/filesystem.hpp>
@@ -17,7 +16,7 @@ RL_PoWER::RL_PoWER(unsigned int seed,
                    unsigned int evaluations,
 				   std::size_t numSplines)
 :
-EVAlgorithm::EVAlgorithm("RL_PoWER"),
+LearningAlgorithm::LearningAlgorithm("RL_PoWER"),
 _flag(false),
 _directory(d_path),
 _ev_step(0),
@@ -34,7 +33,7 @@ evaluations(evaluations)
 		throw std::domain_error("Angular Velocity Cannot Be <= 0.0");
 	}
 
-	double time = (utils::MyMath::PI_DOUBLE / angular_velocity);
+	double time = ((2 * M_PI) / angular_velocity);
 
 	if (time < (time_step * 2.0)) {
 		throw std::domain_error("Time Must Be At Least == 2 Time Steps");
@@ -42,13 +41,13 @@ evaluations(evaluations)
 
 	_ev_steps = static_cast<std::size_t> (round(time / time_step));
    
-    _random = new utils::Random(seed);
+    _random = new Utils::Random(seed);
    
 }
 
 RL_PoWER::RL_PoWER(const std::string & path, double time_step, double angular_velocity, std::size_t s_size)
 :
-EVAlgorithm::EVAlgorithm("RL_PoWER"),
+LearningAlgorithm::LearningAlgorithm("RL_PoWER"),
 _flag(false),
 _ev_step(0)
 {
@@ -62,7 +61,7 @@ _ev_step(0)
 		throw std::domain_error("Angular Velocity Cannot Be <= 0.0");
 	}
 
-	double time = (utils::MyMath::PI_DOUBLE / angular_velocity);
+	double time = ((2 * M_PI) / angular_velocity);
 
 	if (time < (time_step * 2.0)) {
 		throw std::domain_error("Time Must Be At Least == 2 Time Steps");
@@ -266,8 +265,6 @@ void RL_PoWER::setEvaluationFitness(double value)
 			<< value
 			<< std::endl;
 #endif
-
-	value *= 100;
 
 	_trial->policy_fitness(value);
 }

@@ -35,6 +35,7 @@ private:
     
     int WAITING_INTERVAL_GENOMES_INITIALIZATION = ParametersReader::get<int>("WAITING_INTERVAL_GENOMES_INITIALIZATION");
     int NOISE_GENOMES_INITIALIZATION = ParametersReader::get<int>("NOISE_GENOMES_INITIALIZATION");
+    int INITIAL_POPULATION_MAX_SIZE = ParametersReader::get<int>("INITIAL_POPULATION_MAX_SIZE");
     
     std::string SHAPE_ENCODING = ParametersReader::get<std::string>("SHAPE_ENCODING");
     std::string MIND_ENCODING = ParametersReader::get<std::string>("MIND_ENCODING");
@@ -67,6 +68,7 @@ private:
     bool initialization;
     int initPopulationWaitingTime;
     
+    int initialPopulationSize;
     double lastGeneratedTime;
     double currentTime;
     double lastMating;      // FOR CENTRALIZED REPRODUCTION BY THE EVOLVER

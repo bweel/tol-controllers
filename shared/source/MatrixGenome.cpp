@@ -14,7 +14,7 @@ MatrixGenome::MatrixGenome() {
     x_size = 0;
     y_size = 0;
     
-    random = utils::Random::getInstance();
+    random = Utils::Random::getInstance();
 }
 
 /**
@@ -32,7 +32,7 @@ MatrixGenome::MatrixGenome(int size_x, int size_y) {
     
     genes = std::vector<std::vector<double> >(x_size,std::vector<double>(size_y,0));
     
-    random = utils::Random::getInstance();
+    random = Utils::Random::getInstance();
     
     for(int i=0;i<x_size;i++){
         for(int j=0;j<y_size;j++){
@@ -53,7 +53,7 @@ MatrixGenome::MatrixGenome(const MatrixGenome& genome1) {
     
     genes = genome1.genes;
     
-    random = utils::Random::getInstance();
+    random = Utils::Random::getInstance();
 }
 
 /**
@@ -67,7 +67,7 @@ MatrixGenome::MatrixGenome(std::istream& stream) {
     std::string genomeStr;
     std::string valuesStr;
     
-    random = utils::Random::getInstance();
+    random = Utils::Random::getInstance();
     
     stream >> genomeStr >> x_size >> y_size >> valuesStr;
     

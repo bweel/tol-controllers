@@ -11,7 +11,7 @@
 
 #include <boost/utility.hpp>
 
-namespace utils
+namespace Utils
 {
 
 	class Random
@@ -47,7 +47,7 @@ namespace utils
          * Returns a random unsigned integer between [min,max)
          *
          */
-        unsigned int uniform_integer(unsigned int min, unsigned int max);
+        int uniform_integer(int min, int max);
         
 		/**
 		 * Returns a random double from an uniform distribution in [0.0, 1.0]

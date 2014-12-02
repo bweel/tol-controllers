@@ -7,12 +7,12 @@ const std::string HyperNEAT::LAYER_OUTPUT_NAME = "OutputLayer";
 HyperNEAT::HyperNEAT(unsigned int seed,
 					 const std::string & parametersPath,                // Path to the parameter file for HyperNEAT
 					 const std::string & logDirectory,                  // Logging Directory
-					 const transforms::Vector_3 & organismSize,         // The bounding box of the organism
-					 const std::vector<transforms::Vector_3> & indexes, // The indices of the modules int he organism
+					 const Vector3<double> & organismSize,         // The bounding box of the organism
+					 const std::vector<Vector3<double> > & indexes, // The indices of the modules int he organism
                      const int numMotors,                               // The number of motors per module
 					 std::size_t extraParameters)                         // Parameter size is the number of extra parameters
 :
-EVAlgorithm::EVAlgorithm("HyperNEAT"),
+LearningAlgorithm::LearningAlgorithm("HyperNEAT"),
 _globals(parametersPath.empty() ? NEAT::Globals::init() : NEAT::Globals::init(parametersPath)),
 _directory(logDirectory),
 _i_index_last(0),
@@ -355,11 +355,11 @@ void HyperNEAT::save_generation(const int & index, const boost::shared_ptr<NEAT:
 #endif
 }
 
-JGTL::Vector2<int> HyperNEAT::initMotorLayerDimensions(const transforms::Vector_3 & organismSize, const int numMotors)
+JGTL::Vector2<int> HyperNEAT::initMotorLayerDimensions(const Vector3<double> & organismSize, const int numMotors)
 {
-	int organismXSize = ((static_cast<int> (organismSize.x()) * 2) - 1) * numMotors;
-	int organismYSize = (static_cast<int> (organismSize.y()) * 2) - 1;
-	int organismZSize = (static_cast<int> (organismSize.z()) * 2) - 1;
+	int organismXSize = ((static_cast<int> (organismSize.x) * 2) - 1) * numMotors;
+	int organismYSize = (static_cast<int> (organismSize.y) * 2) - 1;
+	int organismZSize = (static_cast<int> (organismSize.z) * 2) - 1;
 
     
     std::cout << "Initializing motor layer dimension: x: " << organismXSize << ", y: " << organismYSize << ", z: " << organismZSize << std::endl;
@@ -530,8 +530,7 @@ HyperNEAT::Population HyperNEAT::_init_population(std::size_t size, const Genome
 }
 
 /* Fix This */
-std::vector< JGTL::Vector3<int> > HyperNEAT::_init_mappings(const std::vector<transforms::Vector_3> & indexes, const JGTL::Vector2<int> & motorLayerDimensions, const int numMotors,
-                                                            std::size_t parameterSize, const JGTL::Vector2<int> & parameterLayerDimensions)
+std::vector< JGTL::Vector3<int> > HyperNEAT::_init_mappings(const std::vector<Vector3<double> > & indexes, const JGTL::Vector2<int> & motorLayerDimensions, const int numMotors, std::size_t parameterSize, const JGTL::Vector2<int> & parameterLayerDimensions)
 {
 	std::size_t organismSize = indexes.size();
     std::size_t totalSize = organismSize*numMotors + parameterSize;
@@ -545,10 +544,10 @@ std::vector< JGTL::Vector3<int> > HyperNEAT::_init_mappings(const std::vector<tr
 	std::vector< JGTL::Vector3<int> > result(totalSize);
 
 	for (std::size_t index = 0; index < organismSize; index++) {
-        int moduleX = static_cast<int>((indexes[index].x())*-1) + organismXOffset;
+        int moduleX = static_cast<int>((indexes[index].x)*-1) + organismXOffset;
         for(int i = 0; i < numMotors; i++){
             result[(index*numMotors)+i].x = (moduleX*numMotors) + i;
-            result[(index*numMotors)+i].y = static_cast<int> ((indexes[index].y())*-1) + organismYOffset;
+            result[(index*numMotors)+i].y = static_cast<int> ((indexes[index].y)*-1) + organismYOffset;
 
             std::cout << indexes[index] << " -> " << result[(index*numMotors)+i] << ";";
         }

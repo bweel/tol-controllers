@@ -33,11 +33,23 @@
 		61C68B8B192A4ADC00AD6D19 /* MindGenomeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 617B371E1929FD25001D459C /* MindGenomeManager.h */; };
 		61C68B8D192A4B1400AD6D19 /* BuildPlan.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C68B8C192A4B1400AD6D19 /* BuildPlan.h */; };
 		61C68B8F192A4B2500AD6D19 /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 61C68B8E192A4B2500AD6D19 /* Bitmap.h */; };
+		61D028301A28AC21001B3DE7 /* BestTwoParentSelection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61D028281A28AC21001B3DE7 /* BestTwoParentSelection.cpp */; };
+		61D028311A28AC21001B3DE7 /* BestTwoParentSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = 61D028291A28AC21001B3DE7 /* BestTwoParentSelection.h */; };
+		61D028321A28AC21001B3DE7 /* BinaryTournamentParentSelection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61D0282A1A28AC21001B3DE7 /* BinaryTournamentParentSelection.cpp */; };
+		61D028331A28AC21001B3DE7 /* BinaryTournamentParentSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = 61D0282B1A28AC21001B3DE7 /* BinaryTournamentParentSelection.h */; };
+		61D028341A28AC21001B3DE7 /* ParentSelectionMechanism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61D0282C1A28AC21001B3DE7 /* ParentSelectionMechanism.cpp */; };
+		61D028351A28AC21001B3DE7 /* ParentSelectionMechanism.h in Headers */ = {isa = PBXBuildFile; fileRef = 61D0282D1A28AC21001B3DE7 /* ParentSelectionMechanism.h */; };
+		61D028361A28AC21001B3DE7 /* RandomSelection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61D0282E1A28AC21001B3DE7 /* RandomSelection.cpp */; };
+		61D028371A28AC21001B3DE7 /* RandomSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = 61D0282F1A28AC21001B3DE7 /* RandomSelection.h */; };
+		61D028391A28ACCF001B3DE7 /* Defines.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61D028381A28ACCF001B3DE7 /* Defines.cpp */; };
 		61EBFBD2192243B4000E6D71 /* CppnGenome.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EBFBCB192243B4000E6D71 /* CppnGenome.h */; };
 		61EBFBD3192243B4000E6D71 /* Defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EBFBCC192243B4000E6D71 /* Defines.h */; };
 		61EBFBD4192243B4000E6D71 /* Position.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EBFBCD192243B4000E6D71 /* Position.h */; };
 		61EBFBD5192243B4000E6D71 /* CppnGenome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61EBFBCF192243B4000E6D71 /* CppnGenome.cpp */; };
 		61EBFBD6192243B4000E6D71 /* Position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61EBFBD0192243B4000E6D71 /* Position.cpp */; };
+		61EC029A196547A000658978 /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EC0299196547A000658978 /* Logger.h */; };
+		61EC029C196549F600658978 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61EC029B196549F600658978 /* Logger.cpp */; };
+		61EC029E19654D4400658978 /* liblog4cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EC029D19654D4400658978 /* liblog4cpp.a */; };
 		A82391991940C29A00F3267C /* Builder.h in Headers */ = {isa = PBXBuildFile; fileRef = A82391981940C29A00F3267C /* Builder.h */; };
 		A823919B1940C2A500F3267C /* Builder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A823919A1940C2A500F3267C /* Builder.cpp */; };
 		A823919E1940C4CE00F3267C /* RelativePosition.h in Headers */ = {isa = PBXBuildFile; fileRef = A823919C1940C4CE00F3267C /* RelativePosition.h */; };
@@ -47,13 +59,6 @@
 		A82391A51940C52F00F3267C /* ActivationValueMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = A82391A41940C52F00F3267C /* ActivationValueMatrix.h */; };
 		A82391A81940C53F00F3267C /* ActivationValueMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82391A61940C53F00F3267C /* ActivationValueMatrix.cpp */; };
 		A82391A91940C53F00F3267C /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A82391A71940C53F00F3267C /* Bitmap.cpp */; };
-		A84062A9193CD14100964153 /* RandomSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = A84062A8193CD14100964153 /* RandomSelection.h */; };
-		A84062AB193CD15700964153 /* RandomSelection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84062AA193CD15700964153 /* RandomSelection.cpp */; };
-		A84062AF193CD1A600964153 /* BestTwoParentSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = A84062AC193CD1A600964153 /* BestTwoParentSelection.h */; };
-		A84062B0193CD1A600964153 /* BinaryTournamentParentSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = A84062AD193CD1A600964153 /* BinaryTournamentParentSelection.h */; };
-		A84062B1193CD1A600964153 /* ParentSelectionMechanism.h in Headers */ = {isa = PBXBuildFile; fileRef = A84062AE193CD1A600964153 /* ParentSelectionMechanism.h */; };
-		A84062B4193CD1B700964153 /* BinaryTournamentParentSelection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84062B2193CD1B700964153 /* BinaryTournamentParentSelection.cpp */; };
-		A84062B5193CD1B700964153 /* BestTwoParentSelection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84062B3193CD1B700964153 /* BestTwoParentSelection.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -96,12 +101,24 @@
 		61C68B86192A4AC600AD6D19 /* Module.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Module.cpp; sourceTree = "<group>"; };
 		61C68B8C192A4B1400AD6D19 /* BuildPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildPlan.h; sourceTree = "<group>"; };
 		61C68B8E192A4B2500AD6D19 /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bitmap.h; sourceTree = "<group>"; };
+		61D028281A28AC21001B3DE7 /* BestTwoParentSelection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BestTwoParentSelection.cpp; sourceTree = "<group>"; };
+		61D028291A28AC21001B3DE7 /* BestTwoParentSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BestTwoParentSelection.h; sourceTree = "<group>"; };
+		61D0282A1A28AC21001B3DE7 /* BinaryTournamentParentSelection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryTournamentParentSelection.cpp; sourceTree = "<group>"; };
+		61D0282B1A28AC21001B3DE7 /* BinaryTournamentParentSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryTournamentParentSelection.h; sourceTree = "<group>"; };
+		61D0282C1A28AC21001B3DE7 /* ParentSelectionMechanism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParentSelectionMechanism.cpp; sourceTree = "<group>"; };
+		61D0282D1A28AC21001B3DE7 /* ParentSelectionMechanism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentSelectionMechanism.h; sourceTree = "<group>"; };
+		61D0282E1A28AC21001B3DE7 /* RandomSelection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RandomSelection.cpp; sourceTree = "<group>"; };
+		61D0282F1A28AC21001B3DE7 /* RandomSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomSelection.h; sourceTree = "<group>"; };
+		61D028381A28ACCF001B3DE7 /* Defines.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Defines.cpp; sourceTree = "<group>"; };
 		61EBFBC419224330000E6D71 /* libshared.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libshared.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		61EBFBCB192243B4000E6D71 /* CppnGenome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CppnGenome.h; sourceTree = "<group>"; };
 		61EBFBCC192243B4000E6D71 /* Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
 		61EBFBCD192243B4000E6D71 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Position.h; sourceTree = "<group>"; };
 		61EBFBCF192243B4000E6D71 /* CppnGenome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CppnGenome.cpp; sourceTree = "<group>"; };
 		61EBFBD0192243B4000E6D71 /* Position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Position.cpp; sourceTree = "<group>"; };
+		61EC0299196547A000658978 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
+		61EC029B196549F600658978 /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
+		61EC029D19654D4400658978 /* liblog4cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblog4cpp.a; path = ../../../../../../../../opt/local/lib/liblog4cpp.a; sourceTree = "<group>"; };
 		A82391981940C29A00F3267C /* Builder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Builder.h; sourceTree = "<group>"; };
 		A823919A1940C2A500F3267C /* Builder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Builder.cpp; sourceTree = "<group>"; };
 		A823919C1940C4CE00F3267C /* RelativePosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelativePosition.h; sourceTree = "<group>"; };
@@ -111,13 +128,6 @@
 		A82391A41940C52F00F3267C /* ActivationValueMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivationValueMatrix.h; sourceTree = "<group>"; };
 		A82391A61940C53F00F3267C /* ActivationValueMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActivationValueMatrix.cpp; sourceTree = "<group>"; };
 		A82391A71940C53F00F3267C /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
-		A84062A8193CD14100964153 /* RandomSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomSelection.h; sourceTree = "<group>"; };
-		A84062AA193CD15700964153 /* RandomSelection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RandomSelection.cpp; sourceTree = "<group>"; };
-		A84062AC193CD1A600964153 /* BestTwoParentSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BestTwoParentSelection.h; sourceTree = "<group>"; };
-		A84062AD193CD1A600964153 /* BinaryTournamentParentSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryTournamentParentSelection.h; sourceTree = "<group>"; };
-		A84062AE193CD1A600964153 /* ParentSelectionMechanism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentSelectionMechanism.h; sourceTree = "<group>"; };
-		A84062B2193CD1B700964153 /* BinaryTournamentParentSelection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryTournamentParentSelection.cpp; sourceTree = "<group>"; };
-		A84062B3193CD1B700964153 /* BestTwoParentSelection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BestTwoParentSelection.cpp; sourceTree = "<group>"; };
 		A8634376193DF3DC0014C737 /* libboost_random-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_random-mt.a"; path = "../lib/libboost_random-mt.a"; sourceTree = "<group>"; };
 		A8CCFCBD192BA67F00D34ED4 /* ParametersReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParametersReader.h; sourceTree = "<group>"; };
 		A8E16AE9192F494600A5F17B /* MessagesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessagesManager.h; sourceTree = "<group>"; };
@@ -128,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61EC029E19654D4400658978 /* liblog4cpp.a in Frameworks */,
 				6163A5F91962BE8B00A9AA81 /* libboost_filesystem-mt.a in Frameworks */,
 				6163A5FA1962BE8B00A9AA81 /* libboost_system-mt.a in Frameworks */,
 				6163A5FB1962BE8B00A9AA81 /* libz.a in Frameworks */,
@@ -175,9 +186,25 @@
 			name = Libaries;
 			sourceTree = "<group>";
 		};
+		61D028271A28AC21001B3DE7 /* ParentSelectionMechanisms */ = {
+			isa = PBXGroup;
+			children = (
+				61D028281A28AC21001B3DE7 /* BestTwoParentSelection.cpp */,
+				61D028291A28AC21001B3DE7 /* BestTwoParentSelection.h */,
+				61D0282A1A28AC21001B3DE7 /* BinaryTournamentParentSelection.cpp */,
+				61D0282B1A28AC21001B3DE7 /* BinaryTournamentParentSelection.h */,
+				61D0282C1A28AC21001B3DE7 /* ParentSelectionMechanism.cpp */,
+				61D0282D1A28AC21001B3DE7 /* ParentSelectionMechanism.h */,
+				61D0282E1A28AC21001B3DE7 /* RandomSelection.cpp */,
+				61D0282F1A28AC21001B3DE7 /* RandomSelection.h */,
+			);
+			path = ParentSelectionMechanisms;
+			sourceTree = "<group>";
+		};
 		61EBFBBB19224330000E6D71 = {
 			isa = PBXGroup;
 			children = (
+				61EC029D19654D4400658978 /* liblog4cpp.a */,
 				6163A5F61962BE8B00A9AA81 /* libboost_filesystem-mt.a */,
 				6163A5F71962BE8B00A9AA81 /* libboost_system-mt.a */,
 				6163A5F81962BE8B00A9AA81 /* libz.a */,
@@ -187,6 +214,7 @@
 				6163A5EE1962BD0E00A9AA81 /* libboost_random-mt.dylib */,
 				617B3716192647A6001D459C /* Libaries */,
 				617B36F7192639D3001D459C /* test */,
+				61D028271A28AC21001B3DE7 /* ParentSelectionMechanisms */,
 				61EBFBCE192243B4000E6D71 /* include */,
 				61EBFBD1192243B4000E6D71 /* source */,
 				617B36FD19263CA7001D459C /* UnitTests */,
@@ -210,10 +238,6 @@
 				A823919C1940C4CE00F3267C /* RelativePosition.h */,
 				A823919D1940C4CE00F3267C /* RoombotBuildPlan.h */,
 				A82391981940C29A00F3267C /* Builder.h */,
-				A84062A8193CD14100964153 /* RandomSelection.h */,
-				A84062AC193CD1A600964153 /* BestTwoParentSelection.h */,
-				A84062AD193CD1A600964153 /* BinaryTournamentParentSelection.h */,
-				A84062AE193CD1A600964153 /* ParentSelectionMechanism.h */,
 				61C68B8E192A4B2500AD6D19 /* Bitmap.h */,
 				61C68B8C192A4B1400AD6D19 /* BuildPlan.h */,
 				61C68B84192A4ABF00AD6D19 /* Module.h */,
@@ -228,6 +252,7 @@
 				617B371D1929F5DB001D459C /* MindGenome.h */,
 				617B371E1929FD25001D459C /* MindGenomeManager.h */,
 				A8E16AE9192F494600A5F17B /* MessagesManager.h */,
+				61EC0299196547A000658978 /* Logger.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -240,9 +265,6 @@
 				A82391A01940C4DA00F3267C /* RelativePosition.cpp */,
 				A82391A11940C4DA00F3267C /* RoombotBuildPlan.cpp */,
 				A823919A1940C2A500F3267C /* Builder.cpp */,
-				A84062B2193CD1B700964153 /* BinaryTournamentParentSelection.cpp */,
-				A84062B3193CD1B700964153 /* BestTwoParentSelection.cpp */,
-				A84062AA193CD15700964153 /* RandomSelection.cpp */,
 				61C68B86192A4AC600AD6D19 /* Module.cpp */,
 				61C68B82192A4A4F00AD6D19 /* Organism.cpp */,
 				617B37211929FFF8001D459C /* MatrixGenomeManager.cpp */,
@@ -252,6 +274,8 @@
 				617B36F319263624001D459C /* MatrixGenome.cpp */,
 				617B3726192A32CC001D459C /* MindGenome.cpp */,
 				618F2E211934C6D6001500A0 /* ParametersReader.cpp */,
+				61EC029B196549F600658978 /* Logger.cpp */,
+				61D028381A28ACCF001B3DE7 /* Defines.cpp */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -266,22 +290,23 @@
 				61C68B88192A4ADC00AD6D19 /* Organism.h in Headers */,
 				A823919E1940C4CE00F3267C /* RelativePosition.h in Headers */,
 				61C68B89192A4ADC00AD6D19 /* MatrixGenome.h in Headers */,
-				A84062AF193CD1A600964153 /* BestTwoParentSelection.h in Headers */,
 				61C68B8A192A4ADC00AD6D19 /* MindGenome.h in Headers */,
 				A82391A51940C52F00F3267C /* ActivationValueMatrix.h in Headers */,
+				61D028351A28AC21001B3DE7 /* ParentSelectionMechanism.h in Headers */,
 				61C68B8B192A4ADC00AD6D19 /* MindGenomeManager.h in Headers */,
+				61D028371A28AC21001B3DE7 /* RandomSelection.h in Headers */,
 				A823919F1940C4CE00F3267C /* RoombotBuildPlan.h in Headers */,
-				A84062B1193CD1A600964153 /* ParentSelectionMechanism.h in Headers */,
 				61EBFBD2192243B4000E6D71 /* CppnGenome.h in Headers */,
 				61C68B8D192A4B1400AD6D19 /* BuildPlan.h in Headers */,
 				61EBFBD3192243B4000E6D71 /* Defines.h in Headers */,
 				61C68B8F192A4B2500AD6D19 /* Bitmap.h in Headers */,
 				61C68B85192A4ABF00AD6D19 /* Module.h in Headers */,
+				61D028311A28AC21001B3DE7 /* BestTwoParentSelection.h in Headers */,
 				61EBFBD4192243B4000E6D71 /* Position.h in Headers */,
+				61EC029A196547A000658978 /* Logger.h in Headers */,
 				617B3715192646D3001D459C /* Random.h in Headers */,
+				61D028331A28AC21001B3DE7 /* BinaryTournamentParentSelection.h in Headers */,
 				617B37201929FFF1001D459C /* MatrixGenomeManager.h in Headers */,
-				A84062B0193CD1A600964153 /* BinaryTournamentParentSelection.h in Headers */,
-				A84062A9193CD14100964153 /* RandomSelection.h in Headers */,
 				A82391991940C29A00F3267C /* Builder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,7 +354,7 @@
 		61EBFBBC19224330000E6D71 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Berend Weel";
 			};
 			buildConfigurationList = 61EBFBBF19224330000E6D71 /* Build configuration list for PBXProject "shared" */;
@@ -364,22 +389,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				617B3713192646CC001D459C /* Random.cpp in Sources */,
+				61EC029C196549F600658978 /* Logger.cpp in Sources */,
 				61C68B87192A4AC600AD6D19 /* Module.cpp in Sources */,
+				61D028301A28AC21001B3DE7 /* BestTwoParentSelection.cpp in Sources */,
+				61D028321A28AC21001B3DE7 /* BinaryTournamentParentSelection.cpp in Sources */,
 				A82391A31940C4DA00F3267C /* RoombotBuildPlan.cpp in Sources */,
 				617B36F519263624001D459C /* MatrixGenome.cpp in Sources */,
-				A84062AB193CD15700964153 /* RandomSelection.cpp in Sources */,
 				618F2E221934C6D6001500A0 /* ParametersReader.cpp in Sources */,
 				A823919B1940C2A500F3267C /* Builder.cpp in Sources */,
 				61C68B83192A4A4F00AD6D19 /* Organism.cpp in Sources */,
+				61D028391A28ACCF001B3DE7 /* Defines.cpp in Sources */,
+				61D028361A28AC21001B3DE7 /* RandomSelection.cpp in Sources */,
 				617B37221929FFF8001D459C /* MatrixGenomeManager.cpp in Sources */,
 				61EBFBD6192243B4000E6D71 /* Position.cpp in Sources */,
+				61D028341A28AC21001B3DE7 /* ParentSelectionMechanism.cpp in Sources */,
 				617B3727192A32CC001D459C /* MindGenome.cpp in Sources */,
 				61EBFBD5192243B4000E6D71 /* CppnGenome.cpp in Sources */,
 				A82391A91940C53F00F3267C /* Bitmap.cpp in Sources */,
-				A84062B4193CD1B700964153 /* BinaryTournamentParentSelection.cpp in Sources */,
 				A82391A21940C4DA00F3267C /* RelativePosition.cpp in Sources */,
 				A82391A81940C53F00F3267C /* ActivationValueMatrix.cpp in Sources */,
-				A84062B5193CD1B700964153 /* BestTwoParentSelection.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +495,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -507,12 +536,14 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Release;
 		};
 		61EBFBC919224330000E6D71 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -525,6 +556,7 @@
 		61EBFBCA19224330000E6D71 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

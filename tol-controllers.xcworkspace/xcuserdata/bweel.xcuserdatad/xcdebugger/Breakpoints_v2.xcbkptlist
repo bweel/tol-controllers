@@ -42,23 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "424624237.988105"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "495"
-            endingLineNumber = "495"
-            landmarkName = "EvolverController::genomeSpreadMessage(std::string message, double currentTime)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "438188120.43705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "496"
@@ -73,27 +57,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
+            timestampString = "438188120.43705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "789"
-            endingLineNumber = "789">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "762"
-            endingLineNumber = "762"
-            landmarkName = "RoombotController::storeRebuild(std::string message)"
+            startingLineNumber = "497"
+            endingLineNumber = "497"
+            landmarkName = "EvolverController::genomeSpreadMessage(std::string message, double currentTime)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -104,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "743"
-            endingLineNumber = "743"
-            landmarkName = "RoombotController::storeMatureLifeFitnessIntoFile(double fitness)"
+            startingLineNumber = "790"
+            endingLineNumber = "790"
+            landmarkName = "RoombotController::storeMatingLocation(std::string partner, std::string location)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -120,26 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "791"
-            endingLineNumber = "791">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "810"
-            endingLineNumber = "810"
-            landmarkName = "RoombotController::enableAllConnectors()"
+            startingLineNumber = "763"
+            endingLineNumber = "763"
+            landmarkName = "RoombotController::storeFertilityOnFile()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -150,11 +106,61 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "744"
+            endingLineNumber = "744"
+            landmarkName = "RoombotController::logGPS()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
+            timestampString = "438177039.677618"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "792"
+            endingLineNumber = "792"
+            landmarkName = "RoombotController::storeMatingLocation(std::string partner, std::string location)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "811"
-            endingLineNumber = "811">
+            endingLineNumber = "811"
+            landmarkName = "RoombotController::logNumberOfReceivedGenomes()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
+            timestampString = "438177039.677618"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "812"
+            endingLineNumber = "812"
+            landmarkName = "RoombotController::logNumberOfReceivedGenomes()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -244,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "438188120.43705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "EvolverController::getOrganismsListAsString()"
             landmarkType = "5">
          </BreakpointContent>
@@ -260,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "438188120.43705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
+            startingLineNumber = "534"
+            endingLineNumber = "534"
             landmarkName = "EvolverController::EvolverController()"
             landmarkType = "5">
          </BreakpointContent>
@@ -404,13 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "shared/UnitTests/main.cpp"
-            timestampString = "425901764.691477"
+            timestampString = "426071983.361719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "main(int argc, const char * argv[])"
-            landmarkType = "7">
+            startingLineNumber = "137"
+            endingLineNumber = "137">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -420,11 +424,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "shared/UnitTests/main.cpp"
-            timestampString = "425901718.000895"
+            timestampString = "426071277.245635"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19">
+            startingLineNumber = "20"
+            endingLineNumber = "20">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -434,7 +438,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "723"
+            endingLineNumber = "723"
+            landmarkName = "RoombotController::initialiseModuleMapping(std::size_t offset, std::size_t size, const std::string &amp; name, const boost::property_tree::ptree &amp; root)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "722"
@@ -450,13 +470,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "422198495.961886"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "RoombotController::RoombotController()"
-            landmarkType = "5">
+            startingLineNumber = "938"
+            endingLineNumber = "938">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -466,44 +484,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "721"
-            endingLineNumber = "721"
-            landmarkName = "RoombotController::initialiseModuleMapping(std::size_t offset, std::size_t size, const std::string &amp; name, const boost::property_tree::ptree &amp; root)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "937"
-            endingLineNumber = "937"
-            landmarkName = "RoombotController::checkLocks()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "932"
-            endingLineNumber = "932"
-            landmarkName = "RoombotController::checkLocks()"
+            startingLineNumber = "933"
+            endingLineNumber = "933"
+            landmarkName = "RoombotController::sendFitnessUpdateToEvolver(double fitness)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -546,27 +532,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "438188120.43705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "485"
-            endingLineNumber = "485"
-            landmarkName = "EvolverController::genomeSpreadMessage(std::string message, double currentTime)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "424624237.988105"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "482"
-            endingLineNumber = "482"
+            startingLineNumber = "486"
+            endingLineNumber = "486"
             landmarkName = "EvolverController::coupleMessage(std::string message,double currentTime)"
             landmarkType = "5">
          </BreakpointContent>
@@ -578,11 +548,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "438188120.43705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "497"
-            endingLineNumber = "497"
+            startingLineNumber = "483"
+            endingLineNumber = "483"
+            landmarkName = "EvolverController::coupleMessage(std::string message,double currentTime)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
+            timestampString = "438188120.43705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "498"
+            endingLineNumber = "498"
             landmarkName = "EvolverController::genomeSpreadMessage(std::string message, double currentTime)"
             landmarkType = "5">
          </BreakpointContent>
@@ -594,11 +580,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "438188120.43705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "507"
-            endingLineNumber = "507"
+            startingLineNumber = "508"
+            endingLineNumber = "508"
             landmarkName = "EvolverController::genomeSpreadMessage(std::string message, double currentTime)"
             landmarkType = "5">
          </BreakpointContent>
@@ -642,13 +628,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "423415251.034846"
+            timestampString = "436707682.879201"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
-            landmarkName = "BirthClinicController::BirthClinicController()"
-            landmarkType = "5">
+            startingLineNumber = "325"
+            endingLineNumber = "325">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -690,13 +674,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "423415251.034846"
+            timestampString = "436707682.879201"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
-            landmarkName = "BirthClinicController::BirthClinicController()"
-            landmarkType = "5">
+            startingLineNumber = "326"
+            endingLineNumber = "326">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -848,11 +830,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "438188120.43705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "480"
-            endingLineNumber = "480"
+            startingLineNumber = "481"
+            endingLineNumber = "481"
             landmarkName = "EvolverController::coupleMessage(std::string message,double currentTime)"
             landmarkType = "5">
          </BreakpointContent>
@@ -896,11 +878,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "438188120.43705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "484"
-            endingLineNumber = "484">
+            startingLineNumber = "485"
+            endingLineNumber = "485"
+            landmarkName = "EvolverController::coupleMessage(std::string message,double currentTime)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -910,11 +894,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
-            timestampString = "424624237.988105"
+            timestampString = "438188120.43705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "532"
-            endingLineNumber = "532"
+            startingLineNumber = "533"
+            endingLineNumber = "533"
             landmarkName = "EvolverController::EvolverController()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1112,7 +1096,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "shared/source/Random.cpp"
@@ -1176,12 +1160,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "866"
-            endingLineNumber = "866"
-            landmarkName = "RoombotController::searchForOrganism(id_t organismId)"
+            startingLineNumber = "867"
+            endingLineNumber = "867"
+            landmarkName = "RoombotController::updateOrganismsToMateWithList(id_t mateId, double mateFitness, std::string mateGenome, std::string mateMind)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1192,12 +1176,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "882"
-            endingLineNumber = "882"
-            landmarkName = "RoombotController::sendAdultAnnouncement()"
+            startingLineNumber = "883"
+            endingLineNumber = "883"
+            landmarkName = "RoombotController::selectMate()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1208,11 +1192,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1443"
-            endingLineNumber = "1443"
+            startingLineNumber = "1444"
+            endingLineNumber = "1444"
             landmarkName = "RoombotController::life()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1224,11 +1208,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1445"
-            endingLineNumber = "1445"
+            startingLineNumber = "1446"
+            endingLineNumber = "1446"
             landmarkName = "RoombotController::life()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1252,7 +1236,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "shared/source/BinaryTournamentParentSelection.cpp"
@@ -1288,12 +1272,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1038"
-            endingLineNumber = "1038"
-            landmarkName = "RoombotController::life()"
+            startingLineNumber = "1039"
+            endingLineNumber = "1039"
+            landmarkName = "RoombotController::checkFallenInside()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1304,12 +1288,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1044"
-            endingLineNumber = "1044"
-            landmarkName = "RoombotController::life()"
+            startingLineNumber = "1045"
+            endingLineNumber = "1045"
+            landmarkName = "RoombotController::checkFallenInside()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1320,27 +1304,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1030"
-            endingLineNumber = "1030"
-            landmarkName = "RoombotController::askToBeBuiltAgain()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1031"
-            endingLineNumber = "1031">
+            endingLineNumber = "1031"
+            landmarkName = "RoombotController::checkFallenInside()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1350,11 +1320,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1588"
-            endingLineNumber = "1588"
+            startingLineNumber = "1032"
+            endingLineNumber = "1032"
+            landmarkName = "RoombotController::checkFallenInside()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
+            timestampString = "438177039.677618"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1589"
+            endingLineNumber = "1589"
             landmarkName = "RoombotController::death()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1366,12 +1352,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1634"
-            endingLineNumber = "1634"
-            landmarkName = "RoombotController::run()"
+            startingLineNumber = "1635"
+            endingLineNumber = "1635"
+            landmarkName = "RoombotController::death()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1382,12 +1368,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1608"
-            endingLineNumber = "1608"
-            landmarkName = "RoombotController::run()"
+            startingLineNumber = "1609"
+            endingLineNumber = "1609"
+            landmarkName = "RoombotController::death()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1398,12 +1384,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1622"
-            endingLineNumber = "1622"
-            landmarkName = "RoombotController::run()"
+            startingLineNumber = "1623"
+            endingLineNumber = "1623"
+            landmarkName = "RoombotController::death()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1414,12 +1400,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1627"
-            endingLineNumber = "1627"
-            landmarkName = "RoombotController::run()"
+            startingLineNumber = "1628"
+            endingLineNumber = "1628"
+            landmarkName = "RoombotController::death()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1430,11 +1416,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1216"
-            endingLineNumber = "1216"
+            startingLineNumber = "1217"
+            endingLineNumber = "1217"
             landmarkName = "RoombotController::life()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1446,12 +1432,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
-            timestampString = "425459599.463435"
+            timestampString = "438177039.677618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1055"
-            endingLineNumber = "1055"
-            landmarkName = "RoombotController::life()"
+            startingLineNumber = "1056"
+            endingLineNumber = "1056"
+            landmarkName = "RoombotController::askToBeBuiltAgain()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1478,13 +1464,455 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "shared/UnitTests/main.cpp"
-            timestampString = "425901764.691477"
+            timestampString = "426071277.245635"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "TEST(RandomGeneration, BinomialDistribution)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/EVAlgorithms/PoWER/PoWER.cpp"
+            timestampString = "426071277.245635"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "PoWER::PoWER(unsigned int seed, const std::string &amp; loggingPath, double timeStep, double angularVelocity, unsigned int evaluations, std::size_t numSplines)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "shared/source/CppnGenome.cpp"
+            timestampString = "426001979.512398"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "CppnGenome::mutateSize()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/CameraController/CameraController.cpp"
+            timestampString = "434898954.99352"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "CameraController::initialize()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
+            timestampString = "434902301.472414"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "7"
+            endingLineNumber = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
+            timestampString = "438188120.43705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "480"
+            endingLineNumber = "480"
+            landmarkName = "BirthClinicController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
+            timestampString = "438188120.43705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
+            landmarkName = "BirthClinicController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
+            timestampString = "438188120.43705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "436"
+            endingLineNumber = "436"
+            landmarkName = "BirthClinicController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
+            timestampString = "438188120.43705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "438"
+            endingLineNumber = "438"
+            landmarkName = "BirthClinicController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
+            timestampString = "438188120.43705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "450"
+            endingLineNumber = "450"
+            landmarkName = "BirthClinicController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
+            timestampString = "438188120.43705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "439"
+            endingLineNumber = "439"
+            landmarkName = "BirthClinicController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
+            timestampString = "438188120.43705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "479"
+            endingLineNumber = "479"
+            landmarkName = "BirthClinicController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
+            timestampString = "438188120.43705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
+            landmarkName = "BirthClinicController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
+            timestampString = "438188120.43705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "507"
+            endingLineNumber = "507"
+            landmarkName = "BirthClinicController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
+            timestampString = "438188120.43705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
+            landmarkName = "BirthClinicController::run()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BirthClinicController::run()"
+                  moduleName = "BirthClinicController"
+                  urlString = "file:///Volumes/Data/Users/bweel/Documents/projects/tol-controllers/BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
+                  timestampString = "438171389.38058"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "490"
+                  endingLineNumber = "490"
+                  offsetFromSymbolStart = "3207">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BirthClinicController::run()"
+                  moduleName = "BirthClinicController"
+                  urlString = "file:///Volumes/Data/Users/bweel/Documents/projects/tol-controllers/BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
+                  timestampString = "438171389.380757"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "490"
+                  endingLineNumber = "490"
+                  offsetFromSymbolStart = "3362">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/CameraController/CameraController.cpp"
+            timestampString = "438178805.007014"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "CameraController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/CameraController/CameraController.cpp"
+            timestampString = "438178805.007014"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "CameraController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/CameraController/CameraController.cpp"
+            timestampString = "438178790.946657"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "CameraController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/CameraController/CameraController.cpp"
+            timestampString = "438178792.456735"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "CameraController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
+            timestampString = "438179530.371768"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1255"
+            endingLineNumber = "1255"
+            landmarkName = "RoombotController::life()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
+            timestampString = "438179645.816903"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1341"
+            endingLineNumber = "1341"
+            landmarkName = "RoombotController::life()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/RoombotController/source/RoombotController.cpp"
+            timestampString = "438179647.18259"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1339"
+            endingLineNumber = "1339"
+            landmarkName = "RoombotController::life()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
+            timestampString = "438188104.957535"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "664"
+            endingLineNumber = "664"
+            landmarkName = "EvolverController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
+            timestampString = "438188328.215839"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "659"
+            endingLineNumber = "659"
+            landmarkName = "EvolverController::run()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/RoombotController/MovementController.cpp"
+            timestampString = "438256077.39915"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "MovementController::step()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/EVAlgorithms/source/HyperNEAT.cpp"
+            timestampString = "438532974.404151"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "559"
+            endingLineNumber = "559"
+            landmarkName = "HyperNEAT::_init_mappings(const std::vector&lt;Vector3&lt;double&gt; &gt; &amp; indexes, const JGTL::Vector2&lt;int&gt; &amp; motorLayerDimensions, const int numMotors, std::size_t parameterSize, const JGTL::Vector2&lt;int&gt; &amp; parameterLayerDimensions)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RoombotController/RoombotController/ProximityMating.cpp"
+            timestampString = "438864691.050983"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

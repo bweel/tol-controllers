@@ -1,4 +1,5 @@
 #include "Organism.h"
+#include "Random.h"
 
 /**
  * Copy constructor that does not actually does a deep copy
@@ -211,12 +212,18 @@ void BuildableOrganism::writeControllerArgsFile(std::string simulationDateAndTim
     pt.put("Simulation", simulationDateAndTime);
     // Algorithm
     ptree child;
-    child.put("Type", "2");
+    child.put("Type", "RLPower");
     child.put("Parameters", "");
     child.put("Save", "");
     child.put("Infancy_Duration",INFANCY_DURATION);
     child.put("Waiting_Time", ROOMBOT_WAITING_TIME);
-    child.put("Time_To_Live", TIME_TO_LIVE);
+    
+    int noise = 0;
+    if(TIME_TO_LIVE_NOISE > 0) {
+        noise = Utils::Random::getInstance()->uniform_integer(-TIME_TO_LIVE_NOISE,TIME_TO_LIVE_NOISE);
+    }
+    child.put("Time_To_Live", TIME_TO_LIVE + noise);
+
     child.put("Evaluations", EVALUATIONS);
     child.put("Angular_Velocity", "2.6");
     pt.put_child("Algorithm", child);
@@ -228,8 +235,6 @@ void BuildableOrganism::writeControllerArgsFile(std::string simulationDateAndTim
 //    pt.put_child("Shape", child);
     // Robot
     child.clear();
-    child.put("Index", "0");
-    child.put("Index_Root", "0");
     child.put("Name", getName());
     child.put("Modules_#", size);
 //    child.put("Controller", ROOMBOT_CONTROLLER_NAME); // not used
@@ -280,7 +285,7 @@ void BuildableOrganism::writeControllerArgsFile(std::string simulationDateAndTim
     pt.put("MindGenome", mindGenome);
     
     // write and close
-    write_json(organismFile, pt, false);
+    write_json(organismFile, pt, true);
     organismFile.close();
 }
 

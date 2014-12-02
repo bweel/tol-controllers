@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		61746C14192398B3002D8509 /* BirthClinicController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61AD162B1897F88A003D24DE /* BirthClinicController */; };
+		617FAFC019866FF0002F8B33 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 617FAFBF19866FF0002F8B33 /* libshared.a */; };
+		617FAFC21986703E002F8B33 /* libboost_random-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 617FAFC11986703E002F8B33 /* libboost_random-mt.a */; };
 		61AD16401897F90A003D24DE /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163E1897F90A003D24DE /* libController.dylib */; };
 		61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AD163F1897F90A003D24DE /* libCppController.dylib */; };
 		61EBFBF919224C50000E6D71 /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBF719224C50000E6D71 /* libNEATLib.a */; };
 		61EBFBFA19224C50000E6D71 /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EBFBF819224C50000E6D71 /* libtinyxmlpluslib.a */; };
-		A814555E1924A94000278923 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A814555D1924A94000278923 /* libshared.a */; };
 		A84E613D18FE883B007E227E /* BirthClinicController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84E613B18FE883B007E227E /* BirthClinicController.cpp */; };
 		A84F2AED190A970E0033F39C /* RoombotModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A84F2AEB190A970E0033F39C /* RoombotModule.cpp */; };
 		A863435B193DF2210014C737 /* libboost_filesystem-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8634358193DF2210014C737 /* libboost_filesystem-mt.a */; };
@@ -35,6 +36,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		617FAFBF19866FF0002F8B33 /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = ../dist/Debug/libshared.a; sourceTree = "<group>"; };
+		617FAFC11986703E002F8B33 /* libboost_random-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_random-mt.a"; path = "../../../../../../../../opt/local/lib/libboost_random-mt.a"; sourceTree = "<group>"; };
 		61AD162B1897F88A003D24DE /* BirthClinicController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BirthClinicController; sourceTree = BUILT_PRODUCTS_DIR; };
 		61AD163E1897F90A003D24DE /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = ../../../../../../../../Applications/Webots/lib/libController.dylib; sourceTree = "<group>"; };
 		61AD163F1897F90A003D24DE /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
@@ -56,10 +59,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				617FAFC21986703E002F8B33 /* libboost_random-mt.a in Frameworks */,
+				617FAFC019866FF0002F8B33 /* libshared.a in Frameworks */,
 				A863435B193DF2210014C737 /* libboost_filesystem-mt.a in Frameworks */,
 				A863435C193DF2210014C737 /* libboost_system-mt.a in Frameworks */,
 				A863435D193DF2210014C737 /* libz.a in Frameworks */,
-				A814555E1924A94000278923 /* libshared.a in Frameworks */,
 				61EBFBF919224C50000E6D71 /* libNEATLib.a in Frameworks */,
 				61EBFBFA19224C50000E6D71 /* libtinyxmlpluslib.a in Frameworks */,
 				61AD16411897F90A003D24DE /* libCppController.dylib in Frameworks */,
@@ -73,6 +77,8 @@
 		61AD16221897F88A003D24DE = {
 			isa = PBXGroup;
 			children = (
+				617FAFC11986703E002F8B33 /* libboost_random-mt.a */,
+				617FAFBF19866FF0002F8B33 /* libshared.a */,
 				61AD162D1897F88A003D24DE /* BirthClinicController */,
 				61AD163D1897F8C7003D24DE /* Libraries */,
 				61AD162C1897F88A003D24DE /* Products */,
@@ -207,6 +213,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -238,6 +245,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -282,6 +290,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Release;
 		};
@@ -299,6 +308,7 @@
 					"$(inherited)",
 					/opt/local/lib,
 					"/Users/emanuele/Documents/projects/tol-controllers/lib",
+					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/dist/Debug",
 				);
 				PRODUCT_NAME = BirthClinicController;
 			};
@@ -318,6 +328,7 @@
 					"$(inherited)",
 					/opt/local/lib,
 					"/Users/emanuele/Documents/projects/tol-controllers/lib",
+					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/dist/Debug",
 				);
 				PRODUCT_NAME = BirthClinicController;
 			};

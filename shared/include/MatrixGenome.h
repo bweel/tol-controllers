@@ -29,7 +29,7 @@ private:
     std::vector<std::vector<double> > genes;
     std::size_t x_size;
     std::size_t y_size;
-    utils::Random *random;
+    Utils::Random *random;
     
 public:
     

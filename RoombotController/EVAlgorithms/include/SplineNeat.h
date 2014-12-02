@@ -9,9 +9,7 @@
 #ifndef ToLController_SplineNeat_h
 #define ToLController_SplineNeat_h
 
-#include "EVAlgorithm.h"
-
-#include "Vector_3.h"
+#include "LearningAlgorithm.h"
 
 /* Libraries Includes*/
 #include "NEAT.h"
@@ -35,14 +33,14 @@
 
 class SplineNeat
 :
-virtual public EVAlgorithm
+virtual public LearningAlgorithm
 {
 public:
     
     SplineNeat(unsigned int seed,
                const std::string & parametersPath,                // Path to the parameter file for HyperNEAT
                const std::string & logDirectory,                  // Logging Directory
-               const std::vector<transforms::Vector_3> & indexes, // The indices of the modules in the organism
+               const std::vector<Vector3<double> > & indexes, // The indices of the modules in the organism
                const int numMotors,                               // The number of motors per module
                double timeStep,                                   // The time step of the simulator
                double angularVelocity,                            // The speed of the motor
@@ -111,7 +109,7 @@ private:
     unsigned int intervalMinimumLength;
     unsigned int intervalMaximumLength;
     unsigned int intervalLengthUpdateFrequency;
-    std::vector<transforms::Vector_3> modulePositions;
+    std::vector<Vector3<double> > modulePositions;
     
 //    std::vector< std::string > mappingInput;
 //	std::vector< std::string > mappingOutput;

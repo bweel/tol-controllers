@@ -1,4 +1,5 @@
 #include "Trial.h"
+#include "JGTL/JGTL_LocatedException.h"
 
 #include <boost/lexical_cast.hpp>
 
@@ -28,10 +29,9 @@ namespace POWER
 
 	const double Trial::INTERVAL_START = 0.0;
 	const double Trial::INTERVAL_END = 1.0;
-	const double Trial::FITNESS_EXP = 6.0;
 	const double Trial::EPSILON = 1e-10;
 
-	Trial::Trial(utils::Random *random,
+	Trial::Trial(Utils::Random *random,
 				std::size_t numSplines,
 				std::size_t min_size,
 				std::size_t max_size,
@@ -42,23 +42,55 @@ namespace POWER
                 std::vector<std::vector<double> > parameters,
 				bool adaptive)
 	:
-	_random(random),
-	_v_size_min((Trial::V_SIZE_MIN <= min_size) ? min_size : throw std::invalid_argument("Interval minimum length should be larger than "+Trial::V_SIZE_MIN)),
-	_v_size_max((min_size <= max_size) ? max_size : throw std::invalid_argument("Interval maximum length should be larger than the minimum length")),
-	_interval(Trial::INTERVAL_START, Trial::INTERVAL_END, min_size),
-	_rank_size((0 < rank_size) ? rank_size : throw std::invalid_argument("Rank size should be positive")),
-	_ev_size((ev_size > (_v_size_max - _v_size_min)) ? ev_size : throw std::invalid_argument("Evaluation size should be larger than the interval maximum length")),
-	_ev_delta((_v_size_max - _v_size_min) ? static_cast<std::size_t> (round(_ev_size / (_v_size_max - _v_size_min))) : 1),
-	//_ev_delta((_v_size_max - _v_size_min) ? static_cast<std::size_t> (round(_ev_size / ((_v_size_max - _v_size_min) / 2.0))) : 1),
-	_ev_index(0),
-	_variance_decay((0.0 < variance_decay) ? variance_decay : throw std::invalid_argument("Variance Decay should be positive"))
-	{
-		if (0.0 >= variance) {
-			throw std::invalid_argument("Variance must be higher than 0");
+    _random(random),
+    _ev_index(0),
+    _interval(Trial::INTERVAL_START, Trial::INTERVAL_END, min_size)
+    {
+        
+        if(Trial::V_SIZE_MIN <= min_size) {
+            _v_size_min = min_size;
+        } else {
+            throw CREATE_LOCATEDEXCEPTION_INFO("Interval minimum length should be larger than "+Trial::V_SIZE_MIN);
+        }
+        
+        if(min_size <= max_size) {
+            _v_size_max = max_size;
+        } else {
+            throw CREATE_LOCATEDEXCEPTION_INFO("Interval maximum length should be larger than the minimum length");
+        }
+
+        if(0 < rank_size) {
+            _rank_size = rank_size;
+        } else {
+            throw CREATE_LOCATEDEXCEPTION_INFO("Rank size should be positive");
+        }
+        
+//        if (ev_size > (_v_size_max - _v_size_min)) {
+            _ev_size = ev_size;
+//        } else {
+//            throw CREATE_LOCATEDEXCEPTION_INFO("Evaluation size should be larger than the interval maximum length");
+//        }
+        
+        if (_v_size_max - _v_size_min) {
+            _ev_delta = static_cast<std::size_t> (round(_ev_size / (_v_size_max - _v_size_min)));
+        } else {
+            _ev_delta = 1;
+        }
+        
+        //_ev_delta((_v_size_max - _v_size_min) ? static_cast<std::size_t> (round(_ev_size / ((_v_size_max - _v_size_min) / 2.0))) : 1),
+        
+        if (0.0 < variance_decay) {
+            _variance_decay = variance_decay;
+        } else {
+            throw CREATE_LOCATEDEXCEPTION_INFO("Variance Decay should be positive");
+        }
+		
+        if (0.0 >= variance) {
+			throw CREATE_LOCATEDEXCEPTION_INFO("Variance must be higher than 0");
 		}
 
 		if (!numSplines) {
-			throw std::invalid_argument("The number of splines needs to be greater than 0");
+			throw CREATE_LOCATEDEXCEPTION_INFO("The number of splines needs to be greater than 0");
 		}
 
 		_ranking.reserve(_rank_size);
@@ -67,9 +99,11 @@ namespace POWER
         Values values(parameters.size(),parameters[0].size());
         
         for(int i=0;i<parameters.size();i++){
-            for(int j=0;j<parameters[0].size();j++){
-                values.row(i)[j] = parameters[i][j];
-            }
+            //            for(int j=0;j<parameters[0].size();j++){
+            //                values.row(i)[j] = parameters[i][j];
+            //            }
+            std::valarray<double> rowvalues(parameters[i].data(),parameters[i].size());
+            values.row(i, rowvalues);
         }
 
 		_evaluations.push_back(new Policy(_ev_index, variance, _interval, values));
@@ -175,7 +209,7 @@ namespace POWER
 			throw std::invalid_argument("XML Error: Element Parsing" + boost::lexical_cast<std::string>(__FILE__) + " " + boost::lexical_cast<std::string>(__LINE__));
 		}
 
-		_random = new utils::Random(seed);
+		_random = new Utils::Random(seed);
 	}
 
 	Trial::~Trial()
@@ -213,8 +247,10 @@ namespace POWER
 		/*
 		 * We calculate the modified fitness here to avoid calculating it every
 		 * time when we evolve a policy
+         *
+         * We expect that this has already been done by the calling controller
 		 */
-		policy->fitness(std::pow(value, Trial::FITNESS_EXP));
+//		policy->fitness(std::pow(value, Trial::FITNESS_EXP));
 
 		/*
 		 * We maintain a ranking of the n best performing policies in descending

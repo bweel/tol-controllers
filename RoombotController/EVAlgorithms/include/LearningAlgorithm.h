@@ -8,11 +8,11 @@
 
 #include "MindGenome.h"
 
-class EVAlgorithm
+class LearningAlgorithm
 {
   public:
-	EVAlgorithm(const std::string &);
-	virtual ~EVAlgorithm();
+	LearningAlgorithm(const std::string &);
+	virtual ~LearningAlgorithm();
 
 	/**
 	 * Returns the algorithm name

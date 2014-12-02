@@ -15,6 +15,8 @@
 class ParentSelectionMechanism {
 public:
     virtual std::vector<id_t> selectParents(std::vector<Organism> candidates) = 0;
+    
+    static std::unique_ptr<ParentSelectionMechanism> getParentSelectionMechanism();
 };
 
 #endif

@@ -16,17 +16,20 @@ class ProximityMating : public MatingStrategy {
 public:
     double SPREAD_FITNESS_INTERVAL;
     
-    ProximityMating(WorldModel worldModel, MessageHandler &messageHandler) : MatingStrategy(worldModel, messageHandler) {
+    ProximityMating(WorldModel worldModel, MessageHandler &messageHandler, MessageHandler &evolverMessageHandler) : MatingStrategy(worldModel, messageHandler, evolverMessageHandler) {
         lastFitnessSent = 0;
     }
     
     virtual void findMates();
+    virtual void mate();
     
 private:
     void readMateMessage(std::string message, id_t &mateId, double &mateFitness, std::string &mateGenome, std::string &mateMind);
     void updateOrganismsToMateWithList(id_t mateId, double mateFitness, std::string mateGenome, std::string mateMind);
+    void broadcastGenome();
+    void receiveGenomes();
+    
     id_t selectMate();
-    int searchForOrganism(id_t organismId);
     
     double lastFitnessSent;
 };

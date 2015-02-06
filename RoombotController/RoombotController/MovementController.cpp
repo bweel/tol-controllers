@@ -8,11 +8,13 @@
 
 #include "MovementController.h"
 
-MovementController::MovementController(WorldModel &wm, MessageHandler &mh) :
+MovementController::MovementController(WorldModel &wm, MessageHandler &mh, Robot *robot) :
     worldModel(wm),
     messageHandler(mh),
+    robot(robot),
     logger(Logger::getInstance("MovementController"))
 {
+    logger.debugStream() << worldModel.now << " " << worldModel.robotName << " Movement Controller Created";
 }
 
 void MovementController::initialise() {
@@ -20,6 +22,7 @@ void MovementController::initialise() {
     
     if(worldModel.iAmRoot()){
         learningController = std::unique_ptr<LearningController>(new LearningController(worldModel));
+        learningController->initialise();
         
         // initialize motors' angles (notice that root modules are 1 timestep further than the others)
         anglesIn = doubledvector(worldModel.organismSize,std::vector<double>(motors.size(),0.0));     // input angles
@@ -45,7 +48,7 @@ void MovementController::step() {
         for(size_t i=0;i<motors.size();i++) {
             anglesIn[worldModel.robotIndex][i] = anglesTMinusOne[i];
             anglesTMinusOne[i] = getMotorPosition(i);    // update anglesTMinusOne for the next iteration
-            tMinusOne = getTime();                          // update tMinusOne for the next iteration
+            tMinusOne = worldModel.now;                          // update tMinusOne for the next iteration
         }
         
         anglesOut = learningController->computeAngles(anglesIn);  // compute new angles
@@ -54,7 +57,7 @@ void MovementController::step() {
         for(size_t i=0;i<motors.size();i++) {
             setMotorPosition(i,anglesTPlusOne[i]);   // root is one timestep further
             anglesTPlusOne[i] = anglesOut[worldModel.robotIndex][i]; // update anglesTPlusOne for the next iteration
-            tPlusOne = getTime();                       // update tPlusOne for the next iteration
+            tPlusOne = worldModel.now;                       // update tPlusOne for the next iteration
         }
         
         learningController->step();
@@ -80,12 +83,8 @@ double MovementController::getMotorPosition(size_t index) {
 
 // set new position of motors
 void MovementController::setMotorPosition(size_t index, double value) {
-    if (value < -1.0) {
-        value = -1.0;
-    }
-    if (value > 1.0) {
-        value = 1.0;
-    }
+    value = value < -1.0 ? -1.0 : value;
+    value = value >  1.0 ?  1.0 : value;
     
     value *= motorRange;
     
@@ -97,20 +96,30 @@ void MovementController::initialiseMotors() {
     int numMotors = worldModel.parameters.get<unsigned int>("Robot.Motor.Number");
     motorRange = worldModel.parameters.get<double>("Robot.Motor.Range");
     
-    for(size_t i=0;i<numMotors;i++){
-        std::string motorName("Robot.Motor."+std::to_string(i));
+    for(size_t i=0;i<numMotors;i++) {
+        std::string motorParameterName = "Robot.Motor."+std::to_string(i);
+        std::string motorName = worldModel.parameters.get<std::string>(motorParameterName);
+        logger.debugStream() << worldModel.now << " " << worldModel.robotName << ": Initialising Motor: " << motorName;
         
-        motors.push_back(getMotor(worldModel.parameters.get<std::string>(motorName)));
-        
-        std::string sensorName = "position"+worldModel.parameters.get<std::string>(motorName);
-        
-        logger.debug("Initialising position sensor: %s",sensorName.c_str());
-        
-        sensors.push_back(getPositionSensor(sensorName));
+        motors.push_back(robot->getMotor(motorName));
         if (!motors[i]) {
-            throw std::runtime_error("Device Not Found");
+            throw std::runtime_error("Device Not Found: "+to_string(motorName));
+        }
+        
+        std::string sensorName = "position"+worldModel.parameters.get<std::string>(motorParameterName);
+        logger.debugStream() << worldModel.now << " " << worldModel.robotName << ": Initialising position sensor: " << sensorName;
+        
+        sensors.push_back(robot->getPositionSensor(sensorName));
+        if (!sensors[i]) {
+            throw std::runtime_error("Device Not Found: "+to_string(motorName));
         }
         sensors[i]->enable(worldModel.TIME_STEP);
+    }
+}
+
+void MovementController::normaliseMotors() {
+    for(int i = 0; i < motors.size(); i++) {
+        setMotorPosition(i, 0);
     }
 }
 
@@ -119,7 +128,7 @@ void MovementController::sendAngles(doubledvector anglesOut){
     if(anglesOut.size() > 0){
         using namespace boost::property_tree;
         ptree data;
-        data.put("timestamp",getTime());
+        data.put("timestamp",worldModel.now);
         for(int i=0;i<anglesOut.size();i++){
             ptree sub;
             for(int j=0;j<anglesOut[i].size();j++){
@@ -141,7 +150,7 @@ void MovementController::sendAngles(size_t index, dvector anglesOut){
         using namespace boost::property_tree;
         ptree data;
         data.put("index",std::to_string(index));
-        data.put("timestamp",getTime());
+        data.put("timestamp",worldModel.now);
         for(int j=0;j<anglesOut.size();j++){
             data.put(std::to_string(j),anglesOut[j]);
         }

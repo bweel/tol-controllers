@@ -14,6 +14,8 @@
 #include "BinaryTournamentParentSelection.h"
 #include "RandomSelection.h"
 #include "WorldModel.h"
+#include "MatingStrategy.h"
+#include "MessageHandler.h"
 
 #include "LearningAlgorithm.h"
 #include "HyperNEAT.h"
@@ -37,32 +39,21 @@
 
 using namespace webots;
 
-class RoombotController : public Robot
-{
-    
+class RoombotController : public Robot {
 public:
-    
-    // CONSTANTS
-    
     static const std::string GPS_NAME;              // name of the GPS
     static const std::string RESULTS_DIR;           // results directory
     
-    // PUBLIC METHODS
-    
     RoombotController();             // contructor
-    
     virtual ~RoombotController();    // deconstructor
     
     void run();                 // robot behavior
     
-    
-    
 private:
-    
     // ATTRIBUTES
+    int EVOLVER_CHANNEL = ParametersReader::get<int>("EVOLVER_CHANNEL");
     int CLINIC_CHANNEL = ParametersReader::get<int>("CLINIC_CHANNEL");
     int DEATH_CHANNEL = ParametersReader::get<int>("DEATH_CHANNEL");
-    int EVOLVER_CHANNEL = ParametersReader::get<int>("EVOLVER_CHANNEL");
     int MODIFIER_CHANNEL = ParametersReader::get<int>("MODIFIER_CHANNEL");
     int GENOME_EXCHANGE_CHANNEL = ParametersReader::get<int>("GENOME_EXCHANGE_CHANNEL");
     
@@ -86,24 +77,27 @@ private:
     MatingType matingType;
     DeathType deathType;
     
-    Receiver * deathReceiver;
-    Emitter * genomeEmitter;
-    Receiver * genomeReceiver;
-    
     std::unique_ptr<MovementController> movementController;
     std::unique_ptr<LearningController> learningController;
+    std::unique_ptr<FitnessMeasure> adultFitnessMeasure;
+    
+    std::unique_ptr<MatingStrategy> matingStrategy;
+    
+    MessageHandler evolverMessageHandler;
+    MessageHandler movementMessageHandler;
+    MessageHandler deathMessageHandler;
     
     GPS * gps;                                 // GPS
-    std::unique_ptr<ParentSelectionMechanism> parentSelectionMechanism;
     
     std::vector<Connector *> connectors = std::vector<Connector *>();
     
     // PRIVATE METHODS
+    void initialise();
     void initialiseWorldModel();
     
     Emitter * _init_emitter_clinic(int);
-    Emitter * initialiseEmitter();
-    Receiver * initialiseReceiver(double);
+    Emitter * initialiseEmitter(std::string name);
+    Receiver * initialiseReceiver(std::string name);
     
     GPS * initialiseGPS(double);
 
@@ -130,10 +124,6 @@ private:
     
     void storeProblem(std::string message, std::string phase);
     
-    void storeMatingLocation(std::string partner, std::string location);
-    
-    void storeReproductionLocation(std::string partner, std::string location);
-    
     double getRealFitness(double fitness);
     
     void logGPS();
@@ -151,14 +141,6 @@ private:
     void updateWorldModel();
     
     void askToBeBuiltAgain();
-    
-    void readMateMessage(std::string message, id_t * mateId, double * mateFitness, std::string * mateGenome, std::string * mateMind);
-    
-    void updateOrganismsToMateWithList(id_t mateId, double mateFitness, std::string mateGenome, std::string mateMind);
-    
-    id_t selectMate();
-    
-    int searchForOrganism(id_t organismId);
     
     void sendAdultAnnouncement();
     

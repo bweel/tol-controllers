@@ -235,6 +235,7 @@
 					"../lib/**",
 					/opt/local/include/,
 					../shared/include/,
+					../shared/ParentSelectionMechanisms/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
@@ -276,6 +277,7 @@
 					"../lib/**",
 					/opt/local/include/,
 					../shared/include/,
+					../shared/ParentSelectionMechanisms/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;

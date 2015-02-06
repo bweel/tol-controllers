@@ -1,5 +1,6 @@
 #include "RoombotController.h"
 #include "MatrixGenomeManager.h"
+#include "SpeedFitness.h"
 
 const std::string RoombotController::GPS_NAME = "GPS";
 const std::string RoombotController::RESULTS_DIR = "Results";
@@ -7,15 +8,25 @@ const std::string RoombotController::RESULTS_DIR = "Results";
 
 /********************************************* CONSTRUCTORS *********************************************/
 
-RoombotController::RoombotController() {
+RoombotController::RoombotController()
+{
+    std::cout << "[" << worldModel.now << "] " << worldModel.robotName << ": Starting Controller"  << std::endl;
 }
 
 void RoombotController::initialise() {
-    std::cout << "[" << getTime() << "] " << getName() << ": " << "Starting Controller, timestep: " << worldModel.TIME_STEP  << std::endl;
+    std::cout << "[" << worldModel.now << "] " << worldModel.robotName << ": Initialising"  << std::endl;
     initialiseWorldModel();
     
+    evolverMessageHandler = MessageHandler(initialiseEmitter(EVOLVER_EMITTER_NAME),initialiseReceiver(EVOLVER_RECEIVER_NAME));
+    deathMessageHandler = MessageHandler(NULL,initialiseReceiver(ROOMBOT_DEATH_RECEIVER_NAME));
+    movementMessageHandler = MessageHandler(initialiseEmitter(ROOMBOT_EMITTER_NAME),initialiseReceiver(ROOMBOT_RECEIVER_NAME));
+    
+    
+    evolverMessageHandler.setChannel(EVOLVER_CHANNEL);
+    movementMessageHandler.setChannel(worldModel.organismId);
+    deathMessageHandler.setChannel(DEATH_CHANNEL);
+    
     gps = worldModel.iAmRoot() ? initialiseGPS(worldModel.TIME_STEP) : NULL;
-    parentSelectionMechanism = ParentSelectionMechanism::getParentSelectionMechanism();
     
     if(DEATH_SELECTION == "EVOLVER") {
         deathType = DEATH_SELECTION_BY_EVOLVER;
@@ -24,51 +35,47 @@ void RoombotController::initialise() {
     } else {
         std::cerr << "Unknown Death Selection Mechanism: " << DEATH_SELECTION << std::endl;
     }
-    
-    deathReceiver = getReceiver(ROOMBOT_DEATH_RECEIVER_NAME);
-    deathReceiver->setChannel(DEATH_CHANNEL);
-    deathReceiver->enable(worldModel.TIME_STEP);
-    while (deathReceiver->getQueueLength() > 0)
-    {
-        deathReceiver->nextPacket();
-    }
-    
-    genomeReceiver = getReceiver(ROOMBOT_GENOME_RECEIVER_NAME);
-    genomeEmitter = getEmitter(ROOMBOT_GENOME_EMITTER_NAME);
-    
-    genomeReceiver->disable(); // always disabled for non-root modules, will become enabled for the root when organism becomes fertile
-    
+
     // lock connectors
     boost::property_tree::ptree connectorsNode = worldModel.parameters.get_child("Robot." + getName() + ".Connectors");
     BOOST_FOREACH(boost::property_tree::ptree::value_type &v, connectorsNode)
     {
+        std::cout << "[" << worldModel.now << "] " << worldModel.robotName << ": Getting Connector: " << v.second.data()  << std::endl;
         Connector * connector = getConnector(v.second.data());
-        connector->lock();
-        connectors.push_back(connector);
+        if(!connector) {
+            throw std::runtime_error("Device Not Found: "+to_string(v.second.data()));
+        } else {
+            connector->lock();
+            connectors.push_back(connector);
+        }
     }
+    
+    movementController = std::unique_ptr<MovementController>(new MovementController(worldModel, movementMessageHandler, this));
+    movementController->initialise();
 
-    Emitter *emitter = initialiseEmitter();
-    Receiver *receiver = initialiseReceiver(worldModel.TIME_STEP);
-    MessageHandler movementMessagesHandler(emitter,receiver);
-    movementMessagesHandler.setChannel(worldModel.organismId);
-    
-    movementController = std::unique_ptr<MovementController>(new MovementController(worldModel, movementMessagesHandler));
-    
     if (worldModel.iAmRoot()) {
         learningController = std::unique_ptr<LearningController>(new LearningController(worldModel));
+        adultFitnessMeasure = std::unique_ptr<FitnessMeasure>(new SpeedFitness(worldModel));
+        
+        Emitter *genomeEmitter = initialiseEmitter(ROOMBOT_GENOME_EMITTER_NAME);
+        Receiver *genomeReceiver = initialiseReceiver(ROOMBOT_GENOME_RECEIVER_NAME);
+        MessageHandler matingMessagesHandler(genomeEmitter,genomeReceiver);
         
         if (matingType == MATING_SELECTION_BY_EVOLVER)
         {
-            genomeEmitter->setRange(-1);
-            genomeEmitter->setChannel(EVOLVER_CHANNEL);
+            matingMessagesHandler.getEmitter()->setRange(-1);
         }
         else if (matingType == MATING_SELECTION_BY_ORGANISMS)
         {
-            genomeEmitter->setRange(ORGANISM_GENOME_EMITTER_RANGE);
-            genomeEmitter->setChannel(GENOME_EXCHANGE_CHANNEL);
+            matingMessagesHandler.getEmitter()->setRange(ORGANISM_GENOME_EMITTER_RANGE);
+            matingMessagesHandler.setEmitterChannel(GENOME_EXCHANGE_CHANNEL);
         }
-        genomeReceiver->setChannel(GENOME_EXCHANGE_CHANNEL);    // USED ONLY FOR DISTRIBUTED REPRODUCTION
+        matingMessagesHandler.setReceiverChannel(GENOME_EXCHANGE_CHANNEL);    // USED ONLY FOR DISTRIBUTED REPRODUCTION
+        
+        matingStrategy = MatingStrategy::getMatingStrategy(worldModel, matingMessagesHandler, evolverMessageHandler);
     }
+    
+    std::cout << "[" << worldModel.now << "] " << worldModel.robotName << ": " << "Finished initialising" << std::endl;
 }
 
 
@@ -79,32 +86,38 @@ RoombotController::~RoombotController()
 void RoombotController::initialiseWorldModel() {
     // read parameters tree
     worldModel.initialiseParameters(getControllerArguments());
+    worldModel.TIME_STEP = getBasicTimeStep();
     worldModel.projectPath = getProjectPath();
     worldModel.robotType = worldModel.parameters.get<int>("Robot." + getName() + ".Type");
+    worldModel.now = getTime();
+    
+    worldModel.fertile = false;
+    worldModel.adult = false;
+    worldModel.adultFitness = 0;
+    
 }
 
 /********************************************* MINOR FUNCTIONS *********************************************/
 
 // emitter initialization
-Emitter * RoombotController::initialiseEmitter()
+Emitter * RoombotController::initialiseEmitter(std::string name)
 {
-    Emitter * emitter = getEmitter(ROOMBOT_EMITTER_NAME);
+    Emitter * emitter = getEmitter(name);
     if (!emitter) {
-        throw std::runtime_error("Device Not Found");
+        throw std::runtime_error("Device Not Found: "+to_string(name));
     }
-//    emitter->setChannel(channel);
+    
     return emitter;
 }
 
 // receiver initialization
-Receiver * RoombotController::initialiseReceiver(double time_step)
+Receiver * RoombotController::initialiseReceiver(std::string name)
 {
-    Receiver * receiver = getReceiver(ROOMBOT_RECEIVER_NAME);
+    Receiver * receiver = getReceiver(name);
     if (!receiver) {
-        throw std::runtime_error("Device Not Found");
+        throw std::runtime_error("Device Not Found: "+to_string(name));
     }
-    receiver->enable(time_step);
-//    receiver->setChannel(channel);
+    receiver->enable(worldModel.TIME_STEP);
 
     return receiver;
 }
@@ -115,7 +128,7 @@ GPS * RoombotController::initialiseGPS(double time_step)
     GPS * gps = getGPS(RoombotController::GPS_NAME);
     
     if (!gps) {
-        throw std::runtime_error("Device Not Found");
+        throw std::runtime_error("Device Not Found: "+to_string(RoombotController::GPS_NAME));
     }
     
     gps->enable(time_step);
@@ -165,35 +178,6 @@ void RoombotController::storeProblem(std::string message, std::string phase)
     problemFile.close();
 }
 
-void RoombotController::storeMatingLocation(std::string partner, std::string location)
-{
-    ofstream matingLocationFile;
-    matingLocationFile.open(RESULTS_PATH + worldModel.simulationDateAndTime + "/mating-locations.txt", ios::app);
-    matingLocationFile << getTime() << " " << getName() << " mated with " << partner << " at " << location << std::endl;
-    matingLocationFile.close();
-}
-
-void RoombotController::storeReproductionLocation(std::string partner, std::string location)
-{
-    ofstream reproductionLocationFile;
-    reproductionLocationFile.open(RESULTS_PATH + worldModel.simulationDateAndTime + "/reproduction-locations.txt", ios::app);
-    reproductionLocationFile << getTime() << " " << getName() << " chose as partner: " << partner << " at " << location << std::endl;
-    reproductionLocationFile.close();
-}
-
-void RoombotController::logNumberOfReceivedGenomes()
-{
-    ofstream file;
-    file.open(RESULTS_PATH + worldModel.simulationDateAndTime + "/organism_" + std::to_string(worldModel.organismId) + "/received_genomes.txt", ios::app);
-    file << getTime() << " " << organismsToMateWith.size() << " ";
-    for (int i = 0; i < organismsToMateWith.size(); i++)
-    {
-        file << organismsToMateWith[i].getName() << " ";
-    }
-    file << std::endl;
-    file.close();
-}
-
 
 bool RoombotController::allConnectorsOK()
 {
@@ -227,35 +211,29 @@ void RoombotController::disableAllConnectors()
 
 void RoombotController::sendAdultAnnouncement()
 {
-    int backupChannel = _emitter->getChannel();
-    _emitter->setChannel(EVOLVER_CHANNEL);
     std::string message = "[ADULT_ANNOUNCEMENT]";
-    message = MessagesManager::add(message, "ID", std::to_string(organismId));
-    _emitter->send(message.c_str(), (int)message.length()+1);
-    _emitter->setChannel(backupChannel);
+    message = MessagesManager::add(message, "ID", std::to_string(worldModel.organismId));
+    
+    evolverMessageHandler.send(message);
 }
 
 
 void RoombotController::sendFertileAnnouncement()
 {
-    int backupChannel = _emitter->getChannel();
-    _emitter->setChannel(EVOLVER_CHANNEL);
     std::string message = "[FERTILE_ANNOUNCEMENT]";
-    message = MessagesManager::add(message, "ID", std::to_string(organismId));
-    _emitter->send(message.c_str(), (int)message.length()+1);
-    _emitter->setChannel(backupChannel);
+    message = MessagesManager::add(message, "ID", std::to_string(worldModel.organismId));
+
+    evolverMessageHandler.send(message);
 }
 
 
 void RoombotController::sendFitnessUpdateToEvolver(double fitness)
 {
-    int backupChannel = _emitter->getChannel();
-    _emitter->setChannel(EVOLVER_CHANNEL);
     std::string message = "[FITNESS_UPDATE]";
-    message = MessagesManager::add(message, "ID", std::to_string(organismId));
+    message = MessagesManager::add(message, "ID", std::to_string(worldModel.organismId));
     message = MessagesManager::add(message, "FITNESS", std::to_string(fitness));
-    _emitter->send(message.c_str(), (int)message.length()+1);
-    _emitter->setChannel(backupChannel);
+    
+    evolverMessageHandler.send(message);
 }
 
 
@@ -285,7 +263,7 @@ bool RoombotController::checkLocks()
         std::cout << getName() << " detected connectors problem" << std::endl;
         
         std::string message = "[CONNECTORS_PROBLEM_MESSAGE]";
-        _emitter->send(message.c_str(), (int)message.length()+1);
+        movementMessageHandler.send(message);
         return false;
     }
     
@@ -296,25 +274,25 @@ bool RoombotController::checkLocks()
             return connectorsOK;
         }
         
-        while (_receiver->getQueueLength() > 0)
+        while (movementMessageHandler.hasMessage())
         {
-            std::string message = (char*)_receiver->getData();
+            std::string message = movementMessageHandler.receive();
             
             if (message.compare("[CONNECTORS_PROBLEM_MESSAGE]") == 0)
             {
                 std::cout << getName() << " received connectors problem message" << std::endl;
                 
-                if (isRoot())
+                if (worldModel.iAmRoot())
                 {
                     std::cout << getName() << " forwarded connectors problem" << std::endl;
                     
                     std::string message = "[CONNECTORS_PROBLEM_MESSAGE]";
-                    _emitter->send(message.c_str(), (int)message.length()+1);
+                    movementMessageHandler.send(message);
                 }
                 return false;
             }
             
-            _receiver->nextPacket();
+            movementMessageHandler.next();
         }
     }
     
@@ -326,11 +304,10 @@ bool RoombotController::checkFallenInside()
 {
     bool positionOK = true;
     
-    if (isRoot())
+    if (worldModel.iAmRoot())
     {
-        const double * position = _gps->getValues();
-        double x = position[0];
-        double z = position[2];
+        double x = worldModel.position.x;
+        double z = worldModel.position.z;
         double distanceFromCenter = sqrt((x*x) + (z*z));
         
         if (distanceFromCenter < 2)
@@ -338,31 +315,28 @@ bool RoombotController::checkFallenInside()
             std::cout << getName() << " detected fallen into cylinder problem" << std::endl;
             
             std::string message = "[CYLINDER_PROBLEM_MESSAGE]";
-            _emitter->send(message.c_str(), (int)message.length()+1);
+            movementMessageHandler.send(message);
             return false;
         }
     }
     else
     {
         double startingTime = getTime();
-        while (getTime() - startingTime < 1)
-        {
+        while (getTime() - startingTime < 1) {
             if(step(worldModel.TIME_STEP) == -1) {
                 return positionOK;
             }
             
-            while(_receiver->getQueueLength() > 0)
-            {
-                std::string message = (char*)_receiver->getData();
+            while(movementMessageHandler.hasMessage()) {
+                std::string message = movementMessageHandler.receive();
                 
-                if (message.compare("[CYLINDER_PROBLEM_MESSAGE]") == 0)
-                {
+                if (message.compare("[CYLINDER_PROBLEM_MESSAGE]") == 0) {
                     std::cout << getName() << " received fallen into cylinder problem" << std::endl;
                     
                     return false;
                 }
                 
-                _receiver->nextPacket();
+                movementMessageHandler.next();
             }
         }
     }
@@ -373,14 +347,15 @@ bool RoombotController::checkFallenInside()
 
 void RoombotController::askToBeBuiltAgain()
 {
-    _emitter->setChannel(CLINIC_CHANNEL);
+    evolverMessageHandler.setChannel(CLINIC_CHANNEL);
     
     std::string message = "[REBUILD_MESSAGE]";
-    message = MessagesManager::add(message, "ID", std::to_string(organismId));
-    message = MessagesManager::add(message, "GENOME", genome);
-    message = MessagesManager::add(message, "MIND", mindGenome);
+    message = MessagesManager::add(message, "ID", std::to_string(worldModel.organismId));
+    message = MessagesManager::add(message, "GENOME", worldModel.bodyGenome);
+    message = MessagesManager::add(message, "MIND", worldModel.mindGenome);
     
-    _emitter->send(message.c_str(), (int)message.length()+1);
+    evolverMessageHandler.send(message);
+    evolverMessageHandler.setChannel(EVOLVER_CHANNEL);
 }
 
 
@@ -389,37 +364,31 @@ void RoombotController::askToBeBuiltAgain()
 
 void RoombotController::life()
 {
-    worldModel.lifeStartingTime = getTime();
+    worldModel.lifetimeStart = getTime();
     
     // ROOT MODULES BEHAVIOR
-    
-    if (isRoot())
+    if (worldModel.iAmRoot())
     {
         
         /***********************************
          *********** PREPARATION ***********
          ***********************************/
-        
 #ifdef DEBUG_CONTROLLER
         std::cout << "[" << getTime() << "] " << getName() << ": We are root initialize things" << std::endl;
 #endif
-        
         // two first steps (one more than non-root modules)
         if (step(worldModel.TIME_STEP) == -1)
             return;
         if (step(worldModel.TIME_STEP) == -1)
             return;
         
-        
         // set variables for cycle
-        bool flag = false;
-        std::pair<double, std::string> fitness(0.0, "");
         double lastFitnessSent = 0;
         double lastFitnessUpdate = 0;
         double lastMating = 0;
         double lastEvolverUpdate = 0;
         worldModel.lifetimeStart = getTime();   // remember offset for time calculations
-        _position_start = getGPSPosition();
+        adultFitnessMeasure->markStart();
         
         
         /************************************
@@ -430,18 +399,17 @@ void RoombotController::life()
         {
             updateWorldModel();
             
-            
             /********************************************
              ***** CHECK DEATH BY EVOLVER SELECTION *****
              ********************************************/
             
             if (deathType == DEATH_SELECTION_BY_EVOLVER)
             {
-                while(deathReceiver->getQueueLength() > 0)
+                while(deathMessageHandler.hasMessage())
                 {
-                    std::string message = (char*)deathReceiver->getData();
-                    deathReceiver->nextPacket();
-                    if (message.compare(std::to_string(organismId)) == 0 )
+                    std::string message = deathMessageHandler.receive();
+                    deathMessageHandler.next();
+                    if (message.compare(std::to_string(worldModel.organismId)) == 0 )
                     {
                         return; // end mature life (so die)
                     }
@@ -455,7 +423,7 @@ void RoombotController::life()
             
             if (deathType == DEATH_SELECTION_BY_TIME_TO_LIVE)
             {
-                if (now - worldModel.lifeStartingTime > timeToLive)
+                if (worldModel.now - worldModel.lifetimeStart > worldModel.timeToLive)
                 {
                     return; // end mature life (so die)
                 }
@@ -466,15 +434,12 @@ void RoombotController::life()
              ************* CHECK ADULT *************
              ***************************************/
             
-            if (!adult)
+            if (!worldModel.adult && worldModel.now - worldModel.lifetimeStart > worldModel.infancyDuration)
             {
-                if (now - worldModel.lifeStartingTime > infancyDuration)
+                worldModel.adult = true;
+                if (worldModel.iAmRoot())
                 {
-                    adult = true;
-                    if (isRoot())
-                    {
-                        sendAdultAnnouncement();
-                    }
+                    sendAdultAnnouncement();
                 }
             }
             
@@ -485,29 +450,20 @@ void RoombotController::life()
             
             if (matingType == MATING_SELECTION_BY_ORGANISMS)
             {
-                if (!fertile)
+                if (!worldModel.fertile)
                 {
-                    const double * position = _gps->getValues();
-                    double x = position[0];
-                    double z = position[2];
+                    double x = worldModel.position.x;
+                    double z = worldModel.position.y;
                     double distanceFromCenter = sqrt((x*x) + (z*z));
                     
-                    if (distanceFromCenter > FERTILITY_DISTANCE)
-                    {
-                        fertile = true;
-                        if (isRoot())
-                        {
-                            sendFertileAnnouncement();
-                        }
+                    if (distanceFromCenter > FERTILITY_DISTANCE) {
                         
-                        genomeReceiver->enable(worldModel.TIME_STEP);
-                        while (genomeReceiver->getQueueLength() > 0)
-                        {
-                            genomeReceiver->nextPacket();
-                        }
+                        worldModel.fertile = true;
+                        
+                        sendFertileAnnouncement();
                         
                         storeFertilityOnFile();
-                        std::cout << organismId << " became fertile" << std::endl;
+                        std::cout << worldModel.organismId << " became fertile" << std::endl;
                     }
                 }
             }
@@ -516,37 +472,25 @@ void RoombotController::life()
             /**************************
              ***** UPDATE FITNESS *****
              **************************/
-            
-            if (adult)
+            if (worldModel.adult && worldModel.now - lastFitnessUpdate > UPDATE_FITNESS_INTERVAL)
             {
-                if (now - lastFitnessUpdate > UPDATE_FITNESS_INTERVAL)
-                {
-                    // compute fitness
-                    _time_end = getTime();
-                    _position_end = _get_gps();
-                    fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));
-                    
-                    // reset time, position and lastFitnessSent for next fitness evaluation
-                    _time_start = getTime();
-                    _position_start = _get_gps();
-                    lastFitnessUpdate = getTime();
-                }
+                adultFitnessMeasure->markEnd();
+                worldModel.adultFitness = adultFitnessMeasure->computeFitness();
+                
+                adultFitnessMeasure->markStart();
+                lastFitnessUpdate = worldModel.now;
             }
             
             
             /*************************************
              ***** UPDATE FITNESS IN EVOLVER *****
              *************************************/
-            
-            if (matingType == MATING_SELECTION_BY_ORGANISMS)
+            if (matingType == MATING_SELECTION_BY_ORGANISMS && worldModel.adult)
             {
-                if (adult)
+                if (worldModel.now - lastEvolverUpdate > UPDATE_FITNESS_IN_EVOLVER)
                 {
-                    if (now - lastEvolverUpdate > UPDATE_FITNESS_IN_EVOLVER)
-                    {
-                        sendFitnessUpdateToEvolver(fitness.first);
-                        lastEvolverUpdate = getTime();
-                    }
+                    sendFitnessUpdateToEvolver(worldModel.adultFitness);
+                    lastEvolverUpdate = getTime();
                 }
             }
             
@@ -557,22 +501,23 @@ void RoombotController::life()
             
             if (matingType == MATING_SELECTION_BY_EVOLVER)
             {
-                if (adult)
+                if (worldModel.adult)
                 {
-                    if (now - lastFitnessSent > SEND_FITNESS_TO_EVOLVER_INTERVAL)
+                    if (worldModel.now - lastFitnessSent > SEND_FITNESS_TO_EVOLVER_INTERVAL)
                     {
                         // send genome and fitness to evolver
                         string message = "[GENOME_SPREAD_MESSAGE]";
-                        message = MessagesManager::add(message, "ID", std::to_string(organismId));
-                        message = MessagesManager::add(message, "FITNESS", std::to_string(fitness.first));
-                        message = MessagesManager::add(message, "GENOME", genome);
-                        message = MessagesManager::add(message, "MIND", mindGenome);
-                        genomeEmitter->send(message.c_str(), (int)message.length()+1);
+                        message = MessagesManager::add(message, "ID", std::to_string(worldModel.organismId));
+                        message = MessagesManager::add(message, "FITNESS", std::to_string(worldModel.adultFitness));
+                        message = MessagesManager::add(message, "GENOME", worldModel.bodyGenome);
+                        message = MessagesManager::add(message, "MIND", worldModel.mindGenome);
+                        
+                        evolverMessageHandler.send(message);
                         
                         // store in file
-                        storeMatureLifeFitnessIntoFile(fitness.first);
+                        storeMatureLifeFitnessIntoFile(worldModel.adultFitness);
                         
-                        lastFitnessSent = getTime();
+                        lastFitnessSent = worldModel.now;
                     }
                 }
             }
@@ -581,8 +526,14 @@ void RoombotController::life()
             /***********************************************
              ***** MATING USING SELECTION BY ORGANISMS *****
              ***********************************************/
-            
             matingStrategy->findMates();
+            if (worldModel.adult && worldModel.fertile) {
+                if (worldModel.now - lastMating > INDIVIDUAL_MATING_TIME)
+                {
+                    matingStrategy->mate();
+                    lastMating = worldModel.now;
+                }
+            }
             
             /*******************
              *** STEP MOTORS ***
@@ -611,7 +562,6 @@ void RoombotController::life()
         
         while (step(worldModel.TIME_STEP) != -1)
         {
-            
             updateWorldModel();
             /********************************************
              ***** CHECK DEATH BY EVOLVER SELECTION *****
@@ -619,11 +569,11 @@ void RoombotController::life()
             
             if (deathType == DEATH_SELECTION_BY_EVOLVER)
             {
-                while (deathReceiver->getQueueLength() > 0)
+                while(deathMessageHandler.hasMessage())
                 {
-                    std::string message = (char*)deathReceiver->getData();
-                    deathReceiver->nextPacket();
-                    if (message.compare(std::to_string(organismId)) == 0 )
+                    std::string message = deathMessageHandler.receive();
+                    deathMessageHandler.next();
+                    if (message.compare(std::to_string(worldModel.organismId)) == 0 )
                     {
                         return; // end mature life (so die)
                     }
@@ -637,7 +587,7 @@ void RoombotController::life()
             
             else if (deathType == DEATH_SELECTION_BY_TIME_TO_LIVE)
             {
-                if (getTime() - lifeStartingTime > timeToLive)
+                if (worldModel.now - worldModel.lifetimeStart > worldModel.timeToLive)
                 {
                     return; // and die
                 }
@@ -659,10 +609,6 @@ void RoombotController::life()
 
 void RoombotController::death()
 {
-    if(isRoot()) {
-        genomeReceiver->disable();
-    }
-    
     for(int i = 0; i < connectors.size(); i++) {
         connectors[i]->unlock();
     }
@@ -670,29 +616,23 @@ void RoombotController::death()
     double startingTime = getTime();
     while (getTime() - startingTime < 3)
     {
-        for(int i = 0; i < numMotors; i++) {
-            _set_motor_position(i, 0);
-        }
-        
+        movementController->normaliseMotors();
         if (step(worldModel.TIME_STEP) == -1) {
-            return;Ï
+            return;
         }
     }
     
-    _emitter->setChannel(EVOLVER_CHANNEL);
     std::string message = "[DEATH_ANNOUNCEMENT_MESSAGE]";
-    message = MessagesManager::add(message, "ID", std::to_string(organismId));
-    _emitter->send(message.c_str(), (int)message.length()+1);
+    message = MessagesManager::add(message, "ID", std::to_string(worldModel.organismId));
+    evolverMessageHandler.send(message);
     
-    _emitter->setChannel(MODIFIER_CHANNEL);
+    evolverMessageHandler.setChannel(MODIFIER_CHANNEL);
     message = "[TO_RESERVE_MESSAGE]";
     message = MessagesManager::add(message, "NAME", getName());
-    _emitter->send(message.c_str(), (int)message.length()+1);
+    evolverMessageHandler.send(message);
     
     while (true) {
-        for(int i = 0; i < numMotors; i++) {
-            _set_motor_position(i, 0);
-        }
+        movementController->normaliseMotors();
         if (step(worldModel.TIME_STEP) == -1) {
             return;
         }
@@ -710,17 +650,20 @@ void RoombotController::updateWorldModel() {
 
 void RoombotController::run()
 {
+    // wait a timestep so we can debug
     std::string phase = "start";
     try
     {
-        std::string phase = "initialisation";
+        phase = "initialisation";
         initialise();
+        
+        updateWorldModel();
         
         // check if all modules are correctly locked to each other
         phase = "checking locks";
         if (!checkLocks())
         {
-            if (isRoot())
+            if (worldModel.iAmRoot())
             {
                 askToBeBuiltAgain();
                 storeRebuild("connection problem");
@@ -729,6 +672,7 @@ void RoombotController::run()
             death();
             return;
         }
+        
         
         phase = "waiting";
         // wait for module to not move after sliding down from clinic
@@ -743,9 +687,10 @@ void RoombotController::run()
         
         phase = "checking inside cylinder";
         // check if it fell inside the cylinder
+        updateWorldModel();
         if (checkInsideCylinder && !checkFallenInside())
         {
-            if (isRoot())
+            if (worldModel.iAmRoot())
             {
                 askToBeBuiltAgain();
                 storeRebuild("fallen into cylinder");
@@ -758,6 +703,7 @@ void RoombotController::run()
         std::cout << getName() << " STARTS LIFE" << std::endl;
         
         phase = "life";
+        updateWorldModel();
         life();
         
         std::cout << getName() << " STARTS DEATH" << std::endl;

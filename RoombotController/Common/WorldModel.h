@@ -17,6 +17,7 @@
 
 #include "Defines.h"
 #include "JGTL/JGTL_Vector3.h"
+#include "Logger.h"
 
 class WorldModel {
 public:
@@ -27,16 +28,17 @@ public:
     unsigned int numMotors;
     unsigned int robotType;
     
-    unsigned int timeToLive;
     unsigned int organismSize;
+    double timeToLive;
+    double infancyDuration;
     
-    double _time_start;                         // time - start
     double lifetimeStart;                        // time - offset
     double now;
-    double _time_end;                           // time - end
     
     bool fertile;
     bool adult;
+    
+    double adultFitness;
     
     std::string robotName;
     std::string simulationDateAndTime;
@@ -67,7 +69,8 @@ public:
         
         std::istringstream(robotName.substr(robotName.find("_") + 1, robotName.length())) >> organismId;
         
-        timeToLive              = parameters.get<unsigned int>("Algorithm.Time_To_Live");
+        timeToLive              = parameters.get<double>("Algorithm.Time_To_Live");
+        infancyDuration         = parameters.get<double>("Algorithm.Infancy_Duration");
         simulationDateAndTime   = parameters.get<std::string>("Simulation");
         
         parametersPath          = parameters.get<std::string>("Algorithm.Parameters");
@@ -78,6 +81,22 @@ public:
         // GenomeTransmition
         bodyGenome              = parameters.get<std::string>("Genome");
         mindGenome              = parameters.get<std::string>("MindGenome");
+        
+        log4cpp::Category &logger = Logger::getInstance("WorldModel");
+        
+        logger.debugStream() << "Loaded parameters:";
+        logger.debugStream() << "Robot.Name: " << robotName.c_str();
+        logger.debugStream() << "Robot.Modules_#: " << organismSize;
+        logger.debugStream() << "OrganismId: " << organismId;
+        logger.debugStream() << "Robot.Motor.Number: " << numMotors;
+        logger.debugStream() << "Algorithm.Time_To_Live: " << timeToLive;
+        logger.debugStream() << "Algorithm.Infancy_Duration: " << infancyDuration;
+        logger.debugStream() << "Simulation: " << simulationDateAndTime;
+        logger.debugStream() << "Algorithm.Parameters: " << parametersPath;
+        logger.debugStream() << "Algorithm.Save: " << savePath;
+        logger.debugStream() << "Algorithm.LogDir: " << logDirectory;
+        logger.debugStream() << "Genome: " << bodyGenome;
+        logger.debugStream() << "MindGenome: " << mindGenome;
     }
 };
 

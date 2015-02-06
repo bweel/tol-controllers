@@ -10,15 +10,18 @@
 #include "HyperNEATFitness.h"
 #include "SplineNEATFitness.h"
 #include "RLPowerFitness.h"
+#include "SpeedFitness.h"
 
 std::unique_ptr<FitnessMeasure> FitnessMeasure::getFitnessMeasure(std::string learningAlgorithmType, WorldModel &worldModel) {
     if(learningAlgorithmType == "HyperNEAT") {
         return std::unique_ptr<FitnessMeasure>(new HyperNEATFitness(worldModel));
     } else if(learningAlgorithmType == "SplineNEAT") {
         return std::unique_ptr<FitnessMeasure>(new SplineNEATFitness(worldModel));
-    } else if(learningAlgorithmType == "HyperNEAT") {
+    } else if(learningAlgorithmType == "RLPower") {
         return std::unique_ptr<FitnessMeasure>(new RLPowerFitness(worldModel));
+    } else if(learningAlgorithmType == "Speed") {
+        return std::unique_ptr<FitnessMeasure>(new SpeedFitness(worldModel));
     } else {
-        throw CREATE_LOCATEDEXCEPTION_INFO("Unsupported Fitness Measure");
+        throw CREATE_LOCATEDEXCEPTION_INFO("Unsupported Fitness Measure: "+to_string(learningAlgorithmType));
     }
 }

@@ -17,9 +17,9 @@
 const int LearningController::GPS_LOG_PERIOD = 50;
 
 LearningController::LearningController(WorldModel &wm) :
-    worldModel(wm)
+    worldModel(wm),
+    logger(Logger::getInstance("LearningController"))
 {
-    
 }
 
 LearningController::~LearningController() {
@@ -27,9 +27,15 @@ LearningController::~LearningController() {
 
 void LearningController::initialise() {
     // Learning
+    logger.debugStream() << worldModel.now << " " << worldModel.robotName << ": Initialising Learning Controller";
+    
     std::string learningAlgorithmType = worldModel.parameters.get<std::string>("Algorithm.Type");
     unsigned int infancyEvaluations = worldModel.parameters.get<unsigned int>("Algorithm.Evaluations");
     unsigned int infancyDuration = worldModel.parameters.get<unsigned int>("Algorithm.Infancy_Duration");
+    
+    logger.debugStream() << worldModel.now << " " << worldModel.robotName << ": Algorithm Type: " << learningAlgorithmType;
+    logger.debugStream() << worldModel.now << " " << worldModel.robotName << ": Algorithm Evaluations: " << infancyEvaluations;
+    logger.debugStream() << worldModel.now << " " << worldModel.robotName << ": Algorithm Infancy Duration: " << infancyDuration;
     
     double singleEvaluationTime = infancyDuration / infancyEvaluations;
     double timeStep = worldModel.TIME_STEP / 1000.0;

@@ -14,6 +14,11 @@ using namespace webots;
 
 class MessageHandler {
 public:
+    MessageHandler() {
+        emitter = NULL;
+        receiver = NULL;
+    }
+    
     MessageHandler(Emitter *em, Receiver *recv) :
         emitter(em),
         receiver(recv)
@@ -21,37 +26,55 @@ public:
     }
     
     void send(std::string message){
-        emitter->send(message.c_str(), message.length()+1);
+        if(emitter)
+            emitter->send(message.c_str(), message.length()+1);
     }
     
     std::string receive() {
-        std::string message((char*)receiver->getData());
-        return message;
+        if(receiver) {
+            std::string message((char*)receiver->getData());
+            return message;
+        } else {
+            return NULL;
+        }
     }
     
     void next() {
-        receiver->nextPacket();
+        if(receiver) {
+            receiver->nextPacket();
+        }
     }
     
     bool hasMessage() {
-        return receiver->getQueueLength() > 0;
+        if(receiver) {
+            return receiver->getQueueLength() > 0;
+        } else {
+            return false;
+        }
     }
     
     void setChannel(int channel) {
-        emitter->setChannel(channel);
-        receiver->setChannel(channel);
+        if(emitter) {
+            emitter->setChannel(channel);
+        }
+        if(receiver) {
+            receiver->setChannel(channel);
+        }
     }
     
     void setEmitterRange(double range) {
-        emitter->setRange(range);
+        if(emitter)
+            emitter->setRange(range);
     }
 
     void setEmitterChannel(int channel) {
-        emitter->setChannel(channel);
+        if(emitter)
+            emitter->setChannel(channel);
     }
     
     void setReceiverChannel(int channel) {
-        receiver->setChannel(channel);
+        if(receiver)
+            receiver->setChannel(channel);
     }
     
     Emitter *getEmitter() {

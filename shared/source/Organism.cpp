@@ -218,9 +218,9 @@ void BuildableOrganism::writeControllerArgsFile(std::string simulationDateAndTim
     child.put("Infancy_Duration",INFANCY_DURATION);
     child.put("Waiting_Time", ROOMBOT_WAITING_TIME);
     
-    int noise = 0;
+    double noise = 0;
     if(TIME_TO_LIVE_NOISE > 0) {
-        noise = Utils::Random::getInstance()->uniform_integer(-TIME_TO_LIVE_NOISE,TIME_TO_LIVE_NOISE);
+        noise = Utils::Random::getInstance()->uniform_real() * TIME_TO_LIVE_NOISE;
     }
     child.put("Time_To_Live", TIME_TO_LIVE + noise);
 

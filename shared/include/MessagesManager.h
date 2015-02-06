@@ -3,7 +3,6 @@
 
 
 class MessagesManager {
-    
 public:
     
     static std::string get(std::string message, std::string field)

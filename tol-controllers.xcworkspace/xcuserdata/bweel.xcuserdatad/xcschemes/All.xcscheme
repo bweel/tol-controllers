@@ -43,20 +43,6 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "61AD162A1897F88A003D24DE"
-               BuildableName = "EnvironmentModifierController"
-               BlueprintName = "EnvironmentModifierController"
-               ReferencedContainer = "container:EnvironmentModifierController/EnvironmentModifierController.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "61AD162A1897F88A003D24DE"
                BuildableName = "EvolverController"
                BlueprintName = "EvolverController"
                ReferencedContainer = "container:EvolverController/EvolverController.xcodeproj">
@@ -84,10 +70,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "61AD162A1897F88A003D24DE"
+               BuildableName = "EnvironmentModifierController"
+               BlueprintName = "EnvironmentModifierController"
+               ReferencedContainer = "container:EnvironmentModifierController/Environment.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "61854A5219235CD900D24E32"
                BuildableName = "ScreenshotController"
                BlueprintName = "ScreenshotController"
-               ReferencedContainer = "container:ScreenshotController/ScreenshotController.xcodeproj">
+               ReferencedContainer = "container:ScreenshotController/External.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -101,7 +101,21 @@
                BlueprintIdentifier = "618F2E141934C5CA001500A0"
                BuildableName = "TimingController"
                BlueprintName = "TimingController"
-               ReferencedContainer = "container:ScreenshotController/ScreenshotController.xcodeproj">
+               ReferencedContainer = "container:ScreenshotController/External.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A89A4B1B1955BD7F008D7E2E"
+               BuildableName = "DeathController"
+               BlueprintName = "DeathController"
+               ReferencedContainer = "container:RoombotController/RoombotController.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -113,6 +127,15 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "61EBFBC319224330000E6D71"
+            BuildableName = "libshared.a"
+            BlueprintName = "shared"
+            ReferencedContainer = "container:shared/shared.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -123,6 +146,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "61EBFBC319224330000E6D71"
+            BuildableName = "libshared.a"
+            BlueprintName = "shared"
+            ReferencedContainer = "container:shared/shared.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -132,6 +164,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "61EBFBC319224330000E6D71"
+            BuildableName = "libshared.a"
+            BlueprintName = "shared"
+            ReferencedContainer = "container:shared/shared.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

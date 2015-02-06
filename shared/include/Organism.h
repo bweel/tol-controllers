@@ -27,10 +27,10 @@ public:
     
 protected:
     
-    int INFANCY_DURATION = ParametersReader::get<int>("INFANCY_DURATION");
-    int ROOMBOT_WAITING_TIME = ParametersReader::get<int>("ROOMBOT_WAITING_TIME");
-    int TIME_TO_LIVE = ParametersReader::get<int>("TIME_TO_LIVE");
-    int TIME_TO_LIVE_NOISE = ParametersReader::get<int>("TIME_TO_LIVE_NOISE");
+    double INFANCY_DURATION = ParametersReader::get<double>("INFANCY_DURATION");
+    double ROOMBOT_WAITING_TIME = ParametersReader::get<double>("ROOMBOT_WAITING_TIME");
+    double TIME_TO_LIVE = ParametersReader::get<double>("TIME_TO_LIVE");
+    double TIME_TO_LIVE_NOISE = ParametersReader::get<double>("TIME_TO_LIVE_NOISE");
     int EVALUATIONS = ParametersReader::get<int>("EVALUATIONS");
 	
     id_t id;                            //Unique id for this instance of organism.

@@ -26,7 +26,7 @@ numSplines(numSplines),
 evaluations(evaluations)
 {
 	if (0.0 >= time_step) {
-		throw std::domain_error("Time Step Cannot Be <= 0.0");
+        throw std::domain_error("Time Step Cannot Be <= 0.0, step is: "+to_string(time_step));
 	}
 
 	if (0.0 >= angular_velocity) {

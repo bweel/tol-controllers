@@ -23,10 +23,10 @@ using namespace webots;
 typedef std::vector<double> dvector;
 typedef std::vector<dvector> doubledvector;
 
-class MovementController : Robot {
+class MovementController {
     
 public:
-    MovementController(WorldModel &wm, MessageHandler &mh);
+    MovementController(WorldModel &wm, MessageHandler &mh, Robot *robot);
     
     /**
      * Get the current servo angle value normalizing it between [-1;1]
@@ -44,6 +44,7 @@ public:
     
     void initialise();
     void initialiseMotors();
+    void normaliseMotors();
     
     void sendAngles(doubledvector anglesOut);
     void sendAngles(size_t index, dvector anglesOut);
@@ -53,6 +54,8 @@ public:
 private:
     WorldModel &worldModel;
     MessageHandler &messageHandler;
+    Robot *robot;
+    
     log4cpp::Category &logger;
     
     std::unique_ptr<LearningController> learningController;

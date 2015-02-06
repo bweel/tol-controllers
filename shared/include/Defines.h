@@ -72,6 +72,9 @@ static const std::vector<std::string> CONNECTOR_NAMES = {
 #define ROOMBOT_DEATH_RECEIVER_NAME "DeathReceiver"
 #define ROOMBOT_GENOME_RECEIVER_NAME "GenomeReceiver"
 #define ROOMBOT_GENOME_EMITTER_NAME "GenomeEmitter"
+#define EVOLVER_EMITTER_NAME "EvolverEmitter"
+#define EVOLVER_RECEIVER_NAME "EvolverReceiver"
+
 
 
 

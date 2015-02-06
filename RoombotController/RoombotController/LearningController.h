@@ -14,6 +14,7 @@
 #include "LearningAlgorithm.h"
 #include "JGTL/JGTL_Vector3.h"
 #include "FitnessMeasure.h"
+#include "Logger.h"
 
 class LearningController {
 public:
@@ -51,6 +52,8 @@ private:
     
     std::ofstream gpsLog; // GPS log
     std::ofstream fitnessLog;
+    
+    log4cpp::Category &logger;
 };
 
 #endif /* defined(__RoombotController__LearningController__) */

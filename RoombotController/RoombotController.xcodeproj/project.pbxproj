@@ -179,6 +179,7 @@
 		61892C8918881AD800E9EDCD /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
 		61B4068A18A8E65700154961 /* SplineNeat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplineNeat.h; sourceTree = "<group>"; };
 		61B4068B18A8E78900154961 /* SplineNeat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SplineNeat.cpp; sourceTree = "<group>"; };
+		61CC54371A39DB7A00E34D73 /* SpeedFitness.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SpeedFitness.h; path = EVAlgorithms/FitnessMeasures/SpeedFitness.h; sourceTree = SOURCE_ROOT; };
 		61D028021A2769FB001B3DE7 /* FitnessMeasure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FitnessMeasure.h; path = EVAlgorithms/FitnessMeasures/FitnessMeasure.h; sourceTree = SOURCE_ROOT; };
 		61D028041A276A14001B3DE7 /* RLPowerFitness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RLPowerFitness.h; path = EVAlgorithms/FitnessMeasures/RLPowerFitness.h; sourceTree = SOURCE_ROOT; };
 		61D028061A276A81001B3DE7 /* FitnessMeasure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FitnessMeasure.cpp; path = EVAlgorithms/FitnessMeasures/FitnessMeasure.cpp; sourceTree = SOURCE_ROOT; };
@@ -450,6 +451,7 @@
 		61D028011A2768C6001B3DE7 /* FitnessMeasures */ = {
 			isa = PBXGroup;
 			children = (
+				61CC54371A39DB7A00E34D73 /* SpeedFitness.h */,
 				61D028081A277C64001B3DE7 /* HyperNEATFitness.h */,
 				61D028091A277C64001B3DE7 /* SplineNEATFitness.h */,
 				61D028041A276A14001B3DE7 /* RLPowerFitness.h */,
@@ -848,6 +850,7 @@
 					"../lib/**",
 					/opt/local/include/,
 					../shared/include/,
+					../shared/ParentSelectionMechanisms/,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -896,6 +899,7 @@
 					"../lib/**",
 					/opt/local/include/,
 					../shared/include/,
+					../shared/ParentSelectionMechanisms/,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

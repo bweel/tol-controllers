@@ -36,12 +36,8 @@ mindGenome(_parameters->get<std::string>("MindGenome")),
 fertile(false),
 adult(false),
 _seed(0),
-_time_start(0.0),
 _time_offset(0.0),
-_time_end(0.0),
 _ev_step(0),
-_position_start(transforms::Vector_3::ZERO),
-_position_end(transforms::Vector_3::ZERO),
 numMotors(0),
 motorRange(0),
 _algorithm(0),
@@ -1112,14 +1108,16 @@ void RoombotController::life()
         bool flag = false;
         _time_offset = getTime();   // remember offset for time calculations
         double tMinusOne,tPlusOne;  // times T-1 and T+1
-        std::pair<double, std::string> fitness(0.0, "");
-        double lastFitnessSent = 0;
-        double lastFitnessUpdate = 0;
-        double lastMating = 0;
-        double lastEvolverUpdate = 0;
-        _time_start = getTime();        // save initial time
-        _position_start = _get_gps();
-        
+        std::pair<double, std::string> adultFitness(0.0, "");
+        double lastFitnessSent = lifeStartingTime;
+        double lastFitnessUpdate = lifeStartingTime;
+        double lastMating = lifeStartingTime;
+        double lastEvolverUpdate = lifeStartingTime;
+        adultFitnessTimeStart = getTime();        // save initial time
+        adultFitnessPositionStart = _get_gps();
+
+        learningTimeStart = getTime();        // save initial time
+        learningPositionStart = _get_gps();
         
         /************************************
          ************ LIFE CYCLE ************
@@ -1221,13 +1219,13 @@ void RoombotController::life()
                 if (now - lastFitnessUpdate > UPDATE_FITNESS_INTERVAL)
                 {
                     // compute fitness
-                    _time_end = getTime();
-                    _position_end = _get_gps();
-                    fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));
+                    double adultFitnessTimeEnd = getTime();
+                    transforms::Vector_3 adultFitnessPositionEnd = _get_gps();
+                    adultFitness = _compute_fitness((adultFitnessTimeEnd - adultFitnessTimeStart), (adultFitnessPositionEnd - adultFitnessPositionStart));
                     
                     // reset time, position and lastFitnessSent for next fitness evaluation
-                    _time_start = getTime();
-                    _position_start = _get_gps();
+                    adultFitnessTimeStart = getTime();
+                    adultFitnessPositionStart = _get_gps();
                     lastFitnessUpdate = getTime();
                 }
             }
@@ -1243,7 +1241,7 @@ void RoombotController::life()
                 {
                     if (now - lastEvolverUpdate > UPDATE_FITNESS_IN_EVOLVER)
                     {
-                        sendFitnessUpdateToEvolver(fitness.first);
+                        sendFitnessUpdateToEvolver(adultFitness.first);
                         lastEvolverUpdate = getTime();
                     }
                 }
@@ -1263,13 +1261,13 @@ void RoombotController::life()
                         // send genome and fitness to evolver
                         string message = "[GENOME_SPREAD_MESSAGE]";
                         message = MessagesManager::add(message, "ID", std::to_string(organismId));
-                        message = MessagesManager::add(message, "FITNESS", std::to_string(fitness.first));
+                        message = MessagesManager::add(message, "FITNESS", std::to_string(adultFitness.first));
                         message = MessagesManager::add(message, "GENOME", genome);
                         message = MessagesManager::add(message, "MIND", mindGenome);
                         genomeEmitter->send(message.c_str(), (int)message.length()+1);
                         
                         // store in file
-                        storeMatureLifeFitnessIntoFile(fitness.first);
+                        storeMatureLifeFitnessIntoFile(adultFitness.first);
                         
                         lastFitnessSent = getTime();
                     }
@@ -1292,7 +1290,7 @@ void RoombotController::life()
                         // spread genome and fitness
                         std::string genomeMessage = "[GENOME_SPREAD_MESSAGE]";
                         genomeMessage = MessagesManager::add(genomeMessage, "ID", std::to_string(organismId));
-                        genomeMessage = MessagesManager::add(genomeMessage, "FITNESS", std::to_string(fitness.first));
+                        genomeMessage = MessagesManager::add(genomeMessage, "FITNESS", std::to_string(adultFitness.first));
                         genomeMessage = MessagesManager::add(genomeMessage, "GENOME", genome);
                         genomeMessage = MessagesManager::add(genomeMessage, "MIND", mindGenome);
                         
@@ -1340,7 +1338,7 @@ void RoombotController::life()
                                 
                                 std::string message = "[COUPLE_MESSAGE]";
                                 message = MessagesManager::add(message, "ID1", std::to_string(organismId));
-                                message = MessagesManager::add(message, "FITNESS1", std::to_string(fitness.first));
+                                message = MessagesManager::add(message, "FITNESS1", std::to_string(adultFitness.first));
                                 message = MessagesManager::add(message, "GENOME1", genome);
                                 message = MessagesManager::add(message, "MIND1", mindGenome);
                                 message = MessagesManager::add(message, "ID2", std::to_string(mateId));
@@ -1418,8 +1416,8 @@ void RoombotController::life()
                 
                 // if the recovery time ends
                 if ((_ev_step - 1) == _ev_steps_recovery) {
-                    _time_start = getTime();        // save initial time
-                    _position_start = _get_gps();   // save initial position
+                    learningTimeStart = getTime();        // save initial time
+                    learningPositionStart = _get_gps();   // save initial position
                 }
                 
                 // GPS logging
@@ -1431,14 +1429,14 @@ void RoombotController::life()
             // if it is time for evaluation
             else
             {
-                _time_end = getTime();      // get final time
-                _position_end = _get_gps(); // get final position
+                double learningTimeEnd = getTime();      // get final time
+                transforms::Vector_3 learningPositionEnd = _get_gps(); // get final position
                 
-                fitness = _compute_fitness((_time_end - _time_start), (_position_end - _position_start));   // compute fitness
-                _algorithm->setEvaluationFitness(fitness.first);
-                _algorithm->setEvaluationFitnessAlt(fitness.second);
+                std::pair<double, std::string> learningFitness = _compute_fitness((learningTimeEnd - learningTimeStart), (learningPositionEnd - learningPositionStart));   // compute fitness
+                _algorithm->setEvaluationFitness(learningFitness.first);
+                _algorithm->setEvaluationFitnessAlt(learningFitness.second);
                 
-                fitnessLog << _algorithm->getGeneration() << " " << _algorithm->getEvaluation() << " " << getRealFitness(fitness.first) << " " << fitness.second << std::endl;
+                fitnessLog << _algorithm->getGeneration() << " " << _algorithm->getEvaluation() << " " << getRealFitness(learningFitness.first) << " " << learningFitness.second << std::endl;
                 
                 if ((!flag) && (!_algorithm->nextEvaluation())) {
                     flag = true;

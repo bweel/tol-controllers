@@ -130,9 +130,7 @@ private:
     std::size_t _m_index;                       // module's index
     int _m_type;                                // module's type (0=static, 1=slave, 2=master)
     
-    double _time_start;                         // time - start
     double _time_offset;                        // time - offset
-    double _time_end;                           // time - end
     
     int _ev_type;                               // algorithm (1=HyperNEAT, 2=RL PoWER)
     std::size_t _ev_step;                       // current evaluation step
@@ -144,8 +142,11 @@ private:
     unsigned int generation;                    // current generation
     double _ev_angular_velocity;                // speed of the motors
     
-    transforms::Vector_3 _position_start;       // list of transformations
-    transforms::Vector_3 _position_end;         // from start to end
+    double learningTimeStart;                         // time - start
+    transforms::Vector_3 learningPositionStart;       // list of transformations
+    
+    double adultFitnessTimeStart;
+    transforms::Vector_3 adultFitnessPositionStart;         // from start to end
     
     unsigned int numMotors;                     // number of motors
     double motorRange;                          // range of motors

@@ -10,13 +10,13 @@
 		61746C0D19239869002D8509 /* ScreenshotController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61854A5319235CD900D24E32 /* ScreenshotController */; };
 		61854A5719235CD900D24E32 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61854A5619235CD900D24E32 /* main.cpp */; };
 		61854A6119235D4500D24E32 /* ScreenshotController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61854A5F19235D4500D24E32 /* ScreenshotController.cpp */; };
-		61854A6519236A6000D24E32 /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61854A6319236A6000D24E32 /* libController.dylib */; };
-		61854A6619236A6000D24E32 /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61854A6419236A6000D24E32 /* libCppController.dylib */; };
 		618F2E181934C5CA001500A0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618F2E171934C5CA001500A0 /* main.cpp */; };
 		618F2E201934C5E5001500A0 /* TimingController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 618F2E1E1934C5E5001500A0 /* TimingController.cpp */; };
-		618F2E251934C881001500A0 /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61854A6319236A6000D24E32 /* libController.dylib */; };
-		618F2E261934C881001500A0 /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61854A6419236A6000D24E32 /* libCppController.dylib */; };
 		618F2E2A1934CAA8001500A0 /* TimingController in CopyFiles */ = {isa = PBXBuildFile; fileRef = 618F2E151934C5CA001500A0 /* TimingController */; };
+		61A9DB871A84E9EA0039C4BD /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61A9DB851A84E9EA0039C4BD /* libController.dylib */; };
+		61A9DB881A84E9EA0039C4BD /* libController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61A9DB851A84E9EA0039C4BD /* libController.dylib */; };
+		61A9DB891A84E9EA0039C4BD /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61A9DB861A84E9EA0039C4BD /* libCppController.dylib */; };
+		61A9DB8A1A84E9EA0039C4BD /* libCppController.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 61A9DB861A84E9EA0039C4BD /* libCppController.dylib */; };
 		A863438B193DF9E60014C737 /* libboost_filesystem-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A863438A193DF9E60014C737 /* libboost_filesystem-mt.a */; };
 		A863438D193DFA150014C737 /* libboost_system-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A863438C193DFA150014C737 /* libboost_system-mt.a */; };
 		A863438F193DFA4E0014C737 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A863438E193DFA4E0014C737 /* libshared.a */; };
@@ -53,12 +53,12 @@
 		61854A5619235CD900D24E32 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		61854A5F19235D4500D24E32 /* ScreenshotController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScreenshotController.cpp; sourceTree = "<group>"; };
 		61854A6019235D4500D24E32 /* ScreenshotController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenshotController.h; sourceTree = "<group>"; };
-		61854A6319236A6000D24E32 /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = /Applications/Webots/lib/libController.dylib; sourceTree = "<absolute>"; };
-		61854A6419236A6000D24E32 /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = /Applications/Webots/lib/libCppController.dylib; sourceTree = "<absolute>"; };
 		618F2E151934C5CA001500A0 /* TimingController */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TimingController; sourceTree = BUILT_PRODUCTS_DIR; };
 		618F2E171934C5CA001500A0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		618F2E1E1934C5E5001500A0 /* TimingController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimingController.cpp; sourceTree = "<group>"; };
 		618F2E1F1934C5E5001500A0 /* TimingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingController.h; sourceTree = "<group>"; };
+		61A9DB851A84E9EA0039C4BD /* libController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libController.dylib; path = ../../../../../../../Applications/Webots/lib/libController.dylib; sourceTree = "<group>"; };
+		61A9DB861A84E9EA0039C4BD /* libCppController.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppController.dylib; path = ../../../../../../../Applications/Webots/lib/libCppController.dylib; sourceTree = "<group>"; };
 		A863438A193DF9E60014C737 /* libboost_filesystem-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_filesystem-mt.a"; path = "../../lib/libboost_filesystem-mt.a"; sourceTree = "<group>"; };
 		A863438C193DFA150014C737 /* libboost_system-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_system-mt.a"; path = "../../lib/libboost_system-mt.a"; sourceTree = "<group>"; };
 		A863438E193DFA4E0014C737 /* libshared.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libshared.a; path = "../../../../../Library/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug/libshared.a"; sourceTree = "<group>"; };
@@ -69,11 +69,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61A9DB871A84E9EA0039C4BD /* libController.dylib in Frameworks */,
 				A8634392193DFC720014C737 /* libshared.a in Frameworks */,
 				A8634390193DFC570014C737 /* libboost_filesystem-mt.a in Frameworks */,
+				61A9DB891A84E9EA0039C4BD /* libCppController.dylib in Frameworks */,
 				A8634391193DFC570014C737 /* libboost_system-mt.a in Frameworks */,
-				61854A6519236A6000D24E32 /* libController.dylib in Frameworks */,
-				61854A6619236A6000D24E32 /* libCppController.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,11 +81,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61A9DB881A84E9EA0039C4BD /* libController.dylib in Frameworks */,
 				A863438F193DFA4E0014C737 /* libshared.a in Frameworks */,
 				A863438D193DFA150014C737 /* libboost_system-mt.a in Frameworks */,
+				61A9DB8A1A84E9EA0039C4BD /* libCppController.dylib in Frameworks */,
 				A863438B193DF9E60014C737 /* libboost_filesystem-mt.a in Frameworks */,
-				618F2E251934C881001500A0 /* libController.dylib in Frameworks */,
-				618F2E261934C881001500A0 /* libCppController.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,11 +124,11 @@
 		61854A621923600500D24E32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				61A9DB851A84E9EA0039C4BD /* libController.dylib */,
+				61A9DB861A84E9EA0039C4BD /* libCppController.dylib */,
 				A863438E193DFA4E0014C737 /* libshared.a */,
 				A863438A193DF9E60014C737 /* libboost_filesystem-mt.a */,
 				A863438C193DFA150014C737 /* libboost_system-mt.a */,
-				61854A6319236A6000D24E32 /* libController.dylib */,
-				61854A6419236A6000D24E32 /* libCppController.dylib */,
 			);
 			name = Libraries;
 			path = ScreenshotController;
@@ -234,6 +234,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -264,11 +265,14 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"../lib/**",
-					/opt/local/include/,
+					/usr/local/include/,
 					/Applications/Webots/include/controller/cpp/,
 					../shared/include/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SYSTEM_APPS_DIR)/Webots/lib",
+					/usr/local/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
@@ -282,6 +286,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -307,11 +312,14 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"../lib/**",
-					/opt/local/include/,
+					/usr/local/include/,
 					/Applications/Webots/include/controller/cpp/,
 					../shared/include/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SYSTEM_APPS_DIR)/Webots/lib",
+					/usr/local/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
@@ -323,14 +331,8 @@
 		61854A5D19235CD900D24E32 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SYSTEM_APPS_DIR)/Webots/lib",
-					/opt/local/lib,
-					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/dist/Debug",
-					"/Users/emanuele/Documents/projects/tol-controllers/lib",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -338,14 +340,8 @@
 		61854A5E19235CD900D24E32 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SYSTEM_APPS_DIR)/Webots/lib",
-					/opt/local/lib,
-					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/dist/Debug",
-					"/Users/emanuele/Documents/projects/tol-controllers/lib",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -358,14 +354,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/dist/Debug",
-					"$(SYSTEM_APPS_DIR)/Webots/lib",
-					/opt/local/lib,
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
-					"/Users/emanuele/Documents/projects/tol-controllers/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -374,14 +363,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/dist/Debug",
-					"$(SYSTEM_APPS_DIR)/Webots/lib",
-					/opt/local/lib,
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/tol-controllers-fjseyothbjaqdtbuaxsbgzznnair/Build/Products/Debug",
-					"/Users/emanuele/Documents/projects/tol-controllers/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -473,15 +473,15 @@ HyperNEAT::Genome HyperNEAT::_init_genome(std::size_t h_size)
 	 * These are the input node genes used to query the CPPN about substrate
 	 * links weights
 	 */
-	result.push_back(NodeGene("Bias", "NetworkSensor", 0, false));
-	result.push_back(NodeGene("X1", "NetworkSensor", 0, false));
-	result.push_back(NodeGene("Y1", "NetworkSensor", 0, false));
-	result.push_back(NodeGene("X2", "NetworkSensor", 0, false));
-	result.push_back(NodeGene("Y2", "NetworkSensor", 0, false));
+	result.push_back(NodeGene("Bias", "NetworkSensor",0, 0, false));
+	result.push_back(NodeGene("X1", "NetworkSensor",0, 0, false));
+	result.push_back(NodeGene("Y1", "NetworkSensor",0, 0, false));
+	result.push_back(NodeGene("X2", "NetworkSensor",0, 0, false));
+	result.push_back(NodeGene("Y2", "NetworkSensor",0, 0, false));
 
 #if DEBUG_USE_DELTAS
-	result.push_back(NodeGene("DeltaX", "NetworkSensor", 0, false));
-	result.push_back(NodeGene("DeltaY", "NetworkSensor", 0, false));
+	result.push_back(NodeGene("DeltaX", "NetworkSensor",0, 0, false));
+	result.push_back(NodeGene("DeltaY", "NetworkSensor",0, 0, false));
 #endif
 
 	/*

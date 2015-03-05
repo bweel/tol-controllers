@@ -1,14 +1,13 @@
 #ifndef GLOBALS_H
 #define	GLOBALS_H
 
-//#include "Random.h"
-
 #include "tinyxmlplus.h"
 
 #include <boost/noncopyable.hpp>
 
 #include <map>
 #include <string>
+#include "Logger.h"
 
 namespace POWER
 {
@@ -54,30 +53,12 @@ namespace POWER
 		 */
 		static void deinit();
 
-		// <editor-fold defaultstate="collapsed" desc="Accessors">
-
-		/**
-		 * Returns the current seed
-		 * @return Current seed value
-		 */
-		//unsigned int seed() const;
-
 		/**
 		 * Returns the value of the specified parameter
 		 * @param Parameter name
 		 * @return Parameter value
 		 */
 		double parameter(const std::string &) const;
-
-		/**
-		 * Returns a reference to the random number generator
-		 * @return Random number generator
-		 */
-		//utils::Random & random();
-
-		// </editor-fold>
-
-		// <editor-fold defaultstate="collapsed" desc="Mutators">
 
 		/**
 		 * Changes the current seed
@@ -106,33 +87,18 @@ namespace POWER
 		typedef std::map<std::string, double>::iterator MIterator;
 		typedef std::map<std::string, double>::const_iterator MConstIterator;
 
-		// <editor-fold defaultstate="collapsed" desc="Constructor">
-
 		Globals();
 		Globals(const std::string &);
 
-		// </editor-fold>
-
-		// <editor-fold defaultstate="collapsed" desc="Destructor">
-
 		virtual ~Globals();
 
-		// </editor-fold>
-
-		// <editor-fold defaultstate="collapsed" desc="Initializer">
-
 		std::map<std::string, double> _init_parameters();
-
-		// </editor-fold>
-
-		// <editor-fold defaultstate="collapsed" desc="Members">
 
 		static Globals * _instance;
 
 		std::map<std::string, double> _tuples;
-		//utils::Random * _random;
-
-		// </editor-fold>
+        
+        log4cpp::Category& logger;
 
 	};
 }

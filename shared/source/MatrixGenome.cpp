@@ -141,9 +141,9 @@ void MatrixGenome::readString(std::string genome){
  */
 std::string MatrixGenome::toString() const {
     std::string result = std::string("MATRIX ");
-    result.append(TO_STR(x_size));
+    result.append(std::to_string(x_size));
     result.append(" ");
-    result.append(TO_STR(y_size));
+    result.append(std::to_string(y_size));
     result.append(" VALUES ");
     
     std::ostringstream oss;

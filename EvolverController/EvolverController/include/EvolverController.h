@@ -9,6 +9,8 @@
 #include "Organism.h"
 #include "ParentSelectionMechanism.h"
 #include "Builder.h"
+#include "Random.h"
+#include "Logger.h"
 
 #include <webots/Supervisor.hpp>
 
@@ -19,7 +21,7 @@ class EvolverController : public Supervisor
 {
     
 private:
-    
+    log4cpp::Category &logger;
     std::string simulationDateAndTime;
     
     int CLINIC_CHANNEL = ParametersReader::get<int>("CLINIC_CHANNEL");
@@ -75,6 +77,8 @@ private:
     double lastDeath;       // FOR CENTRALIZED DEATH BY THE EVOLVER
     double lastEvolutionEndCheck;
     double lastOffspringLoggingTime;
+    
+    Utils::Random *random;
     
     /*************************
      ******* Functions *******

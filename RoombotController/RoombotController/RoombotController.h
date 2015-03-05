@@ -1,9 +1,6 @@
 #ifndef ROOMBOT_CONTROLLER_H
 #define	ROOMBOT_CONTROLLER_H
 
-//#define DEBUG_CONTROLLER
-//#define DEBUG_TIMING
-
 #include "Organism.h"
 #include "Defines.h"
 #include "ParametersReader.h"
@@ -16,6 +13,7 @@
 #include "WorldModel.h"
 #include "MatingStrategy.h"
 #include "MessageHandler.h"
+#include "Logger.h"
 
 #include "LearningAlgorithm.h"
 #include "HyperNEAT.h"
@@ -50,6 +48,9 @@ public:
     void run();                 // robot behavior
     
 private:
+    log4cpp::Category &logger;
+    log4cpp::Category &matingLogger;
+    
     // ATTRIBUTES
     int EVOLVER_CHANNEL = ParametersReader::get<int>("EVOLVER_CHANNEL");
     int CLINIC_CHANNEL = ParametersReader::get<int>("CLINIC_CHANNEL");
@@ -69,6 +70,7 @@ private:
     double FERTILITY_DISTANCE = ParametersReader::get<double>("FERTILITY_DISTANCE");   
     
     std::string DEATH_SELECTION = ParametersReader::get<std::string>("DEATH_SELECTION");
+    std::string MATING_SELECTION = ParametersReader::get<std::string>("MATING_SELECTION");
     
     bool checkInsideCylinder = ParametersReader::get<bool>("CHECK_INSIDE_CYLINDER");
     

@@ -54,6 +54,8 @@ namespace Utils
 		 * @return Random double evenly distributed
 		 */
 		double uniform_real();
+        
+        double uniform_real(int min, int max);
 
 		/**
 		 * Returns a random double from a normal distribution with mean 0 and

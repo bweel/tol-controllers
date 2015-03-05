@@ -1,9 +1,12 @@
+#include <boost/lexical_cast.hpp>
+
 #include "BirthClinicController.h"
 
 
-////////////////////////////////////////////
-///////////// MINOR FUNCTIONS //////////////
-////////////////////////////////////////////
+
+//////////////////////////////////////////
+/////////// MINOR FUNCTIONS //////////////
+//////////////////////////////////////////
 
 id_t BirthClinicController::getNextOrganismId()
 {
@@ -14,7 +17,7 @@ id_t BirthClinicController::getNextOrganismId()
 
 bool BirthClinicController::isClinicFree()
 {
-    std::map<id_t, Module*>::iterator it;
+    std::map<unsigned int, Module*>::iterator it;
     
     for ( it=moduleMap.begin() ; it != moduleMap.end(); it++ )
     {
@@ -38,7 +41,7 @@ bool BirthClinicController::isClinicFree()
 
 int BirthClinicController::countInRadius(Position position, double radius)
 {
-    std::map<id_t, Module*>::iterator it;
+    std::map<unsigned int, Module*>::iterator it;
     
     int counter = 0;
     
@@ -55,7 +58,7 @@ int BirthClinicController::countInRadius(Position position, double radius)
 
 bool BirthClinicController::positionFree(Position position, double size)
 {
-    std::map<id_t, Module*>::iterator it;
+    std::map<unsigned int, Module*>::iterator it;
     
     if(!position.checkBounds(ARENA_SIZE)) return false;
     
@@ -80,8 +83,8 @@ Position BirthClinicController::getFreeRandomPosition(double size)
     int tryNumber = 0;
     while(tryNumber < 50){
         tryNumber++;
-        result.setX(RANDOM.getRandomDouble(-maxCoordinate, maxCoordinate));
-        result.setZ(RANDOM.getRandomDouble(-maxCoordinate, maxCoordinate));
+        result.setX(random->uniform_real(-maxCoordinate, maxCoordinate));
+        result.setZ(random->uniform_real(-maxCoordinate, maxCoordinate));
         if (positionFree(result, size))
             return result;
     }
@@ -96,7 +99,7 @@ void BirthClinicController::addModuleToReserve(std::string moduleDef)
     Node * root = getFromDef(moduleDef);
     if (root)
     {
-        int idx = std::atoi(moduleDef.substr(moduleDef.find("_")+1, moduleDef.length()).c_str());
+        unsigned int idx = std::atoi(moduleDef.substr(moduleDef.find("_")+1, moduleDef.length()).c_str());
         
         moduleMap[idx]->toReserve();
         
@@ -114,7 +117,7 @@ void BirthClinicController::addModuleToReserve(std::string moduleDef)
         if (!alreadyAvailable)
         {
             availableModules.push(idx);
-            std::cout << "module " << idx << " added to available" << std::endl;
+            logger.debugStream() << "module " << idx << " added to available";
             logModuleCount("Module Added",availableModules.size());
         }
     }
@@ -215,19 +218,24 @@ void BirthClinicController::sendOrganismBuiltMessage(id_t parent1, id_t parent2,
 void BirthClinicController::connectModulesToObjects()
 {
     // connect real modules to objects and store them into map and stack
-    for (id_t i = 1; i < (NUMBER_OF_MODULES+1); i++)
+    logger.debug("Connecting " +to_string(NUMBER_OF_MODULES)+" modules to objects");
+    for (unsigned int i = 1; i < (NUMBER_OF_MODULES+1); i++)
     {
-        Node * root = getFromDef(MODULE_DEF_BASE_NAME + TO_STR(i));
+        logger.debug("Getting module " + std::string(MODULE_DEF_BASE_NAME) + std::to_string(i));
+        Node * root = getFromDef(MODULE_DEF_BASE_NAME + std::to_string(i));
         if (root)
         {
+            logger.debug("Got module " + std::string(MODULE_DEF_BASE_NAME) + std::to_string(i) + " from def, pointer is: "+boost::lexical_cast<std::string>(root));
             moduleMap[i] = new RoombotModule(root, i, ARENA_SIZE);
+            logger.debug("Module Map i is: "+boost::lexical_cast<std::string>(moduleMap[i]));
             moduleMap[i]->toReserve();
             availableModules.push(i);
-            std::cout << MODULE_DEF_BASE_NAME + TO_STR(i) + " INITIALIZED" << std::endl;
+            logger.infoStream() << MODULE_DEF_BASE_NAME + std::to_string(i) + " INITIALIZED";
         }
         else
         {
-            throw CREATE_LOCATEDEXCEPTION_INFO(MODULE_DEF_BASE_NAME + TO_STR(i) + " does not exist.");
+            logger.debug("Module " + std::string(MODULE_DEF_BASE_NAME) + std::to_string(i) + " does not exist");
+//            throw CREATE_LOCATEDEXCEPTION_INFO(MODULE_DEF_BASE_NAME + TO_STR(i) + " does not exist.");
         }
     }
 }
@@ -266,7 +274,7 @@ int BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGeno
                 }
                 
                 BuildableOrganism * organism = new BuildableOrganism(genome.toString(), mindGenome, organismId, buildPlan, position);
-                std::cout << "NEW ORGANISM CREATED: " << organism->getName() << std::endl;
+                logger.noticeStream() << "New organism created: " << organism->getName();
                 
                 for(size_t i = 0; i < buildPlanSize; i++)
                 {
@@ -276,11 +284,11 @@ int BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGeno
                     
                     // update name in Webots
                     moduleToAdd->setName(std::to_string(organism->getId()), std::to_string(i));
-                    std::cout << moduleToAdd->getDef() << " -> name has been updated to " << moduleToAdd->getName() << std::endl;
+                    logger.debugStream() << moduleToAdd->getDef() << " -> name has been updated to " << moduleToAdd->getName();
                     
                     // add it to the organism
                     organism->addModule(moduleToAdd);
-                    std::cout << "module " << moduleToAdd->getId() << " added to "  << organism->getName() << std::endl;
+                    logger.debugStream() << "module " << moduleToAdd->getId() << " added to "  << organism->getName();
                 }
                 // build organism, write relative ControllerArgs file and activate it (set controller and arguments fields on Webots)
                 organism->build();
@@ -293,20 +301,20 @@ int BirthClinicController::buildOrganism(CppnGenome genome, std::string mindGeno
             }
             else
             {
-                //std::cout << "ORGANISM NOT CREATED: waiting for clinic to be free" << std::endl;
+                logger.debugStream() << "ORGANISM NOT CREATED: waiting for clinic to be free";
                 return -2;
             }
         }
         else
         {
-            std::cout << "ORGANISM NOT CREATED: not enough modules available" << std::endl;
+            logger.debugStream() << "ORGANISM NOT CREATED: not enough modules available";
             logModuleCount("Organism Aborted",availableModules.size());
             return -3;
         }
     }
     else
     {
-        std::cout << "ORGANISM NOT CREATED: the build plan was empty or made of only one module" << std::endl;
+        logger.debugStream() << "ORGANISM NOT CREATED: the build plan was empty or made of only one module";
         return -4;
     }
 }
@@ -325,9 +333,12 @@ void BirthClinicController::logModuleCount(std::string message, int modules)
 ////////////// MAIN FUNCTIONS //////////////
 ////////////////////////////////////////////
 
-BirthClinicController::BirthClinicController() : Supervisor()
+BirthClinicController::BirthClinicController() : Supervisor(),
+    logger(Logger::getInstance("BirthClinic"))
 {
-    srand(static_cast<unsigned int>(time(NULL)));
+    logger.debug("Constructing Birth Clinic Controller");
+    
+    random = Utils::Random::getInstance();
     
     platform = getFromDef("CLINIC_PLATFORM");
     
@@ -383,7 +394,6 @@ bool BirthClinicController::rebuildOrganism(std::string message, int &buildTry) 
     }
     else
     {
-        std::cout << buildTry << std::endl;
         buildTry++;
         step(TIME_STEP);
         return false;
@@ -415,7 +425,6 @@ bool BirthClinicController::buildOrganismFromMessage(std::string message, int &b
         buildTry = 0;
         return true;
     } else if (buildResponse == -2) {
-        std::cout << buildTry << std::endl;
         buildTry++;
         // Clinic is still busy. Keep packets and wait a while.
     } else if (buildResponse == -3) {
@@ -433,8 +442,10 @@ bool BirthClinicController::buildOrganismFromMessage(std::string message, int &b
 
 void BirthClinicController::run()
 {
-    TIME_STEP = getBasicTimeStep();
+    logger.debug("Running Birth Clinic Controller");
     
+    TIME_STEP = getBasicTimeStep();
+
     receiver->enable(TIME_STEP);
     while (receiver->getQueueLength() > 0)
     {
@@ -448,6 +459,7 @@ void BirthClinicController::run()
     
     // wait unitil EnvironmentModifierController sais the environment is ok
     bool environmentOk = false;
+    logger.debug("Waiting for environment to be ready");
     while (step(TIME_STEP) != -1 && !environmentOk)
     {
         if(receiver->getQueueLength() > 0)
@@ -457,11 +469,11 @@ void BirthClinicController::run()
             {
                 environmentOk = true;
                 simulationDateAndTime = MessagesManager::get(message, "SDAT");
+                logger.debug("Environment ready");
             }
             receiver->nextPacket();
         }
     }
-    
     
     /**************************************
      ******* MODULES INITIALIZATION *******
@@ -469,30 +481,32 @@ void BirthClinicController::run()
     
     connectModulesToObjects();
     
+    int buildTry = 0;
+    int waitTime = -5;
     while (step(TIME_STEP) != -1)
     {
-        int buildTry = 0;
-        
         /*******************************
          ******* MANAGE MESSAGES *******
          *******************************/
+        double now = getTime();
         
         while (receiver->getQueueLength() > 0) {
             std::string message = (char*)receiver->getData();
             bool goNext = true;
             
             if (message.substr(0,26).compare("[UPDATE_AVAILABLE_MESSAGE]") == 0) {
+                logger.debug("Received available message");
                 std::string moduleDef = MessagesManager::get(message, "DEF");
                 addModuleToReserve(moduleDef);
             } else if (message.substr(0,17).compare("[REBUILD_MESSAGE]") == 0) {
+                logger.debug("Received rebuild message");
                 goNext = rebuildOrganism(message, buildTry);
             } else if (message.substr(0,26).compare("[GENOME_TO_CLINIC_MESSAGE]") == 0) {
-                if(BIRTH_CLINIC_USE_QUEUE){
+                logger.debug("Received genome to clinic message");
                     // Add to queue
-                    buildQueue.push(message);
-                    std::cout << BOLDRED << " Adding genome to queue, queue is now: " << buildQueue.size() << RESET << std::endl;
-                }else if(availableModules.size() > BIRTH_CLINIC_MINIMUM_MODULES) {
-                    goNext = buildOrganismFromMessage(message,buildTry);
+                buildQueue.push_back(message);
+                if(BIRTH_CLINIC_USE_QUEUE) {
+                    logger.noticeStream() << BOLDRED << " Adding genome to queue, queue is now: " << buildQueue.size() << RESET;
                 }
             } else {
                 // Not enough modules in store, go to next shape
@@ -502,14 +516,21 @@ void BirthClinicController::run()
                 receiver->nextPacket();
             }
         }
-        
-        if(BIRTH_CLINIC_USE_QUEUE){
+
+        if(now > waitTime + ROOMBOT_WAITING_TIME) {
             if(buildQueue.size() > 0 && availableModules.size() > BIRTH_CLINIC_MINIMUM_MODULES){
                 std::string message = buildQueue.front();
                 bool success = buildOrganismFromMessage(message,buildTry);
                 if(success){
-                    buildQueue.pop();
-                    std::cout << BOLDRED << " Succesfully built organism, queue is now: " << buildQueue.size() << RESET << std::endl;
+                    buildQueue.pop_front();
+                    waitTime = now;
+                    if(BIRTH_CLINIC_USE_QUEUE) {
+                        logger.noticeStream() << BOLDRED << " Succesfully built organism, queue is now: " << buildQueue.size() << RESET;
+                    } else {
+                        buildQueue.clear();
+                    }
+                } else {
+                    waitTime = now;
                 }
             }
         }

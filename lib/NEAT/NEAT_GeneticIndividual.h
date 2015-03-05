@@ -8,6 +8,7 @@
 #include "NEAT_Network.h"
 #include "NEAT_ModularNetwork.h"
 #include "NEAT_FastNetwork.h"
+#include "NEAT_FastCTNetwork.h"
 #ifdef EPLEX_INTERNAL
 #include "NEAT_VectorNetwork.h"
 #include "NEAT_FractalNetwork.h"
@@ -181,6 +182,12 @@ namespace NEAT
         inline FastNetwork<Type> spawnFastPhenotypeStack() const
         {
             return FastNetwork<Type>(nodes,links);
+        }
+        
+        template<class Type>
+        inline FastCTNetwork<Type> spawnFastCTPhenotypeStack() const
+        {
+            return FastCTNetwork<Type>(nodes,links);
         }
 
 #ifdef EPLEX_INTERNAL

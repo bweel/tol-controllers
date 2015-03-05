@@ -195,21 +195,21 @@ SplineNeat::Genome SplineNeat::initializeGenome(unsigned int numMotors) {
      * Y position of the module
      * T time position for the spline
 	 */
-	result.push_back(NodeGene("Bias", "NetworkSensor", 0, false));
-	result.push_back(NodeGene("X", "NetworkSensor", 0, false));
-	result.push_back(NodeGene("Y", "NetworkSensor", 0, false));
-	result.push_back(NodeGene("T", "NetworkSensor", 0, false));
+	result.push_back(NodeGene("Bias", "NetworkSensor", 0, 0, false));
+	result.push_back(NodeGene("X", "NetworkSensor",0, 0, false));
+	result.push_back(NodeGene("Y", "NetworkSensor",0, 0, false));
+	result.push_back(NodeGene("T", "NetworkSensor",0, 0, false));
     
 #if DEBUG_USE_DELTAS
-	result.push_back(NodeGene("DeltaX", "NetworkSensor", 0, false));
-	result.push_back(NodeGene("DeltaY", "NetworkSensor", 0, false));
+	result.push_back(NodeGene("DeltaX", "NetworkSensor",0, 0, false));
+	result.push_back(NodeGene("DeltaY", "NetworkSensor",0, 0, false));
 #endif
     
     /*
      * Output of the cppn
      * This is the y position of the spline at time t
      */
-	result.push_back(NodeGene("Output_Y", "NetworkOutputNode", 1, false, ACTIVATION_FUNCTION_SIGMOID));
+	result.push_back(NodeGene("Output_Y", "NetworkOutputNode",0, 1, false, ACTIVATION_FUNCTION_SIGMOID));
     
 	return result;
 }

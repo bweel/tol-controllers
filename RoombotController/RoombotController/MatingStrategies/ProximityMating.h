@@ -16,9 +16,7 @@ class ProximityMating : public MatingStrategy {
 public:
     double SPREAD_FITNESS_INTERVAL;
     
-    ProximityMating(WorldModel worldModel, MessageHandler &messageHandler, MessageHandler &evolverMessageHandler) : MatingStrategy(worldModel, messageHandler, evolverMessageHandler) {
-        lastFitnessSent = 0;
-    }
+    ProximityMating(WorldModel &worldModel, MessageHandler &messageHandler, MessageHandler &evolverMessageHandler);
     
     virtual void findMates();
     virtual void mate();

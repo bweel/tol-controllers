@@ -5,6 +5,7 @@
 #include "Interval.h"
 #include "Policy.h"
 #include "Values.h"
+#include "Logger.h"
 
 #include "Random.h"
 
@@ -108,6 +109,8 @@ namespace POWER
 
         
 	  private:
+        log4cpp::Category &logger;
+        
 		static const double FITNESS_EXP;
 		static const double EPSILON;
 

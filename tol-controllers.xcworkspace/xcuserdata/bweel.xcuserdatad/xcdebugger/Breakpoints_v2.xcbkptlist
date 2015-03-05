@@ -499,38 +499,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "422368762.992552"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "BirthClinicController::addModuleToReserve(std::string moduleDef)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "422368762.992552"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "BirthClinicController::addModuleToReserve(std::string moduleDef)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "EvolverController/EvolverController/source/EvolverController.cpp"
             timestampString = "438188120.43705"
             startingColumnNumber = "9223372036854775807"
@@ -595,52 +563,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "423415251.034846"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
-            landmarkName = "BirthClinicController::rotate()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "423415251.034846"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "BirthClinicController::rotate()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "436707682.879201"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "325"
-            endingLineNumber = "325">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "shared/source/Organism.cpp"
             timestampString = "422287202.020751"
             startingColumnNumber = "9223372036854775807"
@@ -665,20 +587,6 @@
             endingLineNumber = "237"
             landmarkName = "BuildableOrganism::writeControllerArgsFile(std::string simulationDateAndTime)"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "436707682.879201"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -820,7 +728,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "221"
-            endingLineNumber = "221">
+            endingLineNumber = "221"
+            landmarkName = "MatrixGenome::getMatrix()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1500,9 +1410,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "CppnGenome::mutateSize()"
-            landmarkType = "5">
+            endingLineNumber = "123">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1561,25 +1469,9 @@
             timestampString = "438188120.43705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "505"
-            endingLineNumber = "505"
-            landmarkName = "BirthClinicController::run()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "438188120.43705"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
             startingLineNumber = "436"
             endingLineNumber = "436"
-            landmarkName = "BirthClinicController::run()"
+            landmarkName = "BirthClinicController::buildOrganismFromMessage(std::string message, int &amp;buildTry)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1595,7 +1487,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "438"
             endingLineNumber = "438"
-            landmarkName = "BirthClinicController::run()"
+            landmarkName = "BirthClinicController::buildOrganismFromMessage(std::string message, int &amp;buildTry)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1627,7 +1519,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "439"
             endingLineNumber = "439"
-            landmarkName = "BirthClinicController::run()"
+            landmarkName = "BirthClinicController::buildOrganismFromMessage(std::string message, int &amp;buildTry)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1643,22 +1535,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "479"
             endingLineNumber = "479"
-            landmarkName = "BirthClinicController::run()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BirthClinicController/BirthClinicController/source/BirthClinicController.cpp"
-            timestampString = "438188120.43705"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "490"
-            endingLineNumber = "490"
             landmarkName = "BirthClinicController::run()"
             landmarkType = "5">
          </BreakpointContent>
@@ -1876,12 +1752,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RoombotController/RoombotController/MovementController.cpp"
-            timestampString = "440180345.947623"
+            timestampString = "438256077.39915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "MovementController::step()"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "MovementController::initialise()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1921,14 +1797,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RoombotController/RoombotController/MovementController.h"
-            timestampString = "440195926.622442"
+            filePath = "shared/source/Organism.cpp"
+            timestampString = "445170658.333995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "class MovementController"
-            landmarkType = "3">
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "BuildableOrganism::BuildableOrganism(std::string genome, std::string mindGenome, id_t id, std::auto_ptr&lt;BuildPlan&gt; plan, Position organismCentre)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

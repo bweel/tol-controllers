@@ -46,8 +46,8 @@ public:
     void initialiseMotors();
     void normaliseMotors();
     
-    void sendAngles(doubledvector anglesOut);
-    void sendAngles(size_t index, dvector anglesOut);
+    void sendAngles(doubledvector nextPositions);
+    void sendAngles(size_t index, dvector currentPositions);
 
     doubledvector receiveAngles();
     dvector receiveAngles(size_t index);
@@ -63,13 +63,13 @@ private:
     double tMinusOne;
     double tPlusOne;
     
-    doubledvector anglesIn;
-    doubledvector anglesOut;
+    doubledvector currentPositions;
+    doubledvector nextPositions;
     dvector anglesTMinusOne;
     dvector anglesTPlusOne;
     
     std::vector<Motor*> motors;
-    std::vector<PositionSensor*> sensors;       // motor sensors
+//    std::vector<PositionSensor*> sensors;       // motor sensors
     double motorRange;                          // range of motors
     
     void logGPS();

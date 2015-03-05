@@ -72,6 +72,12 @@ namespace Utils
 	{
 		return _normal_gen();
 	}
+    
+    double Random::uniform_real(int min, int max)
+    {
+        boost::random::uniform_real_distribution<double> dist(min, max);
+        return dist(_engine);
+    }
 
 	double Random::cauchy_real()
 	{

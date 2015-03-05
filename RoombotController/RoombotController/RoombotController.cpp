@@ -8,14 +8,17 @@ const std::string RoombotController::RESULTS_DIR = "Results";
 
 /********************************************* CONSTRUCTORS *********************************************/
 
-RoombotController::RoombotController()
+RoombotController::RoombotController() :
+    logger(Logger::getInstance("RoombotController")),
+    matingLogger(Logger::getInstance("Mating"))
 {
-    std::cout << "[" << worldModel.now << "] " << worldModel.robotName << ": Starting Controller"  << std::endl;
+    logger.debugStream() << "[" << worldModel.now << "] " << worldModel.robotName << ": Starting Controller";
+    matingLogger.debugStream() << "[" << worldModel.now << "] " << worldModel.robotName << ": Debugging Mating";
 }
 
 void RoombotController::initialise() {
-    std::cout << "[" << worldModel.now << "] " << worldModel.robotName << ": Initialising"  << std::endl;
     initialiseWorldModel();
+    logger.debugStream() << "[" << worldModel.now << "] " << worldModel.robotName << ": Initialising";
     
     evolverMessageHandler = MessageHandler(initialiseEmitter(EVOLVER_EMITTER_NAME),initialiseReceiver(EVOLVER_RECEIVER_NAME));
     deathMessageHandler = MessageHandler(NULL,initialiseReceiver(ROOMBOT_DEATH_RECEIVER_NAME));
@@ -35,15 +38,23 @@ void RoombotController::initialise() {
     } else {
         std::cerr << "Unknown Death Selection Mechanism: " << DEATH_SELECTION << std::endl;
     }
+    
+    if(MATING_SELECTION == "EVOLVER") {
+        matingType = MATING_SELECTION_BY_EVOLVER;
+    } else if(MATING_SELECTION == "ORGANISMS"){
+        matingType = MATING_SELECTION_BY_ORGANISMS;
+    } else {
+        logger.errorStream() << "Unknown Mating Selection Mechanism: " << MATING_SELECTION;
+    }
 
     // lock connectors
     boost::property_tree::ptree connectorsNode = worldModel.parameters.get_child("Robot." + getName() + ".Connectors");
     BOOST_FOREACH(boost::property_tree::ptree::value_type &v, connectorsNode)
     {
-        std::cout << "[" << worldModel.now << "] " << worldModel.robotName << ": Getting Connector: " << v.second.data()  << std::endl;
+        logger.debugStream() << "[" << worldModel.now << "] " << worldModel.robotName << ": Getting Connector: " << v.second.data();
         Connector * connector = getConnector(v.second.data());
         if(!connector) {
-            throw std::runtime_error("Device Not Found: "+to_string(v.second.data()));
+            throw std::runtime_error("Device Not Found: "+v.second.data());
         } else {
             connector->lock();
             connectors.push_back(connector);
@@ -75,7 +86,7 @@ void RoombotController::initialise() {
         matingStrategy = MatingStrategy::getMatingStrategy(worldModel, matingMessagesHandler, evolverMessageHandler);
     }
     
-    std::cout << "[" << worldModel.now << "] " << worldModel.robotName << ": " << "Finished initialising" << std::endl;
+    logger.debugStream() << "[" << worldModel.now << "] " << worldModel.robotName << ": " << "Finished initialising";
 }
 
 
@@ -90,6 +101,7 @@ void RoombotController::initialiseWorldModel() {
     worldModel.projectPath = getProjectPath();
     worldModel.robotType = worldModel.parameters.get<int>("Robot." + getName() + ".Type");
     worldModel.now = getTime();
+    worldModel.moduleName = getName();
     
     worldModel.fertile = false;
     worldModel.adult = false;
@@ -104,7 +116,7 @@ Emitter * RoombotController::initialiseEmitter(std::string name)
 {
     Emitter * emitter = getEmitter(name);
     if (!emitter) {
-        throw std::runtime_error("Device Not Found: "+to_string(name));
+        throw std::runtime_error("Device Not Found: "+name);
     }
     
     return emitter;
@@ -115,7 +127,7 @@ Receiver * RoombotController::initialiseReceiver(std::string name)
 {
     Receiver * receiver = getReceiver(name);
     if (!receiver) {
-        throw std::runtime_error("Device Not Found: "+to_string(name));
+        throw std::runtime_error("Device Not Found: "+name);
     }
     receiver->enable(worldModel.TIME_STEP);
 
@@ -128,7 +140,7 @@ GPS * RoombotController::initialiseGPS(double time_step)
     GPS * gps = getGPS(RoombotController::GPS_NAME);
     
     if (!gps) {
-        throw std::runtime_error("Device Not Found: "+to_string(RoombotController::GPS_NAME));
+        throw std::runtime_error("Device Not Found: "+RoombotController::GPS_NAME);
     }
     
     gps->enable(time_step);
@@ -260,7 +272,7 @@ bool RoombotController::checkLocks()
     
     if (!connectorsOK)
     {
-        std::cout << getName() << " detected connectors problem" << std::endl;
+        logger.warnStream() << getName() << " detected connectors problem";
         
         std::string message = "[CONNECTORS_PROBLEM_MESSAGE]";
         movementMessageHandler.send(message);
@@ -280,11 +292,11 @@ bool RoombotController::checkLocks()
             
             if (message.compare("[CONNECTORS_PROBLEM_MESSAGE]") == 0)
             {
-                std::cout << getName() << " received connectors problem message" << std::endl;
+                logger.debugStream() << getName() << " received connectors problem message";
                 
                 if (worldModel.iAmRoot())
                 {
-                    std::cout << getName() << " forwarded connectors problem" << std::endl;
+                    logger.debugStream() << getName() << " forwarded connectors problem";
                     
                     std::string message = "[CONNECTORS_PROBLEM_MESSAGE]";
                     movementMessageHandler.send(message);
@@ -312,7 +324,7 @@ bool RoombotController::checkFallenInside()
         
         if (distanceFromCenter < 2)
         {
-            std::cout << getName() << " detected fallen into cylinder problem" << std::endl;
+            logger.warnStream() << getName() << " detected fallen into cylinder problem";
             
             std::string message = "[CYLINDER_PROBLEM_MESSAGE]";
             movementMessageHandler.send(message);
@@ -331,7 +343,7 @@ bool RoombotController::checkFallenInside()
                 std::string message = movementMessageHandler.receive();
                 
                 if (message.compare("[CYLINDER_PROBLEM_MESSAGE]") == 0) {
-                    std::cout << getName() << " received fallen into cylinder problem" << std::endl;
+                    logger.debugStream() << getName() << " received fallen into cylinder problem";
                     
                     return false;
                 }
@@ -373,9 +385,8 @@ void RoombotController::life()
         /***********************************
          *********** PREPARATION ***********
          ***********************************/
-#ifdef DEBUG_CONTROLLER
-        std::cout << "[" << getTime() << "] " << getName() << ": We are root initialize things" << std::endl;
-#endif
+        logger.debugStream() << "[" << getTime() << "] " << getName() << ": We are root initialize things";
+        
         // two first steps (one more than non-root modules)
         if (step(worldModel.TIME_STEP) == -1)
             return;
@@ -416,7 +427,6 @@ void RoombotController::life()
                 }
             }
             
-            
             /***************************************
              ***** CHECK DEATH BY TIME TO LIVE *****
              ***************************************/
@@ -428,7 +438,6 @@ void RoombotController::life()
                     return; // end mature life (so die)
                 }
             }
-            
             
             /***************************************
              ************* CHECK ADULT *************
@@ -443,7 +452,6 @@ void RoombotController::life()
                 }
             }
             
-            
             /***************************************************************************
              ****** CHECK FERTILITY REQUIREMENT FOR MATING SELECTION BY ORGANISMS ******
              ***************************************************************************/
@@ -456,6 +464,8 @@ void RoombotController::life()
                     double z = worldModel.position.y;
                     double distanceFromCenter = sqrt((x*x) + (z*z));
                     
+                    matingLogger.debugStream() << "[" << worldModel.now << "] " << worldModel.robotName << ": distance from center: " << distanceFromCenter;
+                    
                     if (distanceFromCenter > FERTILITY_DISTANCE) {
                         
                         worldModel.fertile = true;
@@ -463,7 +473,7 @@ void RoombotController::life()
                         sendFertileAnnouncement();
                         
                         storeFertilityOnFile();
-                        std::cout << worldModel.organismId << " became fertile" << std::endl;
+                        matingLogger.noticeStream() << worldModel.organismId << " became fertile";
                     }
                 }
             }
@@ -643,7 +653,9 @@ void RoombotController::death()
 
 void RoombotController::updateWorldModel() {
     worldModel.now = getTime();
-    worldModel.position = getGPSPosition();
+    if(worldModel.iAmRoot()) {
+        worldModel.position = getGPSPosition();
+    }
 }
 
 /********************************************* RUN *********************************************/
@@ -700,40 +712,40 @@ void RoombotController::run()
             return;
         }
         
-        std::cout << getName() << " STARTS LIFE" << std::endl;
+        logger.debugStream() << getName() << " STARTS LIFE";
         
         phase = "life";
         updateWorldModel();
         life();
         
-        std::cout << getName() << " STARTS DEATH" << std::endl;
+        logger.debugStream() << getName() << " STARTS DEATH";
         
         phase = "death";
         death();
     }
     catch (int err) {
         std::string message = "error number" + std::to_string(err);
-        std::cerr << "PROBLEM in " << phase << ": " << message << std::endl;
+        logger.errorStream() << "PROBLEM in " << phase << ": " << message;
         storeProblem(message, phase);
     }
     catch (LocatedException e) {
         std::string message = e.what();
-        std::cerr << "PROBLEM in " << phase << ": " << message << std::endl;
+        logger.errorStream()  << "PROBLEM in " << phase << ": " << message;
         storeProblem(message, "DEATH");
     }
     catch (std::runtime_error e) {
         std::string message = e.what();
-        std::cerr << "RUNTIME_ERROR in " << phase << ": " << message << std::endl;
+        logger.errorStream()  << "RUNTIME_ERROR in " << phase << ": " << message;
         storeProblem(message, phase);
     }
     catch (std::exception e) {
         std::string message = e.what();
-        std::cerr << "PROBLEM in " << phase << ": " << message << std::endl;
+        logger.errorStream()  << "PROBLEM in " << phase << ": " << message;
         storeProblem(message, phase);
     }
     catch (...) {
         std::string message = "something else";
-        std::cerr << "PROBLEM in " << phase << ": " << message << std::endl;
+        logger.errorStream()  << "PROBLEM in " << phase << ": " << message;
         storeProblem(message, phase);
     }
 }

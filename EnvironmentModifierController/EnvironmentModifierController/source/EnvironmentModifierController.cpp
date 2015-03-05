@@ -7,7 +7,7 @@ void EnvironmentModifierController::putAllModulesToReserve()
     // connect real modules to objects and store them into map and stack
     for (id_t i = 1; i <= NUMBER_OF_MODULES; i++)
     {
-        Node * root = getFromDef(MODULE_DEF_BASE_NAME + TO_STR(i));
+        Node * root = getFromDef(MODULE_DEF_BASE_NAME + std::to_string(i));
         if (root)
         {
             Field * translation = root->getField("translation");
@@ -23,7 +23,7 @@ void EnvironmentModifierController::putAllModulesToReserve()
         }
         else
         {
-            std::cout << MODULE_DEF_BASE_NAME + TO_STR(i) + " does not exist." << std::endl;
+            std::cout << MODULE_DEF_BASE_NAME + std::to_string(i) + " does not exist." << std::endl;
         }
     }
 }
@@ -33,7 +33,7 @@ void EnvironmentModifierController::putModuleToReserve(std::string moduleName)
 {
     for (int i = 1; i <= NUMBER_OF_MODULES; i++)
     {
-        Node * root = getFromDef(MODULE_DEF_BASE_NAME + TO_STR(i));
+        Node * root = getFromDef(MODULE_DEF_BASE_NAME + std::to_string(i));
         if (root)
         {
             Field * name = root->getField("name");
@@ -84,12 +84,12 @@ void EnvironmentModifierController::putModuleToReserve(std::string moduleName)
                 
                 std::cout << moduleName << " to reserve" << std::endl;
                 
-                sendUpdateAvailableMessageToBirthClinic(MODULE_DEF_BASE_NAME + TO_STR(i));
+                sendUpdateAvailableMessageToBirthClinic(MODULE_DEF_BASE_NAME + std::to_string(i));
             }
         }
         else
         {
-            std::cout << MODULE_DEF_BASE_NAME + TO_STR(i) + " does not exist." << std::endl;
+            std::cout << MODULE_DEF_BASE_NAME + std::to_string(i) + " does not exist." << std::endl;
         }
     }
 }

@@ -42,7 +42,10 @@ void LearningController::initialise() {
     evaluationSteps = singleEvaluationTime / timeStep;
     recoverySteps = 0;
     evaluationSteps = evaluationSteps - recoverySteps;
+    evaluationSteps = evaluationSteps < 1 ? 1 : evaluationSteps;
     unsigned int totalEvaluations = worldModel.timeToLive / singleEvaluationTime;
+    
+    evaluationStep = 0;
     
     motorAngularVelocity = worldModel.parameters.get<double>("Algorithm.Angular_Velocity");
     
@@ -85,16 +88,17 @@ void LearningController::initialise() {
     }
     
     fitnessMeasure = FitnessMeasure::getFitnessMeasure(learningAlgorithmType, worldModel);
+    speedMeasure = FitnessMeasure::getFitnessMeasure("Speed", worldModel);
     
     // set variables for writing on files
     boost::filesystem::path dirpath(logDirectory);
-    std::cout << "Opening fitness log file: " << dirpath / "fitness.log" << std::endl;
+    logger.infoStream() << "Opening fitness log file: " << dirpath / "fitness.log";
     fitnessLog = std::ofstream((dirpath / "fitness.log").c_str(), std::ofstream::app);
     
-    std::cout << "Opening location log file: " << dirpath / "fitness.log" << std::endl;
+    logger.infoStream() << "Opening location log file: " << dirpath / "fitness.log";
     gpsLog = std::ofstream((dirpath / "location.log").c_str(), std::ofstream::app);
     
-    fitnessLog << "#Generation Evaluation Fitness 2eDisSq Distance Speed RLFitness  (Seed: " << seed << ")" << std::endl;
+    fitnessLog << "#Generation Evaluation Fitness Speed (Seed: " << seed << ")" << std::endl;
     gpsLog << "#Evaluation x y z" << std::endl;
     
     // set mind
@@ -145,13 +149,15 @@ std::vector<std::vector<double> > LearningController::computeAngles(const std::v
 
 void LearningController::step() {
     // if it is not time for evaluation yet
-    if (evaluationStep < evaluationSteps)
+    logger.debugStream() << "[" << worldModel.now << "] " << worldModel.robotName << ": evaluation step " << evaluationStep << " / " << evaluationSteps;
+    if (evaluationStep <= evaluationSteps)
     {
         evaluationStep += 1;  // increase current
         
         // if the recovery time ends
         if ((evaluationStep - 1) == recoverySteps) {
             fitnessMeasure->markStart();
+            speedMeasure->markStart();
         }
         
         // GPS logging
@@ -164,17 +170,19 @@ void LearningController::step() {
     else
     {
         fitnessMeasure->markEnd();
+        speedMeasure->markEnd();
         double fitness = fitnessMeasure->computeFitness(); // computeFitness((endTime - startTime), (endPosition - startPosition));   // compute fitness
         learningAlgorithm->setEvaluationFitness(fitness);
 //        learningAlgorithm->setEvaluationFitnessAlt(fitness.second);
         
-        fitnessLog << learningAlgorithm->getGeneration() << " " << learningAlgorithm->getEvaluation() << " " << fitness << std::endl;
+        fitnessLog << learningAlgorithm->getGeneration() << " " << learningAlgorithm->getEvaluation() << " " << fitness << " " << speedMeasure->computeFitness() << std::endl;
         
         if (!learningAlgorithm->nextEvaluation()) {
             learningAlgorithm->save();
         }
         
         fitnessMeasure->markStart();
+        speedMeasure->markStart();
         evaluationStep = 0;
     }
 }

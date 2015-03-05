@@ -90,11 +90,11 @@ double Position::distance(const Position &other) const{
 
 
 std::string Position::toString() const{
-    std::string result = std::string(TO_STR(translation[X_AXIS]));
+    std::string result = std::string(std::to_string(translation[X_AXIS]));
     result.append(" ");
-    result.append(TO_STR(translation[Y_AXIS]));
+    result.append(std::to_string(translation[Y_AXIS]));
     result.append(" ");
-    result.append(TO_STR(translation[Z_AXIS]));
+    result.append(std::to_string(translation[Z_AXIS]));
     result.append(" ");
     
     return result;

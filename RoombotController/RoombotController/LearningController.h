@@ -49,6 +49,7 @@ private:
     
     std::unique_ptr<LearningAlgorithm> learningAlgorithm;
     std::unique_ptr<FitnessMeasure> fitnessMeasure;
+    std::unique_ptr<FitnessMeasure> speedMeasure;
     
     std::ofstream gpsLog; // GPS log
     std::ofstream fitnessLog;

@@ -140,13 +140,6 @@ static const std::vector<std::string> CONNECTOR_NAMES = {
 /***** Macros and Such *****/
 /***************************/
 
-template <class T> inline std::string to_string (const T& t){
-	std::stringstream ss;
-	ss << t;
-	return ss.str();
-}
-#define TO_STR(X) to_string(X)
-
 //Type definitions
 typedef id_t GenomeID;
 

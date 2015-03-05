@@ -8,18 +8,23 @@
 #include "ParametersReader.h"
 #include "MessagesManager.h"
 #include "MindGenome.h"
+#include "Logger.h"
+#include "Random.h"
 
 #include <webots/Supervisor.hpp>
 #include <stack>
 #include <limits>
-#include <queue>
+#include <deque>
 
 using namespace webots;
+
 
 class BirthClinicController : public Supervisor
 {
 
     private:
+    log4cpp::Category& logger;
+    Utils::Random *random;
     
     double TIME_STEP;
     std::string simulationDateAndTime;
@@ -35,6 +40,8 @@ class BirthClinicController : public Supervisor
     bool BIRTH_CLINIC_USE_QUEUE = ParametersReader::get<bool>("BIRTH_CLINIC_USE_QUEUE");
     int BIRTH_CLINIC_MINIMUM_MODULES = ParametersReader::get<bool>("BIRTH_CLINIC_MINIMUM_MODULES");
     
+    unsigned int ROOMBOT_WAITING_TIME = ParametersReader::get<unsigned int>("ROOMBOT_WAITING_TIME");
+    
     
     Node * platform;
     
@@ -45,12 +52,12 @@ class BirthClinicController : public Supervisor
     
     Builder * builder;
     
-    std::map<id_t, Module *> moduleMap;
+    std::map<unsigned int, Module *> moduleMap;
     std::stack<id_t> availableModules;
     
     id_t nextOrganismId;
     
-    std::queue<std::string> buildQueue;
+    std::deque<std::string> buildQueue;
     
     void connectModulesToObjects();
     

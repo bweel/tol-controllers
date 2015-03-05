@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6163A5EF1962BD0E00A9AA81 /* libboost_random-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6163A5EE1962BD0E00A9AA81 /* libboost_random-mt.dylib */; };
-		6163A5F11962BE5D00A9AA81 /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6163A5F01962BE5D00A9AA81 /* libNEATLib.a */; };
 		6163A5F41962BE7200A9AA81 /* libboard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6163A5F21962BE7200A9AA81 /* libboard.a */; };
 		6163A5F51962BE7200A9AA81 /* libtinyxmlpluslib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6163A5F31962BE7200A9AA81 /* libtinyxmlpluslib.a */; };
 		6163A5F91962BE8B00A9AA81 /* libboost_filesystem-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6163A5F61962BE8B00A9AA81 /* libboost_filesystem-mt.a */; };
 		6163A5FA1962BE8B00A9AA81 /* libboost_system-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6163A5F71962BE8B00A9AA81 /* libboost_system-mt.a */; };
 		6163A5FB1962BE8B00A9AA81 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6163A5F81962BE8B00A9AA81 /* libz.a */; };
+		6172B9971A850F2A0047E31D /* liblog4cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6172B9961A850F2A0047E31D /* liblog4cpp.a */; };
+		6172B99B1A88B8C30047E31D /* libNEATLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6172B99A1A88B8C30047E31D /* libNEATLib.a */; };
 		617B36F519263624001D459C /* MatrixGenome.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B36F319263624001D459C /* MatrixGenome.cpp */; };
 		617B36FF19263CA7001D459C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617B36FE19263CA7001D459C /* main.cpp */; };
 		617B370619263D3A001D459C /* gtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 617B370519263D3A001D459C /* gtest.framework */; };
@@ -49,7 +49,6 @@
 		61EBFBD6192243B4000E6D71 /* Position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61EBFBD0192243B4000E6D71 /* Position.cpp */; };
 		61EC029A196547A000658978 /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = 61EC0299196547A000658978 /* Logger.h */; };
 		61EC029C196549F600658978 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61EC029B196549F600658978 /* Logger.cpp */; };
-		61EC029E19654D4400658978 /* liblog4cpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EC029D19654D4400658978 /* liblog4cpp.a */; };
 		A82391991940C29A00F3267C /* Builder.h in Headers */ = {isa = PBXBuildFile; fileRef = A82391981940C29A00F3267C /* Builder.h */; };
 		A823919B1940C2A500F3267C /* Builder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A823919A1940C2A500F3267C /* Builder.cpp */; };
 		A823919E1940C4CE00F3267C /* RelativePosition.h in Headers */ = {isa = PBXBuildFile; fileRef = A823919C1940C4CE00F3267C /* RelativePosition.h */; };
@@ -74,13 +73,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6163A5EE1962BD0E00A9AA81 /* libboost_random-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_random-mt.dylib"; path = "../../../../../../../../opt/local/lib/libboost_random-mt.dylib"; sourceTree = "<group>"; };
-		6163A5F01962BE5D00A9AA81 /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = ../lib/libNEATLib.a; sourceTree = "<group>"; };
 		6163A5F21962BE7200A9AA81 /* libboard.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboard.a; path = ../lib/libboard.a; sourceTree = "<group>"; };
 		6163A5F31962BE7200A9AA81 /* libtinyxmlpluslib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxmlpluslib.a; path = ../lib/libtinyxmlpluslib.a; sourceTree = "<group>"; };
 		6163A5F61962BE8B00A9AA81 /* libboost_filesystem-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_filesystem-mt.a"; path = "../lib/libboost_filesystem-mt.a"; sourceTree = "<group>"; };
 		6163A5F71962BE8B00A9AA81 /* libboost_system-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_system-mt.a"; path = "../lib/libboost_system-mt.a"; sourceTree = "<group>"; };
 		6163A5F81962BE8B00A9AA81 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../lib/libz.a; sourceTree = "<group>"; };
+		6172B9961A850F2A0047E31D /* liblog4cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblog4cpp.a; path = /usr/local/lib/liblog4cpp.a; sourceTree = "<absolute>"; };
+		6172B99A1A88B8C30047E31D /* libNEATLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNEATLib.a; path = ../lib/libNEATLib.a; sourceTree = "<group>"; };
 		617B36F2192633CC001D459C /* MatrixGenome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatrixGenome.h; sourceTree = "<group>"; };
 		617B36F319263624001D459C /* MatrixGenome.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MatrixGenome.cpp; sourceTree = "<group>"; };
 		617B36FC19263CA7001D459C /* UnitTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UnitTests; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,7 +117,6 @@
 		61EBFBD0192243B4000E6D71 /* Position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Position.cpp; sourceTree = "<group>"; };
 		61EC0299196547A000658978 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		61EC029B196549F600658978 /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
-		61EC029D19654D4400658978 /* liblog4cpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblog4cpp.a; path = ../../../../../../../../opt/local/lib/liblog4cpp.a; sourceTree = "<group>"; };
 		A82391981940C29A00F3267C /* Builder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Builder.h; sourceTree = "<group>"; };
 		A823919A1940C2A500F3267C /* Builder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Builder.cpp; sourceTree = "<group>"; };
 		A823919C1940C4CE00F3267C /* RelativePosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelativePosition.h; sourceTree = "<group>"; };
@@ -138,14 +136,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61EC029E19654D4400658978 /* liblog4cpp.a in Frameworks */,
 				6163A5F91962BE8B00A9AA81 /* libboost_filesystem-mt.a in Frameworks */,
 				6163A5FA1962BE8B00A9AA81 /* libboost_system-mt.a in Frameworks */,
 				6163A5FB1962BE8B00A9AA81 /* libz.a in Frameworks */,
 				6163A5F41962BE7200A9AA81 /* libboard.a in Frameworks */,
 				6163A5F51962BE7200A9AA81 /* libtinyxmlpluslib.a in Frameworks */,
-				6163A5F11962BE5D00A9AA81 /* libNEATLib.a in Frameworks */,
-				6163A5EF1962BD0E00A9AA81 /* libboost_random-mt.dylib in Frameworks */,
 				617B3725192A3298001D459C /* libshared.a in Frameworks */,
 				617B370619263D3A001D459C /* gtest.framework in Frameworks */,
 			);
@@ -155,6 +150,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6172B9971A850F2A0047E31D /* liblog4cpp.a in Frameworks */,
+				6172B99B1A88B8C30047E31D /* libNEATLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +178,13 @@
 		617B3716192647A6001D459C /* Libaries */ = {
 			isa = PBXGroup;
 			children = (
+				6172B9961A850F2A0047E31D /* liblog4cpp.a */,
+				6163A5F61962BE8B00A9AA81 /* libboost_filesystem-mt.a */,
+				6163A5F71962BE8B00A9AA81 /* libboost_system-mt.a */,
+				6163A5F81962BE8B00A9AA81 /* libz.a */,
+				6163A5F21962BE7200A9AA81 /* libboard.a */,
+				6163A5F31962BE7200A9AA81 /* libtinyxmlpluslib.a */,
+				6172B99A1A88B8C30047E31D /* libNEATLib.a */,
 				A8634376193DF3DC0014C737 /* libboost_random-mt.a */,
 			);
 			name = Libaries;
@@ -204,14 +208,6 @@
 		61EBFBBB19224330000E6D71 = {
 			isa = PBXGroup;
 			children = (
-				61EC029D19654D4400658978 /* liblog4cpp.a */,
-				6163A5F61962BE8B00A9AA81 /* libboost_filesystem-mt.a */,
-				6163A5F71962BE8B00A9AA81 /* libboost_system-mt.a */,
-				6163A5F81962BE8B00A9AA81 /* libz.a */,
-				6163A5F21962BE7200A9AA81 /* libboard.a */,
-				6163A5F31962BE7200A9AA81 /* libtinyxmlpluslib.a */,
-				6163A5F01962BE5D00A9AA81 /* libNEATLib.a */,
-				6163A5EE1962BD0E00A9AA81 /* libboost_random-mt.dylib */,
 				617B3716192647A6001D459C /* Libaries */,
 				617B36F7192639D3001D459C /* test */,
 				61D028271A28AC21001B3DE7 /* ParentSelectionMechanisms */,
@@ -492,6 +488,7 @@
 					../lib/JGTL/,
 					/usr/local/include/,
 				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -534,6 +531,7 @@
 					../lib/JGTL/,
 					/usr/local/include/,
 				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -546,7 +544,10 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -557,7 +558,10 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Volumes/Data/Users/bweel/Documents/projects/tol-controllers/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

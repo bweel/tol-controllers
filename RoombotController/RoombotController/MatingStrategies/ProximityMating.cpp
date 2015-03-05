@@ -9,8 +9,14 @@
 #include "ProximityMating.h"
 #include "MessagesManager.h"
 
+ProximityMating::ProximityMating(WorldModel &worldModel, MessageHandler &messageHandler, MessageHandler &evolverMessageHandler) : MatingStrategy(worldModel, messageHandler, evolverMessageHandler) {
+    lastFitnessSent = 0;
+}
+
 void ProximityMating::findMates() {
     if (worldModel.adult && worldModel.fertile) {
+//        logger.debugStream() << "[" << worldModel.now << "] " << worldModel.robotName << " [findMates] ";
+        
         broadcastGenome();
         
         receiveGenomes();
@@ -19,12 +25,13 @@ void ProximityMating::findMates() {
 
 void ProximityMating::mate() {
     storeNumberOfReceivedGenomes();
+    logger.debugStream() << "[" << worldModel.now << "] " << worldModel.robotName << " trying to mate, number of candidates: " << organismsToMateWith.size() << log4cpp::eol;
     if (organismsToMateWith.size() > 0) {
         id_t mateId = selectMate();
         // send couple of genomes to evolver
         sendCoupleMessage(mateId);
         
-        std::cout << worldModel.organismId << " chose to mate with " << mateId << std::endl;
+        logger.debugStream() << worldModel.organismId << " chose to mate with " << mateId;
         storeReproductionLocation(to_string(mateId), to_string(worldModel.position.x)+" "+to_string(worldModel.position.z));
     }
     
@@ -91,14 +98,18 @@ void ProximityMating::updateOrganismsToMateWithList(id_t mateId, double mateFitn
 
 id_t ProximityMating::selectMate()
 {
-//    std::cout << "SELECT MATE - start" << std::endl;
+    logger.debugStream() << "[" << worldModel.now << "] " << worldModel.robotName << " [selectMate] " << log4cpp::eol;
+    logger.debugStream() << " Organisms to Mate With: [";
+    for(int i=0;i<organismsToMateWith.size();i++){
+        logger.debugStream() << organismsToMateWith[i].getId() << ", ";
+    }
+    logger.debugStream() << "] " << log4cpp::eol;
+    
+    
     std::vector<id_t> selected = parentSelectionMechanism->selectParents(organismsToMateWith);
-//    std::cout << "SELECT MATE - selected" << std::endl;
     if (selected.size() > 0)
     {
-//        std::cout << "SELECT MATE - return first" << std::endl;
         return selected[0];
     }
-//    std::cout << "SELECT MATE - return 0" << std::endl;
     return 0;
 }

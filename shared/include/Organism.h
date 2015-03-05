@@ -5,6 +5,7 @@
 #include "BuildPlan.h"
 #include "Position.h"
 #include "ParametersReader.h"
+#include "Logger.h"
 
 #include <vector>
 #include <boost/smart_ptr/scoped_ptr.hpp>
@@ -120,6 +121,8 @@ public:
     
 class BuildableOrganism : public Organism {
 private:
+    log4cpp::Category &logger;
+    
     // Used by the birthclinic
     std::vector<Module*> robots; 		//An array of all robots part of this organism.
 	Position organismCentre;            //The position used as the basis during organism construction.

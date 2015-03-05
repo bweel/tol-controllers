@@ -41,6 +41,7 @@ public:
     double adultFitness;
     
     std::string robotName;
+    std::string moduleName;
     std::string simulationDateAndTime;
     std::string projectPath;
     std::string logDirectory;

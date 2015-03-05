@@ -73,22 +73,22 @@ namespace NEAT
             return value;
         }
 
-        inline const string &getName() const
+        virtual inline const string &getName() const
         {
             return name;
         }
 
-        inline const bool &getUpdate() const
+        virtual inline const bool &getUpdate() const
         {
             return update;
         }
 
-        inline const ActivationFunction &getActivationFunction() const
+        virtual inline const ActivationFunction &getActivationFunction() const
         {
             return activationFunction;
         }
 
-        inline void setUpdate(bool _update)
+        virtual inline void setUpdate(bool _update)
         {
             update = _update;
         }

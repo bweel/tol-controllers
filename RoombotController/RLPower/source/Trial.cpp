@@ -42,6 +42,7 @@ namespace POWER
                 std::vector<std::vector<double> > parameters,
 				bool adaptive)
 	:
+    logger(Logger::getInstance("RLPower")),
     _random(random),
     _ev_index(0),
     _interval(Trial::INTERVAL_START, Trial::INTERVAL_END, min_size)
@@ -108,18 +109,19 @@ namespace POWER
 
 		_evaluations.push_back(new Policy(_ev_index, variance, _interval, values));
 
-		std::cout
-				<< "RL_PoWER: Starting Trial" << std::endl
-				<< "Variance: " << variance << " Decay Factor: " << _variance_decay << std::endl
-				<< "Interval: [" << _interval.min() << "," << _interval.max() << "]" << std::endl
-				<< "Parameters # Start: " << _v_size_min << std::endl
-				<< "Parameters # End: " << _v_size_max << std::endl
-				<< "Parameters # Update: " << "Each " << _ev_delta << " Evaluations" << std::endl
-				<< "Evaluations #: " << _ev_size << std::endl;
+		logger.infoStream()
+                << "RL_PoWER: Starting Trial" << log4cpp::eol
+				<< "Variance: " << variance << " Decay Factor: " << _variance_decay << log4cpp::eol
+				<< "Interval: [" << _interval.min() << "," << _interval.max() << "]" << log4cpp::eol
+				<< "Parameters # Start: " << _v_size_min << log4cpp::eol
+				<< "Parameters # End: " << _v_size_max << log4cpp::eol
+				<< "Parameters # Update: " << "Each " << _ev_delta << " Evaluations" << log4cpp::eol
+                << "Evaluations #: " << _ev_size << log4cpp::eol;
 	}
 
 	Trial::Trial(const TiXmlElement & element)
 	:
+    logger(Logger::getInstance("RLPower")),
 	_interval(Trial::INTERVAL_START, Trial::INTERVAL_END)
 	{
 		if (Trial::XML_NAME != element.ValueStr()) {
@@ -251,6 +253,7 @@ namespace POWER
          * We expect that this has already been done by the calling controller
 		 */
 //		policy->fitness(std::pow(value, Trial::FITNESS_EXP));
+        policy->fitness(value);
 
 		/*
 		 * We maintain a ranking of the n best performing policies in descending

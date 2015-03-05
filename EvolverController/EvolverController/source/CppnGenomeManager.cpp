@@ -65,7 +65,7 @@ CppnGenome CppnGenomeManager::createGenome(const std::vector<CppnGenome>& parent
         }break;
             
         default:
-            throw CREATE_LOCATEDEXCEPTION_INFO("Unsupported number of genomes: " + TO_STR(parentsGenomes.size()));
+            throw CREATE_LOCATEDEXCEPTION_INFO("Unsupported number of genomes: " + std::to_string(parentsGenomes.size()));
     }
     return newGenome;
 }

@@ -16,6 +16,7 @@ namespace NEAT
     {
     protected:
         string name,type;
+        double tau;
 
         /*Greater drawing position means closer to output!*/
         double drawingPosition;
@@ -27,6 +28,7 @@ namespace NEAT
         GeneticNodeGene(
             const string &_name,
             const string &_type,
+            const double _tau,
             double _drawingPosition,
             bool randomizeActivation,
             ActivationFunction _activationFunction=ACTIVATION_FUNCTION_SIGMOID
@@ -35,6 +37,7 @@ namespace NEAT
         GeneticNodeGene(
             const string &_name,
             const string &_type,
+            const double _tau,
             double _drawingPosition,
             bool _topologyFrozen,
             bool randomizeActivation,
@@ -59,6 +62,11 @@ namespace NEAT
             return type;
         }
 
+        inline const double getTauValue() const
+        {
+            return tau;
+        }
+        
         /*int getLegacyNodeID()
         {
         return legacyID;

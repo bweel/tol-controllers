@@ -12,7 +12,7 @@ bool EvolverController::checkEvolutionEnd()
 {
     for (id_t i = 1; i <= NUMBER_OF_MODULES; i++)
     {
-        Node * root = getFromDef(MODULE_DEF_BASE_NAME + TO_STR(i));
+        Node * root = getFromDef(MODULE_DEF_BASE_NAME + std::to_string(i));
         if (root)
         {
             Field * controller = root->getField("controller");
@@ -261,7 +261,7 @@ int EvolverController::getRandomWait()
 {
     int noise = 0;
     if(NOISE_GENOMES_INITIALIZATION > 0) {
-         noise = Utils::Random::getInstance()->uniform_integer(-NOISE_GENOMES_INITIALIZATION,NOISE_GENOMES_INITIALIZATION);//(rand() % NOISE_GENOMES_INITIALIZATION) - (NOISE_GENOMES_INITIALIZATION/2);
+         noise = random->uniform_integer(-NOISE_GENOMES_INITIALIZATION,NOISE_GENOMES_INITIALIZATION);//(rand() % NOISE_GENOMES_INITIALIZATION) - (NOISE_GENOMES_INITIALIZATION/2);
     }
     return WAITING_INTERVAL_GENOMES_INITIALIZATION + noise;
 }
@@ -292,7 +292,7 @@ void EvolverController::deathMessage(std::string message, double currentTime) {
         {
             organismsList[index].setState(Organism::DEAD);
             
-            std::cout << "organism_" << organimsID << " died: REMOVED FROM LIST" << std::endl;
+            logger.debugStream() << "organism_" << organimsID << " died: REMOVED FROM LIST";
             
             std::string log = std::to_string(getTime()) + " DEATH " + std::to_string(organimsID) + " organismsListSize " + std::to_string(organismsList.size());
             storeEventOnFile(log);
@@ -466,7 +466,7 @@ void EvolverController::coupleMessage(std::string message,double currentTime) {
                 parentMindGenomes.push_back(mindGenomeManager->getGenomeFromStream(mindAsStream2));
                 boost::shared_ptr<MindGenome> newMind = mindGenomeManager->createGenome(parentMindGenomes);
                 
-                std::cout << "NEW GENOME CREATED FROM organism_" << id1 << " and organism_" << id2 << std::endl;
+                logger.debugStream() << "NEW GENOME CREATED FROM organism_" << id1 << " and organism_" << id2;
                 
                 // store event into file
                 std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(id1) + " and " + std::to_string(id2);
@@ -480,9 +480,9 @@ void EvolverController::coupleMessage(std::string message,double currentTime) {
             }
         }
     }catch(LocatedException &e){
-        std::cout << "Mating failed, genomeManager threw a located exception: " << e.what();
+        logger.warnStream() << "Couple Mating failed, genomeManager threw a located exception: " << e.what();
     }catch(std::exception &e){
-        std::cout << "Mating failed, genomeManager threw a normal exception: " << e.what();
+        logger.warnStream() << "Couple Mating failed, genomeManager threw a normal exception: " << e.what();
     }
 }
 
@@ -520,10 +520,9 @@ void EvolverController::genomeSpreadMessage(std::string message, double currentT
 ////////////////////////////////////////////////////////////////
 
 
-EvolverController::EvolverController() : Supervisor()
+EvolverController::EvolverController() : Supervisor(),
+logger(Logger::getInstance("EvolverController"))
 {
-    srand(static_cast<unsigned int>(time(NULL)));
-    
     // setup shape encoding
     if (SHAPE_ENCODING == "CPPN")
     {
@@ -532,7 +531,7 @@ EvolverController::EvolverController() : Supervisor()
     else
     {
         // set genomeManager for other kind of genome
-        std::cerr << "Unknown Shape Encoding: " << SHAPE_ENCODING << std::endl;
+        logger.errorStream() << "Unknown Shape Encoding: " << SHAPE_ENCODING;
     }
     
     if (MIND_ENCODING == "RLPOWER") {
@@ -540,7 +539,7 @@ EvolverController::EvolverController() : Supervisor()
     }
     else
     {
-        std::cerr << "Unknown Mind Encoding: " << MIND_ENCODING << std::endl;
+        logger.errorStream() << "Unknown Mind Encoding: " << MIND_ENCODING;
     }
     
     if(PARENT_SELECTION == "BESTTWO") {
@@ -550,7 +549,7 @@ EvolverController::EvolverController() : Supervisor()
     } else if (PARENT_SELECTION == "RANDOM") {
         parentSelectionMechanism = new RandomSelection();
     } else {
-        std::cerr << "Unknown Parent Selection Mechanism: " << std::endl;
+        logger.errorStream() << "Unknown Parent Selection Mechanism: " << PARENT_SELECTION;
     }
     
     if(MATING_SELECTION == "EVOLVER") {
@@ -558,7 +557,7 @@ EvolverController::EvolverController() : Supervisor()
     } else if(MATING_SELECTION == "ORGANISMS"){
         matingType = MATING_SELECTION_BY_ORGANISMS;
     } else {
-        std::cerr << "Unknown Mating Selection Mechanism: " << MATING_SELECTION << std::endl;
+        logger.errorStream() << "Unknown Mating Selection Mechanism: " << MATING_SELECTION;
     }
     
     if(DEATH_SELECTION == "EVOLVER") {
@@ -566,7 +565,7 @@ EvolverController::EvolverController() : Supervisor()
     } else if(DEATH_SELECTION == "TIME_TO_LIVE"){
         deathType = DEATH_SELECTION_BY_TIME_TO_LIVE;
     } else {
-        std::cerr << "Unknown Death Selection Mechanism: " << DEATH_SELECTION << std::endl;
+        logger.errorStream() << "Unknown Death Selection Mechanism: " << DEATH_SELECTION;
     }
     
     emitter = getEmitter(EMITTER_NAME);
@@ -619,6 +618,8 @@ void EvolverController::run()
     /***************************************
      ******* CREATE THE FIRST GENOME *******
      ***************************************/
+    random = Utils::Random::getInstance();
+    
     
     CppnGenome genome = createRandomGenome();
     sendGenomeToBirthClinic(genomeManager->genomeToString(genome), "", 0, 0, 0, 0);
@@ -636,7 +637,7 @@ void EvolverController::run()
     lastEvolutionEndCheck = 0;
     lastOffspringLoggingTime = 30;
     
-    std::cout << BOLDGREEN << "Initializing next individual in " << initPopulationWaitingTime << " seconds" << RESET << std::endl;
+    logger.noticeStream() << BOLDGREEN << "Initializing next individual in " << initPopulationWaitingTime << " seconds" << RESET;
     while (step(TIME_STEP) != -1)
     {
         
@@ -663,10 +664,10 @@ void EvolverController::run()
             
             if(initialPopulationSize >= INITIAL_POPULATION_MAX_SIZE) {
                 initialization = false;
-                std::cout << BOLDGREEN << "Finished initialising population" << RESET << std::endl;
+                logger.noticeStream() << BOLDGREEN << "Finished initialising population" << RESET;
             }else{
                 initPopulationWaitingTime = getRandomWait();
-                std::cout << BOLDGREEN << "Initializing next individual in " << initPopulationWaitingTime << " seconds" << RESET << std::endl;
+                logger.noticeStream() << BOLDGREEN << "Initializing next individual in " << initPopulationWaitingTime << " seconds" << RESET;
             }
         }
         
@@ -758,7 +759,7 @@ void EvolverController::run()
         
             if(currentTime - lastMating > MATING_TIME)
             {
-                std::cout << "time to mate" << std::endl;
+                logger.debugStream() << "time to mate";
                 
                 std::vector<id_t> forMating = selectForMating();
                 
@@ -790,7 +791,7 @@ void EvolverController::run()
                                 parentMindGenomes.push_back(mindGenome2);
                                 boost::shared_ptr<MindGenome> newMind = mindGenomeManager->createGenome(parentMindGenomes);
                                 
-                                std::cout << "NEW GENOME CREATED FROM organism_" << forMating[0] << " and organism_" << forMating[1] << std::endl;
+                                logger.debugStream() << "NEW GENOME CREATED FROM organism_" << forMating[0] << " and organism_" << forMating[1];
                                 
                                 std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(forMating[0]) + " and " + std::to_string(forMating[1]);
                                 storeEventOnFile(log);
@@ -800,13 +801,13 @@ void EvolverController::run()
                                 sendGenomeToBirthClinic(genomeManager->genomeToString(newGenome), newMind->toString(), forMating[0], forMating[1], fitness1, fitness2);
                                 
                                 initialization = false;
-                                std::cout << BOLDGREEN << "Finished initialising population" << RESET << std::endl;
+                                logger.noticeStream() << BOLDGREEN << "Finished initialising population" << RESET;
                             }
                         }
                     }catch(LocatedException &e){
-                        std::cout << "Mating failed, genomeManager threw a located exception: " << e.what();
+                        logger.warnStream() << "Evolver Mating failed, genomeManager threw a located exception: " << e.what();
                     }catch(std::exception &e){
-                        std::cout << "Mating failed, genomeManager threw a normal exception: " << e.what();
+                        logger.warnStream() << "Evolver Mating failed, genomeManager threw a normal exception: " << e.what();
                     }
                 }
                 if (forMating.size() == 1)
@@ -832,7 +833,7 @@ void EvolverController::run()
                                 parentMindGenomes.push_back(mindGenome1);
                                 boost::shared_ptr<MindGenome> newMind = mindGenomeManager->createGenome(parentMindGenomes);
                                 
-                                std::cout << "NEW GENOME CREATED FROM SINGLE PARENT organism_" << forMating[0] << std::endl;
+                                logger.debugStream() << "NEW GENOME CREATED FROM SINGLE PARENT organism_" << forMating[0];
                                 
                                 std::string log = std::to_string(getTime()) + " NEW GENOME CREATED FROM " + std::to_string(forMating[0]);
                                 storeEventOnFile(log);
@@ -844,14 +845,14 @@ void EvolverController::run()
                             }
                         }
                     }catch(LocatedException &e){
-                        std::cout << "Mating failed, genomeManager threw a located exception: " << e.what();
+                        logger.warnStream() << "Evolver Mating failed, genomeManager threw a located exception: " << e.what();
                     }catch(std::exception &e){
-                        std::cout << "Mating failed, genomeManager threw a normal exception: " << e.what();
+                        logger.warnStream() << "Evolver Mating failed, genomeManager threw a normal exception: " << e.what();
                     }
                 }
                 if (forMating.size() == 0)
                 {
-                    std::cout << "couple of parents not found" << std::endl;
+                    logger.debugStream() << "couple of parents not found";
                     
                     std::string log = std::to_string(getTime()) + " couple of parents not found";
                     storeEventOnFile(log);
@@ -883,7 +884,7 @@ void EvolverController::run()
                 {
                     sendDeathMessage(forDying[i]);
                     
-                    std::cout << "organism_" << forDying[i] << " SELECTED FOR DEATH" << std::endl;
+                    logger.debugStream() << "organism_" << forDying[i] << " SELECTED FOR DEATH";
                 }
                 
                 lastDeath = getTime();

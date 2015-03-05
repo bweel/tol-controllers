@@ -5,7 +5,8 @@
  * Copy constructor that does not actually does a deep copy
  *
  */
-Organism::Organism(const Organism &other) {
+Organism::Organism(const Organism &other)
+{
     id = other.id;
     genome = other.genome;
     mindGenome = other.mindGenome;
@@ -28,6 +29,7 @@ Organism::Organism(const Organism &other) {
  * with the build plan to determine where the organism will be build.
  */
 BuildableOrganism::BuildableOrganism(std::string genome, std::string mindGenome, id_t id, std::auto_ptr<BuildPlan> plan, Position organismCentre) :
+logger(Logger::getInstance("BuildableOrganism")),
 Organism(genome,mindGenome,id,-1,0,0,std::vector<id_t>(),INFANT, false),
 robots(), organismCentre(organismCentre), buildPlan(plan)
 {
@@ -181,14 +183,13 @@ void BuildableOrganism::build()
             robots[i]->setPosition(position);
             
             // lock connectors
-            std::cout << robots[i]->getName() << ": ";
+            logger.debugStream() << robots[i]->getName() << ": ";
             for (int c = 0; c < 10; c++)
             {
                 bool locked = buildPlan->getConnector(i, c);
                 robots[i]->setLock(CONNECTOR_NAMES[c],locked);
-                if(locked) std::cout << CONNECTOR_NAMES[c] << " ";
+                if(locked) logger.debugStream() << CONNECTOR_NAMES[c] << " ";
             }
-            std::cout << std::endl;
         }
     }
 }
@@ -196,7 +197,7 @@ void BuildableOrganism::build()
 
 void BuildableOrganism::writeControllerArgsFile(std::string simulationDateAndTime)
 {
-    std::cout << "writing ControllerArgs file for " << getName() << std::endl;
+    logger.debugStream() << "writing ControllerArgs file for " << getName();
     
     // extract stuff to write from organism
     std::string organismId = std::to_string(id);
@@ -297,11 +298,11 @@ void BuildableOrganism::activate(std::string simulationDateAndTime)
         {
             // update controllerArgs in Webots
             robots[i]->setControllerArgs(createPathForControllerArgs(simulationDateAndTime));
-            std::cout << robots[i]->getDef() << " -> controllerArgs has been updated" << std::endl;
+            logger.debugStream() << robots[i]->getDef() << " -> controllerArgs has been updated";
             
             // update controller in Webots
             robots[i]->setController(LIFE_CONTROLLER_NAME);
-            std::cout << robots[i]->getDef() << " -> " << LIFE_CONTROLLER_NAME << " has been set" << std::endl;
+            logger.debugStream() << robots[i]->getDef() << " -> " << LIFE_CONTROLLER_NAME << " has been set";
         }
     }
 }

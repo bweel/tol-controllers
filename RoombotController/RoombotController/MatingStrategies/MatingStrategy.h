@@ -13,6 +13,7 @@
 #include "Organism.h"
 #include "MessageHandler.h"
 #include "ParentSelectionMechanism.h"
+#include "Logger.h"
 
 class MatingStrategy {
 public:
@@ -46,6 +47,8 @@ protected:
     ofstream matingLocationFile;
     ofstream numberOfReceivedGenomesFile;
     ofstream reproductionLocationFile;
+    
+    log4cpp::Category &logger;
 };
 
 #endif

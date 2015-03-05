@@ -8,6 +8,8 @@
 #include "Spline.h"
 #include "Values.h"
 
+#include "Logger.h"
+
 #include <string>
 
 class RL_PoWER
@@ -41,6 +43,7 @@ virtual public LearningAlgorithm
     
     
   private:
+    log4cpp::Category &logger;
 
 	bool _flag;
 

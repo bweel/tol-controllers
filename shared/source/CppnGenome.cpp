@@ -21,12 +21,14 @@ CppnGenome::CppnGenome(int size) : size(size)
     nodeVector.push_back(NEAT::GeneticNodeGene(
                             INPUT_X,
                             TYPE_INPUT,
+                            0,
                             DRAW_POS_ZERO,
                             RANDOM_ACTIVATION_TRUE)
                          );
     nodeVector.push_back(NEAT::GeneticNodeGene(
                             INPUT_Y,
                             TYPE_INPUT,
+                            0,
                             DRAW_POS_ZERO,
                             RANDOM_ACTIVATION_TRUE)
                          );
@@ -35,6 +37,7 @@ CppnGenome::CppnGenome(int size) : size(size)
     nodeVector.push_back(NEAT::GeneticNodeGene(
                             OUTPUT,
                             TYPE_OUTPUT,
+                            0,
                             DRAW_POS_HALF_MAX,
                             RANDOM_ACTIVATION_TRUE)
                          );
@@ -76,7 +79,7 @@ CppnGenome::~CppnGenome()
 string CppnGenome::toString() const
 {
     std::string result = std::string("genome ");
-    result.append(TO_STR(size));
+    result.append(std::to_string(size));
     result.append(" cppn ");
     
     ostringstream oss;

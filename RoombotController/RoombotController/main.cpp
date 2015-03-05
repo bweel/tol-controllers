@@ -15,10 +15,6 @@ bool EnableCoreDumps()
 int main(int arg_c, char ** arg_v)
 {
 //    EnableCoreDumps();
-    std::cout << "Creating Roombot Controller" << std::endl;
-	RoombotController * robot = new RoombotController();
-    std::cout << "Running Roombot Controller" << std::endl;
-	robot->run();
-    std::cout << "Deleting Roombot Controller" << std::endl;
-	delete(robot);
+	RoombotController robot;
+	robot.run();
 }

@@ -22,6 +22,6 @@ std::unique_ptr<FitnessMeasure> FitnessMeasure::getFitnessMeasure(std::string le
     } else if(learningAlgorithmType == "Speed") {
         return std::unique_ptr<FitnessMeasure>(new SpeedFitness(worldModel));
     } else {
-        throw CREATE_LOCATEDEXCEPTION_INFO("Unsupported Fitness Measure: "+to_string(learningAlgorithmType));
+        throw CREATE_LOCATEDEXCEPTION_INFO("Unsupported Fitness Measure: "+learningAlgorithmType);
     }
 }

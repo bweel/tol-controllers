@@ -19,7 +19,7 @@ PoWER::PoWER(unsigned int seed,
              unsigned int evaluations,
              std::size_t numSplines)
 : LearningAlgorithm("PoWER"),
-logger(Logger::getInstance("power")) {
+logger(Logger::getInstance("RLPower")) {
     random = Utils::Random::getInstance();
 }
 
@@ -81,13 +81,13 @@ void PoWER::setInitialMinds(boost::ptr_vector<MindGenome> genomes,std::size_t nu
     initialParameters = genes->getMatrix();
     
     std::size_t totalParameters = organismSize * numMotors;
-    logger << log4cpp::Priority::INFO << "Setting initial mind of size: " << initialParameters.size() << " actual number size needed: " << totalParameters;
+    logger.infoStream() << "Setting initial mind of size: " << initialParameters.size() << " actual number size needed: " << totalParameters;
     if(initialParameters.size() < totalParameters) {
         // If the size of the parent's mind is too low
         // Add extra splines here
         std::size_t extraParameters = totalParameters - initialParameters.size();
         
-        logger << log4cpp::Priority::INFO << "Parent mind did not have enough parameters, adding " << extraParameters << " parameter vectors";
+        logger.infoStream() << "Parent mind did not have enough parameters, adding " << extraParameters << " parameter vectors";
         
         for(std::size_t i=0;i<extraParameters;i++) {
             std::vector<double> parameters(min_size, 0.5);

@@ -17,6 +17,7 @@ RL_PoWER::RL_PoWER(unsigned int seed,
 				   std::size_t numSplines)
 :
 LearningAlgorithm::LearningAlgorithm("RL_PoWER"),
+logger(Logger::getInstance("RLPower")),
 _flag(false),
 _directory(d_path),
 _ev_step(0),
@@ -26,7 +27,7 @@ numSplines(numSplines),
 evaluations(evaluations)
 {
 	if (0.0 >= time_step) {
-        throw std::domain_error("Time Step Cannot Be <= 0.0, step is: "+to_string(time_step));
+        throw std::domain_error("Time Step Cannot Be <= 0.0, step is: "+std::to_string(time_step));
 	}
 
 	if (0.0 >= angular_velocity) {
@@ -48,6 +49,7 @@ evaluations(evaluations)
 RL_PoWER::RL_PoWER(const std::string & path, double time_step, double angular_velocity, std::size_t s_size)
 :
 LearningAlgorithm::LearningAlgorithm("RL_PoWER"),
+logger(Logger::getInstance("RLPower")),
 _flag(false),
 _ev_step(0)
 {
@@ -88,7 +90,7 @@ _ev_step(0)
 	}
 
 	if (steps != _ev_steps) {
-		std::cout << "Experiment Carried Out With Different Robot" << std::endl;
+		logger.infoStream() << "Experiment Carried Out With Different Robot";
 	}
 
 	// Checking if current servo size is equal to the last used
@@ -164,13 +166,13 @@ void RL_PoWER::setInitialMinds(boost::ptr_vector<MindGenome> genomes,std::size_t
     initialParameters = genes->getMatrix();
     
     std::size_t totalParameters = organismSize * numMotors;
-    std::cout << "Setting initial mind of size: " << initialParameters.size() << " actual number size needed: " << totalParameters << std::endl;
+    logger.infoStream() << "Setting initial mind of size: " << initialParameters.size() << " actual number size needed: " << totalParameters;
     if(initialParameters.size() < totalParameters) {
         // If the size of the parent's mind is too low
         // Add extra splines here
         std::size_t extraParameters = totalParameters - initialParameters.size();
         
-        std::cout << "Parent mind did not have enough parameters, adding " << extraParameters << " parameter vectors" << std::endl;
+        logger.debugStream() << "Parent mind did not have enough parameters, adding " << extraParameters << " parameter vectors";
         
         for(std::size_t i=0;i<extraParameters;i++){
             std::vector<double> parameters(min_size, 0.5);

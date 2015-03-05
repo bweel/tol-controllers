@@ -13,7 +13,8 @@
 MatingStrategy::MatingStrategy(WorldModel &wm, MessageHandler &mh,MessageHandler &emh) :
 worldModel(wm),
 messageHandler(mh),
-evolverMessageHandler(emh)
+evolverMessageHandler(emh),
+logger(Logger::getInstance("Mating"))
 {
     matingLocationFile.open(RESULTS_PATH + worldModel.simulationDateAndTime + "/mating-locations.txt", ios::app);
     numberOfReceivedGenomesFile.open(RESULTS_PATH + worldModel.simulationDateAndTime + "/organism_" + std::to_string(worldModel.organismId) + "/received_genomes.txt", ios::app);
@@ -29,6 +30,7 @@ MatingStrategy::~MatingStrategy() {
 }
 
 std::unique_ptr<MatingStrategy> MatingStrategy::getMatingStrategy(WorldModel &worldModel, MessageHandler &messageHandler, MessageHandler &evolverMessageHandler) {
+    log4cpp::Category &logger = Logger::getInstance("Mating");
     std::string mateSelection = ParametersReader::get<std::string>("MATING_SELECTION");
 
     if(mateSelection == "EVOLVER") {
@@ -36,7 +38,7 @@ std::unique_ptr<MatingStrategy> MatingStrategy::getMatingStrategy(WorldModel &wo
     } else if(mateSelection == "ORGANISMS"){
         return std::unique_ptr<MatingStrategy>(new ProximityMating(worldModel, messageHandler, evolverMessageHandler));
     } else {
-        std::cerr << "Unknown Mating Selection Mechanism: " << mateSelection << std::endl;
+        logger.errorStream() << "Unknown Mating Selection Mechanism: " << mateSelection;
     }
     
     return std::unique_ptr<MatingStrategy>();

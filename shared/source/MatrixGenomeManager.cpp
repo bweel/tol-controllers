@@ -49,7 +49,7 @@ boost::shared_ptr<MindGenome> MatrixGenomeManager::createGenome(const std::vecto
         }break;
             
         default:
-            throw CREATE_LOCATEDEXCEPTION_INFO("Unsupported number of genomes: " + TO_STR(parentsGenomes.size()));
+            throw CREATE_LOCATEDEXCEPTION_INFO("Unsupported number of genomes: " + std::to_string(parentsGenomes.size()));
     }
     return newGenome;
 }

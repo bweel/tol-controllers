@@ -21,7 +21,7 @@ namespace POWER
 
 		_instance = new Globals();
 
-		std::cout << "RL_PoWER: Globals Init" << std::endl;
+        _instance->logger.debug("RL_PoWER: Globals Init");
 
 		return _instance;
 	}
@@ -34,7 +34,7 @@ namespace POWER
 
 		_instance = new Globals(file_path);
 
-		std::cout << "RL_PoWER: Globals Loaded" << std::endl;
+        _instance->logger.debug("RL_PoWER: Globals Loaded");
 
 		return _instance;
 	}
@@ -127,13 +127,15 @@ namespace POWER
 
 	Globals::Globals()
 	:
-	_tuples(_init_parameters()) { }
-	//_random(new utils::Random()) { }
+	_tuples(_init_parameters()),
+    logger(Logger::getInstance("RLPower"))
+    {
+    }
 
 	Globals::Globals(const std::string & file_path)
 	:
-	_tuples()
-	//_random(0)
+	_tuples(),
+    logger(Logger::getInstance("RLPower"))
 	{
 		TiXmlDocument doc(file_path);
 
